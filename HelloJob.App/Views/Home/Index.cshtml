@@ -1,0 +1,847 @@
+﻿   <!-- Main Section Start -->
+   <main class="main-full full">
+    <div class="new_search_panel full">
+        <div class="nsp_blue"></div>
+        <div class="container">
+        <div class="row pt-3">
+        
+        <div class="nsp_top col-md-12">
+        <ul>
+        <li class="active">
+        <a href="/">İş elanları</a>
+        </li>
+        <li>
+        <a href="./resume.html">CV-lər</a>
+        </li>
+        <li>
+        <a href="./course.html">Kurslar</a>
+        </li>
+        </ul>
+        </div>
+        
+        
+        <div class="nsp_bottom col-md-12">
+        <div class="nsp_searchbar full">
+        <div class="nsb_searchbar_top">
+        <form action="/search" class="full">
+        <div class="nsp_search_input">
+        <img src="~/assets/icons/search.svg" alt="">    
+        <input type="text seach" name="query" class="searchinput" value="" placeholder="Məsələn, Dizayner">
+        <input type="hidden" name="search_type" value="keyword">
+        <input type="hidden" name="searched" value="">
+        </div>
+        <button type="submit" class="nsp_search"><span>Axtar</span></button>
+        </form>
+        <div class="nsb_bar_buttons">
+        <button id="multisearch" class="nsp_filter_open">
+            <img src="~/assets/icons/filter.svg" class="pe-3 filterimg" alt="">
+            <span class="etrafli">Ətraflı axtarış</span></button>
+        </div>
+        </div>
+        <div class="nsb_searchbar_filter full " style="display: none;">
+        <button class="nsp_close" type="button">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <form action="/search">
+        <div class="col-md-12 filter_page_filter main_page_filter_inputs p-0">
+        <div class="row">
+        <div class="col-lg-4 col-md-6 col-6">
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-6 mb-4">
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-6">
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-6 mb-4">
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-6">
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-6 pb-5">
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+    </div>
+        
+       
+        <div class="col-md-7 search_checks">
+        <label>
+        <input class="checkbox" value="3" type="checkbox">
+        <p>Part-time</p>
+        </label>
+        <label>
+        <input class="checkbox" value="1" type="checkbox">
+        <p>Full-time</p>
+        </label>
+        <label>
+        <input class="checkbox" value="2" type="checkbox">
+        <p>Frilans</p>
+        </label>
+        <label>
+        <input class="checkbox"   value="4" type="checkbox">
+        <p>Təcrübə</p>
+        </label>
+        <label>
+        <input class="checkbox"  value="5" type="checkbox">
+        <p>Uzaqdan</p>
+        </label>
+        </div>
+        <div class="col-md-5 search_results">
+        <button id="FilterTemizle" type="button">Təmizlə</button>
+        <input type="hidden" name="search_type" value="filter">
+        <button data-action="search" id="srch-result-count-bar"><i id="search-btn-loader" class="fas fa-spinner fa-pulse d-none mr-5" aria-hidden="true"></i> <b class="result-finded-items-count mr-2">390</b> Elan tapıldı</button>
+        </div>
+</div>
+
+    </div>
+</form>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+        </div>
+        </div>
+        
+        <!-- Category start -->
+        <div class="col-md-12 vacancy_cat_tabs p-0 mt-0">
+            
+            <div class="new-categories-section">
+                <div class="container">
+                    <div class="new-categories-container">
+                        <div class="col-md-12 section_title-parent">
+                            <div class="row">
+                                <div class="col-md-4 pl-0 sec_tit">
+                                    <h4 class="mt-0 section-title">İş elanları 2024</h1>
+                                    </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="new-categories-slider position-relative">
+                        <div class="category-card">
+                            <a href="">
+                                        <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                    
+                                    <div class="category-name">
+                                        <p>Texnologiya</p>
+                                    </div>
+            
+                                    <div class="category-job-count">
+                                        <p>25 is elani</p>
+                                    </div>
+                                </a>
+                                </div>
+                                <div class="category-card">
+                                    <a href="">
+                                                <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                            
+                                            <div class="category-name">
+                                                <p>Texnologiya</p>
+                                            </div>
+                    
+                                            <div class="category-job-count">
+                                                <p>25 is elani</p>
+                                            </div>
+                                        </a>
+                                        </div>
+                                        <div class="category-card">
+                                            <a href="">
+                                                        <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                    
+                                                    <div class="category-name">
+                                                        <p>Texnologiya</p>
+                                                    </div>
+                            
+                                                    <div class="category-job-count">
+                                                        <p>25 is elani</p>
+                                                    </div>
+                                                </a>
+                                                </div>
+                                                <div class="category-card">
+                                                    <a href="">
+                                                                <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                            
+                                                            <div class="category-name">
+                                                                <p>Texnologiya</p>
+                                                            </div>
+                                    
+                                                            <div class="category-job-count">
+                                                                <p>25 is elani</p>
+                                                            </div>
+                                                        </a>
+                                                        </div>
+                                                        <div class="category-card">
+                                                            <a href="">
+                                                                        <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                                    
+                                                                    <div class="category-name">
+                                                                        <p>Texnologiya</p>
+                                                                    </div>
+                                            
+                                                                    <div class="category-job-count">
+                                                                        <p>25 is elani</p>
+                                                                    </div>
+                                                                </a>
+                                                                </div>
+                                                                <div class="category-card">
+                                                                    <a href="">
+                                                                                <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                                            
+                                                                            <div class="category-name">
+                                                                                <p>Texnologiya</p>
+                                                                            </div>
+                                                    
+                                                                            <div class="category-job-count">
+                                                                                <p>25 is elani</p>
+                                                                            </div>
+                                                                        </a>
+                                                                        </div>
+                                                                        <div class="category-card">
+                                                                            <a href="">
+                                                                                        <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                                                    
+                                                                                    <div class="category-name">
+                                                                                        <p>Texnologiya</p>
+                                                                                    </div>
+                                                            
+                                                                                    <div class="category-job-count">
+                                                                                        <p>25 is elani</p>
+                                                                                    </div>
+                                                                                </a>
+                                                                                </div>
+                                                                                <div class="category-card">
+                                                                                    <a href="">
+                                                                                                <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                                                            
+                                                                                            <div class="category-name">
+                                                                                                <p>Texnologiya</p>
+                                                                                            </div>
+                                                                    
+                                                                                            <div class="category-job-count">
+                                                                                                <p>25 is elani</p>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                        </div>
+                                                                                        <div class="category-card">
+                                                                                            <a href="">
+                                                                                                        <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                                                                    
+                                                                                                    <div class="category-name">
+                                                                                                        <p>Texnologiya</p>
+                                                                                                    </div>
+                                                                            
+                                                                                                    <div class="category-job-count">
+                                                                                                        <p>25 is elani</p>
+                                                                                                    </div>
+                                                                                                </a>
+                                                                                                </div>
+                                                                                                <div class="category-card">
+                                                                                                    <a href="">
+                                                                                                                <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                                                                            
+                                                                                                            <div class="category-name">
+                                                                                                                <p>Texnologiya</p>
+                                                                                                            </div>
+                                                                                    
+                                                                                                            <div class="category-job-count">
+                                                                                                                <p>25 is elani</p>
+                                                                                                            </div>
+                                                                                                        </a>
+                                                                                                        </div>
+                                                                                                        <div class="category-card">
+                                                                                                            <a href="">
+                                                                                                                        <img src="~/assets/images/categories/texnologiya.svg" alt="">
+                                                                                                                    
+                                                                                                                    <div class="category-name">
+                                                                                                                        <p>Texnologiya</p>
+                                                                                                                    </div>
+                                                                                            
+                                                                                                                    <div class="category-job-count">
+                                                                                                                        <p>25 is elani</p>
+                                                                                                                    </div>
+                                                                                                                </a>
+                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                  
+                       
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Category end -->
+        <div class="all-companies">
+            <div class="container">
+                <h3 class="section-title">
+                    Sirketler
+                </h3>
+                <div class="new-companies">
+                    <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                            <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+                    <p>33 vakansiya</p>
+                    </a>
+                    <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                        <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+                <p>33 vakansiya</p>
+                </a> <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                    <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+            <p>33 vakansiya</p>
+            </a> <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+        <p>33 vakansiya</p>
+        </a>
+                    
+                    </div>
+            </div>
+        </div>
+
+     <!-- Sub-Category start -->
+            <div class="col-md-12 vacancy_cat_tabs p-0 mt-0 d-none">
+                <div class="container">
+                    <h4 class="mt-0 section-title">İş elanları 2024</h4>
+                </div>
+                    <div class="cat_tabs active" id="vacancy">
+                        <div class="container">
+                            <div class="sub-categories w-100 d-flex">
+                                <a class="active" href="/is-elanlari/maliyye">Hamısı <span>80</span></a>
+                                <a class="active" href="/is-elanlari/maliyye">Hamısı <span>80</span></a>
+                                <a class="active" href="/is-elanlari/maliyye">Hamısı <span>80</span></a>
+                                <a class="active" href="/is-elanlari/maliyye">Hamısı <span>80</span></a>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+       
+     <!-- Sub-Category end -->
+       
+
+<!-- Vacancies Start -->
+            <section class="vacancies">
+            <div class="container">
+                <h3 class="section-title">
+                    Vakansiyalar
+                </h3>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <a href="" class="vacancies__item vacancies__item_new">
+                            <div class="vacancies__item__left">
+                            <div class="vacancies__icon">
+                            <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                            </div>
+                            <div class="vacancies__desc">
+                            <h3>Xadimə</h3>
+                            <p class="vacancy_item_company"> Elson Group MMC</p>
+                            <div class="vacancy_item_date_count">
+                            <span class="vacancy_item_time">
+                                <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                            <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="vacancies__item__right">
+                                
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+                                <span class="card_like " data-section="works" data-id="16519">
+                                    <i id="unlike" class="fa-regular fa-heart"></i>
+                                    <i id="like" class="fa-solid fa-heart"></i>
+                                </span>
+                            </div>
+                            <span class="vacancies__premium">
+                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                            <span>Premium</span>
+                            </span>
+                            </a>
+                            <a href="" class="vacancies__item vacancies__item_new">
+                                <div class="vacancies__item__left">
+                                <div class="vacancies__icon">
+                                <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                </div>
+                                <div class="vacancies__desc">
+                                <h3>Xadimə</h3>
+                                <p class="vacancy_item_company"> Elson Group MMC</p>
+                                <div class="vacancy_item_date_count">
+                                <span class="vacancy_item_time">
+                                    <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                <span class="card_like " data-section="works" data-id="16519">
+                                    <i id="unlike" class="fa-regular fa-heart"></i>
+                                    <i id="like" class="fa-solid fa-heart"></i>
+                                </span>
+                                </div>
+                                <span class="vacancies__premium">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                <span>Premium</span>
+                                </span>
+                                </a>
+                                <a href="" class="vacancies__item vacancies__item_new">
+                                    <div class="vacancies__item__left">
+                                    <div class="vacancies__icon">
+                                    <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                    </div>
+                                    <div class="vacancies__desc">
+                                    <h3>Xadimə</h3>
+                                    <p class="vacancy_item_company"> Elson Group MMC</p>
+                                    <div class="vacancy_item_date_count">
+                                    <span class="vacancy_item_time">
+                                        <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                    <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                    <span class="card_like " data-section="works" data-id="16519">
+                                        <i id="unlike" class="fa-regular fa-heart"></i>
+                                        <i id="like" class="fa-solid fa-heart"></i>
+                                    </span>
+                                    </div>
+                                    <span class="vacancies__premium">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                    <span>Premium</span>
+                                    </span>
+                                    </a>
+                                    <a href="" class="vacancies__item vacancies__item_new">
+                                        <div class="vacancies__item__left">
+                                        <div class="vacancies__icon">
+                                        <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                        </div>
+                                        <div class="vacancies__desc">
+                                        <h3>Xadimə</h3>
+                                        <p class="vacancy_item_company"> Elson Group MMC</p>
+                                        <div class="vacancy_item_date_count">
+                                        <span class="vacancy_item_time">
+                                            <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                        <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                        <span class="card_like " data-section="works" data-id="16519">
+                                            <i id="unlike" class="fa-regular fa-heart"></i>
+                                            <i id="like" class="fa-solid fa-heart"></i>
+                                        </span>
+                                        </div>
+                                        <span class="vacancies__premium">
+                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                        <span>Premium</span>
+                                        </span>
+                                        </a>
+                                        
+                           <a href="" class="vacancies__item vacancies__item_new">
+                                            <div class="vacancies__item__left">
+                                            <div class="vacancies__icon">
+                                            <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                            </div>
+                                            <div class="vacancies__desc">
+                                            <h3>Xadimə</h3>
+                                            <p class="vacancy_item_company"> Elson Group MMC</p>
+                                            <div class="vacancy_item_date_count">
+                                            <span class="vacancy_item_time">
+                                                <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                            <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                            <span class="card_like " data-section="works" data-id="16519">
+                                                <i id="unlike" class="fa-regular fa-heart"></i>
+                                                <i id="like" class="fa-solid fa-heart"></i>
+                                            </span>
+                                            </div>
+                                            <span class="vacancies__premium">
+                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                            <span>Premium</span>
+                                            </span>
+                                            </a>
+                                            
+                              <a href="" class="vacancies__item vacancies__item_new">
+                                                <div class="vacancies__item__left">
+                                                <div class="vacancies__icon">
+                                                <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                                </div>
+                                                <div class="vacancies__desc">
+                                                <h3>Xadimə</h3>
+                                                <p class="vacancy_item_company"> Elson Group MMC</p>
+                                                <div class="vacancy_item_date_count">
+                                                <span class="vacancy_item_time">
+                                                    <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                                <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                                <span class="card_like " data-section="works" data-id="16519">
+                                                    <i id="unlike" class="fa-regular fa-heart"></i>
+                                                    <i id="like" class="fa-solid fa-heart"></i>
+                                                </span>
+                                                </div>
+                                                <span class="vacancies__premium">
+                                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                                <span>Premium</span>
+                                                </span>
+                                                </a>
+                                                
+                                                
+                           <a href="" class="vacancies__item vacancies__item_new">
+                                                    <div class="vacancies__item__left">
+                                                    <div class="vacancies__icon">
+                                                    <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                                    </div>
+                                                    <div class="vacancies__desc">
+                                                    <h3>Xadimə</h3>
+                                                    <p class="vacancy_item_company"> Elson Group MMC</p>
+                                                    <div class="vacancy_item_date_count">
+                                                    <span class="vacancy_item_time">
+                                                        <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                                    <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                                    <span class="card_like " data-section="works" data-id="16519">
+                                                        <i id="unlike" class="fa-regular fa-heart"></i>
+                                                        <i id="like" class="fa-solid fa-heart"></i>
+                                                    </span>
+                                                    </div>
+                                                    <span class="vacancies__premium">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                                    <span>Premium</span>
+                                                    </span>
+                                                    </a>
+
+                                                    <a href="https://urlgeni.us/linkedin/mblbnnr" class="vacancies__banner click_banner" data-id="21" target="_blank">
+                                                        <img loading="lazy" src="https://www.hellojob.az/uploads/banners/2023/11/14/kapital-statik-banner-november-banner-65536b1993912-f7cd8c406d6f9eebda432cee942a70cd65536b1993927-gMZ438Ol3rN7Pq-.jpg" height="770px" width="96px" alt="kapital statik banner - november">
+                                                        </a>
+                                                    
+                                       <a href="" class="vacancies__item vacancies__item_new">
+                                                        <div class="vacancies__item__left">
+                                                        <div class="vacancies__icon">
+                                                        <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                                        </div>
+                                                        <div class="vacancies__desc">
+                                                        <h3>Xadimə</h3>
+                                                        <p class="vacancy_item_company"> Elson Group MMC</p>
+                                                        <div class="vacancy_item_date_count">
+                                                        <span class="vacancy_item_time">
+                                                            <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                                        <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                                        <span class="card_like " data-section="works" data-id="16519">
+                                                            <i id="unlike" class="fa-regular fa-heart"></i>
+                                                            <i id="like" class="fa-solid fa-heart"></i>
+                                                        </span>
+                                                        </div>
+                                                        <span class="vacancies__premium">
+                                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                                        <span>Premium</span>
+                                                        </span>
+                                                        </a>    
+                                                        <a href="" class="vacancies__item vacancies__item_new">
+                                                            <div class="vacancies__item__left">
+                                                            <div class="vacancies__icon">
+                                                            <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                                            </div>
+                                                            <div class="vacancies__desc">
+                                                            <h3>Xadimə</h3>
+                                                            <p class="vacancy_item_company"> Elson Group MMC</p>
+                                                            <div class="vacancy_item_date_count">
+                                                            <span class="vacancy_item_time">
+                                                                <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                                            <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                                            <span class="card_like " data-section="works" data-id="16519">
+                                                                <i id="unlike" class="fa-regular fa-heart"></i>
+                                                                <i id="like" class="fa-solid fa-heart"></i>
+                                                            </span>
+                                                            </div>
+                                                            <span class="vacancies__premium">
+                                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                                            <span>Premium</span>
+                                                            </span>
+                                                            </a>
+                                                            <a href="" class="vacancies__item vacancies__item_new">
+                                                                <div class="vacancies__item__left">
+                                                                <div class="vacancies__icon">
+                                                                <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                                                </div>
+                                                                <div class="vacancies__desc">
+                                                                <h3>Xadimə</h3>
+                                                                <p class="vacancy_item_company"> Elson Group MMC</p>
+                                                                <div class="vacancy_item_date_count">
+                                                                <span class="vacancy_item_time">
+                                                                    <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                                                <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                                                </div>
+                                                                </div>
+                                                                </div>
+                                                                <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                                                <span class="card_like " data-section="works" data-id="16519">
+                                                                    <i id="unlike" class="fa-regular fa-heart"></i>
+                                                                    <i id="like" class="fa-solid fa-heart"></i>
+                                                                </span>
+                                                                </div>
+                                                                <span class="vacancies__premium">
+                                                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                                                <span>Premium</span>
+                                                                </span>
+                                                                </a>
+                                                                <a href="" class="vacancies__item vacancies__item_new">
+                                                                    <div class="vacancies__item__left">
+                                                                    <div class="vacancies__icon">
+                                                                    <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                                                    </div>
+                                                                    <div class="vacancies__desc">
+                                                                    <h3>Xadimə</h3>
+                                                                    <p class="vacancy_item_company"> Elson Group MMC</p>
+                                                                    <div class="vacancy_item_date_count">
+                                                                    <span class="vacancy_item_time">
+                                                                        <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                                                    <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                                                    </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                                                    <span class="card_like " data-section="works" data-id="16519">
+                                                                        <i id="unlike" class="fa-regular fa-heart"></i>
+                                                                        <i id="like" class="fa-solid fa-heart"></i>
+                                                                    </span>
+                                                                    </div>
+                                                                    <span class="vacancies__premium">
+                                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                                                    <span>Premium</span>
+                                                                    </span>
+                                                                    </a>
+                                                                    
+                                                                    <a href="" class="vacancies__item vacancies__item_new">
+                                                                        <div class="vacancies__item__left">
+                                                                        <div class="vacancies__icon">
+                                                                        <img loading="lazy" src="~/assets/images/categories/satis.svg" alt="Xadime">
+                                                                        </div>
+                                                                        <div class="vacancies__desc">
+                                                                        <h3>Xadimə</h3>
+                                                                        <p class="vacancy_item_company"> Elson Group MMC</p>
+                                                                        <div class="vacancy_item_date_count">
+                                                                        <span class="vacancy_item_time">
+                                                                            <i class="fa-regular fa-calendar"></i> 07 Fev</span>
+                                                                        <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> 986</span>
+                                                                        </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="vacancies__item__right">
+                                <span class="vacancies__price">500 - 800 AZN</span> 
+
+                                                                        <span class="card_like " data-section="works" data-id="16519">
+                                                                            <i id="unlike" class="fa-regular fa-heart"></i>
+                                                                            <i id="like" class="fa-solid fa-heart"></i>
+                                                                        </span>
+                                                                        </div>
+                                                                        <span class="vacancies__premium">
+                                                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                                                        <span>Premium</span>
+                                                                        </span>
+                                                                        </a>
+                                    
+                                                                          <ul class="custom-pagination">
+                                                                            <li>
+                                                                            <a href="#" class="disabled">
+                                                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow.svg" alt="">
+                                                                            </a>
+                                                                            </li>
+                                                                            <li><a href="vakansiyalar" class="active">1</a></li>
+                                                                            <li><a href="vakansiyalar?page=2">2</a></li>
+                                                                            <li><a>...</a></li>
+                                                                            <li><a href="vakansiyalar?page=9">9</a></li>
+                                                                            <li><a href="vakansiyalar?page=10">10</a></li>
+                                                                            <li>
+                                                                            <a href="vakansiyalar?page=2">
+                                                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow.svg" alt="">
+                                                                            </a>
+                                                                            </li>
+                                                                            </ul>
+                                                                        </div>
+
+                    <div class="col-md-4">
+                        <div class="sticky_element sticky_active_top sticky_active_bottom">
+                        <div class="sticky_element__banner">
+                        <a href="https://urlgeni.us/linkedin/bgbnnr" target="_blank" data-id="22" class="vacancies__banner vacancies__banner--main click_banner">
+                        <img loading="lazy" src="https://www.hellojob.az/uploads/banners/2023/11/14/kapital-sag-banner-november-banner-65536c3930f8c-642f99826c18629c88e81e0d334a240365536c3930f9e-xfF83drfxG8MnB_.jpg" width="370px" height="370px" alt="kapital sag banner - november">
+                        </a>
+                        </div>
+                        <div class="sticky_element__companies comps">
+                        <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                                <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+                        <p>33 vakansiya</p>
+                        </a>
+                        <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                            <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+                    <p>33 vakansiya</p>
+                    </a> <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                        <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+                <p>33 vakansiya</p>
+                </a> <a href="/sirket/kapital-bank-8" class="vacancies__company">
+                    <img loading="lazy" src="~/assets/images/companies/Kapitalbank.png" alt="Kapital Bank" width="30px" class="n_company_images">
+            <p>33 vakansiya</p>
+            </a>
+                        
+                        </div>
+                        </div>
+                        </div>
+                </div>
+            </div>    
+            </section>
+<!-- Vacancies end -->
+<!-- Blogs Start -->
+
+            <section class="blogs">
+                <div class="container">
+                <h2 class="section-title">Bloq yazıları</h2>
+                <div class="row">
+                <div class="col-md-4">
+                <a href="/post/it-sahesi-ucun-mutexessisler-musahibeye-nece-hazirlasmalidir" class="blogs__item">
+                <div class="blogs__img">
+                <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/12/21/65842cb3d0cb4-EznFy-4Ml8PVskp.png" alt="">
+                </div>
+                <div class="blogs__desc">
+                <span class="blogs__date">21 Dekabr 2023</span>
+                <h3>
+                <p>İT sahəsi üçün mütəxəssislər müsahibəyə necə hazırlaşmalıdır?</p>
+                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
+                </h3>
+                
+                </div>
+                </a>
+                </div>
+                <div class="col-md-4">
+                <a href="/post/hr-mutexessisleri-cv-de-neye-diqqet-yetirirler" class="blogs__item">
+                <div class="blogs__img">
+                <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/12/19/65814d3416426-v60yOBnW048Re8_.png" alt="">
+                </div>
+                <div class="blogs__desc">
+                <span class="blogs__date">19 Dekabr 2023</span>
+                <h3>
+                <p>HR mütəxəssisləri CV-də nəyə diqqət yetirirlər?</p>
+                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
+                </h3>
+                
+                </div>
+                </a>
+                </div>
+                <div class="col-md-4">
+                <a href="/post/reqemsal-marketinq-mutexessisi-kimdir-babaxan-melikli" class="blogs__item">
+                <div class="blogs__img">
+                <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/11/26/65626537d2b4d-fnBBl7ZY-TsSL4V.jpg" alt="">
+                </div>
+                <div class="blogs__desc">
+                <span class="blogs__date">26 Noyabr 2023</span>
+                <h3>
+                <p>Rəqəmsal marketinq mütəxəssisi kimdir? - Babaxan Məlikli</p>
+                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
+                </h3>
+                
+                </div>
+                </a>
+                </div>
+                </div>
+                </div>
+                </section>
+<!-- Blogs end -->
+<!-- Tags start -->
+
+<section class="tags">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/is-elanlari">Is elanlari 2023 - Vakansiyalar</a>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+                </section>
+                
+                <!-- Tags end -->
+        
+   </main>
+   <!-- Main Section End -->
+
+                @section Scripts {
+                    <script src="~/assets/js/home.js"></script>
+                }
+   

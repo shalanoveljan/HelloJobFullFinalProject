@@ -1,0 +1,589 @@
+﻿<main>
+    <div class="nsp_course">
+        <div class="container">
+            <div class="row ">
+
+                <div class="nsp_top col-md-12">
+                    <ul>
+                        <li>
+                            <a href="/">İş elanları</a>
+                        </li>
+                        <li>
+                            <a href="./resume.html">CV-lər</a>
+                        </li>
+                        <li class="active">
+                            <a href="./course.html">Kurslar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="resumes courses">
+        <div class="container">
+            <div class="resumes__head">
+                <div class="w-100 d-none d-md-flex align-items-center justify-content-between">
+                    <h3 class="resumes__title">kurslar</h3>
+                </div>
+                <div class="resumes__head__btns--mobile d-md-none">
+                    <a href="#" class="btn btn-sort">
+                        Sırala
+                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/sort.svg" alt>
+                    </a>
+                    <a href="#" class="btn btn-filters">
+                        Filtrlə
+                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/filter.svg" alt>
+                        <span id="filters_count"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="resumes__sort d-md-none">
+                <h4>Sırala</h4>
+                <ul>
+                    <li>
+                        <input type="radio" class="d-none" value="retire" name="sort" id="sort1" checked>
+                        <label for="sort1">Öncə təqaüdlü proqramlar</label>
+                    </li>
+                    <li>
+                        <input type="radio" class="d-none" value="time_asc" name="sort" id="sort2">
+                        <label for="sort2">Müddətə görə (az)</label>
+                    </li>
+                    <li>
+                        <input type="radio" class="d-none" value="time_desc" name="sort" id="sort3">
+                        <label for="sort3">Müddətə görə (çox)</label>
+                    </li>
+                    <li>
+                        <input type="radio" class="d-none" value="level_asc" name="sort" id="sort4">
+                        <label for="sort4">Səviyyəyə görə (aşağı)</label>
+                    </li>
+                    <li>
+                        <input type="radio" class="d-none" value="level_desc" name="sort" id="sort5">
+                        <label for="sort5">Səviyyəyə görə (yüksək)</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="resumes__filters" id="resume_filters">
+                        <div class="resumes__filters__head  d-md-none">
+                            <h4>Filterlə</h4>
+                            <a href="#" class="resumes__filters__close">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/close.svg" alt>
+                            </a>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">İxtİsas</h3>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-group-search" placeholder="İxtisas axtar">
+                            </div>
+                            <ul class="resumes__filters__profession resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="2" class="form-control d-none" id="category2"
+                                           name="category">
+                                    <label for="category2">
+                                        Dizayn
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="3" class="form-control d-none" id="category3"
+                                           name="category">
+                                    <label for="category3">
+                                        Proqramlaşdırma
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="4" class="form-control d-none" id="category4"
+                                           name="category">
+                                    <label for="category4">
+                                        Marketinq
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="5" class="form-control d-none" id="category5"
+                                           name="category">
+                                    <label for="category5">
+                                        Satış
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="7" class="form-control d-none" id="category7"
+                                           name="category">
+                                    <label for="category7">
+                                        Mühasibatlıq və vergi
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="9" class="form-control d-none" id="category9"
+                                           name="category">
+                                    <label for="category9">
+                                        Qida və içki
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">Şirkət axtar</h3>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-group-search" placeholder="Şirkət axtar">
+                            </div>
+                            <ul class="resumes__filters__profession resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="989" class="form-control d-none" id="company989"
+                                           name="company">
+                                    <label for="company989">Vision Academy</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="1681" class="form-control d-none" id="company1681"
+                                           name="company">
+                                    <label for="company1681">Dövlət Məşğulluq Agentliyi</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">TəQAÜD İmkanı</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="retire_1"
+                                           name="retire">
+                                    <label for="retire_1">Var</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">QIYMƏT</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="paid" name="paid">
+                                    <label for="paid">Ödənişsiz kurslar</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">Dərs REJİMİ</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="mode_1"
+                                           name="mode">
+                                    <label for="mode_1">Online</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="0" class="form-control d-none" id="mode_0"
+                                           name="mode">
+                                    <label for="mode_0">Sinifdə</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <div class="resumes__filters__item">
+                            <h3 class="resumes__title">Müddət</h3>
+                            <div class="form-group">
+                                <input class="range-input d-none" type="text" id="time" readonly>
+                                <div id="slider-range"></div>
+                                <div class="resumes__filters__interval">
+                                    <span>1 ay</span>
+                                    <span>24 ay</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="resumes_filters_item   ">
+                            <h3 class="resumes__title">Iş stajı</h3>
+
+                            <div class="range-container">
+                                <div class="values">
+                                    <span id="range1"> 0</span>
+                                    <span>&dash;</span>
+                                    <span id="range2"> 24 </span>
+                                </div>
+                                <div class="wrapper">
+
+                                    <div class="slider-track"></div>
+                                    <input type="range" min="0" max="24" value="0" id="slider-1" oninput="slideOne()">
+                                    <input type="range" min="0" max="24" value="24" id="slider-2" oninput="slideTwo()">
+                                </div>
+                                <div class="wrapper_info mb-3">
+                                    <span>0 ay</span>
+                                    <span>24 ay</span>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">SERTİFİKAT</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="certificate_1"
+                                           name="certificate">
+                                    <label for="certificate_1">Verilir</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">SƏVİYYƏ</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="level_1"
+                                           name="level">
+                                    <label for="level_1">Başlanğıc</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="2" class="form-control d-none" id="level_2"
+                                           name="level">
+                                    <label for="level_2">Orta</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" value="3" class="form-control d-none" id="level_3"
+                                           name="level">
+                                    <label for="level_3">Yüksək</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__btns">
+                            <a href="#" class="btn" id="search_filters">Axtar <span id="count_items"></span></a>
+                            <a href="#" class="btn btn-grey" id="clear_filters">Təmizlə</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-between mb-23">
+                        <div class="d-md-flex text-center">
+                            <p class="cv_count">
+                                Axtarışınıza uyğun <span id="count_items_head">12</span> kurs tapıldı
+                            </p>
+                            <a href="#" class="cv_count ml-md-3 text-dark" id="clear_filters2">Filtrləri təmizlə</a>
+                        </div>
+                        <div class="form-group d-none  mb-0 d-md-flex align-items-center">
+                            <label for>Sırala</label>
+                            <select name="sort2" id="sort" class="form-control">
+                                <option>Seçin</option>
+                                <option value="retire">Öncə təqaüdlü proqramlar</option>
+                                <option value="time_asc">Müddətə görə (az)</option>
+                                <option value="time_desc">Müddətə görə (çox)</option>
+                                <option value="level_asc">Səviyyəyə görə (aşağı)</option>
+                                <option value="level_desc">Səviyyəyə görə (yüksək)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="similar-resume">
+                        <a href="/kurs/tikis-avadanliqlarinin-operatoru-tikisci" class="resume__block w-100 full" target="_blank">
+                            <div class="resume__header">
+                                <div class="resume__header__img">
+                                    <img loading="lazy" src="https://www.hellojob.az/uploads/stores/2023/04/14/tikis-avadanliqlarinin-operatoru-tikisci-store-64390eca9b72b-6317ab82c78854ba39ae3d37aca9b13164390eca9b739-vux__DDeY9mbo6I.png" alt="">
+                                </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="d-block">
+                                        <div class="resume__header__desc">
+                                            <h3 class="resume__header__name">
+                                                Tikiş avadanlıqlarının operatoru, tikişçi
+                                                <span class="resume__premium resume__premium--scholarship">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/courses/magic.svg" alt="Ödənişsizdir"><p>Ödənişsizdir</p>
+                                                </span>
+
+                                            </h3>
+                                            <p class="resume__header__speciality">Dövlət Məşğulluq Agentliyi</p>
+                                        </div>
+                                        <div class="resume__footer">
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Sinifdə</h4>
+                                                    <p>Dərs rejimi</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Ödənişsizdir</h4>
+                                                    <p>Qiymət</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span class="resume__icon mr-0 course_like " data-id="31">
+                                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+                        </a>
+                        <a href="/kurs/tikis-avadanliqlarinin-operatoru-tikisci" class="resume__block w-100 full" target="_blank">
+                            <div class="resume__header">
+                                <div class="resume__header__img">
+                                    <img loading="lazy" src="https://www.hellojob.az/uploads/stores/2023/04/14/tikis-avadanliqlarinin-operatoru-tikisci-store-64390eca9b72b-6317ab82c78854ba39ae3d37aca9b13164390eca9b739-vux__DDeY9mbo6I.png" alt="">
+                                </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="d-block">
+                                        <div class="resume__header__desc">
+                                            <h3 class="resume__header__name">
+                                                Tikiş avadanlıqlarının operatoru, tikişçi
+                                                <span class="resume__premium resume__premium--scholarship">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/courses/magic.svg" alt="Ödənişsizdir"><p>Ödənişsizdir</p>
+                                                </span>
+
+                                            </h3>
+                                            <p class="resume__header__speciality">Dövlət Məşğulluq Agentliyi</p>
+                                        </div>
+                                        <div class="resume__footer">
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Sinifdə</h4>
+                                                    <p>Dərs rejimi</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Ödənişsizdir</h4>
+                                                    <p>Qiymət</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span class="resume__icon mr-0 course_like " data-id="31">
+                                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+                        </a>
+                        <a href="/kurs/tikis-avadanliqlarinin-operatoru-tikisci" class="resume__block w-100 full" target="_blank">
+                            <div class="resume__header">
+                                <div class="resume__header__img">
+                                    <img loading="lazy" src="https://www.hellojob.az/uploads/stores/2023/04/14/tikis-avadanliqlarinin-operatoru-tikisci-store-64390eca9b72b-6317ab82c78854ba39ae3d37aca9b13164390eca9b739-vux__DDeY9mbo6I.png" alt="">
+                                </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="d-block">
+                                        <div class="resume__header__desc">
+                                            <h3 class="resume__header__name">
+                                                Tikiş avadanlıqlarının operatoru, tikişçi
+                                                <span class="resume__premium resume__premium--scholarship">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/courses/magic.svg" alt="Ödənişsizdir"><p>Ödənişsizdir</p>
+                                                </span>
+
+                                            </h3>
+                                            <p class="resume__header__speciality">Dövlət Məşğulluq Agentliyi</p>
+                                        </div>
+                                        <div class="resume__footer">
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Sinifdə</h4>
+                                                    <p>Dərs rejimi</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Ödənişsizdir</h4>
+                                                    <p>Qiymət</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span class="resume__icon mr-0 course_like " data-id="31">
+                                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+                        </a>
+                        <a href="/kurs/tikis-avadanliqlarinin-operatoru-tikisci" class="resume__block w-100 full" target="_blank">
+                            <div class="resume__header">
+                                <div class="resume__header__img">
+                                    <img loading="lazy" src="https://www.hellojob.az/uploads/stores/2023/04/14/tikis-avadanliqlarinin-operatoru-tikisci-store-64390eca9b72b-6317ab82c78854ba39ae3d37aca9b13164390eca9b739-vux__DDeY9mbo6I.png" alt="">
+                                </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="d-block">
+                                        <div class="resume__header__desc">
+                                            <h3 class="resume__header__name">
+                                                Tikiş avadanlıqlarının operatoru, tikişçi
+                                                <span class="resume__premium resume__premium--scholarship">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/courses/magic.svg" alt="Ödənişsizdir"><p>Ödənişsizdir</p>
+                                                </span>
+
+                                            </h3>
+                                            <p class="resume__header__speciality">Dövlət Məşğulluq Agentliyi</p>
+                                        </div>
+                                        <div class="resume__footer">
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Sinifdə</h4>
+                                                    <p>Dərs rejimi</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Ödənişsizdir</h4>
+                                                    <p>Qiymət</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span class="resume__icon mr-0 course_like " data-id="31">
+                                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+                        </a>
+                        <a href="/kurs/tikis-avadanliqlarinin-operatoru-tikisci" class="resume__block w-100 full" target="_blank">
+                            <div class="resume__header">
+                                <div class="resume__header__img">
+                                    <img loading="lazy" src="https://www.hellojob.az/uploads/stores/2023/04/14/tikis-avadanliqlarinin-operatoru-tikisci-store-64390eca9b72b-6317ab82c78854ba39ae3d37aca9b13164390eca9b739-vux__DDeY9mbo6I.png" alt="">
+                                </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="d-block">
+                                        <div class="resume__header__desc">
+                                            <h3 class="resume__header__name">
+                                                Tikiş avadanlıqlarının operatoru, tikişçi
+                                                <span class="resume__premium resume__premium--scholarship">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/courses/magic.svg" alt="Ödənişsizdir"><p>Ödənişsizdir</p>
+                                                </span>
+
+                                            </h3>
+                                            <p class="resume__header__speciality">Dövlət Məşğulluq Agentliyi</p>
+                                        </div>
+                                        <div class="resume__footer">
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Sinifdə</h4>
+                                                    <p>Dərs rejimi</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Ödənişsizdir</h4>
+                                                    <p>Qiymət</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span class="resume__icon mr-0 course_like " data-id="31">
+                                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+                        </a>
+                        <a href="/kurs/tikis-avadanliqlarinin-operatoru-tikisci" class="resume__block w-100 full" target="_blank">
+                            <div class="resume__header">
+                                <div class="resume__header__img">
+                                    <img loading="lazy" src="https://www.hellojob.az/uploads/stores/2023/04/14/tikis-avadanliqlarinin-operatoru-tikisci-store-64390eca9b72b-6317ab82c78854ba39ae3d37aca9b13164390eca9b739-vux__DDeY9mbo6I.png" alt="">
+                                </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="d-block">
+                                        <div class="resume__header__desc">
+                                            <h3 class="resume__header__name">
+                                                Tikiş avadanlıqlarının operatoru, tikişçi
+                                                <span class="resume__premium resume__premium--scholarship">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/courses/magic.svg" alt="Ödənişsizdir"><p>Ödənişsizdir</p>
+                                                </span>
+
+                                            </h3>
+                                            <p class="resume__header__speciality">Dövlət Məşğulluq Agentliyi</p>
+                                        </div>
+                                        <div class="resume__footer">
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Sinifdə</h4>
+                                                    <p>Dərs rejimi</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="resume__item">
+                                                <div class="resume__icon">
+                                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                                </div>
+                                                <div class="resume__item__text">
+                                                    <h4>Ödənişsizdir</h4>
+                                                    <p>Qiymət</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span class="resume__icon mr-0 course_like " data-id="31">
+                                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+                        </a>
+                    </div>
+                    <div class="show_more  d-none "></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+@section Scripts {
+    <script src="~/assets/js/course.js"></script>
+   }
