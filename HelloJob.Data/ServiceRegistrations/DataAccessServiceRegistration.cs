@@ -18,15 +18,19 @@ namespace HelloJob.Data.ServiceRegistrations
     {
         public static void DataAccessServiceRegister(this IServiceCollection services)
         {
-            services.AddDbContext<HelloJobDbContext>(opt =>
-            {
-                opt.UseSqlServer(DatabaseConfiguration.ConnectionString);
+            //    services.AddDbContext<HelloJobDbContext>(opt =>
+            //    {
+            //        opt.UseSqlServer(DatabaseConfiguration.ConnectionString);
 
-            });
+            //    });
 
 
             services.AddScoped<IBlogDAL, BlogDAL>();
             services.AddScoped<ICategoryDAL, CategoryDAL>();
+            services.AddScoped<ISettingDAL, SettingDAL>();
+            services.AddScoped<ITagDAL, TagDAL>();
+            services.AddScoped<ICourseDAL, CourseDAL>();
+            services.AddScoped<ILayoutDAL, LayoutDAL>();
 
 
             //services.AddIdentity<User, IdentityRole>(opt =>

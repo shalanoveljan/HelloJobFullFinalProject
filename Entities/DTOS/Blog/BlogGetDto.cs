@@ -12,7 +12,8 @@ namespace HelloJob.Entities.DTOS
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public string Image { get; set; } = null!;
+        public string smallDescription { get; set; } = null!;
+        public string? Image { get; set; } = null!;
         public int ViewCount { get; set; }
         public DateTime CreatedAt { get; set; }
         public CategoryGetDto Category { get; set; }

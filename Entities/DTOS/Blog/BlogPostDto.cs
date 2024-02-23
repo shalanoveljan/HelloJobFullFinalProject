@@ -11,6 +11,7 @@ namespace HelloJob.Entities.DTOS
     {
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
+        public string smallDescription { get; set; } = null!;
         public IFormFile? ImageFile { get; set; }
         public int CategoryId { get; set; }
     }

@@ -11,13 +11,13 @@ namespace HelloJob.Service.Services.Interfaces
 {
     public interface IBlogService
     {
-        public Task<PagginatedResponse<BlogGetDto>> GetAllAsync(int page = 1);
+        public Task<PagginatedResponse<BlogGetDto>> GetAllAsync(int pageNumber=1, int pageSize=6);
 
         public Task<IResult> CreateAsync(BlogPostDto dto);
 
-        public Task RemoveAsync(int id);
+        public Task<IResult> RemoveAsync(int id);
 
         public Task<IResult> UpdateAsync(int id, BlogPostDto dto);
-        public Task<IDataResult<BlogUpdateDto>> GetAsync(int id);
+        public Task<IDataResult<BlogGetDto>> GetAsync(int id);
     }
 }

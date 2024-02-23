@@ -34,14 +34,13 @@ namespace HelloJob.App.Configurations
             //    DataSeeder.SeedUsers(userManager).Wait();
             //}
 
-                
             applicationBuilder.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //  name: "areas",
-                //      pattern: "{area:exists}/{controller=identity}/{action=login}/{id?}"
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                      pattern: "{area:exists}/{controller=Dashboard}/{action=index}/{id?}"
 
-                //);
+                );
 
                 endpoints.MapControllerRoute(
                 name: "default",

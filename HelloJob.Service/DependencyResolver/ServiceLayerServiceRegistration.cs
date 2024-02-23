@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using HelloJob.Service.Services.Implementations;
+using HelloJob.Service.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,12 @@ namespace HelloJob.Service.DependencyResolver
     {
         public static void ServiceLayerServiceRegister(this IServiceCollection services)
         {
+            services.AddScoped<IBlogService, BlogService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISettingService,SettingService>();
+            services.AddScoped<ILayoutService,LayoutService>();
+            services.AddScoped<ICourseService,CourseService>();
+            services.AddScoped<ITagService,TagService>();
             services.AddHttpContextAccessor();
 
 

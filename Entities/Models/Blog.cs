@@ -11,9 +11,9 @@ namespace HelloJob.Entities.Models
     {
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public string Image { get; set; } = null!;
+        public string smallDescription { get; set; } = null!;
+        public string? Image { get; set; }
         public int CategoryId { get; set; }
-
         public Category Category { get; set; }
         public int ViewCount { get; set; }
         public string Storage { get; set; } = null!;

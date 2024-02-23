@@ -2,6 +2,8 @@ using HelloJob.App.Configurations;
 using HelloJob.Data.ServiceRegistrations;
 using HelloJob.Service.DependencyResolver;
 using HelloJob.Service.Mappers;
+using Microsoft.AspNetCore.Builder;
+
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews()

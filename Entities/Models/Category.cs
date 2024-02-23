@@ -10,12 +10,12 @@ namespace HelloJob.Entities.Models
     public class Category:BaseEntity
     {
         public string Name { get; set; } = null!;
-        public string? Image { get; set; }=null!;
-        public int? ParentId { get; set; }
-        public Category? Parent { get; set; }= null!;
-        public bool IsParent { get; set; }
+        public string? Image { get; set; }
 
-        public IEnumerable<Category> Children { get; set; }
+        public int? ParentId { get; set; } = null;
+        public Category? Parent { get; set; }
+        public string Storage { get; set; }
+        public List<Category> Children { get; set; }
         public IEnumerable<Blog> Blogs { get; set; }
     }
 }

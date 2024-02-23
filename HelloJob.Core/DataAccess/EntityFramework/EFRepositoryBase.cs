@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
     
 namespace HelloJob.Core.DataAccess.EntityFramework
@@ -14,8 +15,6 @@ namespace HelloJob.Core.DataAccess.EntityFramework
             addEntity.State = EntityState.Added;
             context.SaveChangesAsync();
         }
-
-       
 
         public async Task RemoveAsync(T entity)
         {

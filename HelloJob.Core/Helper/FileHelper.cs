@@ -15,7 +15,7 @@ namespace HelloJob.Core.Helper
             };
                 
             return FileName;
-        }
+        }   
 
         public static bool IsImage(this IFormFile file)
         {

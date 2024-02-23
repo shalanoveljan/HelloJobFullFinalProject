@@ -10,10 +10,14 @@ namespace HelloJob.Entities.DTOS
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
         public int? ParentId { get; set; }
-        public bool IsParent { get; set; }
-        public IEnumerable<CategoryGetDto> Children { get; set; }
+        public List<CategoryGetDto> Children { get; set; }
+
+        public CategoryGetDto()
+        {
+            Children= new List<CategoryGetDto>();
+        }
 
 
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4qr1HXIzRI8t/KpJBOFcqNtfIUZ2VQQ9AoSjHt495KOHIRi0NBQy9AmwMKsC9fdZoKNIXCdbwJ5Y1r7fQmy0Rw==",
+  "dgSpecHash": "adG04b1dix4hmQw006yERdlzZlPvTSb9Oay6thvzF6kPNoKTVraWa1OhkpkEUTFvdrqaMLNQVmcSx20VnEbQeA==",
   "success": true,
   "projectFilePath": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\HelloJob.App.csproj",
   "expectedPackageFiles": [
@@ -68,7 +68,7 @@
     "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.27\\microsoft.aspnetcore.cryptography.keyderivation.6.0.27.nupkg.sha512",
     "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.dataprotection\\2.2.0\\microsoft.aspnetcore.dataprotection.2.2.0.nupkg.sha512",
     "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.dataprotection.abstractions\\2.2.0\\microsoft.aspnetcore.dataprotection.abstractions.2.2.0.nupkg.sha512",
-    "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.2\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.2.nupkg.sha512",
+    "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\6.0.27\\microsoft.aspnetcore.diagnostics.entityframeworkcore.6.0.27.nupkg.sha512",
     "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.0\\microsoft.aspnetcore.http.2.2.0.nupkg.sha512",

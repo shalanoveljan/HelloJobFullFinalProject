@@ -1,4 +1,12 @@
-﻿<main>
+﻿
+@inject IBlogService blogService
+
+@{
+    IList<BlogGetDto> blogs =  blogService.GetAllAsync().Result.Datas;
+}
+@model BlogGetDto
+
+<main>
 
     <div class="col-md-12 breadc new_breadcrumb">
         <div class="container two_side_breadc">
@@ -9,9 +17,9 @@
                 </li>
                 <li>
                     <a href="/blog">Bloq</a>
-                <li>
-                    <a href="/post/hr-mutexessisleri-cv-de-neye-diqqet-yetirirler/">HR mütəxəssisləri CV-də nəyə diqqət yetirirlər?</a>
                 </li>
+                <li>
+                    <a asp-controller="Blog"  asp-action="Detail" asp-route-id="@Model.Id">@Model.Title</a>
                 </li>
 
             </ul>
@@ -23,53 +31,16 @@
             <div class="row">
                 <div class="bi_desc col-md-12 full">
                     <h2>
-                        HR mütəxəssisləri CV-də nəyə diqqət yetirirlər?
+                        @Model.Title
                     </h2>
                     <div class="bi_time_and_counter full">
-                        <span class="b_time">19 Dekabr 2023</span>
-                        <span class="b_visible"><i></i>3378</span>
+                        <span class="b_time">@Model.CreatedAt.ToString("dd MMMM  yyyy")</span>
+                        <span class="b_visible"><i></i>@Model.ViewCount</span>
                     </div>
                     <p class="image-blog">
-                        <img loading="lazy" src="https://www.hellojob.az/uploads/blog/full/2023/12/19/65814d3416426-v60yOBnW048Re8_.png">
-                    </p><p><span style="color:#000000"><strong>“HR mütəxəssisləri cavablandırır” rubrikamızın bu yazısında PashaPay şirkətinin İnsan resursları mütəxəssisi Elnarə Mustafayeva CV-lər və onların önəmi barədə yazıb.</strong></span></p>
-                    <p><span style="color:#000000">Mən – Elnarə Mustafayeva, hal-hazırda “PashaPay” MMC-də İşə qəbul üzrə Mütəxəssis kimi fəaliyyət göstərirəm. Artıq üç ilə yaxındır ki, bank və “fintech” sahələrində çalışıram. İtaliyada magistr pilləsini başa vurduğdan sonra, Vətənə qayıdıb İnsan Resursları sahəsində davam edəcəyimi qərar vermişdim. O zamanlar, bu sahə haqqında çox az biliyim var idi və HR-ın necə çoxşahəli bir peşə olduğunu bilmirdim. Fərqli təcrübə proqramlarına və kurslara qatıldıqdan sonra, İnsan Resurslarının – İşə qəbul üzrə qoluna yönəlmək istədiyimi anladım. İşimi çox sevirəm və hal-hazırda işlədiyim peşakar komandadan öyrənəcəyim çox şey olduğunu anlayıram. Buna görə də, bütün şansları dəyərləndirib, maksimum biliklər əldə etmək üçün çalışıram.&nbsp;</span></p>
-                    <p><span style="color:#000000"><strong>“HR mütəxəssisləri CV-də nəyə diqqət yetirirlər?”</strong></span></p>
-                    <p><span style="color:#000000">İş axtarışı zamanı bütün namizədlərin diqqət yetirməli olduğu ilk mərhələ - düzgün CV tərtibidir. Curriculum Vitae və ya CV sizin bir növ vizit kartınızdır və sizin üçün bir çox yeni imkanlar yarada bilər. İşəgötürən tərəfindən “CV screening” zamanı bir çox məqamlara diqqət yetirilir. Onlardan biri sizin CV-də qeyd etdiyiniz özünüz haqqda qısa məlumatdır (“Summary”). İdealda bu hissə 3-5 cümlədən ibarət olmalıdır və peşəkar fəaliyyətinizin bütün zəruri aspektlərinə toxunmalıdır. Daha sonra HR, müraciət etdiyiniz vəzifədən asılı olaraq, sizin təhsilinizə və son iş yerinizə nəzər yetirir. Belə ki, CV-nizdə bütün fəaliyyətlərinizi konkret rəqəmlər və faktlarla əks etdirmək çox vacibdir. Karyeranız haqqda məlumat aldıqdan sonra işəgötürən dil bilikləriniz, hobbiləriniz, layihələriniz və digər məlumatlarınızla tanış olur.</span></p>
-                    <p><span style="color:#000000"><strong>CV niyə əhəmiyyətlidir və iş axtarışının niyə əsas hissəsidir?</strong></span></p>
-                    <p><span style="color:#000000">Namizəd haqqında ilk və yeganə məlumat mənbəyi CV-dir. CV-ni əhəmiyyətli edən aşağıdaki faktorlardır:</span></p>
-                    <ul>
-                        <li><span style="color:#000000">İlk təəssürat: CV-niz işəgötürənlərin sizin haqqda yaranan ilkin təəssüratı formalaşdırır. Will Rogersin də dediyi kimi: “İlk təəssüratı yaratmağa ikinci şansınız olmayacaq.”</span></li>
-                        <li><span style="color:#000000">Təfərrüatlar: CV-niz təhsiliniz, bacarıqlarınız, iş təcrübəniz və karyeranızın digər mühüm aspektləri haqqında ətraflı məlumat verir. Bu, işəgötürənlərə sizin mövcud vakansiyaya uyğun olub olmadığınız haqqda qərar verməyə kömək edir.</span></li>
-                        <li><span style="color:#000000">Təqdimat: Yaxşı tərtib olunmuş CV, sizin məlumatları düzgün strukturlaşdırmaq, dil biliklərinizdən istifadə etmək və bacarıqlarınızı professional şəkildə nümayış edə bildiyinizi göstərir.&nbsp;</span></li>
-                        <li><span style="color:#000000">Peşəkar inkişaf: CV karyera yüksəlişinizi, əvvəlki işlərdə əldə etdiyiniz nailiyyətləri və vəzifə öhdəliklərini özündə cəmləşdirir, bu da işəgötürənlərə sizin potensialınızı anlamağa kömək edir.</span></li>
-                    </ul>
-                    <p><span style="color:#000000"><strong>Əsas CV bölmələri/başlıqları hansılardır və hər biri üçün nələr daxil etmək vacibdir? CV strukturu necə olmalıdır?</strong></span></p>
-                    <p><span style="color:#000000">CV adətən bir neçə əsas bölmədən ibarət olur, onların hər biri sizin peşəkar təcrübənizin, təhsilinizin və bacarıqlarınızın müxtəlif aspektləri haqqında məlumat verir. Budur CV-nin əsas bölmələri və hər birinə daxil edilməli olan məlumatlar:</span></p>
-                    <ul>
-                        <li><span style="color:#000000">Əlaqə məlumatları – Ad və Soyad, yaşayış ünvanı (istəyə görə), əlaqə nömrəsi və e-poçt;</span></li>
-                        <li><span style="color:#000000">Xülasə - Namizədi təsvir edəcək qısa məlumat;</span></li>
-                        <li><span style="color:#000000">Bacarıqlar – Sahə ilə bağlı “hard” (texniki)&nbsp; və “soft” (yumuşaq) bacarıqlar;</span></li>
-                        <li><span style="color:#000000">İş təcrübəsi – Şirkət adı, tutulan vəzifə, iş dövrü, vəzifə öhdəlikləri. Son iş yerindən başlayaraq ən birinciyə doğru gedən ardıcılıqda olması arzuolunandır;</span></li>
-                        <li><span style="color:#000000">Təhsil - Qurumun adı,ixtisas və dərəcə, başlama və bitmə illəri;</span></li>
-                        <li><span style="color:#000000">Əlavə bölmələr (sertifikatlar, hobbi və maraqlar, layihələr və s.).</span></li>
-                    </ul>
-                    <p><span style="color:#000000"><strong>CV-də yaş, ünvan və şəkil yerləşdirilməsi vacibdir?</strong></span></p>
-                    <p><span style="color:#000000">Bu məlumatlar mütləq daxil edilən məlumatlar sırasında deyil. Bu namizədin şəxsi istəyindən və müraciət edilən vakansiyadan asılı olaraq dəyişir.</span></p>
-                    <p><span style="color:#000000"><strong>Əgər iş axtaranın təcrübəsi yetəri qədər deyilsə, CV tərtib edərkən nəyə diqqət etməlidir?</strong></span></p>
-                    <p><span style="color:#000000">Əgər təcrübəniz azdırsa və ya hər hansı bir iş təcrübəniz ümumiyyətlə yoxdursa, CV tərtibi zamanı çətinlik çəkə bilərsiz, lakin əsas olaraq şəxsi keyfiyyətlərinizə, bacarıqlarınıza və potensialınıza diqqət yetirmək vacibdir. İş təcrübəsi olmasa belə, CV-də inkişaf və öyrənmək istəyinizi göstərməlisiz.</span></p>
-                    <p><span style="color:#000000"><strong>CV-də referansların yerləşdirilməsi vacibdirmi?</strong></span></p>
-                    <p><span style="color:#000000">CV-yə referansların daxil edilməsi mütləq deyil və bir çox müraciət edənlər bunu etməməyə qərar verirlər. CV-yə referensların əlavə edilməsinin bir çox üstünlükləri var, məsəslən:</span></p>
-                    <ul>
-                        <li><span style="color:#000000">Referanslar sizin peşəkar keyfiyyətlərinizə və komandada işləmək bacarığınıza əlavə sübut kimi xidmət edə bilər.</span></li>
-                        <li><span style="color:#000000">Əvvəlki işəgötürənlərdən və ya həmkarlarınızdan referans almaq potensial işəgötürəndə sizə qarşı etimad hissi yarada bilər.</span></li>
-                    </ul>
-                    <p><span style="color:#000000"><strong>CV göndərəndə diqqət edilməsi lazım olan məqamlar hansılardır. Hansi ümumi səhvlərdən qaçınmaq olar?</strong></span></p>
-                    <p><span style="color:#000000">CV göndərən zaman çox vaxt edilən səhvlərdən biri mövzu hissəsinə müraciət edilən vakansiyanın adını yazmamaq olur. Bələ ki, CV mövzusuz olan diqər CV-lər arasında qalır və HR tərəfindən baxılmır. Əlavə olaraq CV göndərən zaman, CV-nin uzərinə ad və soyadınızı qeyd etmək və düzgün formatda göndərmək arzuolunandır.&nbsp;</span></p>
-                    <p>&nbsp;</p>
-                    <p><span style="color:#000000"><em>"İnsan resursları (HR) Mütəxəssisləri cavablandırır" rubrikamızın məqsədi, əmək ekosistemində daha peşəkar şəxslərin formalaşmasına töhfə vermək, işaxtaranların suallarına peşəkar rəyləri almaq, beləliklə prosesin hər iki tərəf üçün faydalılığını&nbsp;artımaqdır.</em></span></p>
-                    <p><span style="color:#000000"><em>Əgər siz də HR mütəxəssisi olaraq yazınızın yayımlanmasını istəyirsinizsə </em></span><a href="mailto:elan@hellojob.az"><span style="color:#1155cc"><em>elan@hellojob.az</em></span></a><span style="color:#000000"><em> e-poçtuna yaza bilərsiniz.</em></span></p>
-                    <p>&nbsp;</p>
-                    <p></p>
+                    <img loading="lazy" src="~/assets/images/blogs/@Model.Image">
+                    </p>
+                    <p><span style="color:#000000">@Model.Description</span></p>
                 </div>
                 <div class="blog_inner_tags col-md-12 full">
                     <ul class="tag-collections">
@@ -79,81 +50,25 @@
                     <div class="container">
                         <h2 class="section-title">Oxsar Bloglar</h2>
                         <div class="row blog-items">
-                            <div class="col-md-4">
-                                <a href="/post/it-sahesi-ucun-mutexessisler-musahibeye-nece-hazirlasmalidir" class="blogs__item">
-                                    <div class="blogs__img">
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/12/21/65842cb3d0cb4-EznFy-4Ml8PVskp.png" alt="">
-                                    </div>
-                                    <div class="blogs__desc">
-                                        <span class="blogs__date">21 Dekabr 2023</span>
-                                        <h3>
-                                            <p>İT sahəsi üçün mütəxəssislər müsahibəyə necə hazırlaşmalıdır?</p>
-                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
-                                        </h3>
 
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/post/hr-mutexessisleri-cv-de-neye-diqqet-yetirirler" class="blogs__item">
-                                    <div class="blogs__img">
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/12/19/65814d3416426-v60yOBnW048Re8_.png" alt="">
-                                    </div>
-                                    <div class="blogs__desc">
-                                        <span class="blogs__date">19 Dekabr 2023</span>
-                                        <h3>
-                                            <p>HR mütəxəssisləri CV-də nəyə diqqət yetirirlər?</p>
-                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
-                                        </h3>
+                            @foreach (var item in blogs.Where(b => b.CategoryId == Model.CategoryId ).Take(6))
+                            {
+                                  <div class="col-md-4">
+                <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="blogs__item">
+                <div class="blogs__img"> <img loading="lazy" src="~/assets/images/blogs/@item.Image" alt="">
+                </div>
+                <div class="blogs__desc">
+                 <span class="blogs__date">@item.CreatedAt.ToString("dd MMMM  yyyy")</span>
+                <h3>
+                <p>@item.Title</p>
+                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
+                </h3>
+                </div>
+                </a>
+                </div>
+                            }
 
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/post/reqemsal-marketinq-mutexessisi-kimdir-babaxan-melikli" class="blogs__item">
-                                    <div class="blogs__img">
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/11/26/65626537d2b4d-fnBBl7ZY-TsSL4V.jpg" alt="">
-                                    </div>
-                                    <div class="blogs__desc">
-                                        <span class="blogs__date">26 Noyabr 2023</span>
-                                        <h3>
-                                            <p>Rəqəmsal marketinq mütəxəssisi kimdir? - Babaxan Məlikli</p>
-                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
-                                        </h3>
-
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/post/reqemsal-marketinq-mutexessisi-kimdir-babaxan-melikli" class="blogs__item">
-                                    <div class="blogs__img">
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/11/26/65626537d2b4d-fnBBl7ZY-TsSL4V.jpg" alt="">
-                                    </div>
-                                    <div class="blogs__desc">
-                                        <span class="blogs__date">26 Noyabr 2023</span>
-                                        <h3>
-                                            <p>Rəqəmsal marketinq mütəxəssisi kimdir? - Babaxan Məlikli</p>
-                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
-                                        </h3>
-
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/post/reqemsal-marketinq-mutexessisi-kimdir-babaxan-melikli" class="blogs__item">
-                                    <div class="blogs__img">
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/11/26/65626537d2b4d-fnBBl7ZY-TsSL4V.jpg" alt="">
-                                    </div>
-                                    <div class="blogs__desc">
-                                        <span class="blogs__date">26 Noyabr 2023</span>
-                                        <h3>
-                                            <p>Rəqəmsal marketinq mütəxəssisi kimdir? - Babaxan Məlikli</p>
-                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
-                                        </h3>
-
-                                    </div>
-                                </a>
-                            </div>
+                         
                         </div>
                     </div>
                 </section>

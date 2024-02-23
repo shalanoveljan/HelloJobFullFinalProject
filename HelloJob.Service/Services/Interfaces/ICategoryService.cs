@@ -11,13 +11,12 @@ namespace HelloJob.Service.Services.Interfaces
 {
     public interface ICategoryService
     {
-        public Task<PagginatedResponse<CategoryGetDto>> GetAllAsync(int page = 1);
+        public Task<PagginatedResponse<CategoryGetDto>> GetAllAsync(int pageNumber = 1, int pageSize=6);
 
         public Task<IResult> CreateAsync(CategoryPostDto dto);
-
-        public Task RemoveAsync(int id);
+        public Task<IResult> RemoveAsync(int id);
 
         public Task<IResult> UpdateAsync(int id, CategoryPostDto dto);
-        public Task<IDataResult<CategoryUpdateDto>> GetAsync(int id);
+        public Task<IDataResult<CategoryGetDto>> GetAsync(int id);
     }
 }

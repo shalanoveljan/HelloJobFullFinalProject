@@ -819,18 +819,18 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/3.1.2": {
+      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/6.0.27": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "3.1.2"
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.27"
         },
         "compile": {
-          "lib/netcoreapp3.1/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {
+          "lib/net6.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netcoreapp3.1/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {
+          "lib/net6.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {
             "related": ".xml"
           }
         },
@@ -4403,7 +4403,10 @@
         },
         "runtime": {
           "bin/placeholder/HelloJob.Core.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "HelloJob.Data/1.0.0": {
         "type": "project",
@@ -5434,17 +5437,18 @@
         "microsoft.aspnetcore.dataprotection.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/3.1.2": {
-      "sha512": "0ysz80HcarZUsfQm/AjEXrFso3IqUd69+XCtx73UKEdkT1KGAQl/GAtIsJ5xZ4Fnz8M58locJXbReR2IKE5nsw==",
+    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/6.0.27": {
+      "sha512": "T8vCwybmskioXebIhpbJ7xOVuSlOCubMIJa2sFiq1hl05RLGoMeiUvAkG5hJdZGN9iwbnQvGKf8KV13cnZAeug==",
       "type": "package",
-      "path": "microsoft.aspnetcore.diagnostics.entityframeworkcore/3.1.2",
+      "path": "microsoft.aspnetcore.diagnostics.entityframeworkcore/6.0.27",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "lib/netcoreapp3.1/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll",
-        "lib/netcoreapp3.1/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.xml",
-        "microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.2.nupkg.sha512",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.xml",
+        "microsoft.aspnetcore.diagnostics.entityframeworkcore.6.0.27.nupkg.sha512",
         "microsoft.aspnetcore.diagnostics.entityframeworkcore.nuspec"
       ]
     },
@@ -12060,7 +12064,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "HelloJob.Service >= 1.0.0",
-      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.1.2",
+      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.27",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.27",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16"
     ]
@@ -12116,7 +12120,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
-            "version": "[3.1.2, )"
+            "version": "[6.0.27, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

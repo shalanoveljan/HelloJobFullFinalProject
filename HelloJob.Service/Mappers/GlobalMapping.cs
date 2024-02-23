@@ -15,10 +15,14 @@ namespace HelloJob.Service.Mappers
         {
             CreateMap<Blog, BlogPostDto>().ReverseMap();
             CreateMap<Blog, BlogGetDto>().ReverseMap();
-            CreateMap<Blog, BlogUpdateDto>().ReverseMap();
             CreateMap<Category, CategoryGetDto>().ReverseMap();
             CreateMap<Category, CategoryPostDto>().ReverseMap();
-            CreateMap<Category, CategoryUpdateDto>().ReverseMap();
+            CreateMap<Setting, SettingPostDto>().ReverseMap();
+            CreateMap<Setting, SettingGetDto>().ReverseMap();
+            CreateMap<Course, CourseGetDto>().ReverseMap();
+            CreateMap<Course, CoursePostDto>().ReverseMap();
+            CreateMap<Tag, TagPostDto>().ReverseMap();
+            CreateMap<Tag, TagGetDto>().ReverseMap();
 
         }
 

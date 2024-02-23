@@ -1534,7 +1534,10 @@
         },
         "runtime": {
           "bin/placeholder/HelloJob.Core.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "HelloJob.Data/1.0.0": {
         "type": "project",
