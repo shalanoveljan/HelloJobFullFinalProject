@@ -11,11 +11,9 @@ namespace HelloJob.App.Areas.Admin.Controllers
     public class TagController : Controller
     {
         readonly ITagService _TagService;
-        readonly ICategoryService _categoryService;
-        public TagController(ITagService TagService, ICategoryService categoryService)
+        public TagController(ITagService TagService)
         {
             _TagService = TagService;
-            _categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index(int page = 1,int pagesize=6)

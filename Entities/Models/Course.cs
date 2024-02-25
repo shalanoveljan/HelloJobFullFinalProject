@@ -29,6 +29,11 @@ namespace HelloJob.Entities.Models
         public Category Category { get; set; }
         public List<TagCourse> TagsCourse { get; set; }
 
+        public Course()
+        {
+            TagsCourse=new List<TagCourse>();
+        }
+
         
 
     }

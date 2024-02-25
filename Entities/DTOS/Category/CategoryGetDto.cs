@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelloJob.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,13 @@ namespace HelloJob.Entities.DTOS
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string? Image { get; set; }
+        public string Image { get; set; }
         public int? ParentId { get; set; }
-        public List<CategoryGetDto> Children { get; set; }
+        public List<Category> Children { get; set; }
 
         public CategoryGetDto()
         {
-            Children= new List<CategoryGetDto>();
+            Children= new List<Category>();
         }
 
 

@@ -1,4 +1,5 @@
-﻿using HelloJob.Service.Responses;
+﻿using HelloJob.Entities.Models;
+using HelloJob.Service.Responses;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,15 @@ namespace HelloJob.Service.Extensions
                     .Take(pageSize)
                     .ToListAsync();
 
-                return new PagginatedResponse<T>(items, pageNumber, pageSize, count);
+                var otherItems = await source.ToListAsync();
+
+                return new PagginatedResponse<T>(items, pageNumber, pageSize, count, otherItems);
             }
             return new(null, 0, 0, 0);
         }
 
     }
+
+
+
 }

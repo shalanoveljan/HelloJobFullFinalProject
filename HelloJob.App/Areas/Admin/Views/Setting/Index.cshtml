@@ -7,7 +7,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Blog Table</h4>
+                        <h4 class="card-title">Setting Table</h4>
                         <a asp-action="create" class="badge badge-success">Create</a>
                         <div class="table-responsive">
                             <table class="table">
@@ -34,9 +34,6 @@
                                 </tbody>
                             </table>
 
-
-                            @if (Model.TotalPages > 1)
-                            {
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
@@ -53,7 +50,7 @@
                                         </li>
                                     </ul>
                                 </nav>
-                            }
+                            
                         </div>
                     </div>
                 </div>

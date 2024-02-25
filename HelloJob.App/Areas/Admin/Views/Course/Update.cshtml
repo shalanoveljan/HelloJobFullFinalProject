@@ -30,16 +30,16 @@
                                 <span class="text text-danger" asp-validation-for="Agency"></span>
                             </div>
                             <div class="form-group">
-                                <label name="maxAge">maxAge</label>
-                                <input name="maxAge" type="number" class="form-control" id="exampleInputEmail1" placeholder="maxAge">
+                                <label asp-for="maxAge">maxAge</label>
+                                <input asp-for="maxAge" type="number" class="form-control" id="exampleInputEmail1" placeholder="maxAge">
                             </div>
                             <div class="form-group">
-                                <label name="minAge">minAge</label>
-                                <input name="minAge" type="number" class="form-control" id="exampleInputEmail1" placeholder="minAge">
+                                <label asp-for="minAge">minAge</label>
+                                <input asp-for="minAge" type="number" class="form-control" id="exampleInputEmail1" placeholder="minAge">
                             </div>
                             <div class="form-group">
-                                <label name="Price">Price</label>
-                                <input name="Price" type="number" class="form-control" id="exampleInputEmail1" placeholder="Price">
+                                <label asp-for="Price">Price</label>
+                                <input asp-for="Price" type="number" class="form-control" id="exampleInputEmail1" placeholder="Price">
                             </div>
                             <div class="form-group">
                                 <label asp-for="Period">Period</label>
@@ -71,7 +71,7 @@
                             <div class="form-group d-flex justify-content-between">
                                 <div class="form-check form-check-success">
                                     <label asp-for="IsPremium" class="form-check-label">
-                                        <input asp-for="IsPremium" type="checkbox" class="form-check-input" checked="">
+                                        <input asp-for="IsPremium" type="checkbox" class="form-check-input" >
                                         IsPremium
                                         <i class="input-helper"></i>
                                         <span class="text text-danger" asp-validation-for="IsPremium"></span>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="form-check form-check-success">
                                     <label asp-for="IsRetirement" class="form-check-label">
-                                        <input asp-for="IsRetirement" type="checkbox" class="form-check-input" checked="">
+                                        <input asp-for="IsRetirement" type="checkbox" class="form-check-input">
                                         IsRetirement
                                         <i class="input-helper"></i>
                                         <span class="text text-danger" asp-validation-for="IsRetirement"></span>
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="form-check form-check-success">
                                     <label asp-for="IsSertificate" class="form-check-label">
-                                        <input asp-for="IsSertificate" type="checkbox" class="form-check-input" checked="">
+                                        <input asp-for="IsSertificate" type="checkbox" class="form-check-input">
                                         IsSertificate
                                         <i class="input-helper"></i>
                                         <span class="text text-danger" asp-validation-for="IsSertificate"></span>
@@ -100,14 +100,11 @@
                                 <div class="form-group">
                                     <label>Tags</label>
                                     <select name="TagsIds" class="js-example-basic-single w-100 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                        <option value="0" selected>Tags</option>
+                                        <option value="" selected>Tags</option>
 
                                         @foreach (var item in ViewBag.Tags.Datas)
                                         {
-                                            if (item.ParentId == null)
-                                            {
                                                 <option value="@item.Id">@item.Name</option>
-                                            }
                                         }
                                     </select>
 
@@ -118,7 +115,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputConfirmPassword1">ParentCategories</label>
                                     <select asp-for="CategoryId" class="js-example-basic-single w-100 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                        <option value="0" selected>Categories</option>
+                                        <option value="" selected>Categories</option>
 
                                         @foreach (var item in ViewBag.Categories.Datas)
                                         {
@@ -137,6 +134,8 @@
                                 <label>File upload</label>
                                 <input type="file" accept="image/*" name="ImageFile" class="form-control">
                                 <span class="text text-danger" name="ImageFile"></span>
+                                <br />
+                                <img style="height:150px" src="~/assets/images/courses/@Model.Image" />
                             </div>
 
 

@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Default form</h4>
                         <p class="card-description">
-                            Setting Create Form
+                            Setting Update Form
                         </p>
                         <form enctype="multipart/form-data" method="post" class="forms-sample">
                             <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
@@ -18,7 +18,7 @@
                                 <span class="text text-danger" asp-validation-for="Key"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Value">Small Description</label>
+                                <label asp-for="Value">Value</label>
                                 <input asp-for="Value" type="text" class="form-control" id="exampleInputEmail1" placeholder="Value">
                                 <span class="text text-danger" asp-validation-for="Value"></span>
                             </div>

@@ -17,5 +17,10 @@ namespace HelloJob.Entities.Models
         public string Storage { get; set; }
         public List<Category> Children { get; set; }
         public IEnumerable<Blog> Blogs { get; set; }
+
+        public Category()
+        {
+            Children=new List<Category>();
+        }
     }
 }

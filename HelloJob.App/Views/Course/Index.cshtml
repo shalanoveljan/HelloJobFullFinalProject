@@ -1,6 +1,11 @@
 ﻿
 
 @model PagginatedResponse<CourseGetDto>
+
+@{
+    var premiumItems = Model.Datas.Where(item => item.IsPremium).ToList();
+    var nonPremiumItems = Model.Datas.Where(item => !item.IsPremium).ToList();
+}
 <main>
     <div class="nsp_course">
         <div class="container">
@@ -84,17 +89,17 @@
                             <ul class="resumes__filters__profession resumes__filters__checkbox">
                                 @foreach (var item in ViewBag.Categories.Datas)
                                 {
-                                    
-                                <li>
-                                    <input  type="checkbox" value="2" class="form-control d-none" id="category2"
+                                    @if (item.ParentId == null)
+                                    {
+                                    <li>
+                                            <input type="checkbox" value="2" class="form-control d-none" id="category@(item.Id)"
                                            name="category">
-                                    <label for="category2">
-                                            @if(item.ParentId == null)
-                                            {
+                                            <label for="category@(item.Id)">
                                             @item.Name
-                                            }
                                     </label>
                                 </li>
+                                        
+                                    }
                                 }
                                
                             </ul>
@@ -225,7 +230,7 @@
                     <div class="d-flex align-items-center justify-content-center justify-content-md-between mb-23">
                         <div class="d-md-flex text-center">
                             <p class="cv_count">
-                                Axtarışınıza uyğun <span id="count_items_head">12</span> kurs tapıldı
+                                Axtarışınıza uyğun <span id="count_items_head">@Model.Datas.Count()</span> kurs tapıldı
                             </p>
                             <a href="#" class="cv_count ml-md-3 text-dark" id="clear_filters2">Filtrləri təmizlə</a>
                         </div>
@@ -242,7 +247,7 @@
                         </div>
                     </div>
                     <div class="similar-resume">
-                        @foreach (var item in Model.Datas)
+                        @foreach (var item in premiumItems.Concat(nonPremiumItems))
                         {
                             
                         <a asp-action="Detail" asp-route-id="@item.Id" class="resume__block w-100 full" target="_blank">

@@ -45,6 +45,7 @@ namespace HelloJob.App.Areas.Admin.Controllers
             }
             var response = await _CourseService.CreateAsync(dto);
 
+
             if (!response.Success)
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();

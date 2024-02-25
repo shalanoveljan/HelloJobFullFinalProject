@@ -27,7 +27,7 @@ namespace HelloJob.Service.Services.Implementations
          readonly IMapper _mapper;
 
 
-        public BlogService(IWebHostEnvironment env, IBlogDAL blogRepository, IMapper mapper, HelloJobDbContext context)
+        public BlogService(IWebHostEnvironment env, IBlogDAL blogRepository, IMapper mapper)
         {
             _env = env;
             _blogRepository = blogRepository;
@@ -68,6 +68,9 @@ namespace HelloJob.Service.Services.Implementations
              .AsNoTrackingWithIdentityResolution()
              .Include(x => x.Category);
 
+            var totalCount = await query.CountAsync();
+
+
             var paginatedBlogs = await query.ToPagedListAsync(pageNumber, pageSize);
 
             var BlogGetDtos = paginatedBlogs.Datas.Select(x =>
@@ -80,10 +83,12 @@ namespace HelloJob.Service.Services.Implementations
                     Image = x.Image,
                     CreatedAt = x.CreatedAt,
                     ViewCount = x.ViewCount,
-                    Category = new CategoryGetDto { Name = x.Category.Name,Image=x.Category.Image },
+                    Category = new CategoryGetDto { Name = x.Category.Name,Image=x.Category.Image ,Id=x.CategoryId},
                 }).ToList();
-            var pagginatedResponse = new PagginatedResponse<BlogGetDto>(BlogGetDtos, pageNumber, pageSize, paginatedBlogs.Datas.Count());
-
+            var pagginatedResponse = new PagginatedResponse<BlogGetDto>(
+                 BlogGetDtos, paginatedBlogs.PageNumber,
+                 paginatedBlogs.PageSize,
+                 totalCount);
 
             return pagginatedResponse;
         }
@@ -103,7 +108,8 @@ namespace HelloJob.Service.Services.Implementations
                   Image = x.Image,
                   CreatedAt = x.CreatedAt,
                   ViewCount = x.ViewCount,
-                  Category = new CategoryGetDto { Name = x.Category.Name },
+                  Category = new CategoryGetDto { Id=x.Category.Id,Name = x.Category.Name,ParentId=x.Category.ParentId },
+                  CategoryId= x.Category.Id,
               }).ToListAsync();
             BlogGetDto? blog= blogs.FirstOrDefault(x=>x.Id== id);
            
@@ -112,7 +118,7 @@ namespace HelloJob.Service.Services.Implementations
                 return new ErrorDataResult<BlogGetDto>("Blog Not Found");
             }
 
-             return new SuccessDataResult<BlogGetDto>("Get Blog"); 
+             return new SuccessDataResult<BlogGetDto>(blog,"Get Blog"); 
         }
 
         public async Task<IResult> RemoveAsync(int id)
@@ -130,14 +136,16 @@ namespace HelloJob.Service.Services.Implementations
 
         public async Task<IResult> UpdateAsync(int id, BlogPostDto dto)
         {
-            Blog blog = _mapper.Map<Blog>(dto);
-            blog.CategoryId = dto.CategoryId;
-
+            Blog? blog = await _blogRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category");
             if (blog == null)
             {
                 return new ErrorResult("The Blog not found");
 
             }
+               blog.Title= dto.Title;
+              blog.Description= dto.Description;
+            blog.smallDescription = dto.smallDescription;
+            blog.CategoryId= dto.CategoryId;
 
             if (dto.ImageFile != null)
             {
@@ -155,10 +163,7 @@ namespace HelloJob.Service.Services.Implementations
 
                 blog.Image = dto.ImageFile.SaveFile(_env.WebRootPath, "assets/images/blogs");
             }
-            else
-            {
-                return new ErrorResult("The field image is required");
-            }
+           
 
             await _blogRepository.UpdateAsync(blog);
             return new SuccessResult("Update Blog successfully");

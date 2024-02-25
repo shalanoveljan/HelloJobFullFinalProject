@@ -22,7 +22,7 @@
                                 <div class="form-group">
                                 <label for="exampleInputConfirmPassword1">Categories</label>
                                     <select asp-for="ParentId" class="js-example-basic-single w-100 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                        <option value="0" selected>Categories</option>
+                                        <option value="" selected>Categories</option>
 
                                         @foreach (var item in ViewBag.Categories.Datas)
                                         {
@@ -37,11 +37,9 @@
                                 </div>  
                             </div>
 
-                         
                             <div class="form-group">
                                 <label>File upload</label>
                                 <div class="form-group">
-                                    <label>File upload</label>
                                     <input type="file" accept="image/*" asp-for="ImageFile" class="form-control">
                                     <span class="text text-danger" asp-validation-for="ImageFile"></span>
                                 </div>

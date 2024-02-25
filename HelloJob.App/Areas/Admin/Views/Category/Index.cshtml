@@ -22,11 +22,19 @@
                                 <tbody>
                                     @foreach (var item in Model.Datas)
                                     {
-                                        
-                                    <tr>
-                                        <td class="py-1">
-                                            <img src="~/assets/images/categories/@item.Image" alt="image">
-                                        </td>
+
+                                        <tr>
+                                            <td class="py-1">
+                                                @if (item.ParentId == null)
+                                                {
+                                                    <img src="~/assets/images/categories/@item.Image" alt="image">
+
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/assets/images/categories/@Model.OtherDatas.FirstOrDefault(x=>x.Id==item.ParentId).Image" alt="image">
+                                                }
+                                            </td>
                                         <td>@item.Name</td>
                                         <td>
                                             @foreach (var sub in item.Children)
@@ -43,8 +51,7 @@
                             </table>
 
 
-                            @if (Model.TotalPages > 1)
-                            {
+                          
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
@@ -61,7 +68,7 @@
                                         </li>
                                     </ul>
                                 </nav>
-                            }
+                            
                         </div>
                     </div>
                 </div>

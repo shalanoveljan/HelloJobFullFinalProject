@@ -2,6 +2,7 @@
 using HelloJob.Data.DAL.Implementations;
 using HelloJob.Data.DAL.Interfaces;
 using HelloJob.Data.DBContexts.SQLSERVER;
+using HelloJob.Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,9 +32,13 @@ namespace HelloJob.Data.ServiceRegistrations
             services.AddScoped<ITagDAL, TagDAL>();
             services.AddScoped<ICourseDAL, CourseDAL>();
             services.AddScoped<ILayoutDAL, LayoutDAL>();
+            services.AddScoped<ILanguageDAL, LanguageDAL>();
+            services.AddScoped<IEducationDAL, EducationDAL>();
+            services.AddScoped<ICityDAL, CityDAL>();
+            services.AddScoped<IExperienceDAL, ExperienceDAL>();
 
 
-            //services.AddIdentity<User, IdentityRole>(opt =>
+            //services.AddIdentity<AppUser, IdentityRole>(opt =>
             //{
             //    opt.User.RequireUniqueEmail = true;
             //    opt.Lockout.MaxFailedAccessAttempts = 5;

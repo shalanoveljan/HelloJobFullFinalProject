@@ -22,7 +22,7 @@ namespace HelloJob.App.Controllers
         public async Task<IActionResult> Index(int pageNumber = 1, int PageSize = 6)
         {
             ViewBag.Categories = await _categoryService.GetAllAsync();
-            return View(_CourseService.GetAllAsync(pageNumber,PageSize));
+            return View(await _CourseService.GetAllAsync(pageNumber,PageSize));
         }
         public async Task<IActionResult> Detail(int id)
         {

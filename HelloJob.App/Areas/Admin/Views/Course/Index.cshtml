@@ -21,8 +21,8 @@
                                         <th>Tags</th>
                                         <th>Mode</th>
                                         <th>Level</th>
-                                        <th>Period</th>
                                         <th>Payment</th>
+                                        <th>Period</th>
                                         <th>Retirement</th>
                                         <th>Sertification</th>
                                         <th>Premium</th>
@@ -60,6 +60,8 @@
                                                     <span>Odenisli(Price:@item.Price)</span>
                                                 }
                                             </td>
+
+                                            <td>@item.Period ay</td>
                                             <td>
                                                 @if (@item.IsRetirement)
                                                 {
@@ -100,8 +102,7 @@
                             </table>
 
 
-                            @if (Model.TotalPages > 1)
-                            {
+                          
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
@@ -118,7 +119,6 @@
                                         </li>
                                     </ul>
                                 </nav>
-                            }
                         </div>
                     </div>
                 </div>

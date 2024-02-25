@@ -10,7 +10,7 @@ namespace HelloJob.Entities.Enums
     {
         SuperAdmin,
         Admin,
-        User
-
+        Owner,
+        Employee
     }
 }

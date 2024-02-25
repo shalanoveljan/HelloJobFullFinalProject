@@ -20,6 +20,10 @@ namespace HelloJob.Service.DependencyResolver
             services.AddScoped<ILayoutService,LayoutService>();
             services.AddScoped<ICourseService,CourseService>();
             services.AddScoped<ITagService,TagService>();
+            services.AddScoped<IEducationService,EducationService>();
+            services.AddScoped<ILanguageService,LanguageService>();
+            services.AddScoped<IExperienceService,ExperienceService>();
+            services.AddScoped<ICityService,CityService>();
             services.AddHttpContextAccessor();
 
 

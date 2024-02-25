@@ -13,6 +13,8 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+
+                                        <th>Id</th>
                                         <th>Name</th>
                                         <th>CreateAt</th>
                                         <th>Operations</th>
@@ -23,11 +25,15 @@
                                     {
                                         
                                     <tr>
+                                            <td>@item.Id</td>
                                         <td>@item.Name</td>
                                         <td>
                                            @item.CreateAt
                                         </td>
-                                        <td><a onclick="return confirm('are you sure?')" asp-action="remove" asp-route-id="@item.Id" class="badge badge-danger">Remove</a> <a asp-action="update" asp-route-id="@item.Id" class="badge badge-warning">Update</a></td>
+                                        <td>
+                                            <a onclick="return confirm('are you sure?')" asp-action="remove" asp-route-id="@item.Id" class="badge badge-danger">Remove</a> 
+                                            <a asp-controller="tag" asp-action="update" asp-route-id="@item.Id" class="badge badge-warning">Update</a>
+                                        </td>
 
                                     </tr>
                                     }
@@ -36,8 +42,7 @@
                             </table>
 
 
-                            @if (Model.TotalPages > 1)
-                            {
+                           
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
@@ -54,7 +59,6 @@
                                         </li>
                                     </ul>
                                 </nav>
-                            }
                         </div>
                     </div>
                 </div>

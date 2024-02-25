@@ -36,7 +36,7 @@
 
                                         @foreach (var item in ViewBag.Categories.Datas)
                                         {
-                                            if (item.ParentId == 0)
+                                            if (item.ParentId == null)
                                             {
                                                 <option value="@item.Id">@item.Name</option>
                                             }
@@ -51,7 +51,7 @@
                                 <label>File upload</label>
                                 <input type="file" accept="image/*" name="ImageFile" class="form-control">
                                 <br />
-                                <img style="height:150px" src="~/assets/img/categories/@Model.Image" />
+                                <img style="height:150px" src="~/assets/images/blogs/@Model.Image" />
                             </div>
 
 

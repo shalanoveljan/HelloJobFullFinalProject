@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HelloJob.Entities.Models
 {
-    public class AppUser:IdentityUser
+    public class AppUser: Microsoft.AspNetCore.Identity.IdentityUser
     {
     }
 }

@@ -44,7 +44,10 @@ namespace HelloJob.Service.Services.Implementations
         public async Task<PagginatedResponse<SettingGetDto>> GetAllAsync(int pageNumber = 1, int pageSize = 6)
         {
             var query = _settingRepository.GetQuery(x => !x.IsDeleted);
+            var totalCount = await query.CountAsync();
+
             var paginatedSettings = await query.ToPagedListAsync(pageNumber, pageSize);
+
             var SettingGetDtos = paginatedSettings.Datas.Select(x =>
                new SettingGetDto
                {
@@ -53,30 +56,29 @@ namespace HelloJob.Service.Services.Implementations
                    Id = x.Id,
                    CreatedAt = x.CreatedAt,
                }).ToList();
-            var pagginatedResponse = new PagginatedResponse<SettingGetDto>(SettingGetDtos,pageNumber,pageSize,paginatedSettings.Datas.Count());
+            var pagginatedResponse = new PagginatedResponse<SettingGetDto>(SettingGetDtos, paginatedSettings.PageNumber,
+               paginatedSettings.PageSize,
+               totalCount);
             return pagginatedResponse;
         }
 
         public async Task<IDataResult<SettingGetDto>> GetAsync(int id)
         {
-            var query = _settingRepository.GetQuery(x => !x.IsDeleted);
-            var Settings = await query.Select(x =>
-              new SettingGetDto
-              {
-                  Key = x.Key,
-                  Value = x.Value,
-                  Id = x.Id,
-                  CreatedAt = x.CreatedAt,
-
-              }).ToListAsync();
-            SettingGetDto? Setting = Settings.FirstOrDefault(x => x.Id == id);
-
+            var Setting = _settingRepository.GetAsync(x => !x.IsDeleted && x.Id == id).Result;
             if (Setting == null)
             {
                 return new ErrorDataResult<SettingGetDto>("Setting Not Found");
             }
+            SettingGetDto dto = new SettingGetDto
+            {
+                Id = Setting.Id,
+                Key = Setting.Key,
+                Value = Setting.Value,
+                  CreatedAt = DateTime.Now,
+            };
 
-            return new SuccessDataResult<SettingGetDto>("Get Setting");
+
+            return new SuccessDataResult<SettingGetDto>(dto, "Get Setting");
         }
 
         public async Task<IResult> RemoveAsync(int id)
@@ -100,9 +102,9 @@ namespace HelloJob.Service.Services.Implementations
             {
                 return new ErrorResult("Setting is null");
             }
-            Setting newsetting = _mapper.Map<Setting>(dto);
-
-            await _settingRepository.UpdateAsync(newsetting);
+            setting.Key= dto.Key;
+            setting.Value= dto.Value;
+            await _settingRepository.UpdateAsync(setting);
 
             return new SuccessResult("Update Setting successfully");
         }

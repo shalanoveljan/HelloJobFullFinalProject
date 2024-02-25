@@ -1,4 +1,7 @@
-﻿   <!-- Main Section Start -->
+﻿  
+ @model HomeVM
+
+<!-- Main Section Start -->
    <main class="main-full full">
     <div class="new_search_panel full">
         <div class="nsp_blue"></div>
@@ -774,51 +777,25 @@
                 <div class="container">
                 <h2 class="section-title">Bloq yazıları</h2>
                 <div class="row">
+                    @foreach (var item in Model.blogs.Datas)
+                {
+                    
                 <div class="col-md-4">
-                <a href="/post/it-sahesi-ucun-mutexessisler-musahibeye-nece-hazirlasmalidir" class="blogs__item">
+                <a asp-action="Detail" asp-controller="Blog" asp-route-id="@item.Id" class="blogs__item">
                 <div class="blogs__img">
-                <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/12/21/65842cb3d0cb4-EznFy-4Ml8PVskp.png" alt="">
+                <img loading="lazy" src="~/assets/images/blogs/@item.Image" alt="">
                 </div>
                 <div class="blogs__desc">
-                <span class="blogs__date">21 Dekabr 2023</span>
+                <span class="blogs__date">@item.CreatedAt.ToString("dd MMMM yyyy")</span>
                 <h3>
-                <p>İT sahəsi üçün mütəxəssislər müsahibəyə necə hazırlaşmalıdır?</p>
+                <p>@item.Title</p>
                 <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
                 </h3>
                 
                 </div>
                 </a>
                 </div>
-                <div class="col-md-4">
-                <a href="/post/hr-mutexessisleri-cv-de-neye-diqqet-yetirirler" class="blogs__item">
-                <div class="blogs__img">
-                <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/12/19/65814d3416426-v60yOBnW048Re8_.png" alt="">
-                </div>
-                <div class="blogs__desc">
-                <span class="blogs__date">19 Dekabr 2023</span>
-                <h3>
-                <p>HR mütəxəssisləri CV-də nəyə diqqət yetirirlər?</p>
-                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
-                </h3>
-                
-                </div>
-                </a>
-                </div>
-                <div class="col-md-4">
-                <a href="/post/reqemsal-marketinq-mutexessisi-kimdir-babaxan-melikli" class="blogs__item">
-                <div class="blogs__img">
-                <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/11/26/65626537d2b4d-fnBBl7ZY-TsSL4V.jpg" alt="">
-                </div>
-                <div class="blogs__desc">
-                <span class="blogs__date">26 Noyabr 2023</span>
-                <h3>
-                <p>Rəqəmsal marketinq mütəxəssisi kimdir? - Babaxan Məlikli</p>
-                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
-                </h3>
-                
-                </div>
-                </a>
-                </div>
+                }
                 </div>
                 </div>
                 </section>

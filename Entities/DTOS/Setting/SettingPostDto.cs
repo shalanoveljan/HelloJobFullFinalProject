@@ -9,6 +9,7 @@ namespace HelloJob.Entities.DTOS
 {
     public record SettingPostDto
     {
+
         public string Key { get; set; } = null!;
         public string Value { get; set; } = null!;
     }

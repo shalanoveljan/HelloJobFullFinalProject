@@ -13,8 +13,9 @@ namespace HelloJob.Service.Mappers
     {
         public GlobalMapping() 
         {
-            CreateMap<Blog, BlogPostDto>().ReverseMap();
+           
             CreateMap<Blog, BlogGetDto>().ReverseMap();
+            CreateMap<Blog, BlogPostDto>().ReverseMap();
             CreateMap<Category, CategoryGetDto>().ReverseMap();
             CreateMap<Category, CategoryPostDto>().ReverseMap();
             CreateMap<Setting, SettingPostDto>().ReverseMap();
@@ -23,6 +24,16 @@ namespace HelloJob.Service.Mappers
             CreateMap<Course, CoursePostDto>().ReverseMap();
             CreateMap<Tag, TagPostDto>().ReverseMap();
             CreateMap<Tag, TagGetDto>().ReverseMap();
+            CreateMap<Language, LanguagePostDto>().ReverseMap();
+            CreateMap<Language, LanguageGetDto>().ReverseMap();
+            CreateMap<Education, EducationGetDto>().ReverseMap();
+            CreateMap<Education, EducationPostDto>().ReverseMap();
+            CreateMap<Experience, ExperienceGetDto>().ReverseMap();
+            CreateMap<Experience, ExperiencePostDto>().ReverseMap();
+            CreateMap<City, CityGetDto>().ReverseMap();
+            CreateMap<City, CityPostDto>().ReverseMap();
+
+
 
         }
 

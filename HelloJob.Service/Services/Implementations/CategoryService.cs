@@ -44,8 +44,8 @@ namespace HelloJob.Service.Services.Implementations
             {
                 var parentCategory = await _categoryRepository.GetAsync(x=>x.Id==dto.ParentId);
                 var subcategory = _mapper.Map<Category>(dto);
+                subcategory.Storage = "wwwroot";
                 subcategory.ParentId = parentCategory.Id;
-                parentCategory.Children=new List<Category>();
                 parentCategory.Children.Add(subcategory);
                 await _categoryRepository.UpdateAsync(parentCategory);
                 await _categoryRepository.AddAsync(subcategory);
@@ -78,13 +78,26 @@ namespace HelloJob.Service.Services.Implementations
             return new SuccessResult("Create Category successfully");
         }
 
-        public async Task<PagginatedResponse<CategoryGetDto>> GetAllAsync(int pageNumber = 1, int pageSize = 8)
+        public async Task<PagginatedResponse<CategoryGetDto>> GetAllAsync(int pageNumber = 1, int pageSize = 6)
         {
             var query = _categoryRepository.GetQuery(x => !x.IsDeleted)
              .AsNoTrackingWithIdentityResolution()
-             .Include(x => x.Parent);
+             .Include(x => x.Parent).ThenInclude(x => x.Children);
+
+            var totalCount = await query.CountAsync();
+
 
             var paginatedCategorys = await query.ToPagedListAsync(pageNumber, pageSize);
+
+            var getdto=query.Select(x =>
+                new CategoryGetDto
+                {
+                    Name = x.Name,
+                    Id = x.Id,
+                    Image = x.Image,
+                    ParentId = x.ParentId,
+                    Children = x.Children
+                }).ToList();
 
             var CategoryGetDtos = paginatedCategorys.Datas.Select(x =>
                 new CategoryGetDto
@@ -92,9 +105,14 @@ namespace HelloJob.Service.Services.Implementations
                     Name = x.Name,
                     Id = x.Id,
                     Image = x.Image,
-                    ParentId = x.ParentId
+                    ParentId = x.ParentId,
+                    Children=x.Children
                 }).ToList();
-            var pagginatedResponse = new PagginatedResponse<CategoryGetDto>(CategoryGetDtos, pageNumber, pageSize, paginatedCategorys.Datas.Count());
+
+            var pagginatedResponse = new PagginatedResponse<CategoryGetDto>(
+                CategoryGetDtos, paginatedCategorys.PageNumber,
+                paginatedCategorys.PageSize,
+                totalCount, getdto);
 
             return pagginatedResponse;
         }

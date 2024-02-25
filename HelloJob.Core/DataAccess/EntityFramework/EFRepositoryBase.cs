@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-    
+
 namespace HelloJob.Core.DataAccess.EntityFramework
 {
     public class EFRepositoryBase<T, TContext> : IRepositoryBase<T>
@@ -13,7 +13,7 @@ namespace HelloJob.Core.DataAccess.EntityFramework
             using var context = new TContext();
             var addEntity = context.Entry(entity);
             addEntity.State = EntityState.Added;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
         public async Task RemoveAsync(T entity)
@@ -21,7 +21,7 @@ namespace HelloJob.Core.DataAccess.EntityFramework
             using var context = new TContext();
             var deleteEntity = context.Entry(entity);
             deleteEntity.State = EntityState.Deleted;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
 
@@ -53,7 +53,7 @@ namespace HelloJob.Core.DataAccess.EntityFramework
             using var context = new TContext();
             var updateEntity = context.Entry(entity);
             updateEntity.State = EntityState.Modified;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
     }

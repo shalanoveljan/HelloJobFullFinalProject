@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,24 +34,28 @@ namespace HelloJob.Data.DBContexts.SQLSERVER
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Education> Educations { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<City> Citys { get; set; }
 
+        public DbSet<Experience> Experiences { get; set; }
 
-        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        //{
-        //    foreach (var entry in ChangeTracker.Entries<BaseEntity>())
-        //    {
-        //        switch (entry.State)
-        //        {
-        //            case EntityState.Added:
-        //                entry.Entity.CreatedAt = DateTime.UtcNow.AddHours(4);
-        //                break;
-        //            case EntityState.Modified:
-        //                entry.Entity.UpdatedAt = DateTime.UtcNow.AddHours(4);
-        //                break;
-        //        }
-        //    }
-        //    return base.SaveChangesAsync(cancellationToken);
-        //}
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedAt = DateTime.UtcNow.AddHours(4);
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.UpdatedAt = DateTime.UtcNow.AddHours(4);
+                        break;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

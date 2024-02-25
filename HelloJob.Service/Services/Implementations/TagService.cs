@@ -44,36 +44,38 @@ namespace HelloJob.Service.Services.Implementations
         public async Task<PagginatedResponse<TagGetDto>> GetAllAsync(int pageNumber = 1, int pageSize = 6)
         {
             var query = _TagRepository.GetQuery(x => !x.IsDeleted);
+            var totalCount = await query.CountAsync();
+
             var paginatedTags = await query.ToPagedListAsync(pageNumber, pageSize);
             var TagGetDtos = paginatedTags.Datas.Select(x =>
                new TagGetDto
                {
-               Name= x.Name,
-               CreateAt= DateTime.Now,
+                   Id = x.Id,
+                   Name = x.Name,
+                   CreateAt = DateTime.Now,
                }).ToList();
-            var pagginatedResponse = new PagginatedResponse<TagGetDto>(TagGetDtos, pageNumber, pageSize, paginatedTags.Datas.Count());
+            var pagginatedResponse = new PagginatedResponse<TagGetDto>(TagGetDtos, paginatedTags.PageNumber,
+              paginatedTags.PageSize,
+              totalCount);
             return pagginatedResponse;
         }
 
         public async Task<IDataResult<TagGetDto>> GetAsync(int id)
         {
-            var query = _TagRepository.GetQuery(x => !x.IsDeleted);
-            var Tags = await query.Select(x =>
-              new TagGetDto
-              {
-                  Id= id,
-                  Name = x.Name,
-                  CreateAt = DateTime.Now,
-
-              }).ToListAsync();
-            TagGetDto? Tag = Tags.FirstOrDefault(x => x.Id == id);
-
+            var Tag = _TagRepository.GetAsync(x => !x.IsDeleted && x.Id == id).Result;
             if (Tag == null)
             {
                 return new ErrorDataResult<TagGetDto>("Tag Not Found");
             }
+            TagGetDto dto = new TagGetDto
+            {
+                Id = Tag.Id,
+                Name = Tag.Name,
+                CreateAt = DateTime.Now,
+            };
 
-            return new SuccessDataResult<TagGetDto>("Get Tag");
+
+            return new SuccessDataResult<TagGetDto>(dto, "Get Tag");
         }
 
         public async Task<IResult> RemoveAsync(int id)
@@ -97,9 +99,10 @@ namespace HelloJob.Service.Services.Implementations
             {
                 return new ErrorResult("Tag is null");
             }
-            Tag newTag = _mapper.Map<Tag>(dto);
+            Tag.Name = dto.Name;
+            
 
-            await _TagRepository.UpdateAsync(newTag);
+            await _TagRepository.UpdateAsync(Tag);
 
             return new SuccessResult("Update Tag successfully");
         }
