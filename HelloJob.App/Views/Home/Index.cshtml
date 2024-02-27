@@ -777,9 +777,8 @@
                 <div class="container">
                 <h2 class="section-title">Bloq yazıları</h2>
                 <div class="row">
-                    @foreach (var item in Model.blogs.Datas)
+                    @foreach (var item in Model.blogs.Datas.OrderByDescending(x=>x.CreatedAt).Take(3))
                 {
-                    
                 <div class="col-md-4">
                 <a asp-action="Detail" asp-controller="Blog" asp-route-id="@item.Id" class="blogs__item">
                 <div class="blogs__img">
@@ -791,7 +790,6 @@
                 <p>@item.Title</p>
                 <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
                 </h3>
-                
                 </div>
                 </a>
                 </div>

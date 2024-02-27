@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,13 @@ namespace HelloJob.Data.ServiceRegistrations
 {
     public static class DataAccessServiceRegistration
     {
-        public static void DataAccessServiceRegister(this IServiceCollection services)
+        public static void DataAccessServiceRegister(this IServiceCollection services, IConfiguration configuration)
         {
-            //    services.AddDbContext<HelloJobDbContext>(opt =>
-            //    {
-            //        opt.UseSqlServer(DatabaseConfiguration.ConnectionString);
+            services.AddDbContext<HelloJobDbContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("Default"));
+            });
 
-            //    });
 
 
             services.AddScoped<IBlogDAL, BlogDAL>();
@@ -36,7 +37,6 @@ namespace HelloJob.Data.ServiceRegistrations
             services.AddScoped<IEducationDAL, EducationDAL>();
             services.AddScoped<ICityDAL, CityDAL>();
             services.AddScoped<IExperienceDAL, ExperienceDAL>();
-
 
             //services.AddIdentity<AppUser, IdentityRole>(opt =>
             //{

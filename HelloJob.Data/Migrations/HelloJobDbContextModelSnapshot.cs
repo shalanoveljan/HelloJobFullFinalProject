@@ -41,6 +41,9 @@ namespace HelloJob.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsActivate")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -433,7 +436,7 @@ namespace HelloJob.Data.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("TagCourse");
+                    b.ToTable("TagCourses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

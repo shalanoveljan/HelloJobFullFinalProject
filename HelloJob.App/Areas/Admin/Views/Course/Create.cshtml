@@ -56,20 +56,26 @@
                                     <option value="">Select Mode</option>
                                     @foreach (var modeValue in Enum.GetValues(typeof(LessonMode)))
                                     {
+                                        if ((int)modeValue != 0)
+                                        {
                                         <option value="@modeValue">@modeValue</option>
+                                        }
                                     }
                                 </select>
                                 <span asp-validation-for="Mode" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Level" class="control-label">Level</label>
-                                <select asp-for="Level" class="form-control">
-                                    <option value="">Select Level</option>
-                                    @foreach (var LevelValue in Enum.GetValues(typeof(Level)))
+                               <select asp-for="Level" class="form-control">
+                                <option value="">Select Level</option>
+                                @foreach (var LevelValue in Enum.GetValues(typeof(Level)))
+                                {
+                                    if ((int)LevelValue != 0) 
                                     {
                                         <option value="@LevelValue">@LevelValue</option>
                                     }
-                                </select>
+                                }
+                            </select>
                                 <span asp-validation-for="Level" class="text-danger"></span>
                             </div>
                              <div class="form-group d-flex justify-content-between">

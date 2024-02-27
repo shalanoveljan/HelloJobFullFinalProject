@@ -6,6 +6,7 @@ using HelloJob.Core.Utilities.Results.Concrete.SuccessResults;
 using HelloJob.Data.DAL.Interfaces;
 using HelloJob.Data.DBContexts.SQLSERVER;
 using HelloJob.Entities.DTOS;
+using HelloJob.Entities.Enums;
 using HelloJob.Entities.Models;
 using HelloJob.Service.Extensions;
 using HelloJob.Service.Responses;
@@ -26,14 +27,15 @@ namespace HelloJob.Service.Services.Implementations
         readonly IWebHostEnvironment _env;
         readonly ICourseDAL _CourseRepository;
         readonly IMapper _mapper;
-        private readonly ITagDAL _tag;
+        readonly ICategoryDAL _categoryRepository;
+        private readonly HelloJobDbContext _context;
 
-        public CourseService(IWebHostEnvironment env, ICourseDAL CourseRepository, IMapper mapper, ITagDAL tag)
+        public CourseService(IWebHostEnvironment env, ICourseDAL CourseRepository, IMapper mapper, ITagDAL tag, ICategoryDAL categoryRepository)
         {
             _env = env;
             _CourseRepository = CourseRepository;
             _mapper = mapper;
-            _tag = tag;
+            _categoryRepository = categoryRepository;
         }
         public async Task<IResult> CreateAsync(CoursePostDto dto)
         {
@@ -63,51 +65,47 @@ namespace HelloJob.Service.Services.Implementations
             {
                 Course.TagsCourse.Add(new TagCourse
                 {
-                    Course = Course,
-                    TagId = item,
+                    TagId = item
                 });
             }
-
+            //await _context.Courses.AddAsync(Course);
+            //await _context.SaveChangesAsync();
             await _CourseRepository.AddAsync(Course);
+            var a = _CourseRepository.GetQuery(x => !x.IsDeleted && x.Id == Course.Id);
             return new SuccessResult("Create Course successfully");
 
         }
 
         public async Task<PagginatedResponse<CourseGetDto>> GetAllAsync(int pageNumber = 1, int pageSize = 6)
         {
-            var query = _CourseRepository.GetQuery(x => !x.IsDeleted)
-             .AsNoTrackingWithIdentityResolution()
-             .Include(x=>x.Category)
-             .Include(x => x.TagsCourse)
-             .ThenInclude(x => x.Tag);
+            var query = GetBaseQuery();
 
             var totalCount = await query.CountAsync();
 
 
             var paginatedCourses = await query.ToPagedListAsync<Course>(pageNumber, pageSize);
 
-            //IQueryable<Course> courses=_CourseRepository.
-           var CourseGetDtos = paginatedCourses.Datas.Select( x =>
-                  new CourseGetDto
-                  {
-                      Title = x.Title,
-                      Id = x.Id,
-                      Description = x.Description,
-                      Agency = x.Agency,
-                      Image = x.Image,
-                      Price = x.Price,
-                      IsPremium = x.IsPremium,
-                      IsRetirement = x.IsRetirement,
-                      IsSertificate = x.IsSertificate,
-                      Level = x.Level,
-                      Mode = x.Mode,
-                      Period = x.Period,
-                      Tags =x.TagsCourse.Select(x=>new TagGetDto { Name=x.Tag.Name , Id=x.Tag.Id}) ,
-                      CategoryId =x.CategoryId ,
-                      Category=new CategoryGetDto { Name=x.Category.Name ,Id=x.Category.Id },
-                  }
-                  
-                  ).ToList();
+            var CourseGetDtos = paginatedCourses.Datas.Select(x =>
+                   new CourseGetDto
+                   {
+                       Title = x.Title,
+                       Id = x.Id,
+                       Description = x.Description,
+                       Agency = x.Agency,
+                       Image = x.Image,
+                       Price = x.Price,
+                       IsPremium = x.IsPremium,
+                       IsRetirement = x.IsRetirement,
+                       IsSertificate = x.IsSertificate,
+                       Level = x.Level,
+                       Mode = x.Mode,
+                       Period = x.Period,
+                       Tags = x.TagsCourse.Select(x => new TagGetDto { Name = x.Tag.Name, Id = x.Tag.Id }),
+                       CategoryId = x.CategoryId,
+                       Category = new CategoryGetDto { Name = x.Category.Name, Id = x.Category.Id },
+                   }
+
+                   ).ToList();
 
             var pagginatedResponse = new PagginatedResponse<CourseGetDto>(CourseGetDtos, paginatedCourses.PageNumber,
                 paginatedCourses.PageSize,
@@ -121,7 +119,7 @@ namespace HelloJob.Service.Services.Implementations
         {
             var query = _CourseRepository.GetQuery(x => !x.IsDeleted)
                          .AsNoTrackingWithIdentityResolution()
-                         .Include(x=>x.Category)
+                         .Include(x => x.Category)
                          .Include(x => x.TagsCourse)
                          .ThenInclude(x => x.Tag);
             var Courses = await query.Select(x =>
@@ -133,17 +131,17 @@ namespace HelloJob.Service.Services.Implementations
                   Agency = x.Agency,
                   Image = x.Image,
                   Price = x.Price,
-                  maxAge=x.maxAge,
-                  minAge=x.minAge,
                   IsPremium = x.IsPremium,
                   IsRetirement = x.IsRetirement,
                   IsSertificate = x.IsSertificate,
                   Level = x.Level,
                   Mode = x.Mode,
-                  CategoryId = x.CategoryId,
+                  maxAge= x.maxAge,
+                  minAge= x.minAge,
                   Period = x.Period,
-                  Tags = x.TagsCourse.Select(y => new TagGetDto { Name = y.Tag.Name, Id = y.TagId }),
-                  Category = new CategoryGetDto { Name = x.Category.Name, Image = x.Category.Image,Id=x.Category.Id },
+                  Tags = x.TagsCourse.Select(x => new TagGetDto { Name = x.Tag.Name, Id = x.Tag.Id }),
+                  CategoryId = x.CategoryId,
+                  Category = new CategoryGetDto { Name = x.Category.Name, Id = x.Category.Id },
               }).ToListAsync();
 
 
@@ -154,7 +152,7 @@ namespace HelloJob.Service.Services.Implementations
                 return new ErrorDataResult<CourseGetDto>("Course Not Found");
             }
 
-            return new SuccessDataResult<CourseGetDto>(Course,"Get Course");
+            return new SuccessDataResult<CourseGetDto>(Course, "Get Course");
         }
 
         public async Task<IResult> RemoveAsync(int id)
@@ -179,19 +177,19 @@ namespace HelloJob.Service.Services.Implementations
 
             }
             Course.CategoryId = dto.CategoryId;
-            Course.Agency=dto.Agency;
+            Course.Agency = dto.Agency;
             Course.maxAge = dto.maxAge;
-            Course.minAge= dto.minAge;
+            Course.minAge = dto.minAge;
             Course.Description = dto.Description;
-            Course.Mode= dto.Mode;
-            Course.Level= dto.Level;
-            Course.IsPremium= dto.IsPremium;
-            Course.IsRetirement= dto.IsRetirement;
-            Course.IsSertificate= dto.IsSertificate;
-            Course.Price= dto.Price;
-            Course.Period= dto.Period;
-            Course.Title= dto.Title;
-            
+            Course.Mode = dto.Mode;
+            Course.Level = dto.Level;
+            Course.IsPremium = dto.IsPremium;
+            Course.IsRetirement = dto.IsRetirement;
+            Course.IsSertificate = dto.IsSertificate;
+            Course.Price = dto.Price;
+            Course.Period = dto.Period;
+            Course.Title = dto.Title;
+
 
 
             if (dto.ImageFile != null)
@@ -228,5 +226,161 @@ namespace HelloJob.Service.Services.Implementations
 
         }
 
+        private IQueryable<Course> GetBaseQuery()
+        {
+            return _CourseRepository.GetQuery(x => !x.IsDeleted)
+                .AsNoTrackingWithIdentityResolution()
+                .Include(x => x.Category)
+                .Include(x => x.TagsCourse)
+                .ThenInclude(x => x.Tag);
+        }
+
+        private async Task<List<CourseGetDto>> GetCourseGetDtoListAsync(IQueryable<Course> query)
+        {
+            return await query.Select(x => new CourseGetDto
+            {
+                Title = x.Title,
+                Id = x.Id,
+                Description = x.Description,
+                Agency = x.Agency,
+                Image = x.Image,
+                Price = x.Price,
+                IsPremium = x.IsPremium,
+                IsRetirement = x.IsRetirement,
+                IsSertificate = x.IsSertificate,
+                maxAge = x.maxAge,
+                minAge = x.minAge,
+                Level = x.Level,
+                Mode = x.Mode,
+                Period = x.Period,
+                Tags = x.TagsCourse.Select(x => new TagGetDto { Name = x.Tag.Name, Id = x.Tag.Id }),
+                CategoryId = x.CategoryId,
+                Category = new CategoryGetDto { Name = x.Category.Name, Id = x.Category.Id },
+            }).ToListAsync();
+        }
+
+
+        public async Task<IDataResult<List<CourseGetDto>>> GetAllForCoursePageInWebSiteAsync()
+        {
+            var query = GetBaseQuery();
+
+            var CourseGetDtos = await GetCourseGetDtoListAsync(query);
+
+            if (CourseGetDtos == null)
+            {
+                return new ErrorDataResult<List<CourseGetDto>>("Courses Not Found");
+            }
+
+
+            return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Get Courses for SITE PAGE");
+        }
+
+
+        public async Task<IDataResult<List<CourseGetDto>>> SortCourses(int id)
+        {
+            var query = GetBaseQuery();
+
+            var CourseGetDtos = await GetCourseGetDtoListAsync(query);
+
+            switch (id)
+            {
+                case 1:
+                    CourseGetDtos = CourseGetDtos.OrderBy(course => course.Period).ToList();
+                    break;
+
+                case 2:
+                    CourseGetDtos = CourseGetDtos.OrderByDescending(course => course.Period).ToList();
+                    break;
+                case 3:
+                    CourseGetDtos = CourseGetDtos.OrderByDescending(course => course.Level).ToList();
+                    break;
+                case 4:
+                    CourseGetDtos = CourseGetDtos.OrderBy(course => course.Level).ToList();
+                    break;
+                default:
+                    break;
+
+            }
+            return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Halaldi");
+        }
+
+
+        public async Task<IDataResult<List<CourseGetDto>>> FilterCourses(CourseFilterDto dto)
+        {
+            var query = GetBaseQuery();
+
+            var CourseGetDtos = await GetCourseGetDtoListAsync(query);
+
+            // Filter by category IDs
+            if (dto.CategoriesIds != null && dto.CategoriesIds.Count > 0)
+            {
+                var activeCategories = _categoryRepository.GetQuery(x => !x.IsDeleted && x.ParentId == null).ToList();
+                CourseGetDtos = CourseGetDtos.Where(course =>
+                    dto.CategoriesIds.Any(categoryId => activeCategories.Any(category => category.Id == categoryId))
+                ).ToList();
+
+            }
+
+            // Filter by minimum time
+            if (dto.MinTime > 0)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => course.Period >= dto.MinTime).ToList();
+            }
+
+            // Filter by maximum time
+            if (dto.MaxTime < 25)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => course.Period <= dto.MaxTime).ToList();
+            }
+
+            // Filter by agencies
+            if (dto.Agencies != null && dto.Agencies.Count > 0)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => dto.Agencies.Contains(course.Agency)).ToList();
+            }
+
+            // Filter by free courses
+            if (dto.IsFree)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => course.Price == 0).ToList();
+            }
+
+            // Filter by certificate availability
+            if (dto.IsSertificate)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => course.IsSertificate).ToList();
+            }
+
+            // Filter by retirement status
+            if (dto.IsRetirement)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => course.IsRetirement).ToList();
+            }
+
+            // Filter by selected lesson mode
+            if (dto.Selected_Lesson_Mode != LessonMode.None)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => course.Mode == dto.Selected_Lesson_Mode).ToList();
+                // Filter by selected job mode
+                if (dto.Level != Level.None)
+                {
+                    CourseGetDtos = CourseGetDtos.Where(course => course.Level == dto.Level).ToList();
+                }
+
+
+
+
+            }
+                return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Halaldi sene ");
+
+
+
+
+
+        }
+
+
+
     }
 }
+

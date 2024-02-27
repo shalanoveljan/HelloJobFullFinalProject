@@ -4745,6 +4745,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\blogs\\f56f3551-b5d4-4c20-afb3-95faa400add1blog-8.png"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\blogs\\f965e4f7-f182-4396-9478-52b02ea0ec98blog-5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\blogs\\f965e4f7-f182-4396-9478-52b02ea0ec98blog-5.jpg"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\blogs\\f9f14303-eebc-482c-b9c2-f0db779de208blog-6.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\blogs\\f9f14303-eebc-482c-b9c2-f0db779de208blog-6.jpg"
     },
@@ -4901,12 +4905,48 @@
       "PackagePath": "staticwebassets\\assets\\images\\companies\\defaultProfile.svg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\0045a946-d3fb-45f0-bbdd-7cf52d39f7feblog-9.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\0045a946-d3fb-45f0-bbdd-7cf52d39f7feblog-9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\04674f3e-bec1-475d-951f-532c4762ded6blog-14.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\04674f3e-bec1-475d-951f-532c4762ded6blog-14.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\097161d6-4779-4c04-8bd0-8003d62f7389blog-12.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\097161d6-4779-4c04-8bd0-8003d62f7389blog-12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\1743a197-9584-4072-bac5-ac6223d04ad1blog-14.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\1743a197-9584-4072-bac5-ac6223d04ad1blog-14.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\2b97e262-20d9-4e98-bc4e-9d13c4dc3a3ablog-9.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\2b97e262-20d9-4e98-bc4e-9d13c4dc3a3ablog-9.jpg"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\2d01b1d1-5cc2-4c86-89e3-aaee904d8abablog-10.jpeg",
       "PackagePath": "staticwebassets\\assets\\images\\courses\\2d01b1d1-5cc2-4c86-89e3-aaee904d8abablog-10.jpeg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\3b13c39b-24f3-4ccb-a070-bc36ecdcdfd7blog-9.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\3b13c39b-24f3-4ccb-a070-bc36ecdcdfd7blog-9.jpg"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\3fdbb1ce-bb88-4432-816e-2bbeefadbe85telegram-elanlar-haqqinda-banner.png",
       "PackagePath": "staticwebassets\\assets\\images\\courses\\3fdbb1ce-bb88-4432-816e-2bbeefadbe85telegram-elanlar-haqqinda-banner.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\40452f5e-f493-46af-8ea6-f060fe5aeb08blog-5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\40452f5e-f493-46af-8ea6-f060fe5aeb08blog-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\41899ba6-aa94-4f40-96e8-159c1b7c7839blog-8.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\41899ba6-aa94-4f40-96e8-159c1b7c7839blog-8.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\48f5102b-1495-4c8a-99f2-61c6121232c4blog-6.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\48f5102b-1495-4c8a-99f2-61c6121232c4blog-6.jpg"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\51a0fd7c-72f5-47c4-a3f4-6744da77ef15blog-2.png",
@@ -4917,6 +4957,30 @@
       "PackagePath": "staticwebassets\\assets\\images\\courses\\56abd155-5380-4241-a1ab-71226a5bdf0fblog-7.jpg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\56f51b80-8697-4e29-9ffa-8e3dfeb1b372blog-4.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\56f51b80-8697-4e29-9ffa-8e3dfeb1b372blog-4.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\69944e5b-4d65-4036-b0b5-668da298f749blog-4.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\69944e5b-4d65-4036-b0b5-668da298f749blog-4.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\6b7d03b2-79cf-4e6b-b7e6-8cdcbeb8af81blog-5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\6b7d03b2-79cf-4e6b-b7e6-8cdcbeb8af81blog-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\753aa483-683f-4be4-a1b0-fd21798a2a2eblog-8.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\753aa483-683f-4be4-a1b0-fd21798a2a2eblog-8.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\7e0e636e-5851-46cf-b685-6bcfa59e4367blog-12.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\7e0e636e-5851-46cf-b685-6bcfa59e4367blog-12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\83ce69a4-76f7-4f4c-bf56-934d54e75ee8blog-10.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\83ce69a4-76f7-4f4c-bf56-934d54e75ee8blog-10.jpeg"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\9e4775e5-63d8-4a16-8236-6d629b989bf5blog-5.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\courses\\9e4775e5-63d8-4a16-8236-6d629b989bf5blog-5.jpg"
     },
@@ -4925,8 +4989,36 @@
       "PackagePath": "staticwebassets\\assets\\images\\courses\\a3f27fa3-19a2-4da6-87bd-7f4b63e28846blog-14.png"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\afb8a833-8acd-46de-b2d6-220ea54a0d69blog-5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\afb8a833-8acd-46de-b2d6-220ea54a0d69blog-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\b67524d1-a6f4-4d9f-be2b-a2a3faa2225dblog-1.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\b67524d1-a6f4-4d9f-be2b-a2a3faa2225dblog-1.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\c23c27ee-3755-4707-8f25-d048b39ca093blog-4.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\c23c27ee-3755-4707-8f25-d048b39ca093blog-4.jpeg"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\c55c2827-d75a-4187-862d-b842122a6cb8blog-5.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\courses\\c55c2827-d75a-4187-862d-b842122a6cb8blog-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\ca70f60f-d237-47e1-86f9-a9f4cbb1a44cblog-8.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\ca70f60f-d237-47e1-86f9-a9f4cbb1a44cblog-8.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\cef3b7bc-0ac2-4118-af26-2367929e19acblog-9.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\cef3b7bc-0ac2-4118-af26-2367929e19acblog-9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\d0d204b7-00d1-4380-9902-a5f05f9e3529blog-5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\d0d204b7-00d1-4380-9902-a5f05f9e3529blog-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\d2f83d7d-1102-4bda-b6ec-66b2a5fb182ablog-10.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\d2f83d7d-1102-4bda-b6ec-66b2a5fb182ablog-10.jpeg"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\e3b72732-d428-4e03-aedb-9f3a42585894telegram-elanlar-haqqinda-banner.png",
@@ -4935,6 +5027,14 @@
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\e60a4707-90f7-4fa3-9f93-c0b4067e94e5blog-2.png",
       "PackagePath": "staticwebassets\\assets\\images\\courses\\e60a4707-90f7-4fa3-9f93-c0b4067e94e5blog-2.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\e635d62f-1124-41bb-bfc6-8b78fca8096fblog-1.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\e635d62f-1124-41bb-bfc6-8b78fca8096fblog-1.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\eb2663a1-c140-4a2d-914c-1fa3cfe2bb5cblog-8.png",
+      "PackagePath": "staticwebassets\\assets\\images\\courses\\eb2663a1-c140-4a2d-914c-1fa3cfe2bb5cblog-8.png"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\employees\\employee-1.jpeg",
@@ -5025,6 +5125,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\logo\\night_mode_logo.svg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\Custom.js",
+      "PackagePath": "staticwebassets\\assets\\js\\Custom.js"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\blog-detail.js",
       "PackagePath": "staticwebassets\\assets\\js\\blog-detail.js"
     },
@@ -5053,12 +5157,20 @@
       "PackagePath": "staticwebassets\\assets\\js\\error.js"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\forgetpassword.js",
+      "PackagePath": "staticwebassets\\assets\\js\\forgetpassword.js"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\home.js",
       "PackagePath": "staticwebassets\\assets\\js\\home.js"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\library\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\library\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\resetpassword.js",
+      "PackagePath": "staticwebassets\\assets\\js\\resetpassword.js"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\resume-detail.js",

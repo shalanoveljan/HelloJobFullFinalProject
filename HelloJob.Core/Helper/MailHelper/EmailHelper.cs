@@ -26,7 +26,7 @@ namespace HelloJob.Core.Helper.MailHelper
             return regex.IsMatch(email);
         }
 
-        public async Task<IResult> SendEmailAsync(string email, string name,string subject, string body, string token)
+        public async Task<IResult> SendEmailAsync(string email,string subject, string body, string token)
         {
             try
             {

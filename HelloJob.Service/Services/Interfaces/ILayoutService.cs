@@ -8,6 +8,6 @@ namespace HelloJob.Service.Services.Interfaces
 {
     public interface ILayoutService
     {
-         public Dictionary<string, string> GetSettings();
+         public Task<Dictionary<string, string>> GetSettings();
     }
 }

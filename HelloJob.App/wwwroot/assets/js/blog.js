@@ -69,3 +69,5 @@ loginbtn.addEventListener("click",function (e) {
   registermodal.style.display="none"
   loginmodal.style.display="flex"
 })
+
+

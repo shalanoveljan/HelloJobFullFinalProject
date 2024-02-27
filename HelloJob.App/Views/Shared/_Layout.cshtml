@@ -1,7 +1,7 @@
 ﻿@inject ILayoutService layoutService
 
 @{
-    Dictionary<string, string> settings = layoutService.GetSettings();
+    Dictionary<string, string> settings = await layoutService.GetSettings();
 }
 
 
@@ -14,276 +14,276 @@
     <link rel="stylesheet" href="~/assets/styles/font.css">
     <link rel="stylesheet" href="~/assets/styles/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
-<style>
+    <style>
 
-    .dark .resume__header__speciality{
-        color:#fff;
-    }
+        .dark .resume__header__speciality {
+            color: #fff;
+        }
 
         .dark .resume__header__name {
             color: #fff;
         }
-        
-    .dropbtn {
-      background-color: #04AA6D;
-      color: white;
-      padding: 16px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-    }
-    
-    .dropbtn:hover, .dropbtn:focus {
-      background-color: #3e8e41;
-    }
-    
-    #myInput {
-      box-sizing: border-box;
-      background-image: url('searchicon.png');
-      background-position: 14px 12px;
-      background-repeat: no-repeat;
-      font-size: 16px;
-      padding: 14px 20px 12px 45px;
-      border: none;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    #myInput:focus {outline: 3px solid #ddd;}
-    
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f6f6f6;
-      min-width: 230px;
-      overflow: auto;
-      border: 1px solid #ddd;
-      z-index: 1;
-    }
-    
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    
-    .dropdown a:hover {background-color: #ddd;}
-    
-    .show {display: block;}
+
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .dropbtn:hover, .dropbtn:focus {
+                background-color: #3e8e41;
+            }
+
+        #myInput {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+            #myInput:focus {
+                outline: 3px solid #ddd;
+            }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        .show {
+            display: block;
+        }
     </style>
 </head>
 <body id="body">
 
-   
-  <!-- Login form Modal start-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content ">
-        <div class="modal-header">
-            <div class="popup__head__text text-center">
-                <h3>Hesabınıza daxil olun</h3>
-                <p>
-                Xoş gəlmişsiniz!
-                </p>
-                </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="popup__form__social">
-                <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Fwww.hellojob.az%2Fuser-login%2Fgoogle_verify&amp;client_id=36186815782-e8dkfbottlq01ioglfqg9fq49hkepvec.apps.googleusercontent.com&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;access_type=offline&amp;approval_prompt=force" class="btn" target="_blank">
-                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/google.svg" alt="">
-                Google ilə daxil ol
-                </a>
-                <p class="login-agreement-text">
-                Hesab yaradaraq Hellojob.az vebsayt <a href="/page/qaydalar" target="_blank" style="color: #344054; text-decoration: underline; font-weight: 500;">qaydalarını</a> qəbul edirəm.
-                </p>
-                <span>və ya</span>
-                </div>
 
-                <form id="login_blank">
-                    <div class="popup__form">
-                    <div class="form-group">
-                    <label for="">E-poçt</label>
-                    <input type="email" name="email" id="loginEmail" placeholder="E-poçtunuzu yazın" class="form-control">
+    <!-- Login form Modal start-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <div class="popup__head__text text-center">
+                        <h3>Hesabınıza daxil olun</h3>
+                        <p>
+                            Xoş gəlmişsiniz!
+                        </p>
                     </div>
-                    <div class="form-group">
-                    <label for="">Şifrə</label>
-                    <input type="password" name="password" id="loginPassword" placeholder="••••••••" class="form-control">
-                    </div>
-                    <input type="hidden" name="recaptcha_login" id="recaptchaLogin">
-                    </div>
-                    <div class="popup__tools">
-                    <div class="form-group form-group--checkbox">
-                    <input type="checkbox" name="save_me"  id="save_pass">
-                    <label for="save_pass">Yadda saxla</label>
-                    </div>
-                    <a href="#forgot-password" class="regs_bopup_open" data-effect="mfp-zoom-in">Şifrəni unutmuşam</a>
-                    </div>
-                    <p id="error-login" class="popup__error-msg text-danger mb-1"></p>
-                    <div class="popup__btns">
-                    <button type="submit" class="btn" id="login_btn">Daxil ol</button>
-                    <a href="#registration_popup" class="register-btn btn btn-transparent register-acc regs_bopup_open" data-effect="mfp-zoom-in">Qeydiyyatdan keç</a>
-                    </div>
-                    </form>
-        </div>
-      
-      </div>
-      <div class="modal-content-register">
-        <div class="modal-header">
-            <div class="popup__head__text text-center">
-                <h3>Qeydiyyatdan keç</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-                <form id="login_blank">
-                    <div class="popup__form">
-                        <div class="form-group">
-                        <label for="">Adınız*</label>
-                        <input type="text" id="reg_name" name="firstname" value="" placeholder="Adınızı daxil edin" class="form-control">
-                        </div>
-                        <div class="form-group">
-                        <label for="">E-poçt*</label>
-                        <input type="email" id="reg_email" name="email" value="" placeholder="E-poçtunuzu yazın" class="form-control">
-                        </div>
-                        <div class="form-group">
-                        <label for="">Şifrə*</label>
-                        <input type="password" id="reg_password" name="password" placeholder="••••••••" class="form-control">
-                        </div>
-                        <div class="form-group">
-                        <label for="">Şifrə təkrar*</label>
-                        <input type="password" id="reg_password_again" name="password_again" placeholder="••••••••" class="form-control">
-                        </div>
-                        </div>
-                    <div class="popup__tools">
-                        <div class="form-group form-group--checkbox" style="display: -webkit-box;">
-                            <input type="checkbox" name="register_agreement" class="form-control" id="register_agreement">
-                            
-                            <label for="register_agreement">Hesab yaradaraq Hellojob.az vebsayt <a href="/page/qaydalar" target="_blank" style="color: #344054; text-decoration: underline; font-weight: 500;">qaydalarını</a> qəbul edirəm.</label>
+                <div class="modal-body">
+                    <div class="popup__form__social">
+                        <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Fwww.hellojob.az%2Fuser-login%2Fgoogle_verify&amp;client_id=36186815782-e8dkfbottlq01ioglfqg9fq49hkepvec.apps.googleusercontent.com&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;access_type=offline&amp;approval_prompt=force" class="btn" target="_blank">
+                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/google.svg" alt="">
+                            Google ilə daxil ol
+                        </a>
+                        <p class="login-agreement-text">
+                            Hesab yaradaraq Hellojob.az vebsayt <a href="/page/qaydalar" target="_blank" style="color: #344054; text-decoration: underline; font-weight: 500;">qaydalarını</a> qəbul edirəm.
+                        </p>
+                        <span>və ya</span>
+                    </div>
+
+                    <form id="login_blank">
+                        <div class="popup__form">
+                            <div class="form-group">
+                                <label for="">E-poçt</label>
+                                <input type="email" name="email" id="loginEmail" placeholder="E-poçtunuzu yazın" class="form-control">
                             </div>
-                    </div>
-                    <!--<p id="error-register" class="popup__error-msg text-danger">Qaydalar qəbul edilməyib.</p>-->
-                    <div class="popup__btns">
-                        <a href="javascript:" class="btn" id="registerSubmit">Qeydiyyat ol</a>
-                        <a href="#login-popup2" class="loginac btn btn-transparent register-acc regs_bopup_open">Giriş səhifəsi</a>
+                            <div class="form-group">
+                                <label for="">Şifrə</label>
+                                <input type="password" name="password" id="loginPassword" placeholder="••••••••" class="form-control">
+                            </div>
+                            <input type="hidden" name="recaptcha_login" id="recaptchaLogin">
+                        </div>
+                        <div class="popup__tools">
+                            <div class="form-group form-group--checkbox">
+                                <input type="checkbox" name="save_me" id="save_pass">
+                                <label for="save_pass">Yadda saxla</label>
+                            </div>
+                            <a asp-controller="Identity" asp-action="ForgetPassword" class="regs_bopup_open" data-effect="mfp-zoom-in">Şifrəni unutmuşam</a>
+                        </div>
+                        <p id="error-login" class="popup__error-msg text-danger mb-1"></p>
+                        <div class="popup__btns">
+                            <button type="submit" class="btn" id="login_btn">Daxil ol</button>
+                            <a href="#registration_popup" class="register-btn btn btn-transparent register-acc regs_bopup_open" data-effect="mfp-zoom-in">Qeydiyyatdan keç</a>
                         </div>
                     </form>
-        </div>
-      
-      </div>
-
-      
-    </div>
-  </div>
- 
-    <!-- login Form Modal end -->
-
-
- 
-  
-
-
-   <!-- Header start section -->
-    <header class="full-header">
-     <div class="container">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-lg-3  header-logo">
-                    <img id="menu_open" class="menu_open" src="~/assets/icons/menu_open_night.svg" alt="">
-                    <a href="/pages/index.html" class="logo">
-                        <span class="d-none">HelloJob.az</span>
-                        <img src="~/assets/images/logo/logo.svg" class="light-logo" alt="">
-                        <img src="~/assets/images/logo/night_mode_logo.svg" class="night-logo" alt="">
-                    </a>
                 </div>
-                <div class="col-lg-9  header_btns">
-                    <a href="./login.html" class="login-btn popup-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        Sayta daxil ol
-                    </a>
 
-                    <div class="elan_yerlesdir_button_hover">
-                        <a href="./elan-yerlesdir-form.html" class="elan_yerlesdir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fa-solid fa-circle-plus"></i>
-                        Elan yerləşdir </a>
+            </div>
+            <div class="modal-content-register">
+                <div class="modal-header">
+                    <div class="popup__head__text text-center">
+                        <h3>Qeydiyyatdan keç</h3>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login_blank">
+                        <div class="popup__form">
+                            <div class="form-group">
+                                <label for="">Adınız*</label>
+                                <input type="text" id="reg_name" name="firstname" value="" placeholder="Adınızı daxil edin" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">E-poçt*</label>
+                                <input type="email" id="reg_email" name="email" value="" placeholder="E-poçtunuzu yazın" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Şifrə*</label>
+                                <input type="password" id="reg_password" name="password" placeholder="••••••••" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Şifrə təkrar*</label>
+                                <input type="password" id="reg_password_again" name="password_again" placeholder="••••••••" class="form-control">
+                            </div>
+                        </div>
+                        <div class="popup__tools">
+                            <div class="form-group form-group--checkbox" style="display: -webkit-box;">
+                                <input type="checkbox" name="register_agreement"  id="register_agreement">
+
+                                <label for="register_agreement">Hesab yaradaraq Hellojob.az vebsayt <a href="/page/qaydalar" target="_blank" style="color: #344054; text-decoration: underline; font-weight: 500;">qaydalarını</a> qəbul edirəm.</label>
+                            </div>
+                        </div>
+                        <!--<p id="error-register" class="popup__error-msg text-danger">Qaydalar qəbul edilməyib.</p>-->
+                        <div class="popup__btns">
+                            <a href="javascript:" class="btn" id="registerSubmit">Qeydiyyat ol</a>
+                            <a href="#login-popup2" class="loginac btn btn-transparent register-acc regs_bopup_open">Giriş səhifəsi</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- login Form Modal end -->
+    <!-- Header start section -->
+    <header class="full-header">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-lg-3  header-logo">
+                        <img id="menu_open" class="menu_open" src="~/assets/icons/menu_open_night.svg" alt="">
+                        <a asp-controller="Home" asp-action="Index" class="logo">
+                            <span class="d-none">HelloJob.az</span>
+                            <img src="~/assets/images/logo/logo.svg" class="light-logo" alt="">
+                            <img src="~/assets/images/logo/night_mode_logo.svg" class="night-logo" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-9  header_btns">
+                        <a href="./login.html" class="login-btn popup-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            Sayta daxil ol
+                        </a>
+
+                        <div class="elan_yerlesdir_button_hover">
+                            <a href="./elan-yerlesdir-form.html" class="elan_yerlesdir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa-solid fa-circle-plus"></i>
+                                Elan yerləşdir
+                            </a>
                         </div>
 
                         <a href="./wishlist.html" class="wishlist">
                             <span class="d-none">Wishlist</span>
                             <img class="heart-img" src="~/assets/icons/heart.svg" alt="">
-                            </a>
-                            <!-- <a href="" id="night_moon" class="night mode_btn" style="display: inline-block;" >
-                                <img class="moon-img" src="../assets/icons/moon.svg" alt="">
-                            </a>
-                            <a href="" id="light_sun"  class="light mode_btn" style="display: none;" >
+                        </a>
+                        <!-- <a href="" id="night_moon" class="night mode_btn" style="display: inline-block;" >
+                            <img class="moon-img" src="../assets/icons/moon.svg" alt="">
+                        </a>
+                        <a href="" id="light_sun"  class="light mode_btn" style="display: none;" >
 
-                                <img class="sun-img" src="../assets/icons/sun.svg" alt="">
-                            </a> -->
-                            <a href="" class="evening mode_btn">
+                            <img class="sun-img" src="../assets/icons/sun.svg" alt="">
+                        </a> -->
+                        <a href="" class="evening mode_btn">
 
-                            </a>
-                    
+                        </a>
+
+                    </div>
                 </div>
             </div>
         </div>
-     </div>
     </header>
-   <!-- Header end section -->
-
-   <!-- Sidebarmenu start -->
-   <div class="sidebar">
-    <div class="logo-sidebar">
-        <img src="~/assets/images/logo/logo.svg" alt="Logo">
-           <a class="baglama-btn btn-primary" href="">
-            <i class="fa-solid fa-xmark"></i>
-           </a>
-    </div>
-    <div class="menu">
-        <div class="elan_yerlesdir_sidebar">
-            <a href="./elan-yerlesdir-form.html" class="elan_yerlesdir-1"class="elan_yerlesdir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  >
-                <i class="fa-solid fa-circle-plus"></i>
-            Elan yerləşdir </a>
+    <!-- Header end section -->
+    <!-- Sidebarmenu start -->
+    <div class="sidebar">
+        <div class="logo-sidebar">
+            <img src="~/assets/images/logo/logo.svg" alt="Logo">
+            <a class="baglama-btn btn-primary" href="">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+        </div>
+        <div class="menu">
+            <div class="elan_yerlesdir_sidebar">
+                <a href="./elan-yerlesdir-form.html" class="elan_yerlesdir-1" class="elan_yerlesdir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    Elan yerləşdir
+                </a>
             </div>
 
-           <div class="sayta_daxil_ol_sidebar">
-            <a href="./login.html" class="login-btn_sidebar popup-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-                <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                Sayta daxil ol
-            </a>
-           </div>
+            <div class="sayta_daxil_ol_sidebar">
+                <a href="./login.html" class="login-btn_sidebar popup-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    Sayta daxil ol
+                </a>
+            </div>
 
+        </div>
+        <div class="options">
+            <a href=""><p>Butun vakansiyalar</p></a>
+            <hr>
+            <a href=""><p>Secilmisler</p></a>
+            <hr>
+            <a href=""><p>Sirketler</p></a>
+            <hr>
+            <a asp-controller="Blog" asp-action="Index"><p>Bloqlar</p></a>
+            <hr>
+            <a href=""><p>Qaydalar</p></a>
+            <hr>
+            <a href=""><p>saytda reklam</p></a>
+        </div>
     </div>
-    <div class="options">
-        <a href=""><p>Butun vakansiyalar</p></a>
-        <hr>
-         <a href=""><p>Secilmisler</p></a> 
-        <hr>
-        <a href=""><p>Sirketler</p></a>
-        <hr>
-        <a asp-controller="Blog" asp-action="Index" ><p>Bloqlar</p></a>
-        <hr>
-        <a href=""><p>Qaydalar</p></a>
-        <hr>
-        <a href=""><p>saytda reklam</p></a>
-    </div>
-</div>
-   <!-- Sidebarmenu end -->
-
-                @RenderBody()
+    <!-- Sidebarmenu end -->
+    @RenderBody()
 
     <!-- Footer start -->
     <footer class="footer full">

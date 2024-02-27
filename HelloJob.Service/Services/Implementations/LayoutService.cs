@@ -19,9 +19,9 @@ namespace HelloJob.Service.Services.Implementations
             _layoutDAL = layoutDAL;
         }
 
-        public Dictionary<string, string> GetSettings()
+        public async Task< Dictionary<string, string>> GetSettings()
         {
-            Dictionary<string, string> settings = _layoutDAL.GetQuery(x=>!x.IsDeleted).ToDictionary(s => s.Key, s => s.Value);
+            Dictionary<string, string> settings = await _layoutDAL.GetQuery(x=>!x.IsDeleted).ToDictionaryAsync(s => s.Key, s => s.Value);
             return settings;
         }
     }

@@ -8,6 +8,7 @@ namespace HelloJob.Entities.Enums
 {
     public enum LessonMode
     {
+        None,
         Online,
         Sinifde
     }

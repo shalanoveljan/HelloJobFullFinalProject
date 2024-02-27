@@ -1,5 +1,4 @@
-﻿using HelloJob.Core.DataAccess.EntityFramework;
-using HelloJob.Data.DAL.Interfaces;
+﻿using HelloJob.Data.DAL.Interfaces;
 using HelloJob.Data.DBContexts.SQLSERVER;
 using HelloJob.Entities.Models;
 using System;
@@ -10,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace HelloJob.Data.DAL.Implementations
 {
-    public class ExperienceDAL: EFRepositoryBase<Experience, HelloJobDbContext>, IExperienceDAL
+    public class ExperienceDAL: EFRepositoryBase<Experience>, IExperienceDAL
     {
+        public ExperienceDAL(HelloJobDbContext context) : base(context)
+        {
 
+        }
     }
 }

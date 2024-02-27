@@ -1,5 +1,4 @@
-﻿using HelloJob.Core.DataAccess.EntityFramework;
-using HelloJob.Data.DAL.Interfaces;
+﻿using HelloJob.Data.DAL.Interfaces;
 using HelloJob.Data.DBContexts.SQLSERVER;
 using HelloJob.Entities.Models;
 using System;
@@ -10,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace HelloJob.Data.DAL.Implementations
 {
-    public class LanguageDAL: EFRepositoryBase<Language, HelloJobDbContext>, ILanguageDAL
+    public class LanguageDAL: EFRepositoryBase<Language>, ILanguageDAL
     {
+        public LanguageDAL(HelloJobDbContext context) : base(context)
+        {
 
+        }
     }
 }

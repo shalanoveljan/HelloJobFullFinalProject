@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HelloJob.App.Controllers
 {
+   
     public class CourseController : Controller
     {
         readonly ICourseService _CourseService;
@@ -19,10 +20,21 @@ namespace HelloJob.App.Controllers
             _tagService = tagService;
         }
 
-        public async Task<IActionResult> Index(int pageNumber = 1, int PageSize = 6)
+  
+        public async Task<IActionResult> Index(List<CourseGetDto>? courses)
         {
+       
             ViewBag.Categories = await _categoryService.GetAllAsync();
-            return View(await _CourseService.GetAllAsync(pageNumber,PageSize));
+            if (courses.Count!=0)
+            {
+
+                return View(courses);
+            }
+            else
+            { 
+            var result = await _CourseService.GetAllForCoursePageInWebSiteAsync();
+            return View(result.Data);
+            }
         }
         public async Task<IActionResult> Detail(int id)
         {
@@ -32,7 +44,19 @@ namespace HelloJob.App.Controllers
 
             return View(res.Data);
         } 
-        
+
+        public async Task<IActionResult> SortCourses(int id)
+        {
+            var res = await _CourseService.SortCourses(id);
+            Index(res.Data);
+            return Json(res.Data);
+        }
+        //public async Task<IActionResult> FilterCourses(int id)
+        //{
+        //    var res = await _CourseService.FilterCourses(id);
+        //    return Json(res.Data);
+        //}
+
 
 
     }

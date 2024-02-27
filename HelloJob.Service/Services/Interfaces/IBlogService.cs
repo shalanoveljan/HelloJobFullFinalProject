@@ -19,5 +19,7 @@ namespace HelloJob.Service.Services.Interfaces
 
         public Task<IResult> UpdateAsync(int id, BlogPostDto dto);
         public Task<IDataResult<BlogGetDto>> GetAsync(int id);
+
+        public  Task IncreaseCount(int id);
     }
 }

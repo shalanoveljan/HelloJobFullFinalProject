@@ -8,6 +8,7 @@ namespace HelloJob.Entities.Enums
 {
     public enum Level
     {
+        None,
         Baslangic,
         Orta,
         Yuksek

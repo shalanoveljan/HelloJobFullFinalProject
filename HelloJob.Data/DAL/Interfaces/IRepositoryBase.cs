@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HelloJob.Core.DataAccess
+namespace HelloJob.Data.DAL.Interfaces
 {
     public interface IRepositoryBase<T> where T : class
     {
@@ -14,6 +14,5 @@ namespace HelloJob.Core.DataAccess
         public Task<T> GetAsync(Expression<Func<T, bool>> expression, params string[] Includes);
         public IQueryable<T> GetQuery(Expression<Func<T, bool>> expression);
         public Task RemoveAsync(T entity);
-
     }
 }

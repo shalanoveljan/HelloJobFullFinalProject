@@ -16,14 +16,11 @@ namespace HelloJob.Data.DBContexts.SQLSERVER
 {
     public class HelloJobDbContext:IdentityDbContext<AppUser>
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(DatabaseConfiguration.ConnectionString);
-        }
-        //public HelloJobDbContext(DbContextOptions<HelloJobDbContext> options) : base(options)
-        //{
 
-        //}
+        public HelloJobDbContext(DbContextOptions<HelloJobDbContext> options) : base(options)
+        {
+
+        }
         //public HelloJobDbContext() : base(new DbContextOptions<HelloJobDbContext>())
         //{
 
@@ -34,9 +31,12 @@ namespace HelloJob.Data.DBContexts.SQLSERVER
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<TagCourse> TagCourses { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<City> Citys { get; set; }
+
+
 
         public DbSet<Experience> Experiences { get; set; }
 

@@ -1,10 +1,5 @@
 ﻿
-@inject IBlogService blogService
-
-@{
-    IList<BlogGetDto> blogs =  blogService.GetAllAsync().Result.Datas;
-}
-@model BlogGetDto
+@model BlogDetailVM
 
 <main>
 
@@ -16,10 +11,10 @@
                     <a href="/">Ana səhifə</a>
                 </li>
                 <li>
-                    <a href="/blog">Bloq</a>
+                    <a asp-controller="Blog" asp-action="Index">Bloq</a>
                 </li>
                 <li>
-                    <a asp-controller="Blog"  asp-action="Detail" asp-route-id="@Model.Id">@Model.Title</a>
+                    <a asp-controller="Blog"  asp-action="Detail" asp-route-id="@Model.result.Id">@Model.result.Title</a>
                 </li>
 
             </ul>
@@ -31,16 +26,16 @@
             <div class="row">
                 <div class="bi_desc col-md-12 full">
                     <h2>
-                        @Model.Title
+                        @Model.result.Title
                     </h2>
                     <div class="bi_time_and_counter full">
-                        <span class="b_time">@Model.CreatedAt.ToString("dd MMMM  yyyy")</span>
-                        <span class="b_visible"><i></i>@Model.ViewCount</span>
+                        <span class="b_time">@Model.result.CreatedAt.ToString("dd MMMM  yyyy")</span>
+                        <span class="b_visible"><i></i>@Model.result.ViewCount</span>
                     </div>
                     <p class="image-blog">
-                    <img loading="lazy" src="~/assets/images/blogs/@Model.Image">
+                    <img loading="lazy" src="~/assets/images/blogs/@Model.result.Image">
                     </p>
-                    <p><span style="color:#000000">@Model.Description</span></p>
+                    <p><span style="color:#000000">@Model.result.Description</span></p>
                 </div>
                 <div class="blog_inner_tags col-md-12 full">
                     <ul class="tag-collections">
@@ -51,7 +46,7 @@
                         <h2 class="section-title">Oxsar Bloglar</h2>
                         <div class="row blog-items">
 
-                            @foreach (var item in blogs.Where(b => b.CategoryId == Model.CategoryId ).Take(6))
+                            @foreach (var item in Model.blogs.Where(b => b.CategoryId == Model.result.CategoryId && b.Id !=Model.result.Id ).Take(6))
                             {
                                   <div class="col-md-4">
                 <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="blogs__item">

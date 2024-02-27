@@ -9,5 +9,6 @@ namespace HelloJob.Entities.Models
 {
     public class AppUser: Microsoft.AspNetCore.Identity.IdentityUser
     {
+        public bool IsActivate { get; set; }
     }
 }

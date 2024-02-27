@@ -84,6 +84,7 @@ namespace HelloJob.Service.Services.Implementations
                     CreatedAt = x.CreatedAt,
                     ViewCount = x.ViewCount,
                     Category = new CategoryGetDto { Name = x.Category.Name,Image=x.Category.Image ,Id=x.CategoryId},
+                    CategoryId=x.CategoryId
                 }).ToList();
             var pagginatedResponse = new PagginatedResponse<BlogGetDto>(
                  BlogGetDtos, paginatedBlogs.PageNumber,
@@ -98,21 +99,21 @@ namespace HelloJob.Service.Services.Implementations
             var query = _blogRepository.GetQuery(x => !x.IsDeleted)
                          .AsNoTrackingWithIdentityResolution()
                          .Include(x => x.Category);
-            var blogs = await query.Select(x =>
-              new BlogGetDto
-              {
-                  Title = x.Title,
-                  Id = x.Id,
-                  Description = x.Description,
-                  smallDescription = x.smallDescription,
-                  Image = x.Image,
-                  CreatedAt = x.CreatedAt,
-                  ViewCount = x.ViewCount,
-                  Category = new CategoryGetDto { Id=x.Category.Id,Name = x.Category.Name,ParentId=x.Category.ParentId },
-                  CategoryId= x.Category.Id,
-              }).ToListAsync();
-            BlogGetDto? blog= blogs.FirstOrDefault(x=>x.Id== id);
-           
+            var blog = await query.Where(x => x.Id == id)
+                    .Select(x => new BlogGetDto
+                    {
+                        Title = x.Title,
+                        Id = x.Id,
+                        Description = x.Description,
+                        smallDescription = x.smallDescription,
+                        Image = x.Image,
+                        CreatedAt = x.CreatedAt,
+                        ViewCount = x.ViewCount,
+                        Category = new CategoryGetDto { Id = x.Category.Id, Name = x.Category.Name, ParentId = x.Category.ParentId },
+                        CategoryId = x.Category.Id,
+                    })
+                    .FirstOrDefaultAsync();
+
             if (blog == null)
             {
                 return new ErrorDataResult<BlogGetDto>("Blog Not Found");
@@ -168,6 +169,15 @@ namespace HelloJob.Service.Services.Implementations
             await _blogRepository.UpdateAsync(blog);
             return new SuccessResult("Update Blog successfully");
 
+        }
+
+        public async Task  IncreaseCount(int id)
+        {
+            Blog blog = await _blogRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category");
+            
+                blog.ViewCount++;
+                await _blogRepository.UpdateAsync(blog);
+            
         }
     }
 }
