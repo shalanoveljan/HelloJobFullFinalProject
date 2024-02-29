@@ -6,6 +6,7 @@ using HelloJob.Core.Utilities.Results.Concrete.ErrorResults;
 using HelloJob.Core.Utilities.Results.Concrete.SuccessResults;
 using HelloJob.Entities.DTOS;
 using HelloJob.Entities.DTOS.User;
+using HelloJob.Entities.Enums;
 using HelloJob.Entities.Models;
 using HelloJob.Service.Responses;
 using HelloJob.Service.Services.Interfaces;
@@ -15,9 +16,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -240,6 +243,8 @@ namespace HelloJob.Service.Services.Implementations
                 return new ErrorResult(errors);
             }
 
+             await _signInManager.RefreshSignInAsync(user);
+
             return new SuccessResult("User updated successfully");
         }
 
@@ -270,8 +275,6 @@ namespace HelloJob.Service.Services.Implementations
 
             return new SuccessResult("User activation status changed successfully");
         }
-
-
 
         public async Task<PagginatedResponse<AppUser>> GetAllUsers(int count, int page)
         {
@@ -312,8 +315,6 @@ namespace HelloJob.Service.Services.Implementations
             }
         }
 
-
-
         public async Task<PagginatedResponse<AppUser>> GetAllAdmin(int count, int page)
         {
             try
@@ -351,6 +352,80 @@ namespace HelloJob.Service.Services.Implementations
             }
         }
 
+        public async Task<Core.Utilities.Results.Abstract.IResult> RegisterWithGoogle(string returnUrl = null)
+        {
+            try
+            {
+                var authenticationProperties = _signInManager.ConfigureExternalAuthenticationProperties("Google", _helper.Action("GoogleCallback", "Account", new { returnUrl }));
+                return new SuccessResult("Google authentication initiated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult($"Error initiating Google authentication: {ex.Message}");
+            }
+        }
+
+
+        public async Task<Core.Utilities.Results.Abstract.IResult> GoogleCallback(string returnUrl = null)
+        {
+            try
+            {
+                var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
+                if (externalLoginInfo == null)
+                {
+                    return new ErrorResult("External login information not found.");
+                }
+
+                var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
+                var userName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Name);
+
+                var existingUser = await _userManager.FindByEmailAsync(email);
+                if (existingUser != null)
+                {
+                    await _signInManager.SignInAsync(existingUser, isPersistent: false);
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return new SuccessResult("User signed in successfully.");
+                    }
+                    return new SuccessResult("User signed in successfully.");
+                }
+
+                var userNameWithoutSpaces = userName.Replace(" ", string.Empty);
+                var newUser = new AppUser
+                {
+                    UserName = userNameWithoutSpaces.ToLower(),
+                    Email = email,
+                    EmailConfirmed = true
+                };
+
+                var result = await _userManager.CreateAsync(newUser);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(newUser, UserRoles.Employee.ToString());
+
+                    await _signInManager.SignInAsync(newUser, isPersistent: false);
+
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return new SuccessResult("New user registered and signed in successfully.");
+                    }
+
+                    return new SuccessResult("New user registered and signed in successfully.");
+                }
+                else
+                {
+                    return new ErrorResult("Error registering new user.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult($"Error during Google callback: {ex.Message}");
+            }
+        }
 
     }
+
+
+
 }
+

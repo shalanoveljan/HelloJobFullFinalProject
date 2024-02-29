@@ -14,12 +14,14 @@ namespace HelloJob.App.Controllers
     {
         readonly IAccountService _accountService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
 
-        public AccountController(IAccountService accountService, UserManager<AppUser> userManager)
+        public AccountController(IAccountService accountService, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _accountService = accountService;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         public async Task<IActionResult> Register()
         {
@@ -151,6 +153,68 @@ namespace HelloJob.App.Controllers
             UpdateDto? updateDto = await query.Select(x => new UpdateDto { UserName = x.UserName })
                 .FirstOrDefaultAsync();
             return View(updateDto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+
+        public async Task<IActionResult> Update(UpdateDto dto)
+        {
+            if(!ModelState.IsValid) {
+                return View(dto);
+            }
+
+            var res = await _accountService.Update(dto);
+            if(!res.Success)
+            {
+                ModelState.AddModelError("", res.Message);
+                return View(dto);
+            }
+            TempData["update"] = "updated Account";
+
+
+            return RedirectToAction(nameof(Update));
+
+        }
+
+    
+        [HttpGet]
+        public async Task<IActionResult> RegisterWithGoogle(string returnUrl = null)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _accountService.RegisterWithGoogle(returnUrl);
+            if (result.Success)
+            {
+                return RedirectToAction("Home", "Index");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Google ile kayıt olma işlemi başarısız oldu. Lütfen tekrar deneyin.");
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GoogleCallback(string returnUrl = null)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _accountService.GoogleCallback(returnUrl);
+            if (result.Success)
+            {
+                return RedirectToAction("Home", "Index");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Failed to register with Google. Please try again.");
+                return View();
+            }
         }
 
     }

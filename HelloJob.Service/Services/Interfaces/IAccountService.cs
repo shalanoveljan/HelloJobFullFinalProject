@@ -27,6 +27,9 @@ namespace HelloJob.Service.Services.Interfaces
         public Task<IResult> Update(UpdateDto dto);
         public Task<PagginatedResponse<AppUser>> GetAllUsers(int count, int page);
         public Task<PagginatedResponse<AppUser>> GetAllAdmin(int count, int page);
-      
+        public Task<IResult> RegisterWithGoogle(string returnUrl = null);
+        public Task<IResult> GoogleCallback(string returnUrl = null);
+
+
     }
 }
