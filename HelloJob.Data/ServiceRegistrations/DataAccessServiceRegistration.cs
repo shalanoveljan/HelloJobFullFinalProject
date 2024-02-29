@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -44,6 +45,8 @@ namespace HelloJob.Data.ServiceRegistrations
             //    opt.Lockout.MaxFailedAccessAttempts = 5;
             //    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
             //    opt.SignIn.RequireConfirmedEmail = true;
+           // options.Lockout.AllowedForNewUsers = true;
+            //options.Password.RequireNonAlphanumeric = true;
             //})
             //    .AddEntityFrameworkStores<HelloJobDbContext>()
             //    .AddDefaultTokenProviders();

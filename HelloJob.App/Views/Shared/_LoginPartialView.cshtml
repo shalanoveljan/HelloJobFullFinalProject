@@ -1,1 +1,52 @@
 ﻿
+@model LoginDto
+<div class="modal-content ">
+    <div class="modal-header">
+        <div class="popup__head__text text-center">
+            <h3>Hesabınıza daxil olun</h3>
+            <p>
+                Xoş gəlmişsiniz!
+            </p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="popup__form__social">
+            <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Fwww.hellojob.az%2Fuser-login%2Fgoogle_verify&amp;client_id=36186815782-e8dkfbottlq01ioglfqg9fq49hkepvec.apps.googleusercontent.com&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;access_type=offline&amp;approval_prompt=force" class="btn" target="_blank">
+                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/google.svg" alt="">
+                Google ilə daxil ol
+            </a>
+            <p class="login-agreement-text">
+                Hesab yaradaraq Hellojob.az vebsayt <a href="/page/qaydalar" target="_blank" style="color: #344054; text-decoration: underline; font-weight: 500;">qaydalarını</a> qəbul edirəm.
+            </p>
+            <span>və ya</span>
+        </div>
+
+        <form id="login_blank">
+            <div class="popup__form">
+                <div class="form-group">
+                    <label for="">E-poçt</label>
+                    <input type="email" name="email" id="loginEmail" placeholder="E-poçtunuzu yazın" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Şifrə</label>
+                    <input type="password" name="password" id="loginPassword" placeholder="••••••••" class="form-control">
+                </div>
+                <input type="hidden" name="recaptcha_login" id="recaptchaLogin">
+            </div>
+            <div class="popup__tools">
+                <div class="form-group form-group--checkbox">
+                    <input type="checkbox" name="save_me" id="save_pass">
+                    <label for="save_pass">Yadda saxla</label>
+                </div>
+                <a asp-controller="Identity" asp-action="ForgetPassword" class="regs_bopup_open" data-effect="mfp-zoom-in">Şifrəni unutmuşam</a>
+            </div>
+            <p id="error-login" class="popup__error-msg text-danger mb-1"></p>
+            <div class="popup__btns">
+                <button type="submit" class="btn" id="login_btn">Daxil ol</button>
+                <a href="#registration_popup" class="register-btn btn btn-transparent register-acc regs_bopup_open" data-effect="mfp-zoom-in">Qeydiyyatdan keç</a>
+            </div>
+        </form>
+    </div>
+
+</div>

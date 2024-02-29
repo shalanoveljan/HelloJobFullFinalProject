@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HelloJob.App.Controllers
 {
-   
+
     public class CourseController : Controller
     {
         readonly ICourseService _CourseService;
@@ -20,20 +20,20 @@ namespace HelloJob.App.Controllers
             _tagService = tagService;
         }
 
-  
+
         public async Task<IActionResult> Index(List<CourseGetDto>? courses)
         {
-       
+
             ViewBag.Categories = await _categoryService.GetAllAsync();
-            if (courses.Count!=0)
+            if (courses.Count != 0)
             {
 
                 return View(courses);
             }
             else
-            { 
-            var result = await _CourseService.GetAllForCoursePageInWebSiteAsync();
-            return View(result.Data);
+            {
+                var result = await _CourseService.GetAllForCoursePageInWebSiteAsync();
+                return View(result.Data);
             }
         }
         public async Task<IActionResult> Detail(int id)
@@ -43,21 +43,28 @@ namespace HelloJob.App.Controllers
             ViewBag.Categories = await _categoryService.GetAllAsync();
 
             return View(res.Data);
-        } 
+        }
 
         public async Task<IActionResult> SortCourses(int id)
         {
             var res = await _CourseService.SortCourses(id);
-            Index(res.Data);
-            return Json(res.Data);
+            //Index(res.Data);
+            return PartialView("_CoursePartial", res.Data);
         }
-        //public async Task<IActionResult> FilterCourses(int id)
-        //{
-        //    var res = await _CourseService.FilterCourses(id);
-        //    return Json(res.Data);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> FilterCourses(CourseFilterDto dto)
+        {
+            var res = await _CourseService.FilterCourses(dto);
+            return PartialView("_CoursePartial", res.Data);
+
+        }
 
 
 
+    }
+    public class DataDto
+    {
+       public List<CourseGetDto> CourseGetDtos { get; set; }
+       public int Count { get; set; }
     }
 }

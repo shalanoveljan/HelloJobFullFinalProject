@@ -4,18 +4,21 @@ using HelloJob.Core.Utilities.Results.Concrete.ErrorResults;
 using HelloJob.Core.Utilities.Results.Concrete.SuccessResults;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.AspNetCore.Hosting;
 using MimeKit;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 
 namespace HelloJob.Core.Helper.MailHelper
 {
     public class EmailHelper : IEmailHelper
     {
+        private readonly IWebHostEnvironment _env;
         private readonly IEmailConfiguration _emailConfiguration;
-
-        public EmailHelper(IEmailConfiguration emailConfiguration)
+        public EmailHelper(IEmailConfiguration emailConfiguration, IWebHostEnvironment env)
         {
             _emailConfiguration = emailConfiguration;
+            _env = env;
         }
 
         public bool IsValidEmail(string email)
@@ -26,7 +29,7 @@ namespace HelloJob.Core.Helper.MailHelper
             return regex.IsMatch(email);
         }
 
-        public async Task<IResult> SendEmailAsync(string email,string subject, string body, string token)
+        public async Task<IResult> SendEmailAsync(string email,string url,string subject, string token)
         {
             try
             {
@@ -40,11 +43,17 @@ namespace HelloJob.Core.Helper.MailHelper
                 message.To.Add(MailboxAddress.Parse(email));
                 message.Subject = subject;
                 message.Importance = MessageImportance.High;
+                string mybody = string.Empty;
+                string path = Path.Combine(_env.WebRootPath, "Templates", "Verify.html");
+                using (StreamReader SourceReader = System.IO.File.OpenText(path))
+                {
+                    mybody = SourceReader.ReadToEnd();
+                }
+                mybody = mybody.Replace("{{url}}", url);
                 message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
                 {
-                    Text = body
+                    Text = mybody
                 };
-
                 using (var client = new SmtpClient())
                 {
                     await client.ConnectAsync(smtp, port, SecureSocketOptions.StartTls);

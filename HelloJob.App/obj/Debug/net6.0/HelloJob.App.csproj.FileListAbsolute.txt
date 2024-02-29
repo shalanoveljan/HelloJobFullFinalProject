@@ -274,3 +274,4 @@ C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\refint\Hello
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.pdb
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.genruntimeconfig.cache
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\ref\HelloJob.App.dll
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.MvcApplicationPartsAssemblyInfo.cs

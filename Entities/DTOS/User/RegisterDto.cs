@@ -36,6 +36,5 @@ namespace HelloJob.Entities.DTOS
         [Range(typeof(bool), "true", "true", ErrorMessage = "Şərtləri qəbul etməlisiniz.")]
         public bool Terms { get; set; }
 
-        public bool IsActivate { get; set; }
     }
 }

@@ -10,22 +10,23 @@ using HelloJob.Entities.DTOS;
 using HelloJob.Entities.DTOS.User;
 using HelloJob.Entities.Models;
 using HelloJob.Core.Utilities.Results.Abstract;
+using HelloJob.Service.Responses;
 
 namespace HelloJob.Service.Services.Interfaces
 {
     public interface IAccountService
     {
-        public Task<IDataResult<string>> SignUp(RegisterDto dto);
+        public Task<IDataResult<string>> SignUp(RegisterDto dto,string role);
         public Task<IResult> VerifyEmail(string token, string email);
-        public Task<IResult> Login(LoginDto dto, bool IsUserStatus);
+        public Task<IResult> Login(LoginDto dto);
         public Task<IResult> LogOut();
         public Task<IResult> ForgetPassword(string email);
-        public Task<IResult> ResetPasswordGet(string email, string token);
+        public Task<IDataResult<ResetPasswordDto>> ResetPasswordGet(string email, string token);
         public Task<IResult> ResetPasswordPost(ResetPasswordDto dto);
-        public Task<IResult> GetUser();
-        public Task<IResult> Update(UpdateDto dto, AppUser? updated);
-        public Task<IResult> GetAllUsers(int count, int page);
-        public Task<IResult> GetAllAdmin(int count, int page);
-        public Task<IResult> Remove(string id);
+        public Task<IResult> ChangeUserActivationStatus(string email, bool activate);
+        public Task<IResult> Update(UpdateDto dto);
+        public Task<PagginatedResponse<AppUser>> GetAllUsers(int count, int page);
+        public Task<PagginatedResponse<AppUser>> GetAllAdmin(int count, int page);
+      
     }
 }

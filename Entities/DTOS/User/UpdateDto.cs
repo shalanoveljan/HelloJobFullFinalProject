@@ -32,7 +32,6 @@ namespace HelloJob.Entities.DTOS
         [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Şifrə yalnız hərflər, rəqəmlər və boşluqlardan ibarət ola bilər")]
         public string? NewPassword { get; set; }
 
-        public bool IsActivated { get; set; } = true;
 
 
 

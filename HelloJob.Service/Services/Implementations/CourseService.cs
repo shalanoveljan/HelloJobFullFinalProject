@@ -19,6 +19,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace HelloJob.Service.Services.Implementations
 {
@@ -315,9 +316,17 @@ namespace HelloJob.Service.Services.Implementations
             if (dto.CategoriesIds != null && dto.CategoriesIds.Count > 0)
             {
                 var activeCategories = _categoryRepository.GetQuery(x => !x.IsDeleted && x.ParentId == null).ToList();
-                CourseGetDtos = CourseGetDtos.Where(course =>
-                    dto.CategoriesIds.Any(categoryId => activeCategories.Any(category => category.Id == categoryId))
-                ).ToList();
+
+                //CourseGetDtos = CourseGetDtos.Where(course =>
+                //    dto.CategoriesIds.Any(categoryId => activeCategories.Any(category => category.Id == categoryId))
+                //).ToList();
+
+
+                var categories = activeCategories.Where(cat =>
+                    dto.CategoriesIds.Any(categoryId => cat.Id == categoryId)
+                );
+
+                CourseGetDtos = CourseGetDtos.Where(c => categories.Any(cat => cat.Id == c.CategoryId)).ToList();
 
             }
 
@@ -338,7 +347,6 @@ namespace HelloJob.Service.Services.Implementations
             {
                 CourseGetDtos = CourseGetDtos.Where(course => dto.Agencies.Contains(course.Agency)).ToList();
             }
-
             // Filter by free courses
             if (dto.IsFree)
             {
@@ -361,17 +369,15 @@ namespace HelloJob.Service.Services.Implementations
             if (dto.Selected_Lesson_Mode != LessonMode.None)
             {
                 CourseGetDtos = CourseGetDtos.Where(course => course.Mode == dto.Selected_Lesson_Mode).ToList();
-                // Filter by selected job mode
-                if (dto.Level != Level.None)
-                {
-                    CourseGetDtos = CourseGetDtos.Where(course => course.Level == dto.Level).ToList();
-                }
-
-
-
 
             }
-                return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Halaldi sene ");
+
+            // Filter by selected job mode
+            if (dto.Level != Level.None)
+            {
+                CourseGetDtos = CourseGetDtos.Where(course => course.Level == dto.Level).ToList();
+            }
+            return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Halaldi sene ");
 
 
 

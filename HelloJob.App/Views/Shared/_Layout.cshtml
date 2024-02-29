@@ -1,4 +1,5 @@
-﻿@inject ILayoutService layoutService
+﻿@*@model LayoutVM*@
+@inject ILayoutService layoutService
 
 @{
     Dictionary<string, string> settings = await layoutService.GetSettings();
@@ -98,6 +99,8 @@
     <!-- Login form Modal start-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
+        @*    @await Html.PartialAsync("_LoginPartialView",Model.Logindto)
+            @await Html.PartialAsync("_RegisterPartialView",Model.Registerdto)*@
             <div class="modal-content ">
                 <div class="modal-header">
                     <div class="popup__head__text text-center">
@@ -177,7 +180,7 @@
                         </div>
                         <div class="popup__tools">
                             <div class="form-group form-group--checkbox" style="display: -webkit-box;">
-                                <input type="checkbox" name="register_agreement"  id="register_agreement">
+                                <input type="checkbox" name="register_agreement" id="register_agreement">
 
                                 <label for="register_agreement">Hesab yaradaraq Hellojob.az vebsayt <a href="/page/qaydalar" target="_blank" style="color: #344054; text-decoration: underline; font-weight: 500;">qaydalarını</a> qəbul edirəm.</label>
                             </div>
@@ -191,8 +194,6 @@
                 </div>
 
             </div>
-
-
         </div>
     </div>
 
