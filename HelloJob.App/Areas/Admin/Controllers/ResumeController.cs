@@ -1,4 +1,6 @@
 ﻿using HelloJob.Entities.DTOS;
+using HelloJob.Entities.Enums;
+using HelloJob.Service.Services.Implementations;
 using HelloJob.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,11 +24,35 @@ namespace HelloJob.App.Areas.Admin.Controllers
             _languageService = languageService;
         }
 
-        public async Task<IActionResult> Index(int page = 1,int pagesize=6)
+        public async Task<IActionResult> Index(string userid=null,int page = 1, int pagesize = 6)
         {
-
-            return View(await _ResumeService.GetAllAsync(page,pagesize));
+            return View(await _ResumeService.GetAllAsync(userid,true,page, pagesize));
         }
+        public async Task<IActionResult> Accept(int id)
+        {
+            var result = await _ResumeService.SetOrderStatus(id, Order.Accept);
 
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
+        public async Task<IActionResult> Reject(int id)
+        {
+            var result = await _ResumeService.SetOrderStatus(id, Order.Reject);
+
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
     }
 }

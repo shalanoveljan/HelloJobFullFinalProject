@@ -19,7 +19,6 @@ namespace HelloJob.Entities.DTOS
 
         [Required(ErrorMessage = "İstifadəçi adı daxil edilməlidir.")]
         [StringLength(25, MinimumLength = 2, ErrorMessage = "İstifadəçi adı 2 ilə 25 simvol aralığında olmalıdır")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "İstifadəçi adı yalnız hərflər, rəqəmlər və boşluqlardan ibarət ola bilər")]
         public string UserName { get; set; } = null!;
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Şifrə vacibdir")]

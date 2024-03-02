@@ -20,6 +20,7 @@ namespace HelloJob.Entities.Models
         public Gender Gender {get; set; }
         public JobMode Mode { get; set; }
         public MaritalStatus Status { get; set; }
+        public Order order { get; set; }
         public double Salary { get; set; }
         public bool IsDriverLicense { get; set; }
         public bool IsPremium { get; set; }

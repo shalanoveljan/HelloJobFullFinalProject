@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HelloJob.Entities.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace HelloJob.App.Configurations
 {
@@ -25,30 +26,15 @@ namespace HelloJob.App.Configurations
             applicationBuilder.UseAuthentication();
             applicationBuilder.UseAuthorization();
 
-            //var scopFactory = applicationBuilder.Services.GetRequiredService<IServiceScopeFactory>();
-            //using (var scope = scopFactory.CreateScope())
-            //{
-            //    var userManager = scope.ServiceProvider.GetService<UserManager<User>>();
-            //    var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-            //    DataSeeder.SeedRoles(roleManager).Wait();
-            //    DataSeeder.SeedUsers(userManager).Wait();
-            //}
+            var scopFactory = applicationBuilder.Services.GetRequiredService<IServiceScopeFactory>();
+            using (var scope = scopFactory.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetService<UserManager<AppUser>>();
+                var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                DataSeeder.SeedRoles(roleManager).Wait();
+                DataSeeder.SeedUsers(userManager).Wait();
+            }
 
-            //         applicationBuilder.UseEndpoints(endpoints =>
-            //         {
-            //             endpoints.MapControllerRoute(
-            //             name: "areas",
-            //            pattern: "{area:admin}/{controller=Dashboard}/{action=index}/{id?}"
-            // );
-            //             endpoints.MapControllerRoute(
-            //            name: "areas1",
-            //           pattern: "{area:user}/{controller=Profilim}/{action=index}/{id?}"
-            //);
-            //             endpoints.MapControllerRoute(
-            //             name: "default",
-            //             pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            //         });
             applicationBuilder.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

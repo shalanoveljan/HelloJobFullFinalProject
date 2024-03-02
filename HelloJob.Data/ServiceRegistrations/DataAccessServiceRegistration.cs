@@ -26,7 +26,6 @@ namespace HelloJob.Data.ServiceRegistrations
             });
 
 
-
             services.AddScoped<IBlogDAL, BlogDAL>();
             services.AddScoped<ICategoryDAL, CategoryDAL>();
             services.AddScoped<ISettingDAL, SettingDAL>();
@@ -47,7 +46,6 @@ namespace HelloJob.Data.ServiceRegistrations
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
                 opt.SignIn.RequireConfirmedEmail = true;
                 opt.Lockout.AllowedForNewUsers = true;
-                opt.Password.RequireNonAlphanumeric = true;
             })
                 .AddEntityFrameworkStores<HelloJobDbContext>()
                 .AddDefaultTokenProviders();

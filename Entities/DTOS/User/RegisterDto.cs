@@ -11,24 +11,21 @@ namespace HelloJob.Entities.DTOS
     {
         [Required(ErrorMessage = "İstifadəçi adı daxil edilməlidir.")]
         [StringLength(25, MinimumLength = 2, ErrorMessage = "İstifadəçi adı 2 ilə 25 simvol aralığında olmalıdır")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "İstifadəçi adı yalnız hərflər, rəqəmlər və boşluqlardan ibarət ola bilər")]
         public string Username { get; set; } = null!;
         [Required(ErrorMessage = "E-poçt vacibdir")]
         [StringLength(255, MinimumLength = 10, ErrorMessage = "E-poçt ünvanı 10 ilə 255 simvol aralığında olmalıdır")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Yanlış e-poçt ünvanı")]
-        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage = "Yanlış e-poçt formatı")]
+        //[RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage = "Yanlış e-poçt formatı")]
         public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = "Şifrə vacibdir")]
         [StringLength(25, MinimumLength = 8, ErrorMessage = "Şifrə 8 ilə 25 simvol aralığında olmalıdır")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Şifrə yalnız hərflər, rəqəmlər və boşluqlardan ibarət ola bilər")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
         [Required(ErrorMessage = "Şifrənin təsdiqi vacibdir")]
         [StringLength(25, MinimumLength = 8, ErrorMessage = "Şifrə 8 ilə 25 simvol aralığında olmalıdır")]
         [Compare(nameof(Password), ErrorMessage = "Şifrə eyni olmalıdır")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Şifrə yalnız hərflər, rəqəmlər və boşluqlardan ibarət ola bilər")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = null!;
 

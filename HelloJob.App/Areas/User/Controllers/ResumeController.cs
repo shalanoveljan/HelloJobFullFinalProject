@@ -22,10 +22,9 @@ namespace HelloJob.App.Areas.User.Controllers
             _languageService = languageService;
         }
 
-        public async Task<IActionResult> Index(int page = 1,int pagesize=6)
+        public async Task<IActionResult> Index(string userid,int page = 1,int pagesize=6)
         {
-
-            return View(await _ResumeService.GetAllAsync(page,pagesize));
+            return View(await _ResumeService.GetAllAsync(userid,false,page,pagesize));
         }
 
         public async Task<IActionResult> Create()

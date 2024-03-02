@@ -86,6 +86,8 @@ namespace HelloJob.Service.Services.Implementations
         }
         public async Task<IResult> CreateAsync(ResumePostDto dto)
         {
+            Order orderStatus = Order.None;
+
             if (dto.ImageFile == null)
             {
                 return new ErrorResult("The field image is required");
@@ -133,7 +135,8 @@ namespace HelloJob.Service.Services.Implementations
                 experiences = new List<Employee_Special_Experience>(),
                 Skills = new List<Skill>()
             };
-                
+            resume.order = orderStatus;
+
             resume.Image = dto.ImageFile.SaveFile(_env.WebRootPath, "assets/images/Resumes");
 
             AddEducationsFromDto(dto, resume);
@@ -144,19 +147,29 @@ namespace HelloJob.Service.Services.Implementations
         
     }
 
-        public async Task<PagginatedResponse<ResumeGetDto>> GetAllAsync(int pageNumber = 1, int pageSize = 8)
+        public async Task<PagginatedResponse<ResumeGetDto>> GetAllAsync(string userId, bool isAdmin, int pageNumber = 1, int pageSize = 8)
         {
-            var query = _ResumeRepository.GetQuery(x => !x.IsDeleted)
-                                         .AsNoTrackingWithIdentityResolution()
-                                         .Include(x => x.AppUser)
-                                         .Include(x => x.City)
-                                         .Include(x => x.Education)
-                                         .Include(x => x.Language)
-                                         .Include(x => x.Category);
+            IQueryable<Resume> query;
+
+            if (isAdmin)
+            {
+                query = _ResumeRepository.GetQuery(x => !x.IsDeleted);
+            }
+            else
+            {
+                query = _ResumeRepository.GetQuery(x => x.AppUserId == userId && !x.IsDeleted);
+            }
 
             var totalCount = await query.CountAsync();
 
-            var paginatedResumes = await query.ToPagedListAsync(pageNumber, pageSize);
+            var paginatedResumes = await query
+                .AsNoTrackingWithIdentityResolution()
+                .Include(x => x.AppUser)
+                .Include(x => x.City)
+                .Include(x => x.Education)
+                .Include(x => x.Language)
+                .Include(x => x.Category)
+                .ToPagedListAsync(pageNumber, pageSize);
 
             var ResumeGetDtos = paginatedResumes.Datas.Select(x =>
                 new ResumeGetDto
@@ -184,7 +197,7 @@ namespace HelloJob.Service.Services.Implementations
                     Education = new EducationGetDto { Id = x.Education.Id, Name = x.Education.Name, CreateAt = x.Education.CreatedAt },
                     Language = new LanguageGetDto { Id = x.Language.Id, Name = x.Language.Name, CreateAt = x.Language.CreatedAt },
                     City = new CityGetDto { Id = x.City.Id, Name = x.City.Name, CreateAt = x.City.CreatedAt },
-                    AppUser=x.AppUser,
+                    AppUser = x.AppUser,
                 }).ToList();
 
             var pagginatedResponse = new PagginatedResponse<ResumeGetDto>(
@@ -194,6 +207,7 @@ namespace HelloJob.Service.Services.Implementations
 
             return pagginatedResponse;
         }
+
         public async Task<IDataResult<ResumeGetDto>> GetAsync(int id)
         {
             var resume = await _ResumeRepository.GetQuery(x => x.Id == id && !x.IsDeleted)
@@ -253,17 +267,19 @@ namespace HelloJob.Service.Services.Implementations
 
         public async Task<IResult> UpdateAsync(int id, ResumePostDto dto)
         {
+            Order orderStatus = Order.None;
+
             Resume? resume = await _ResumeRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Education", "Language", "AppUser");
             if (resume == null)
             {
                 return new ErrorResult("The Resume not found");
             }
             if (dto.EducationStartDates.Count != dto.EducationEndDates.Count ||
-  dto.ExperienceStartDates.Count != dto.ExperienceEndDates.Count)
+              dto.ExperienceStartDates.Count != dto.ExperienceEndDates.Count)
             {
                 return new ErrorResult("Invalid date range for education or experience");
             }
-
+            resume.order = Order.None;
             resume.Name = dto.Name;
             resume.Surname = dto.Surname;
             resume.Email = dto.Email;
@@ -296,8 +312,6 @@ namespace HelloJob.Service.Services.Implementations
 
                 resume.Image = dto.ImageFile.SaveFile(_env.WebRootPath, "assets/images/Resumes");
             }
-
-         
 
             AddEducationsFromDto(dto, resume);
             AddExperiencesFromDto(dto, resume);
@@ -370,7 +384,6 @@ namespace HelloJob.Service.Services.Implementations
 
             return new SuccessDataResult<List<ResumeGetDto>>(ResumeGetDtos, "Get Resumes for SITE PAGE");
         }
-
         public async Task<IDataResult<List<ResumeGetDto>>> SortResumes(int id, ResumeFilterDto dto)
         {
 
@@ -397,8 +410,6 @@ namespace HelloJob.Service.Services.Implementations
             }
             return new SuccessDataResult<List<ResumeGetDto>>(data, "Halaldi");
         }
-
-
         public async Task<IDataResult<List<ResumeGetDto>>> FilterResumes(ResumeFilterDto dto)
         {
             var query = GetBaseQuery();
@@ -486,6 +497,19 @@ namespace HelloJob.Service.Services.Implementations
             }
             return new SuccessDataResult<List<ResumeGetDto>>(ResumeGetDtos, "Halaldi sene ");
 
+        }
+        public async Task<IResult> SetOrderStatus(int resumeId, Order orderStatus)
+        {
+            var resume = await _ResumeRepository.GetAsync(x => !x.IsDeleted && x.Id == resumeId, "Category", "City", "Education", "Language", "AppUser");
+            if (resume == null)
+            {
+                return new ErrorResult("Resume not found");
+            }
+
+            resume.order = orderStatus;
+            await _ResumeRepository.UpdateAsync(resume);
+
+            return new SuccessResult("Order status updated successfully");
         }
     }
 }
