@@ -5,7 +5,6 @@ using HelloJob.Core.Utilities.Results.Concrete;
 using HelloJob.Core.Utilities.Results.Concrete.ErrorResults;
 using HelloJob.Core.Utilities.Results.Concrete.SuccessResults;
 using HelloJob.Entities.DTOS;
-using HelloJob.Entities.DTOS.User;
 using HelloJob.Entities.Enums;
 using HelloJob.Entities.Models;
 using HelloJob.Service.Responses;
@@ -31,24 +30,19 @@ namespace HelloJob.Service.Services.Implementations
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IMapper _mapper;
         private readonly IEmailHelper _emailService;
         private readonly IHttpContextAccessor _http;
-        private readonly IConfiguration _configuration;
-        readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IUrlHelper _helper;
 
 
+
         public AccountService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            IMapper mapper, IEmailHelper emailService, IHttpContextAccessor http, IConfiguration configuration, IWebHostEnvironment webHostEnvironment, IUrlHelper helper)
+            IEmailHelper emailService, IHttpContextAccessor http, IUrlHelper helper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _mapper = mapper;
             _emailService = emailService;
             _http = http;
-            _configuration = configuration;
-            _webHostEnvironment = webHostEnvironment;
             _helper = helper;
         }
         public async Task<Core.Utilities.Results.Abstract.IDataResult<string>> SignUp(RegisterDto dto, string role)

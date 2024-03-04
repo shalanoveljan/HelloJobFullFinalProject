@@ -13,14 +13,12 @@ namespace HelloJob.Service.Services.Interfaces
     public interface ICourseService
     {
         public Task<PagginatedResponse<CourseGetDto>> GetAllAsync(int pageNumber=1, int pageSize=6);
-        public Task<IDataResult<List<CourseGetDto>>> GetAllForCoursePageInWebSiteAsync();
 
         public Task<IResult> CreateAsync(CoursePostDto dto);
-        public Task<IDataResult<List<CourseGetDto>>> SortCourses(int id);
+        public Task<IDataResult<List<CourseGetDto>>> GetAllForCoursePageInWebSiteAsync();
+        public Task<IDataResult<List<CourseGetDto>>> SortCourses(int id,CourseFilterDto dto);
         public Task<IDataResult<List<CourseGetDto>>> FilterCourses(CourseFilterDto dto);
-
         public Task<IResult> RemoveAsync(int id);
-
         public Task<IResult> UpdateAsync(int id, CoursePostDto dto);
         public Task<IDataResult<CourseGetDto>> GetAsync(int id);
     }

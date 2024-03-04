@@ -1327,15 +1327,14 @@ a {
 
 .modal-content-register {
   position: relative;
-  display: none;
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   outline: 0;
+  padding-bottom:10px;
 }
 
 .popup__form__social span {
@@ -4623,3 +4622,6 @@ section .col-md-4 .contact .contact__btn .btn.resume__up-btn {
         bottom: 100%;
     }
 }
+
+
+

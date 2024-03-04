@@ -1,5 +1,4 @@
 ﻿using Entities.Common;
-using HelloJob.Core.Configuration.Concrete;
 using HelloJob.Entities.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +34,10 @@ namespace HelloJob.Data.DBContexts.SQLSERVER
         public DbSet<Education> Educations { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<City> Citys { get; set; }
-
+        public DbSet<Resume> Resumes { get; set; }
+        public DbSet<Employee_Special_Education> employee_Special_Educations { get; set; }
+        public DbSet<Employee_Special_Experience> employee_Special_Experiences { get; set; }
+        public DbSet<Skill> Skills { get; set; }
 
 
         public DbSet<Experience> Experiences { get; set; }

@@ -5,6 +5,7 @@ using HelloJob.Core.Utilities.Results.Concrete.SuccessResults;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
@@ -37,6 +38,7 @@ namespace HelloJob.Core.Helper.MailHelper
                 string senderPassword = _emailConfiguration.Password;
                 int port = _emailConfiguration.Port;
                 string smtp = _emailConfiguration.SmtpServer;
+
 
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress("HelloJob",senderEmail));

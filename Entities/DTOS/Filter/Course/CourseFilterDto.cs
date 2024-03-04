@@ -23,6 +23,8 @@ namespace HelloJob.Entities.DTOS
 
         public Level  Level { get; set; }
 
+        public bool IsSort { get; set; }
+
     }
 
    

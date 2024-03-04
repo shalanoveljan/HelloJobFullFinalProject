@@ -1,0 +1,69 @@
+﻿<div class="create_cv">
+    <div class="title">
+        <h1>Şirkət yarat</h1>
+        <ul class="profile__add-cv__parts">
+            <li class="active">
+                <a href="#tab1" class="tab1 step_btn"> Şirkət məlumatları</a>
+            </li>
+        </ul>
+    </div>
+    <div class="inner_tab">
+        <form action="">
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">Şirkət məlumatları</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="form-group">
+                        <div class="image_input">
+                            <input class="choose"
+                                   type="file"
+                                   id="fileInput"
+                                   accept="image/*" />
+                            <span class="upload_file_img">
+                                <img id="preview"
+                                     src="https://cdn-icons-png.flaticon.com/512/2815/2815428.png"
+                                     class="m-0"
+                                     alt="" />
+                            </span>
+                        </div>
+                        <label for="prof_img" class="upload_image">
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg"
+                                 alt="" />
+                            <span>Şəkil əlavə et</span>
+                            <p>SVG, PNG, JPG or GIF (max. 1000x1000px)</p>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Ad</label>
+                                <input type="text"
+                                       name="name"
+                                       value="Rashid"
+                                       class="form-control inputs"
+                                       placeholder="Adınız" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">E-Poçt</label>
+                                <input type="text"
+                                       name="name"
+                                       value="rrrr@gmail.com"
+                                       class="form-control inputs"
+                                       placeholder="E-poçt ünvanınızı yazın" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-button">
+                <button class="btn btn-primary submit">Təsdiq et</button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+        <script src="~/HelloJobPanel/assets/js/createcompany.js"></script>
+   }

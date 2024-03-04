@@ -541,6 +541,10 @@
       "PackagePath": "staticwebassets\\HelloJobPanel\\assets\\images\\night_mode_logo.svg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\HelloJobPanel\\assets\\js\\createcompany.js",
+      "PackagePath": "staticwebassets\\HelloJobPanel\\assets\\js\\createcompany.js"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\HelloJobPanel\\assets\\js\\cvpage.js",
       "PackagePath": "staticwebassets\\HelloJobPanel\\assets\\js\\cvpage.js"
     },
@@ -4537,6 +4541,10 @@
       "PackagePath": "staticwebassets\\assets\\icons\\like.svg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\icons\\manat.png",
+      "PackagePath": "staticwebassets\\assets\\icons\\manat.png"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\icons\\megaphone-elanlarim-muracietlerim.svg",
       "PackagePath": "staticwebassets\\assets\\icons\\megaphone-elanlarim-muracietlerim.svg"
     },
@@ -5125,8 +5133,16 @@
       "PackagePath": "staticwebassets\\assets\\images\\logo\\night_mode_logo.svg"
     },
     {
-      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\Custom.js",
-      "PackagePath": "staticwebassets\\assets\\js\\Custom.js"
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\CustomCourse.js",
+      "PackagePath": "staticwebassets\\assets\\js\\CustomCourse.js"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\Register.js",
+      "PackagePath": "staticwebassets\\assets\\js\\Register.js"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\app.js",
+      "PackagePath": "staticwebassets\\assets\\js\\app.js"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\blog-detail.js",
@@ -5155,10 +5171,6 @@
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\error.js",
       "PackagePath": "staticwebassets\\assets\\js\\error.js"
-    },
-    {
-      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\forgetpassword.js",
-      "PackagePath": "staticwebassets\\assets\\js\\forgetpassword.js"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\home.js",

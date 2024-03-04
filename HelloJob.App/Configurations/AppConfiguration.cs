@@ -34,18 +34,39 @@ namespace HelloJob.App.Configurations
             //    DataSeeder.SeedUsers(userManager).Wait();
             //}
 
+            //         applicationBuilder.UseEndpoints(endpoints =>
+            //         {
+            //             endpoints.MapControllerRoute(
+            //             name: "areas",
+            //            pattern: "{area:admin}/{controller=Dashboard}/{action=index}/{id?}"
+            // );
+            //             endpoints.MapControllerRoute(
+            //            name: "areas1",
+            //           pattern: "{area:user}/{controller=Profilim}/{action=index}/{id?}"
+            //);
+            //             endpoints.MapControllerRoute(
+            //             name: "default",
+            //             pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            //         });
             applicationBuilder.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                  name: "areas",
-                      pattern: "{area:exists}/{controller=Dashboard}/{action=index}/{id?}"
-
-                );
-
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
                 endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "admin",
+                    pattern: "admin/{controller=Dashboard}/{action=index}/{id?}",
+                    defaults: new { area = "admin" }
+                );
+                endpoints.MapControllerRoute(
+                    name: "user",
+                    pattern: "user/{controller=Profilim}/{action=index}/{id?}",
+                    defaults: new { area = "user" }
+                );
             });
+
         }
     }
 }

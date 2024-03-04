@@ -10,5 +10,7 @@ namespace HelloJob.Entities.Models
     public class City:BaseEntity
     {
         public string Name { get; set; }
+        public IEnumerable<Resume> Resumes { get; set; }
+
     }
 }

@@ -39,16 +39,13 @@ namespace HelloJob.App.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             var res = await _CourseService.GetAsync(id);
-            ViewBag.Tags = await _tagService.GetAllAsync();
-            ViewBag.Categories = await _categoryService.GetAllAsync();
-
             return View(res.Data);
         }
 
-        public async Task<IActionResult> SortCourses(int id)
+        public async Task<IActionResult> SortCourses(int id, CourseFilterDto dto)
         {
-            var res = await _CourseService.SortCourses(id);
-            //Index(res.Data);
+            ViewBag.Dto=dto;
+            var res = await _CourseService.SortCourses(id,dto);
             return PartialView("_CoursePartial", res.Data);
         }
         [HttpPost]
@@ -61,10 +58,5 @@ namespace HelloJob.App.Controllers
 
 
 
-    }
-    public class DataDto
-    {
-       public List<CourseGetDto> CourseGetDtos { get; set; }
-       public int Count { get; set; }
     }
 }

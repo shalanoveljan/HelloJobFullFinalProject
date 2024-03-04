@@ -13,6 +13,5 @@ namespace HelloJob.Entities.DTOS
         public string Name { get; set; }
         public DateTime CreateAt { get; set; }
 
-
     }
 }

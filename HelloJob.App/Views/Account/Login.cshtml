@@ -1,0 +1,59 @@
+﻿
+@model LoginDto
+<main id="loginregisterpage" class="pb-3">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="popup__head__text text-center">
+                <h3>Hesabınıza daxil olun</h3>
+                <p>
+                    Xoş gəlmişsiniz!
+                </p>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="popup__form__social">
+                <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Fwww.hellojob.az%2Fuser-login%2Fgoogle_verify&amp;client_id=36186815782-e8dkfbottlq01ioglfqg9fq49hkepvec.apps.googleusercontent.com&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;access_type=offline&amp;approval_prompt=force" class="btn" target="_blank">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/google.svg" alt="">
+                    Google ilə daxil ol
+                </a>
+                <p class="login-agreement-text">
+                    Hesab yaradaraq Hellojob.az vebsayt <a href="/page/qaydalar" target="_blank" style="color: #344054; text-decoration: underline; font-weight: 500;">qaydalarını</a> qəbul edirəm.
+                </p>
+                <span>və ya</span>
+            </div>
+
+            <form id="login_blank" method="post">
+                <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                <div class="popup__form">
+                    <div class="form-group">
+                        <label asp-for="UserNameOrEmail">E-poçt Or UserName</label>
+                        <input type="text" asp-for="UserNameOrEmail" id="loginEmail" placeholder="E-poçtunuzu veya UserName yazın" class="form-control">
+                        <span class="alert alert-text" asp-validation-for="UserNameOrEmail"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Şifrə</label>
+                        <input type="password" asp-for="Password" id="loginPassword" placeholder="••••••••" class="form-control">
+                        <span class="alert alert-text" asp-validation-for="Password"></span>
+                    </div>
+                    <input type="hidden" name="recaptcha_login" id="recaptchaLogin">
+                </div>
+                <div class="popup__tools">
+                    <div class="form-group form-group--checkbox">
+                        <input type="checkbox" name="save_me" id="save_pass">
+                        <!-- <input type="checkbox"  name="" id=""> -->
+                        <label for="save_pass">Yadda saxla</label>
+                    </div>
+                    <a asp-controller="account" asp-action="forgetpassword" class="regs_bopup_open" data-effect="mfp-zoom-in">Şifrəni unutmuşam</a>
+                </div>
+                <p id="error-login" class="popup__error-msg text-danger mb-1"></p>
+                <div class="popup__btns">
+                    <button type="submit" class="btn" id="login_btn">Daxil ol</button>
+                    <a asp-controller="account" asp-action="register" class="register-btn btn btn-transparent register-acc regs_bopup_open" data-effect="mfp-zoom-in">Qeydiyyatdan keç</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</main>

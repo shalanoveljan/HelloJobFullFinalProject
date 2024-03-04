@@ -11,13 +11,13 @@ namespace HelloJob.Entities.Models
     {
         public string Name { get; set; } = null!;
         public string? Image { get; set; }
-
         public int? ParentId { get; set; } = null;
         public Category? Parent { get; set; }
         public string Storage { get; set; }
         public List<Category> Children { get; set; }
         public IEnumerable<Blog> Blogs { get; set; }
-
+        public IEnumerable<Course> Courses { get; set; }
+        public IEnumerable<Resume> Resumes { get; set; }
         public Category()
         {
             Children=new List<Category>();

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HelloJob.Entities.DTOS;
-using HelloJob.Entities.DTOS.User;
 using HelloJob.Entities.Models;
 using HelloJob.Core.Utilities.Results.Abstract;
 using HelloJob.Service.Responses;

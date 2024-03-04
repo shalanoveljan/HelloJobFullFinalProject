@@ -11,8 +11,9 @@ builder.Services.AddControllersWithViews()
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 builder.Services.AddAutoMapper(typeof(GlobalMapping));
-builder.Services.DataAccessServiceRegister(builder.Configuration);
 builder.Services.ServiceLayerServiceRegister();
+builder.Services.DataAccessServiceRegister(builder.Configuration);
+
 var app = builder.Build();
 app.AddDefaultConfiguration(app.Environment);
 app.Run();

@@ -1,12 +1,16 @@
 ﻿
 @model List<CourseGetDto>
-@*
 @{
     var premiumItems = Model.Where(item => item.IsPremium).ToList();
-    var nonPremiumItems = Model.Where(item => !item.IsPremium).ToList(); premiumItems.Concat(nonPremiumItems)
-}*@
+    var nonPremiumItems = Model.Where(item => !item.IsPremium).ToList();
+    bool checkSort = false;
+    if (ViewBag.Dto != null)
+    {
+        checkSort = ViewBag.Dto.IsSort;
+    }
+}
 <input type="text" value="@Model.Count" id="courseCount" hidden/>
-@foreach (var item in Model)
+@foreach (var item in checkSort ? Model : premiumItems.Concat(nonPremiumItems))
 {
     <a asp-action="Detail" asp-route-id="@item.Id" class="resume__block w-100 full" target="_blank">
         <div class="resume__header">

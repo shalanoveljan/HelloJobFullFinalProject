@@ -10,5 +10,6 @@ namespace HelloJob.Entities.Models
     public class Experience:BaseEntity
     {
         public string Name { get; set; }
+        public IEnumerable<Resume> Resumes { get; set; }
     }
 }

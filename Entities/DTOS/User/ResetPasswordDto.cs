@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HelloJob.Entities.DTOS.User
+namespace HelloJob.Entities.DTOS
 {
     public record ResetPasswordDto
     {
@@ -21,12 +21,5 @@ namespace HelloJob.Entities.DTOS.User
         [StringLength(25, MinimumLength = 8, ErrorMessage = "Yeni parol 8 ilə 25 simvol aralığında olmalıdır")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
-
-        [Required(ErrorMessage = "Yeni parol daxil edilməlidir.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Yeni parol yalnız hərflər, rəqəmlər və boşluqlardan ibarət ola bilər")]
-        [StringLength(25, MinimumLength = 8, ErrorMessage = "Yeni parol 8 ilə 25 simvol aralığında olmalıdır")]
-        [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "Şifrə eyni olmalıdır")]
-        public string NewConfirmPassword { get; set; }
     }
 }

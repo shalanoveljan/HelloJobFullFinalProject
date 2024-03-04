@@ -1,5 +1,4 @@
-﻿using HelloJob.Core.Configuration.Concrete;
-using HelloJob.Data.DAL.Implementations;
+﻿using HelloJob.Data.DAL.Implementations;
 using HelloJob.Data.DAL.Interfaces;
 using HelloJob.Data.DBContexts.SQLSERVER;
 using HelloJob.Entities.Models;
@@ -38,18 +37,20 @@ namespace HelloJob.Data.ServiceRegistrations
             services.AddScoped<IEducationDAL, EducationDAL>();
             services.AddScoped<ICityDAL, CityDAL>();
             services.AddScoped<IExperienceDAL, ExperienceDAL>();
+            services.AddScoped<IResumeDAL, ResumeDAL>();
+            services.AddScoped<IExperienceDAL, ExperienceDAL>();
 
-            //services.AddIdentity<AppUser, IdentityRole>(opt =>
-            //{
-            //    opt.User.RequireUniqueEmail = true;
-            //    opt.Lockout.MaxFailedAccessAttempts = 5;
-            //    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
-            //    opt.SignIn.RequireConfirmedEmail = true;
-           // options.Lockout.AllowedForNewUsers = true;
-            //options.Password.RequireNonAlphanumeric = true;
-            //})
-            //    .AddEntityFrameworkStores<HelloJobDbContext>()
-            //    .AddDefaultTokenProviders();
+            services.AddIdentity<AppUser, IdentityRole>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+                opt.Lockout.MaxFailedAccessAttempts = 5;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+                opt.SignIn.RequireConfirmedEmail = true;
+                opt.Lockout.AllowedForNewUsers = true;
+                opt.Password.RequireNonAlphanumeric = true;
+            })
+                .AddEntityFrameworkStores<HelloJobDbContext>()
+                .AddDefaultTokenProviders();
 
 
 

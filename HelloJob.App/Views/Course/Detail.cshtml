@@ -47,12 +47,15 @@
                         </div>
                     </div>
                     <div class="kursownright">
-                        <a href="" class="premiumbox"> <img src="~/assets/icons/crown.svg" alt=""> 
-                            @if(Model.IsPremium)
-                            {
-                                <p>Premium</p>
-                            }  
-                        </a>
+                        @if (Model.IsPremium)
+                        {
+                            <a href="" class="premiumbox">
+                                <img src="~/assets/icons/crown.svg" alt="">
+                                    <p>Premium</p>
+                            </a>
+                            
+                        }
+                       
                         <span class="resume__icon mr-0 course_like mt-2 " data-id="31">
                             <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
                             <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
@@ -81,7 +84,7 @@
                                 }
                                 else
                                 {
-                                    <h5>Price:@Model.Price</h5>
+                                    <h5>Price: @Model.Price $</h5>
                                 }
                                 <p>Qiymət</p>
                             </div>
@@ -107,7 +110,7 @@
                         <h3 class="cartinfoheadings">ÖYRƏNƏCƏKLƏRİNİZ</h3>
                     </div>
                     <div class="learnings-below">
-                                @foreach (var item in ViewBag.Tags.Datas)
+                                @foreach (var item in Model.Tags)
                                 {
                                  <a class="learnings-cart">@item.Name </a>
                                 }
@@ -118,7 +121,7 @@
                 <div class="contact">
                     <button>
                         <a style="color: white;" href="https://dma.gov.az/pese-hazirligi">
-                            <img src="../assets/icons/telegram.svg" alt="" /> Müraciət et
+                            <img src="~/assets/icons/telegram.svg" alt="" /> Müraciət et
                         </a>
                     </button>
 

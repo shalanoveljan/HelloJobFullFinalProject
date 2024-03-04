@@ -8,6 +8,7 @@ namespace HelloJob.Entities.Enums
 {
     public enum MaritalStatus
     {
+        None,
         Evli,
         Subay
     }

@@ -19,7 +19,6 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace HelloJob.Service.Services.Implementations
 {
@@ -37,6 +36,7 @@ namespace HelloJob.Service.Services.Implementations
             _CourseRepository = CourseRepository;
             _mapper = mapper;
             _categoryRepository = categoryRepository;
+
         }
         public async Task<IResult> CreateAsync(CoursePostDto dto)
         {
@@ -259,8 +259,6 @@ namespace HelloJob.Service.Services.Implementations
                 Category = new CategoryGetDto { Name = x.Category.Name, Id = x.Category.Id },
             }).ToListAsync();
         }
-
-
         public async Task<IDataResult<List<CourseGetDto>>> GetAllForCoursePageInWebSiteAsync()
         {
             var query = GetBaseQuery();
@@ -275,37 +273,31 @@ namespace HelloJob.Service.Services.Implementations
 
             return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Get Courses for SITE PAGE");
         }
-
-
-        public async Task<IDataResult<List<CourseGetDto>>> SortCourses(int id)
-        {
-            var query = GetBaseQuery();
-
-            var CourseGetDtos = await GetCourseGetDtoListAsync(query);
-
-            switch (id)
+        public async Task<IDataResult<List<CourseGetDto>>> SortCourses(int id,CourseFilterDto dto)
             {
-                case 1:
-                    CourseGetDtos = CourseGetDtos.OrderBy(course => course.Period).ToList();
-                    break;
-
-                case 2:
-                    CourseGetDtos = CourseGetDtos.OrderByDescending(course => course.Period).ToList();
-                    break;
-                case 3:
-                    CourseGetDtos = CourseGetDtos.OrderByDescending(course => course.Level).ToList();
-                    break;
-                case 4:
-                    CourseGetDtos = CourseGetDtos.OrderBy(course => course.Level).ToList();
-                    break;
-                default:
-                    break;
-
+               dto.IsSort = true;
+                var filteredCourseGetDtos = await FilterCourses(dto);
+                
+                var data = filteredCourseGetDtos.Data;
+                switch (id)
+                {
+                    case 1:
+                        data = data.OrderBy(course => course.Period).ToList();
+                        break;
+                    case 2:
+                        data = data.OrderByDescending(course => course.Period).ToList();
+                        break;
+                    case 3:
+                        data = data.OrderByDescending(course => course.Level).ToList();
+                        break;
+                    case 4:
+                        data = data.OrderBy(course => course.Level).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                return new SuccessDataResult<List<CourseGetDto>>(data, "Halaldi");
             }
-            return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Halaldi");
-        }
-
-
         public async Task<IDataResult<List<CourseGetDto>>> FilterCourses(CourseFilterDto dto)
         {
             var query = GetBaseQuery();
@@ -320,7 +312,6 @@ namespace HelloJob.Service.Services.Implementations
                 //CourseGetDtos = CourseGetDtos.Where(course =>
                 //    dto.CategoriesIds.Any(categoryId => activeCategories.Any(category => category.Id == categoryId))
                 //).ToList();
-
 
                 var categories = activeCategories.Where(cat =>
                     dto.CategoriesIds.Any(categoryId => cat.Id == categoryId)
@@ -377,16 +368,10 @@ namespace HelloJob.Service.Services.Implementations
             {
                 CourseGetDtos = CourseGetDtos.Where(course => course.Level == dto.Level).ToList();
             }
+
             return new SuccessDataResult<List<CourseGetDto>>(CourseGetDtos, "Halaldi sene ");
 
-
-
-
-
         }
-
-
-
     }
 }
 

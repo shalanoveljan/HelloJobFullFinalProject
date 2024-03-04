@@ -53,20 +53,3 @@ baglamaButonu.addEventListener('click', function (e) {
     e.preventDefault()
     sidebar.style.display = 'none';
 });
-
-var registermodal=document.querySelector('.modal-content-register')
-var loginmodal=document.querySelector('.modal-content')
-var registerbtn=document.querySelector('.register-btn')
-var loginbtn=document.querySelector('.loginac')
-
-registerbtn.addEventListener("click",function (e) {
-  e.preventDefault()
-  registermodal.style.display="flex"
-  loginmodal.style.display="none"
-})
-loginbtn.addEventListener("click",function (e) {
-  e.preventDefault()
-  registermodal.style.display="none"
-  loginmodal.style.display="flex"
-})
-

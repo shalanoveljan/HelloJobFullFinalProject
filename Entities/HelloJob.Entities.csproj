@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOS\Filter\Resume\" />
     <Folder Include="DTOS\Filter\Vacancy\" />
   </ItemGroup>
 

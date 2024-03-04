@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PIW34aoQJvZpcWLMHA/Og2+lku8iju7Ry19nXUCZ6+0=",
+  "Hash": "uzvnNVwEXKtK0fk3hyAS1R3GyWOfHXPkVbtqSY1pYaw=",
   "Source": "HelloJob.App",
   "BasePath": "_content/HelloJob.App",
   "Mode": "Default",
@@ -16422,6 +16422,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\icons\\like.svg"
     },
     {
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\icons\\manat.png",
+      "SourceId": "HelloJob.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
+      "BasePath": "_content/HelloJob.App",
+      "RelativePath": "assets/icons/manat.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\icons\\manat.png"
+    },
+    {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\icons\\megaphone-elanlarim-muracietlerim.svg",
       "SourceId": "HelloJob.App",
       "SourceType": "Discovered",
@@ -18921,6 +18938,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\logo\\night_mode_logo.svg"
     },
     {
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\app.js",
+      "SourceId": "HelloJob.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
+      "BasePath": "_content/HelloJob.App",
+      "RelativePath": "assets/js/app.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\app.js"
+    },
+    {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\blog.js",
       "SourceId": "HelloJob.App",
       "SourceType": "Discovered",
@@ -19023,12 +19057,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\js\\course-detail.js"
     },
     {
-      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\Custom.js",
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\CustomCourse.js",
       "SourceId": "HelloJob.App",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
       "BasePath": "_content/HelloJob.App",
-      "RelativePath": "assets/js/Custom.js",
+      "RelativePath": "assets/js/CustomCourse.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -19037,7 +19071,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\js\\Custom.js"
+      "OriginalItemSpec": "wwwroot\\assets\\js\\CustomCourse.js"
     },
     {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\error.js",
@@ -19055,23 +19089,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\error.js"
-    },
-    {
-      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\forgetpassword.js",
-      "SourceId": "HelloJob.App",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
-      "BasePath": "_content/HelloJob.App",
-      "RelativePath": "assets/js/forgetpassword.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\js\\forgetpassword.js"
     },
     {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\home.js",
@@ -19106,6 +19123,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\library\\bootstrap.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\Register.js",
+      "SourceId": "HelloJob.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
+      "BasePath": "_content/HelloJob.App",
+      "RelativePath": "assets/js/Register.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\Register.js"
     },
     {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\resetpassword.js",
@@ -21996,6 +22030,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\HelloJobPanel\\assets\\images\\User\\CVs\\982Cv.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\HelloJobPanel\\assets\\js\\createcompany.js",
+      "SourceId": "HelloJob.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
+      "BasePath": "_content/HelloJob.App",
+      "RelativePath": "HelloJobPanel/assets/js/createcompany.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\HelloJobPanel\\assets\\js\\createcompany.js"
     },
     {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\HelloJobPanel\\assets\\js\\cvpage.js",

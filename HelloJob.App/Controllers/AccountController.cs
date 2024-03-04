@@ -1,12 +1,13 @@
 ﻿using HelloJob.Core.Utilities.Results.Concrete;
 using HelloJob.Entities.DTOS;
-using HelloJob.Entities.DTOS.User;
 using HelloJob.Entities.Models;
 using HelloJob.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Common;
 
 namespace HelloJob.App.Controllers
 {
@@ -15,13 +16,16 @@ namespace HelloJob.App.Controllers
         readonly IAccountService _accountService;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public AccountController(IAccountService accountService, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+
+        public AccountController(IAccountService accountService, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IWebHostEnvironment webHostEnvironment)
         {
             _accountService = accountService;
             _userManager = userManager;
             _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> Register()
         {
@@ -30,18 +34,17 @@ namespace HelloJob.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async  Task<IActionResult> Register(RegisterDto dto, string role)
+        public async  Task<IActionResult> Register(RegisterDto dto,string role)
         {
             if(!ModelState.IsValid)
             {
-                return PartialView("_RegisterPartialView",dto);
+                return View(dto);
             }
            var res= await _accountService.SignUp(dto, role);
             if (!res.Success)
             {
                 ViewData["Error"] = res.Message;
-                return PartialView("_RegisterPartialView", dto);
-
+                return View(dto);
             }
             TempData["Register"] = "Please verify your email";
             return RedirectToAction("index", "Home");
