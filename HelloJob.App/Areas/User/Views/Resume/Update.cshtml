@@ -1,0 +1,345 @@
+﻿
+
+@model ResumeGetDto
+<div class="create_cv">
+    <div class="title">
+        <h1>CV Yerləşdir</h1>
+        <ul class="profile__add-cv__parts">
+            <li class="active">
+                <a href="#tab1" class="tab1 step_btn"> Şəxsi məlumatlar</a>
+            </li>
+        </ul>
+    </div>
+    <div class="inner_tab">
+        <form enctype="multipart/form-data" method="post">
+            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">Şəxsi məlumatlar</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="form-group">
+                        <div class="image_input">
+                            <input class="choose"
+                                   type="file"
+                                   name="ImageFile"
+                                   id="fileInput"
+                                   accept="image/*" />
+
+
+
+                        </div>
+                        <label for="prof_img" class="upload_image">
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg"
+                                 alt="" />
+                            <span>Şəkil əlavə et</span>
+                            <p>SVG, PNG, JPG or GIF (max. 1000x1000px)</p>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Ad</label>
+                                <input type="text"
+                                       asp-for="Name"
+                                       value="Elcan"
+                                       class="form-control inputs"
+                                       placeholder="Adınız" />
+                                <span class="text text-danger" asp-validation-for="Name"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Soyad</label>
+                                <input type="text"
+                                       asp-for="Surname"
+                                       value="Shalanov"
+                                       class="form-control inputs"
+                                       placeholder="Soyad" />
+                                <span class="text text-danger" asp-validation-for="Surname"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Doğum Tarixi</label>
+                                <input type="date"
+                                       asp-for="Birthday"
+                                       value="__/__/____"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Son tarix </label>
+                                <input type="date"
+                                       asp-for="EndDate"
+                                       value="__/__/____"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                                <span class="text text-danger" asp-validation-for="EndDate"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">E-Poçt</label>
+                                <input type="email"
+                                       asp-for="Email"
+                                       value="rrrr@gmail.com"
+                                       class="form-control inputs"
+                                       placeholder="E-poçt ünvanınızı yazın" />
+                                <span class="text text-danger" asp-validation-for="Email"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label>Mobil nömrəniz</label>
+                                <div class="position-relative">
+                                    <input id="phone"
+                                           inputmode="tel"
+                                           type="text"
+                                           asp-for="PhoneNumber"
+                                           placeholder="Mobil nömrənizi qeyd edin"
+                                           class="form-control inputs"
+                                           im-insert="true"
+                                           style="padding-left: 60px" />
+                                    <span class="text text-danger" asp-validation-for="PhoneNumber"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Şəhər</label>
+                                <select name="CityId" id="" class="form-control cities">
+                                    @foreach (var item in ViewBag.Cities.Datas)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">İş məlumatlar</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Kateqoriya</label>
+                                @{
+                                    var categories = ViewBag.Categories as IEnumerable<CategoryGetDto>;
+                                }
+
+                                <select name="CategoryId" class="form-control cities">
+                                    @foreach (var category in categories.Where(c => c.ParentId == null))
+                                    {
+                                            <optgroup label="@category.Name">
+                                            @foreach (var subCategory in categories.Where(c => c.ParentId == category.Id))
+                                            {
+                                                        <option>@subCategory.Name</option>
+                                            }
+                                            </optgroup>
+                                    }
+                                </select>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">İş stajı</label>
+                                    <label asp-for="Experience">Experience</label>
+                                    <input asp-for="Experience" type="number" class="form-control" id="exampleInputEmail1" placeholder="Experience">
+                                    <span class="text text-danger" asp-validation-for="Experience"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Təhsil</label>
+                                <select name="EducationId" class="form-control cities">
+                                    <option value="" selected disabled>Təhsilinizi seçin</option>
+                                    @foreach (var item in ViewBag.Educations.Datas)
+                                    {
+                                            <option value="@item.Id">@item.Name</option>
+                                    }
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Dil bilikleri</label>
+                                <select name="LanguageId" class="form-control cities">
+                                    <option value="" selected disabled>Bildiyiniz Dili seçin</option>
+                                    @foreach (var item in ViewBag.Languages.Datas)
+                                    {
+                                            <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">İş saatı</label>
+                                <select asp-for="Mode" class="form-control cities">
+                                    @foreach (var mode in Enum.GetValues(typeof(JobMode)))
+                                    {
+                                        if ((int)mode != 0)
+                                        {
+                                                <option value="@mode">@mode</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Mode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Gender</label>
+                                <select asp-for="Gender" class="form-control cities">
+                                    @foreach (var mode in Enum.GetValues(typeof(Gender)))
+                                    {
+                                        if ((int)mode != 0)
+                                        {
+                                                    <option value="@mode">@mode</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for=""></label>
+                                <select asp-for="Status" class="form-control cities">
+                                    @foreach (var mode in Enum.GetValues(typeof(MaritalStatus)))
+                                    {
+                                        if ((int)mode != 0)
+                                        {
+                                                    <option value="@mode">@mode</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Minimum əmək haqqı AZN</label>
+                                <input type="number"
+                                       max="12000"
+                                       asp-for="Salary"
+                                       class="form-control inputs"
+                                       placeholder="Məs:1500" />
+                                <span class="text text-danger" asp-validation-for="Salary"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Sürücülük vəsiqəsi</label>
+                                <div class="checkbox">
+                                    <input asp-for="IsDriverLicense" type="checkbox" class="form-check-input mt-0">
+                                    <span>Var</span>
+                                    <span class="text text-danger" asp-validation-for="IsDriverLicense"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Premium</label>
+                                <div class="checkbox">
+                                    <input asp-for="IsPremium" type="checkbox" class="form-check-input mt-0">
+                                    <span>Premium</span>
+                                    <span class="text text-danger" asp-validation-for="IsPremium"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                           <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Skills</label>
+                                <input type="text"
+                                       name="SkillNames"
+                                       class="form-control inputs"
+                                       placeholder="Bacariqlarinizi yazın" />
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Universitetler</label>
+                                <input type="text"
+                                       name="Univerties"
+                                       class="form-control inputs"
+                                       placeholder="Oxudugunuz universitetleri  yazın" />
+                                <label for="">Degree</label>
+                                <input type="text"
+                                       name="Degrees"
+                                       class="form-control degree-input"
+                                       placeholder="Derecenizi yazın" />
+                                <label for="">baslangic tarix </label>
+                                <input type="date"
+                                       name="EducationStartDates"
+                                       value="__/__/____"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                                <label for="">Son tarix </label>
+                                           <input type="date"
+                                       name="EducationEndDates"
+                                       value="__/__/____"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Workplaces</label>
+                                <input type="text"
+                                       name="Workplaces"
+                                       class="form-control inputs"
+                                       placeholder=" Companies yazın" />
+                                <label for="">Position</label>
+                                <input type="text"
+                                       name="Positions"
+                                       class="form-control degree-input"
+                                       placeholder="Position yazın" />
+                                <label for="">baslangic tarix </label>
+                                <input type="date"
+                                       name="ExperienceStartDates"
+                                       value="__/__/____"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                                <label for="">Son tarix </label>
+                                <input type="date"
+                                       name="ExperienceEndDates"
+                                       value="__/__/____"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-button">
+                <button class="btn btn-primary submit">Təsdiq et</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+        <script src="~/HelloJobPanel/assets/js/pageCv.js"></script>
+   }

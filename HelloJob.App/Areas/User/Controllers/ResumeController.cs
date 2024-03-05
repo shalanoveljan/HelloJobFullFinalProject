@@ -14,12 +14,14 @@ namespace HelloJob.App.Areas.User.Controllers
         readonly ICategoryService _categoryService;
         readonly IEducationService _educationService;
         readonly ILanguageService _languageService;
-        public ResumeController(IResumeService ResumeService, ICategoryService categoryService, IEducationService educationService, ILanguageService languageService)
+        readonly ICityService _cityService;
+        public ResumeController(IResumeService ResumeService, ICategoryService categoryService, IEducationService educationService, ILanguageService languageService, ICityService cityService)
         {
             _ResumeService = ResumeService;
             _categoryService = categoryService;
             _educationService = educationService;
             _languageService = languageService;
+            _cityService = cityService;
         }
 
         public async Task<IActionResult> Index(string userid,int page = 1,int pagesize=6)
@@ -32,7 +34,8 @@ namespace HelloJob.App.Areas.User.Controllers
             ViewBag.Categories = await _categoryService.GetAllAsync();
             ViewBag.Educations = await _educationService.GetAllAsync();
             ViewBag.Languages = await _languageService.GetAllAsync();
-            return View();
+            ViewBag.Cities = await _cityService.GetAllAsync();   
+                return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -43,6 +46,8 @@ namespace HelloJob.App.Areas.User.Controllers
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Educations = await _educationService.GetAllAsync();
                 ViewBag.Languages = await _languageService.GetAllAsync();
+                ViewBag.Cities = await _cityService.GetAllAsync();
+
                 return View();
             }
             var response = await _ResumeService.CreateAsync(dto);
@@ -53,6 +58,8 @@ namespace HelloJob.App.Areas.User.Controllers
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Educations = await _educationService.GetAllAsync();
                 ViewBag.Languages = await _languageService.GetAllAsync();
+                ViewBag.Cities = await _cityService.GetAllAsync();
+
                 ModelState.AddModelError("", response.Message);
                 return View();
             }
@@ -66,6 +73,8 @@ namespace HelloJob.App.Areas.User.Controllers
             ViewBag.Categories = await _categoryService.GetAllAsync();
             ViewBag.Educations = await _educationService.GetAllAsync();
             ViewBag.Languages = await _languageService.GetAllAsync();
+            ViewBag.Cities = await _cityService.GetAllAsync();
+
             var res = await _ResumeService.GetAsync(id);
             return View(res.Data);
         }
@@ -78,6 +87,8 @@ namespace HelloJob.App.Areas.User.Controllers
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Educations = await _educationService.GetAllAsync();
                 ViewBag.Languages = await _languageService.GetAllAsync();
+                ViewBag.Cities = await _cityService.GetAllAsync();
+
 
                 var res = await _ResumeService.GetAsync(id);
                 return View(res.Data);
@@ -89,6 +100,8 @@ namespace HelloJob.App.Areas.User.Controllers
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Educations = await _educationService.GetAllAsync();
                 ViewBag.Languages = await _languageService.GetAllAsync();
+                ViewBag.Cities = await _cityService.GetAllAsync();
+
                 ModelState.AddModelError("", response.Message);
                 var res = await _ResumeService.GetAsync(id);
                 return View(res.Data);

@@ -41,6 +41,7 @@ namespace HelloJob.App.Controllers
         }
         public async Task<IActionResult> Detail(int id)
         {
+            ViewBag.Resumes = await _ResumeService.GetAllForResumePageInWebSiteAsync();
             var res = await _ResumeService.GetAsync(id);
             return View(res.Data);
         }
@@ -58,7 +59,11 @@ namespace HelloJob.App.Controllers
             return PartialView("_ResumePartial", res.Data);
         }
 
-
+        public async Task<IActionResult> LoadMore(int id, ResumeFilterDto dto, int pagenumber, int pagesize)
+        {
+            var res = await _ResumeService.LoadMoreResumesAsync(id,pagenumber,pagesize,dto);
+            return PartialView("_ResumePartial", res.Data);
+        }
 
     }
 }

@@ -31,6 +31,7 @@ namespace HelloJob.Service.DependencyResolver
             services.AddScoped<IExperienceService,ExperienceService>();
             services.AddScoped<ICityService,CityService>();
             services.AddScoped<IAccountService,AccountService>();
+            services.AddScoped<IResumeService,ResumeService>();
             services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
             services.AddTransient<IUrlHelper>(factory =>
             {

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HelloJob.App.Controllers
 {
-
     public class CourseController : Controller
     {
         readonly ICourseService _CourseService;
@@ -19,7 +18,6 @@ namespace HelloJob.App.Controllers
             _categoryService = categoryService;
             _tagService = tagService;
         }
-
 
         public async Task<IActionResult> Index(List<CourseGetDto>? courses)
         {

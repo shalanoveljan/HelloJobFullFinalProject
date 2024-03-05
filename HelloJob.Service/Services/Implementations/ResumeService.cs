@@ -511,5 +511,28 @@ namespace HelloJob.Service.Services.Implementations
 
             return new SuccessResult("Order status updated successfully");
         }
+
+        public async Task<IDataResult<List<ResumeGetDto>>> LoadMoreResumesAsync(int id ,int pageNumber, int pageSize, ResumeFilterDto dto)
+        {
+            var filteredResumesResult = await SortResumes(id,dto);
+            if (!filteredResumesResult.Success)
+            {
+                return new ErrorDataResult<List<ResumeGetDto>>("Error occurred while filtering resumes");
+            }
+            var filteredResumes = filteredResumesResult.Data;
+
+            var resumesToReturn = filteredResumes
+                                    .Skip((pageNumber - 1) * pageSize)
+                                    .Take(pageSize)
+                                    .ToList();
+
+            if (!resumesToReturn.Any())
+            {
+                return new ErrorDataResult<List<ResumeGetDto>>("No more resumes available");
+            }
+
+            return new SuccessDataResult<List<ResumeGetDto>>(resumesToReturn, "Load more resumes");
+        }
+
     }
 }

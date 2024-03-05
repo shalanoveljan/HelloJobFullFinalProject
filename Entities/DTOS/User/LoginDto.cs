@@ -15,7 +15,6 @@ namespace HelloJob.Entities.DTOS
         public string UserNameOrEmail { get; set; } = null!;
         [Required(ErrorMessage = "Parol daxil edilməlidir.")]
         [DataType(DataType.Password)]
-        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Parol yalnız hərflər, rəqəmlər və boşluqlardan ibarət ola bilər.")]
         [StringLength(25, MinimumLength = 8, ErrorMessage = "Parol 8 ilə 25 simvol aralığında olmalıdır.")]
         public string Password { get; set; } = null!;
         [Required]

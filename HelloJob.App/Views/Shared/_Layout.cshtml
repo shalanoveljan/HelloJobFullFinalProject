@@ -132,22 +132,56 @@
                         <img id="menu_open" class="menu_open" src="~/assets/icons/menu_open_night.svg" alt="">
                         <a asp-controller="Home" asp-action="Index" class="logo">
                             <span class="d-none">HelloJob.az</span>
-                            <img src="~/assets/images/logo/logo.svg" class="light-logo" alt="">
-                            <img src="~/assets/images/logo/night_mode_logo.svg" class="night-logo" alt="">
+                            <img src="~/assets/images/logo/@settings["Logo"]" class="light-logo" alt="">
+                            <img src="~/assets/images/logo/@settings["nightlogo"]" class="night-logo" alt="">
                         </a>
                     </div>
                     <div class="col-lg-9  header_btns">
-                        <a asp-controller="Account"  asp-action="register" class="login-btn popup-btn" class="btn btn-primary"  data-bs-target="#exampleModal">
-                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                            Sayta daxil ol
-                        </a>
-
-                        <div class="elan_yerlesdir_button_hover">
-                            <a href="./elan-yerlesdir-form.html" class="elan_yerlesdir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fa-solid fa-circle-plus"></i>
-                                Elan yerləşdir
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a  asp-controller="profilim" asp-action="index" class="login-btn popup-btn btn btn-primary" data-bs-target="#exampleModal">
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                @User.Identity.Name
                             </a>
-                        </div>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="register" class="login-btn popup-btn btn btn-primary" data-bs-target="#exampleModal">
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                Sayta daxil ol
+                            </a>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Employee"))
+                            {
+                                <div class="elan_yerlesdir_button_hover">
+                                    <a asp-area="user" asp-controller="resume" asp-action="create" class="elan_yerlesdir btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fa-solid fa-circle-plus"></i>
+                                        CV yerləşdir
+                                    </a>
+                                </div>
+                            }
+                            else if (User.IsInRole("Owner"))
+                            {
+                                <div class="elan_yerlesdir_button_hover">
+                                    <a asp-area="user" asp-controller="vacancy" asp-action="create" class="elan_yerlesdir btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fa-solid fa-circle-plus"></i>
+                                        Elan yerləşdir
+                                    </a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="elan_yerlesdir_button_hover">
+                                <a asp-controller="account" asp-action="register" class="elan_yerlesdir btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    Elan yerləşdir
+                                </a>
+                            </div>
+                        }
+
 
                         <a href="./wishlist.html" class="wishlist">
                             <span class="d-none">Wishlist</span>
@@ -218,7 +252,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <a href="/" class="footer__logo">
-                            <img loading="lazy" src="~/assets/images/logo/night_mode_logo.svg" alt="">
+                            <img loading="lazy" src="~/assets/images/logo/@settings["nightlogo"]" alt="">
                             <p>Yeni işinizi qarşılayın</p>
                         </a>
                     </div>
@@ -291,25 +325,25 @@
                 <p>© 2019-2024 Hellodigital</p>
                 <ul class="footer__social">
                     <li>
-                        <a href="https://www.instagram.com/hellojobaz">
+                        <a href="@settings["InstagramLink"]">
                             <img loading="lazy" src="https://www.hellojob.az/content/assets//images/social/instagram.svg" alt="">
                             <span class="d-none">Instagram</span>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.facebook.com/hellojobaz">
+                        <a href="@settings["FacebookLink"]">
                             <img loading="lazy" src="https://www.hellojob.az/content/assets//images/social/facebook.svg" alt="">
                             <span class="d-none">Facebook</span>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/company/hellojobaz">
+                        <a href="@settings["LinkedinLink"]">
                             <img loading="lazy" src="https://www.hellojob.az/content/assets//images/social/linkedin.svg" alt="">
                             <span class="d-none">Linkedin</span>
                         </a>
                     </li>
                     <li>
-                        <a href="https://t.me/hellojobaz">
+                        <a href="@settings["TelegramLink"]">
                             <img loading="lazy" src="https://www.hellojob.az/content/assets//images/social/telegram.svg" alt="">
                             <span class="d-none">Telegram</span>
                         </a>

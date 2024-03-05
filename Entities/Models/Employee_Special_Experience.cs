@@ -12,7 +12,7 @@ namespace HelloJob.Entities.Models
         public string Workplace { get; set; }
         public string Position { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public int ResumeId { get; set; }
         public Resume Resume { get; set; }
 

@@ -1,4 +1,6 @@
 ﻿
+
+@model List<ResumeGetDto>
 <main>
     <div class="nsp_course">
         <div class="container">
@@ -77,52 +79,21 @@
                     </div>
                     <div class="resumes__filters__item resumes__filters__item--profession">
                         <h3 class="resumes__title">İxtİsas</h3>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-group-search" placeholder="İxtisas axtar">
-                        </div>
                         <ul class="resumes__filters__profession resumes__filters__checkbox">
-                            <li>
-                                <input type="checkbox" value="2" class="form-control d-none" id="category2"
-                                       name="category">
-                                <label for="category2">
-                                    Dizayn
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="3" class="form-control d-none" id="category3"
-                                       name="category">
-                                <label for="category3">
-                                    Proqramlaşdırma
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="4" class="form-control d-none" id="category4"
-                                       name="category">
-                                <label for="category4">
-                                    Marketinq
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="5" class="form-control d-none" id="category5"
-                                       name="category">
-                                <label for="category5">
-                                    Satış
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="7" class="form-control d-none" id="category7"
-                                       name="category">
-                                <label for="category7">
-                                    Mühasibatlıq və vergi
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="9" class="form-control d-none" id="category9"
-                                       name="category">
-                                <label for="category9">
-                                    Qida və içki
-                                </label>
-                            </li>
+                            @foreach (var item in ViewBag.Categories.Datas)
+                            {
+                                @if (item.ParentId == null)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@item.Id" class="form-control d-none" id="category@(item.Id)"
+                                       name="CategoriesIds">
+                                        <label for="category@(item.Id)">
+                                            @item.Name
+                                        </label>
+                                    </li>
+
+                                }
+                            }
                         </ul>
                     </div>
                     <div class="resumes__filters__item resumes__filters__item--profession">
@@ -131,16 +102,19 @@
                             <input type="text" class="form-control form-group-search" placeholder="Is rejimi">
                         </div>
                         <ul class="resumes__filters__profession resumes__filters__checkbox">
-                            <li>
-                                <input type="checkbox" value="989" class="form-control d-none" id="company989"
-                                       name="company">
-                                <label for="company989">Part time</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="1681" class="form-control d-none" id="company1681"
-                                       name="company">
-                                <label for="company1681">Full time</label>
-                            </li>
+                            @foreach (var mode in Enum.GetValues(typeof(JobMode)))
+                            {
+                                if ((int)mode != 0)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@((int)mode)" class="form-control d-none" id="@mode"
+                                       name="Mode">
+                                        <label for="@mode">@mode</label>
+                                    </li>
+
+                                }
+                            }
+
                         </ul>
                     </div>
                     <div class="resumes__filters__item resumes__filters__item--profession">
@@ -149,16 +123,16 @@
                             <input type="text" class="form-control form-group-search" placeholder="Tehsil">
                         </div>
                         <ul class="resumes__filters__profession resumes__filters__checkbox">
-                            <li>
-                                <input type="checkbox" value="989" class="form-control d-none" id="company989"
-                                       name="company">
-                                <label for="company989">Ali</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="1681" class="form-control d-none" id="company1681"
-                                       name="company">
-                                <label for="company1681">Orta tehsil</label>
-                            </li>
+                            @foreach (var item in ViewBag.Educations.Datas)
+                            {
+                                    <li>
+                                        <input type="checkbox" value="@item.Id" class="form-control d-none" id="education@(item.Id)"
+                                       name="EducationsIds">
+                                        <label for="education@(item.Id)">
+                                            @item.Name
+                                        </label>
+                                    </li>
+                            }
                         </ul>
                     </div>
                     <!--Staj-->
@@ -174,8 +148,8 @@
                             <div class="wrapper">
 
                                 <div class="slider-track"></div>
-                                <input type="range" min="0" max="6" value="0" id="slider-1" oninput="slideOne()">
-                                <input type="range" min="0" max="6" value="6" id="slider-2" oninput="slideTwo()">
+                                <input type="range" name="MinExperience" min="0" max="6" value="0" id="slider-1" oninput="slideOne()">
+                                <input type="range" name="MaxExperience" min="0" max="6" value="6" id="slider-2" oninput="slideTwo()">
                             </div>
                             <div class="wrapper_info">
                                 <span>1 ildən az</span>
@@ -202,8 +176,8 @@
                             <div class="wrapper">
 
                                 <div class="slider-track slider-track_internship"></div>
-                                <input type="range" min="100" max="10000" value="100" id="slider-3" oninput="slide_3()">
-                                <input type="range" min="100" max="10000" value="10000" id="slider-4" oninput="slide_4()">
+                                <input type="range" name="MinSalary" min="100" max="10000" value="100" id="slider-3" oninput="slide_3()">
+                                <input type="range" name="MaxSalary" min="100" max="10000" value="10000" id="slider-4" oninput="slide_4()">
                             </div>
                             <div class="wrapper_info">
                                 <span>100 AZN</span>
@@ -219,44 +193,48 @@
                     <div class="resumes__filters__item resumes__filters__item--profession">
                         <h3 class="resumes__title">Cinsiyyet</h3>
                         <ul class="resumes__filters__checkbox">
-                            <li>
-                                <input type="checkbox" value="1" class="form-control d-none" id="retire_1"
-                                       name="retire">
-                                <label for="retire_1">Kisi</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="1" class="form-control d-none" id="retire_1"
-                                       name="retire">
-                                <label for="retire_1">Qadin</label>
-                            </li>
+                           @foreach (var gen in Enum.GetValues(typeof(Gender)))
+                            {
+                                if ((int)gen != 0)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@((int)gen)" class="form-control d-none" id="@gen"
+                                       name="Gender">
+                                        <label for="@gen">@gen</label>
+                                    </li>
+                                }
+                            }
                         </ul>
                     </div>
                     <div class="resumes__filters__item resumes__filters__item--profession">
                         <h3 class="resumes__title">Medeni hali</h3>
                         <ul class="resumes__filters__checkbox">
-                            <li>
-                                <input type="checkbox" value="1" class="form-control d-none" id="paid" name="paid">
-                                <label for="paid">Subay</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="1" class="form-control d-none" id="paid" name="paid">
-                                <label for="paid">Evli</label>
-                            </li>
+                            @foreach (var gen in Enum.GetValues(typeof(MaritalStatus)))
+                            {
+                                if ((int)gen != 0)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@((int)gen)" class="form-control d-none" id="@gen"
+                                       name="Status">
+                                        <label for="@gen">@gen</label>
+                                    </li>
+                                }
+                            }
                         </ul>
                     </div>
                     <div class="resumes__filters__item resumes__filters__item--profession">
                         <h3 class="resumes__title">Dil bilikleri</h3>
                         <ul class="resumes__filters__checkbox">
-                            <li>
-                                <input type="checkbox" value="1" class="form-control d-none" id="mode_1"
-                                       name="mode">
-                                <label for="mode_1">Azerbaycan</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" value="0" class="form-control d-none" id="mode_0"
-                                       name="mode">
-                                <label for="mode_0">Ingilis</label>
-                            </li>
+                            @foreach (var item in ViewBag.Languages.Datas)
+                            {
+                                <li>
+                                    <input type="checkbox" value="@item.Id" class="form-control d-none" id="lan@(item.Id)"
+                                       name="LanguagesIds">
+                                    <label for="lan@(item.Id)">
+                                        @item.Name
+                                    </label>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <div class="resumes__filters__item resumes__filters__item--profession">
@@ -264,7 +242,7 @@
                         <ul class="resumes__filters__checkbox">
                             <li>
                                 <input type="checkbox" value="1" class="form-control d-none" id="certificate_1"
-                                       name="certificate">
+                                       name="IsDriverLicense">
                                 <label for="certificate_1">Var</label>
                             </li>
                         </ul>
@@ -278,232 +256,22 @@
             <div class="col-md-9 col_2">
                 <div class="col_2_header">
                     <div class="part_1 d-md-flex text-center">
-                        <p class="cv_count">Axtarışınıza uyğun <span id="count_items_head">5191</span> CV tapıldı</p>
+                        <p class="cv_count">Axtarışınıza uyğun <span id="count_items_head"></span> CV tapıldı</p>
                         <a href="#" id="clear_filters">Filtrləri təmizlə</a>
                     </div>
                     <div class="form_group  d-none  mb-0 d-md-flex align-items-center">
                         <label>Sırala</label>
                         <select class="form-control" id="sort">
-                            <option value="1" id="sortitem">Yenilər</option>
-                            <option value="2" id="sortitem">Köhnələr</option>
-                            <option value="3" id="sortitem">Maaşa görə(çox)</option>
-                            <option value="4" id="sortitem">Maaşa görə(az)</option>
+                            <option value="">Seçin</option>
+                            <option value="1" class="sortitem">Yenilər</option>
+                            <option value="2" class="sortitem">Köhnələr</option>
+                            <option value="3" class="sortitem">Maaşa görə(çox)</option>
+                            <option value="4" class="sortitem">Maaşa görə(az)</option>
                         </select>
                     </div>
                 </div>
                 <div class="similar_resumes">
-                    <div class="resume">
-                        <a href="./detail.html" target="_blank">
-                            <div class="resume_header">
-                                <div class="info">
-                                    <div class="resume_header_img">
-
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/elanlar-cv/2024/02/01/senan-allahverenov-cv-65bb8f8f0686f-56df753f625b8629be183176426e63a465bb8f8f0687b-B5ohR4ei5gjbc-h.jpeg" alt="" class="">
-                                    </div>
-                                    <div class="resume_header_desc">
-                                        <h3>Mühasib köməkçisi  </h3>
-                                        <p>Sənan Allahverənov</p>
-
-                                    </div>
-                                </div>
-
-                                <span class="resume__icon mr-0 course_like " data-id="31">
-                                    <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
-                                    <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
-                                </span>
-
-                            </div>
-                            <div class="resume_footer">
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>Tam-ştat</h4>
-                                        <p>İş rejimi</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>500</h4>
-                                        <p>Minimum əmək haqqı AZN</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>1 ildən az</h4>
-                                        <p>İş staji</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="resume">
-                        <a href="./detail.html" target="_blank">
-                            <div class="resume_header">
-                                <div class="info">
-                                    <div class="resume_header_img">
-
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/elanlar-cv/2024/02/01/senan-allahverenov-cv-65bb8f8f0686f-56df753f625b8629be183176426e63a465bb8f8f0687b-B5ohR4ei5gjbc-h.jpeg" alt="" class="">
-                                    </div>
-                                    <div class="resume_header_desc">
-                                        <h3>Mühasib köməkçisi  </h3>
-                                        <p>Sənan Allahverənov</p>
-
-                                    </div>
-                                </div>
-
-                                <span class="resume__icon mr-0 course_like " data-id="31">
-                                    <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
-                                    <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
-                                </span>
-
-                            </div>
-                            <div class="resume_footer">
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>Tam-ştat</h4>
-                                        <p>İş rejimi</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>500</h4>
-                                        <p>Minimum əmək haqqı AZN</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>1 ildən az</h4>
-                                        <p>İş staji</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="resume">
-                        <a href="./detail.html" target="_blank">
-                            <div class="resume_header">
-                                <div class="info">
-                                    <div class="resume_header_img">
-
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/elanlar-cv/2024/02/01/senan-allahverenov-cv-65bb8f8f0686f-56df753f625b8629be183176426e63a465bb8f8f0687b-B5ohR4ei5gjbc-h.jpeg" alt="" class="">
-                                    </div>
-                                    <div class="resume_header_desc">
-                                        <h3>Mühasib köməkçisi  </h3>
-                                        <p>Sənan Allahverənov</p>
-
-                                    </div>
-                                </div>
-
-                                <span class="resume__icon mr-0 course_like " data-id="31">
-                                    <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
-                                    <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
-                                </span>
-
-                            </div>
-                            <div class="resume_footer">
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>Tam-ştat</h4>
-                                        <p>İş rejimi</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>500</h4>
-                                        <p>Minimum əmək haqqı AZN</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>1 ildən az</h4>
-                                        <p>İş staji</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="resume">
-                        <a href="./detail.html" target="_blank">
-                            <div class="resume_header">
-                                <div class="info">
-                                    <div class="resume_header_img">
-
-                                        <img loading="lazy" src="https://www.hellojob.az/uploads/elanlar-cv/2024/02/01/senan-allahverenov-cv-65bb8f8f0686f-56df753f625b8629be183176426e63a465bb8f8f0687b-B5ohR4ei5gjbc-h.jpeg" alt="" class="">
-                                    </div>
-                                    <div class="resume_header_desc">
-                                        <h3>Mühasib köməkçisi  </h3>
-                                        <p>Sənan Allahverənov</p>
-
-                                    </div>
-                                </div>
-
-                                <span class="resume__icon mr-0 course_like " data-id="31">
-                                    <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
-                                    <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
-                                </span>
-
-                            </div>
-                            <div class="resume_footer">
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>Tam-ştat</h4>
-                                        <p>İş rejimi</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>500</h4>
-                                        <p>Minimum əmək haqqı AZN</p>
-                                    </div>
-                                </div>
-                                <div class="resume_item">
-                                    <div class="image">
-                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
-                                    </div>
-                                    <div class="resume_item_text">
-                                        <h4>1 ildən az</h4>
-                                        <p>İş staji</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-
-
-
+                    @await Html.PartialAsync("_ResumePartial",Model)
                 </div>
                 <ul class="pagination"><a href="" class="page-link-load" page="2" aria-label="Next">Daha çox göstər</a></ul>
             </div>
@@ -515,4 +283,5 @@
 
 @section Scripts {
     <script src="~/assets/js/resume.js"></script>
+    <script src="~/assets/js/CustomResume.js"></script>
    }

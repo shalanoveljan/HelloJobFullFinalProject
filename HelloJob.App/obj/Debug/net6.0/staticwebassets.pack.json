@@ -5137,6 +5137,10 @@
       "PackagePath": "staticwebassets\\assets\\js\\CustomCourse.js"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\CustomResume.js",
+      "PackagePath": "staticwebassets\\assets\\js\\CustomResume.js"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\js\\Register.js",
       "PackagePath": "staticwebassets\\assets\\js\\Register.js"
     },

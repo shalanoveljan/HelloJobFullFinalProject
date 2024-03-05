@@ -84,7 +84,6 @@ namespace HelloJob.Service.Services.Implementations
 
                         var url = urlHelper.Action("VerifyEmail", "Account", new { email = appUser.Email, token = token }, protocol: _http.HttpContext.Request.Scheme);
 
-
                         //var url = $"{_http.HttpContext.Request.Scheme}://{_http.HttpContext.Request.Host}{_helper.Action("VerifyEmail", "Identity", new { email = appUser.Email, token = token })}";
 
                         await _emailService.SendEmailAsync(appUser.Email, url, "Verify Email", token);
@@ -123,10 +122,10 @@ namespace HelloJob.Service.Services.Implementations
                     if (!result.Succeeded)
                         return new ErrorResult("Email or Password is incorrect!");
 
-                    if (!result.IsLockedOut)
+                    if (result.IsLockedOut)
                         return new ErrorResult("User is locked out!");
 
-                    if (!result.IsNotAllowed)
+                    if (result.IsNotAllowed)
                         return new ErrorResult("User is not allowed to sign in!");
 
                     return new SuccessResult("Login Successfully");
