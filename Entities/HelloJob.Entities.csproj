@@ -13,7 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HelloJob.Core\HelloJob.Core.csproj" />
   </ItemGroup>
-
+ 
   <ItemGroup>
     <Folder Include="DTOS\Filter\Vacancy\" />
   </ItemGroup>

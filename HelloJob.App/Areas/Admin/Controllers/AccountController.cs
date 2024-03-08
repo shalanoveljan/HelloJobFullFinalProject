@@ -9,8 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace HelloJob.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,SuperAdmin")]
-
+    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class AccountController : Controller
     {
         
@@ -22,9 +21,37 @@ namespace HelloJob.App.Areas.Admin.Controllers
             _accountService = accountService;
             _userManager = userManager;
         }
+
         [HttpGet]
         [Authorize(Roles = "SuperAdmin")]
-        public async Task<IActionResult> GetAllAdmin(int page=1, int count=4)
+        public async Task<IActionResult> CreateAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
+
+        public async Task<IActionResult> CreateAdmin(RegisterDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+            var res = await _accountService.SignUp(dto, "Admin");
+            if (!res.Success)
+            {
+                ViewData["Error"] = res.Message;
+                return View(dto);
+            }
+            TempData["Register"] = "Please verify your email";
+            return RedirectToAction("index", "Dashboard");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> GetAllAdmins(int page=1, int count=4)
         {
             if (!ModelState.IsValid)
             {
@@ -58,18 +85,16 @@ namespace HelloJob.App.Areas.Admin.Controllers
                 return View();
             }
             TempData["Verify"] = "Succesfully SignUp";
-            return RedirectToAction("index", "home");
+            return RedirectToAction("index", "dashboard");
         }
 
-        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> Login()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperAdmin,Admin")]
-
+        
         public async Task<IActionResult> Login(LoginDto dto)
         {
 
@@ -77,25 +102,21 @@ namespace HelloJob.App.Areas.Admin.Controllers
             {
                 return View(dto);
             }
-            var result = await _accountService.Login(dto);
+            var result = await _accountService.Login(dto,true);
             if (!result.Success)
             {
                 ViewData["Error"] = result.Message;
                 return View(dto);
             }
-            return RedirectToAction("index", "home");
+            return RedirectToAction("index", "dashboard");
         }
-
-        [Authorize]
-        [Authorize(Roles = "SuperAdmin,Admin")]
 
         public async Task<IActionResult> LogOut()
         {
             var result = await _accountService.LogOut();
-            return RedirectToAction("index", "home");
+            return RedirectToAction("index", "dashboard");
         }
 
-        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> ForgetPassword()
         {
             return View();
@@ -103,25 +124,24 @@ namespace HelloJob.App.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperAdmin,Admin")]
-        public async Task<IActionResult> ForgetPassword(string mail)
+        public async Task<IActionResult> ForgetPassword(string email)
         {
             if (!ModelState.IsValid)
             {
-                return View(mail);
+                return View();
             }
-            var result = await _accountService.ForgetPassword(mail);
+            var result = await _accountService.ForgetPassword(email);
             if (!result.Success)
             {
                 ModelState.AddModelError("", result.Message);
-                return View(mail);
+                return View(email);
             }
-            return RedirectToAction("index", "home");
+            TempData["reset"] = "check email";
+            return RedirectToAction("index", "dashboard");
         }
 
 
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin,Admin")]
 
         public async Task<IActionResult> ResetPassword(string email, string token)
         {
@@ -141,8 +161,6 @@ namespace HelloJob.App.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperAdmin,Admin")]
-
         public async Task<IActionResult> ResetPassword(ResetPasswordDto dto)
         {
             if (!ModelState.IsValid)
@@ -155,7 +173,6 @@ namespace HelloJob.App.Areas.Admin.Controllers
                 ModelState.AddModelError("", result.Message);
                 return View(dto);
             }
-
             return RedirectToAction("login", "Account");
         }
 

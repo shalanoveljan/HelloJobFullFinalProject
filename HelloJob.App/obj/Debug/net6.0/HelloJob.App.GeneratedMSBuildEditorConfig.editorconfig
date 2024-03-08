@@ -16,16 +16,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Account/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxDcmVhdGUuY3NodG1s
+[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Account/CreateAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxDcmVhdGVBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Account/ForgotPassword.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Account/ForgetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxGb3JnZXRQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Account/GetAllAdmin.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxHZXRBbGxBZG1pbi5jc2h0bWw=
+[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Account/GetAllAdmins.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxHZXRBbGxBZG1pbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Account/GetAllUsers.cshtml]
@@ -208,8 +208,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xDb21wYW55XFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/User/Views/Profilim/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xQcm9maWxpbVxJbmRleC5jc2h0bWw=
+[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/User/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xEYXNoYm9hcmRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/User/Views/Request/CVRequest.cshtml]

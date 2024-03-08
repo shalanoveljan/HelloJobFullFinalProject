@@ -12,5 +12,6 @@ namespace HelloJob.Core.Helper.MailHelper
         bool IsValidEmail(string email);
 
         Task<IResult> SendEmailAsync(string email, string url,string subject, string token);
+        Task<IResult> SendNotificationEmailAsync(string email, string subject, string message);
     }
 }

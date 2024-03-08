@@ -20,10 +20,6 @@ namespace HelloJob.Data.DBContexts.SQLSERVER
         {
 
         }
-        //public HelloJobDbContext() : base(new DbContextOptions<HelloJobDbContext>())
-        //{
-
-        //}
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Setting> Settings { get; set; }
@@ -38,9 +34,9 @@ namespace HelloJob.Data.DBContexts.SQLSERVER
         public DbSet<Employee_Special_Education> employee_Special_Educations { get; set; }
         public DbSet<Employee_Special_Experience> employee_Special_Experiences { get; set; }
         public DbSet<Skill> Skills { get; set; }
-
-
         public DbSet<Experience> Experiences { get; set; }
+        public DbSet<WishlistItem> WishlistItems { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

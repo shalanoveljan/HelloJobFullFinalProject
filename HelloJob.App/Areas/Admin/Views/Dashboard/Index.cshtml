@@ -1,6 +1,22 @@
-﻿<div class="main-panel">
-    <div class="content-wrapper">
+﻿@if (TempData["Verify"] != null)
+{
+    <div id="verify" style="display:none">@TempData["Verify"]</div>
+}
+@if (TempData["reset"] != null)
+{
+    <div id="resetpassword" style="display:none">@TempData["reset"]</div>
+}
+@if (TempData["Register"] != null)
+{
+    <div id="register" style="display:none">@TempData["Register"]</div>
+}
+@if (TempData["update"] != null)
+{
+    <div id="update" style="display:none">@TempData["update"]</div>
+}
 
+<div class="main-panel">
+    <div class="content-wrapper">
         <div class="row">
             <div class="col-xl-6 grid-margin stretch-card flex-column">
                 <h5 class="mb-2 text-titlecase mb-4">Status statistics</h5>
@@ -429,3 +445,84 @@
     </footer>
     <!-- partial -->
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    const data1 = document.getElementById("resetpassword");
+    if (data1 != undefined) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 6000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "warning",
+            title: "please check email "
+        });
+    }
+
+
+    const data2 = ocument.getElementById("verify");
+    if (data2 != undefined) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 6000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "warning",
+            title: "successfully signup"
+        });
+    }
+
+    const data3 = document.getElementById("register");
+    if (data3 != undefined) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 6000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "warning",
+            title: "please verify your email "
+        });
+    }
+
+    const data4 = document.getElementById("update");
+    if (data4 != undefined) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 6000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "warning",
+            title: "updated"
+        });
+    }
+</script>

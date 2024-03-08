@@ -5,8 +5,9 @@ using System.Data;
 namespace HelloJob.App.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize(Roles = "Employee,Owner")]
-    public class ProfilimController : Controller
+    //[Authorize(Roles = "Employee,Owner")]
+
+    public class DashboardController : Controller
     {
         public IActionResult Index()
         {

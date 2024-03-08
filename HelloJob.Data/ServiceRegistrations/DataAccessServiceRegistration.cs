@@ -50,8 +50,6 @@ namespace HelloJob.Data.ServiceRegistrations
                 .AddEntityFrameworkStores<HelloJobDbContext>()
                 .AddDefaultTokenProviders();
 
-
-
         }
     }
 }

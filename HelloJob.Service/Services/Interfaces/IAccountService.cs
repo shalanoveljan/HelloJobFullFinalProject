@@ -17,7 +17,7 @@ namespace HelloJob.Service.Services.Interfaces
     {
         public Task<IDataResult<string>> SignUp(RegisterDto dto,string role);
         public Task<IResult> VerifyEmail(string token, string email);
-        public Task<IResult> Login(LoginDto dto);
+        public Task<IResult> Login(LoginDto dto,bool IsAdminPanel);
         public Task<IResult> LogOut();
         public Task<IResult> ForgetPassword(string email);
         public Task<IDataResult<ResetPasswordDto>> ResetPasswordGet(string email, string token);

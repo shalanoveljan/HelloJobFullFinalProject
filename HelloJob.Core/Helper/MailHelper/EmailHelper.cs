@@ -73,6 +73,41 @@ namespace HelloJob.Core.Helper.MailHelper
 
         }
 
+        public async Task<IResult> SendNotificationEmailAsync(string email, string subject, string message)
+        {
+            try
+            {
+                string senderEmail = _emailConfiguration.Email;
+                string senderPassword = _emailConfiguration.Password;
+                int port = _emailConfiguration.Port;
+                string smtp = _emailConfiguration.SmtpServer;
+
+                var notificationMessage = new MimeMessage();
+                notificationMessage.From.Add(new MailboxAddress("HelloJob", senderEmail));
+                notificationMessage.To.Add(MailboxAddress.Parse(email));
+                notificationMessage.Subject = subject;
+                notificationMessage.Importance = MessageImportance.High;
+                notificationMessage.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
+                {
+                    Text = message
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    await client.ConnectAsync(smtp, port, SecureSocketOptions.StartTls);
+                    await client.AuthenticateAsync(senderEmail, senderPassword);
+                    await client.SendAsync(notificationMessage);
+                    await client.DisconnectAsync(true);
+                }
+
+                return new SuccessResult("Melumatlandirma e-postası ugurla gönderildi!");
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(ex.Message);
+            }
+        }
+
 
     }
 }

@@ -29,7 +29,7 @@ namespace HelloJob.Entities.DTOS
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = null!;
 
-        public string Role { get; init; }
+        public string? Role { get; init; }
         [Range(typeof(bool), "true", "true", ErrorMessage = "Şərtləri qəbul etməlisiniz.")]
         public bool Terms { get; set; }
 

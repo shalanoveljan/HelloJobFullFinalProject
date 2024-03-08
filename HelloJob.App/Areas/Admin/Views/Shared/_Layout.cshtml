@@ -38,15 +38,18 @@
                 <ul class="navbar-nav mr-lg-2">
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
+                            @if (User.Identity.IsAuthenticated)
+                            {
                             <img src="~/admin/template/images/faces/face5.jpg" alt="profile" />
-                            <span class="nav-profile-name">Eugenia Mullins</span>
+                            <span class="nav-profile-name">@User.Identity.Name</span>
+                            }
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
                                 <i class="typcn typcn-cog-outline text-primary"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" asp-controller="account" asp-action="logout">
                                 <i class="typcn typcn-eject text-primary"></i>
                                 Logout
                             </a>
@@ -190,7 +193,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Setting" asp-action="Index">
+                        <a class="nav-link" asp-area="admin" asp-controller="Setting" asp-action="Index">
                             <i class="fa-brands fa-microblog"></i>
                             <span class="menu-title">Setting</span>
                         </a>
@@ -231,6 +234,45 @@
                             <span class="menu-title">Experience</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Resume" asp-action="Index">
+                            <i class="fa-brands fa-microblog"></i>
+                            <span class="menu-title">Requests</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="login">
+                            <i class="fa-brands fa-microblog"></i>
+                            <span class="menu-title">login</span>
+                        </a>
+                    </li>   
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="GetAllUsers">
+                            <i class="fa-brands fa-microblog"></i>
+                            <span class="menu-title">Users</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="GetAllAdmins">
+                            <i class="fa-brands fa-microblog"></i>
+                            <span class="menu-title">Admins</span>
+                        </a>
+                    </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="CreateAdmin">
+                            <i class="fa-brands fa-microblog"></i>
+                            <span class="menu-title">Create Admin</span>
+                        </a>
+                    </li>
+
+
+                        
+                    }
+                 
                  
                 </ul>
             </nav>

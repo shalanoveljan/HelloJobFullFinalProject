@@ -37,20 +37,28 @@ namespace HelloJob.App.Configurations
 
             applicationBuilder.UseEndpoints(endpoints =>
             {
+                //    endpoints.MapControllerRoute(
+                //        name: "admin",
+                //        pattern: "admin/{controller=Dashboard}/{action=index}/{id?}",
+                //        defaults: new { area = "admin" }
+                //    );
+                //    endpoints.MapControllerRoute(
+                //        name: "default",
+                //        pattern: "{controller=Home}/{action=Index}/{id?}"
+                //);
+                //    endpoints.MapControllerRoute(
+                //        name: "user",
+                //        pattern: "user/{controller=Profilim}/{action=index}/{id?}",
+                //        defaults: new { area = "user" }
+                //    );
+
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
-            );
+          name: "areas",
+         pattern: "{area:exists}/{controller=dashboard}/{action=index}/{id?}"
+   );
                 endpoints.MapControllerRoute(
-                    name: "admin",
-                    pattern: "admin/{controller=Dashboard}/{action=index}/{id?}",
-                    defaults: new { area = "admin" }
-                );
-                endpoints.MapControllerRoute(
-                    name: "user",
-                    pattern: "user/{controller=Profilim}/{action=index}/{id?}",
-                    defaults: new { area = "user" }
-                );
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
         }

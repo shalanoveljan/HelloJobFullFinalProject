@@ -97,4 +97,33 @@ function getFilterDto() {
     };
 }
 
+function LoadMore() {
+    const id = getCurrentOptionId();
+    var pageNumber = parseInt($(".page-link-load").attr("page")); 
+    var pageSize = 4; 
+    var resumeCount = parseInt($("#ResumeCount").val()); 
+    var dto = getFilterDto(); 
+
+    $.ajax({
+        url: `https://localhost:7066/Resume/LoadMore/${id}`,
+        type: 'GET',
+        data: {
+            pagenumber: pageNumber,
+            pagesize: pageSize,
+            dto: dto
+        },
+        success: function (res) {
+            $('#resumeList').append(res); 
+            pageNumber++; 
+            if (($("#resumeList .resume").length) >= resumeCount) {
+                $(".pagination").html('<span class="page-link-load" aria-label="Next">Daha resume yoxdur/span>');
+            } else {
+                $(".page-link-load").attr("page", pageNumber);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(error); 
+        }
+    });
+}
 

@@ -43,7 +43,8 @@ namespace HelloJob.App.Controllers
            var res= await _accountService.SignUp(dto, role);
             if (!res.Success)
             {
-                ViewData["Error"] = res.Message;
+                ModelState.AddModelError("", res.Message);
+
                 return View(dto);
             }
             TempData["Register"] = "Please verify your email";
@@ -55,7 +56,7 @@ namespace HelloJob.App.Controllers
             var result =await _accountService.VerifyEmail(token, email);
             if (!result.Success)
             {
-                ViewData["Error"] = result.Message;
+                ModelState.AddModelError("", result.Message);
                 return View();
             }
             TempData["Verify"] = "Succesfully SignUp";
@@ -70,15 +71,14 @@ namespace HelloJob.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginDto dto)
         {
-
             if (!ModelState.IsValid)
             {
                 return View(dto);
             }
-            var result = await _accountService.Login(dto);
+            var result = await _accountService.Login(dto,false);
             if (!result.Success)
             {
-                ViewData["Error"] = result.Message;
+                ModelState.AddModelError("", result.Message);
                 return View(dto);
             }
             return RedirectToAction("index", "home");
@@ -98,18 +98,19 @@ namespace HelloJob.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgetPassword(string mail)
+        public async Task<IActionResult> ForgetPassword(string email)
         {
             if (!ModelState.IsValid)
             {
-                return View(mail);
+                return View(email);
             }
-            var result = await _accountService.ForgetPassword(mail);
+            var result = await _accountService.ForgetPassword(email);
             if (!result.Success)
             {
                 ModelState.AddModelError("", result.Message);
-                return View(mail);
+                return View();
             }
+            TempData["resetPassword"] = "reset";
             return RedirectToAction("index", "home");
         }
 
@@ -149,37 +150,36 @@ namespace HelloJob.App.Controllers
             return RedirectToAction("login", "Account");
         }
 
-        [Authorize]
-        public async Task<IActionResult> Update()
-        {
-            var query = _userManager.Users.Where(x => x.UserName == User.Identity.Name);
-            UpdateDto? updateDto = await query.Select(x => new UpdateDto { UserName = x.UserName })
-                .FirstOrDefaultAsync();
-            return View(updateDto);
-        }
+        //[Authorize]
+        //public async Task<IActionResult> Update()
+        //{
+        //    var query = _userManager.Users.Where(x => x.UserName == User.Identity.Name);
+        //    UpdateDto? updateDto = await query.Select(x => new UpdateDto { UserName = x.UserName })
+        //        .FirstOrDefaultAsync();
+        //    return View(updateDto);
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize]
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
+        //public async Task<IActionResult> Update(UpdateDto dto)
+        //{
+        //    if(!ModelState.IsValid) {
+        //        return View(dto);
+        //    }
 
-        public async Task<IActionResult> Update(UpdateDto dto)
-        {
-            if(!ModelState.IsValid) {
-                return View(dto);
-            }
-
-            var res = await _accountService.Update(dto);
-            if(!res.Success)
-            {
-                ModelState.AddModelError("", res.Message);
-                return View(dto);
-            }
-            TempData["update"] = "updated Account";
+        //    var res = await _accountService.Update(dto);
+        //    if(!res.Success)
+        //    {
+        //        ModelState.AddModelError("", res.Message);
+        //        return View(dto);
+        //    }
+        //    TempData["update"] = "updated Account";
 
 
-            return RedirectToAction(nameof(Update));
+        //    return RedirectToAction(nameof(Update));
 
-        }
+        //}
 
     
         [HttpGet]

@@ -39,7 +39,9 @@ namespace HelloJob.Entities.Models
         public List<Skill> Skills { get; set; }
         public List<Employee_Special_Education> educations { get; set; }
         public List<Employee_Special_Experience> experiences { get; set; }
+        public List<WishlistItem> WishListItems { get; set; }
 
-        
+
+
     }
 }

@@ -34,6 +34,7 @@ namespace HelloJob.Service.Services.Implementations
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailHelper _emailService;
         private readonly IHttpContextAccessor _http;
         private readonly IUrlHelper _helper;
@@ -41,13 +42,14 @@ namespace HelloJob.Service.Services.Implementations
 
 
         public AccountService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            IEmailHelper emailService, IHttpContextAccessor http, IUrlHelper helper)
+            IEmailHelper emailService, IHttpContextAccessor http, IUrlHelper helper, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
             _http = http;
             _helper = helper;
+            _roleManager = roleManager;
         }
         public async Task<Core.Utilities.Results.Abstract.IDataResult<string>> SignUp(RegisterDto dto, string role)
         {
@@ -91,359 +93,387 @@ namespace HelloJob.Service.Services.Implementations
                 }
 
             }
-                return new SuccessDataResult<string>(
-                    message: "RegisterDto olundu"
-                    );
-            }
+            return new SuccessDataResult<string>(
+                message: "RegisterDto olundu"
+                );
+        }
 
+        private async Task<bool> IsUserInRole(AppUser user, string roleName)
+        {
+            return await _userManager.IsInRoleAsync(user, roleName);
+        }
 
-            public async Task<Core.Utilities.Results.Abstract.IResult> Login(LoginDto dto)
+        public async Task<Core.Utilities.Results.Abstract.IResult> Login(LoginDto dto, bool isAdminPanelLogin)
+        {
+            try
             {
-                try
+                AppUser checkUser = await _userManager.FindByNameAsync(dto.UserNameOrEmail);
+
+                if (checkUser == null)
                 {
-                    AppUser checkUser = await _userManager.FindByNameAsync(dto.UserNameOrEmail);
-
-                    if (checkUser == null)
-                    {
-                        checkUser = await _userManager.FindByEmailAsync(dto.UserNameOrEmail);
-                    }
-
-                    if (checkUser == null)
-                        return new ErrorResult("User not Found!");
-
-                    if (!checkUser.EmailConfirmed)
-                        return new ErrorResult("Please verify this email before sign in!");
-
-                    if (!checkUser.IsActivate)
-                        return new ErrorResult("Your account is blocked! Please contact the administrator.");
-
-                    var result = await _signInManager.PasswordSignInAsync(checkUser, dto.Password, dto.RememberMe, true);
-
-                    if (!result.Succeeded)
-                        return new ErrorResult("Email or Password is incorrect!");
-
-                    if (result.IsLockedOut)
-                        return new ErrorResult("User is locked out!");
-
-                    if (result.IsNotAllowed)
-                        return new ErrorResult("User is not allowed to sign in!");
-
-                    return new SuccessResult("Login Successfully");
-                }
-                catch (Exception ex)
-                {
-                    return new ErrorResult(ex.Message);
+                    checkUser = await _userManager.FindByEmailAsync(dto.UserNameOrEmail);
                 }
 
-
-            }
-            public async Task<Core.Utilities.Results.Abstract.IResult> VerifyEmail(string token, string email)
-            {
-                AppUser appUser = await _userManager.FindByEmailAsync(email);
-                if (appUser == null) return new ErrorResult("User tapilmadi");
-                var res = await _userManager.ConfirmEmailAsync(appUser, token);
-                if (!res.Succeeded)
-                {
-                    var errors = string.Join(", ", res.Errors.Select(e => e.Description));
-                    return new ErrorResult($"Confirm Email is invalid : {errors}");
-                }
-                appUser.EmailConfirmed = true;
-                await _signInManager.SignInAsync(appUser, true);
-                return new SuccessResult("Email tesdiq olundu ve signin olundu");
-            }
-
-            public async Task<Core.Utilities.Results.Abstract.IResult> LogOut()
-            {
-                try
-                {
-                    await _signInManager.SignOutAsync();
-                    return new SuccessResult();
-                }
-
-                catch (Exception ex)
-                {
-                    return new ErrorResult(ex.Message);
-                }
-            }
-
-            //private async Task FirstRegisterAsync()
-            //{
-            //        var users = _userManager.Users.ToList();
-            //        if (users.Count != 1) return;
-            //        var user = users[0];
-            //        await _userManager.AddToRoleAsync(user, "SuperAdmin");
-            //}
-            public async Task<Core.Utilities.Results.Abstract.IResult> ForgetPassword(string email)
-            {
-                if (email is null)
-                {
-                    return new ErrorResult("please enter email!");
-                }
-                var isValidEmail = _emailService.IsValidEmail(email);
-                if (!isValidEmail) return new ErrorResult("Invalid Email!");
-                var user = await _userManager.FindByEmailAsync(email);
-                if (user != null) return new ErrorResult("Email is already used!");
-                string token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                if (token is null) return new ErrorResult("token is not generated");
-                var url = $"{_http.HttpContext.Request.Scheme}://{_http.HttpContext.Request.Host}{_helper.Action("ResetPassword", "Identity", new { email = user.Email, token = token })}";
-
-                await _emailService.SendEmailAsync(user.Email, url, "Verify Email for resetpassword", token);
-                return new SuccessResult();
-
-            }
-            public async Task<Core.Utilities.Results.Abstract.IDataResult<ResetPasswordDto>> ResetPasswordGet(string email, string token)
-            {
-                var user = await _userManager.FindByEmailAsync(email);
-                if (user is null)
-                {
-                    return new ErrorDataResult<ResetPasswordDto>("User not found");
-                }
-                ResetPasswordDto dto = new ResetPasswordDto()
-                {
-                    Email = email,
-                    Token = token
-                };
-
-                return new SuccessDataResult<ResetPasswordDto>(dto, "get resetPassword");
-            }
-
-            public async Task<Core.Utilities.Results.Abstract.IResult> ResetPasswordPost(ResetPasswordDto dto)
-            {
-                var user = await _userManager.FindByEmailAsync(dto.Email);
-                if (user == null)
-                {
+                if (checkUser == null)
                     return new ErrorResult("User not Found!");
-                }
 
-                var result = await _userManager.ResetPasswordAsync(user, dto.Token, dto.Password);
-                if (!result.Succeeded)
+                if (!checkUser.EmailConfirmed)
+                    return new ErrorResult("Please verify this email before sign in!");
+
+                if (!checkUser.IsActivate)
+                    return new ErrorResult("Your account is blocked! Please contact the administrator.");
+
+                if ((isAdminPanelLogin && (await IsUserInRole(checkUser, "Owner") || await IsUserInRole(checkUser, "Employee"))) ||
+                    (!isAdminPanelLogin && (await IsUserInRole(checkUser, "SuperAdmin") || await IsUserInRole(checkUser, "Admin"))))
                 {
-                    string errors = string.Join("\n", result.Errors.Select(error => error.Description));
-                    return new ErrorResult("Reset password failed: " + errors);
+                    return new ErrorResult(isAdminPanelLogin ? "You are not authorized to access the admin panel." : "You are not authorized to access the user panel. Please create a user for yourself.");
                 }
 
-                return new SuccessResult("Reset password success");
+                var result = await _signInManager.PasswordSignInAsync(checkUser, dto.Password, dto.RememberMe, true);
+
+                if (!result.Succeeded)
+                    return new ErrorResult("Email or Password is incorrect!");
+
+                if (result.IsLockedOut)
+                    return new ErrorResult("User is locked out!");
+
+                if (result.IsNotAllowed)
+                    return new ErrorResult("User is not allowed to sign in!");
+
+                return new SuccessResult("Login Successfully");
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(ex.Message);
+            }
+        }
+
+        public async Task<Core.Utilities.Results.Abstract.IResult> VerifyEmail(string token, string email)
+        {
+            AppUser appUser = await _userManager.FindByEmailAsync(email);
+            if (appUser == null) return new ErrorResult("User tapilmadi");
+            var res = await _userManager.ConfirmEmailAsync(appUser, token);
+            if (!res.Succeeded)
+            {
+                var errors = string.Join(", ", res.Errors.Select(e => e.Description));
+                return new ErrorResult($"Confirm Email is invalid : {errors}");
+            }
+            appUser.EmailConfirmed = true;
+            await _signInManager.SignInAsync(appUser, true);
+            return new SuccessResult("Email tesdiq olundu ve signin olundu");
+        }
+
+        public async Task<Core.Utilities.Results.Abstract.IResult> LogOut()
+        {
+            try
+            {
+                await _signInManager.SignOutAsync();
+                return new SuccessResult();
             }
 
-            public async Task<Core.Utilities.Results.Abstract.IResult> Update(UpdateDto dto)
+            catch (Exception ex)
             {
-                var user = await _userManager.FindByNameAsync(_http.HttpContext.User.Identity.Name);
-                if (user == null)
-                {
-                    return new ErrorResult("User not found!");
-                }
+                return new ErrorResult(ex.Message);
+            }
+        }
 
-                if (!string.IsNullOrEmpty(dto.Email))
-                {
-                    user.Email = dto.Email;
-                }
+        public async Task<Core.Utilities.Results.Abstract.IResult> ForgetPassword(string email)
+        {
+            if (email is null)
+            {
+                return new ErrorResult("please enter email!");
+            }
+            var isValidEmail = _emailService.IsValidEmail(email);
+            if (!isValidEmail) return new ErrorResult("Invalid Email!");
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return new ErrorResult("Email is not registered!");
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            if (token is null) return new ErrorResult("token is not generated");
+            var urlHelperFactory = _http.HttpContext.RequestServices.GetService<IUrlHelperFactory>();
 
-                if (!string.IsNullOrEmpty(dto.UserName))
+            if (urlHelperFactory != null)
+            {
+                var endpoint = _http.HttpContext.GetEndpoint();
+                if (endpoint != null)
                 {
-                    user.UserName = dto.UserName;
-                }
-
-                if (!string.IsNullOrEmpty(dto.OldPassword) && !string.IsNullOrEmpty(dto.NewPassword))
-                {
-                    var changePasswordResult = await _userManager.ChangePasswordAsync(user, dto.OldPassword, dto.NewPassword);
-                    if (!changePasswordResult.Succeeded)
+                    var actionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
+                    if (actionDescriptor != null)
                     {
-                        string errors = string.Join("\n", changePasswordResult.Errors.Select(error => error.Description));
-                        return new ErrorResult(errors);
+                        var actionContext = new ActionContext(_http.HttpContext, _http.HttpContext.GetRouteData(), actionDescriptor);
+
+                        var urlHelper = urlHelperFactory.GetUrlHelper(actionContext);
+
+                        var url = urlHelper.Action("ResetPassword", "Account", new { email = user.Email, token = token }, protocol: _http.HttpContext.Request.Scheme);
+
+                        await _emailService.SendEmailAsync(user.Email, url, "Verify Email for resetpassword", token);
                     }
                 }
+            }
+            return new SuccessResult();
+        }
+        public async Task<Core.Utilities.Results.Abstract.IDataResult<ResetPasswordDto>> ResetPasswordGet(string email, string token)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user is null)
+            {
+                return new ErrorDataResult<ResetPasswordDto>("User not found");
+            }
+            ResetPasswordDto dto = new ResetPasswordDto()
+            {
+                Email = email,
+                Token = token
+            };
 
-                var result = await _userManager.UpdateAsync(user);
+            return new SuccessDataResult<ResetPasswordDto>(dto, "get resetPassword");
+        }
 
-                if (!result.Succeeded)
+        public async Task<Core.Utilities.Results.Abstract.IResult> ResetPasswordPost(ResetPasswordDto dto)
+        {
+            var user = await _userManager.FindByEmailAsync(dto.Email);
+            if (user == null)
+            {
+                return new ErrorResult("User not Found!");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, dto.Token, dto.Password);
+            if (!result.Succeeded)
+            {
+                string errors = string.Join("\n", result.Errors.Select(error => error.Description));
+                return new ErrorResult("Reset password failed: " + errors);
+            }
+
+            return new SuccessResult("Reset password success");
+        }
+
+        public async Task<Core.Utilities.Results.Abstract.IResult> Update(UpdateDto dto)
+        {
+            var user = await _userManager.FindByNameAsync(_http.HttpContext.User.Identity.Name);
+            if (user == null)
+            {
+                return new ErrorResult("User not found!");
+            }
+
+            if (!string.IsNullOrEmpty(dto.UserName))
+            {
+                user.UserName = dto.UserName;
+            }
+
+            if (!string.IsNullOrEmpty(dto.OldPassword) && !string.IsNullOrEmpty(dto.NewPassword))
+            {
+                var changePasswordResult = await _userManager.ChangePasswordAsync(user, dto.OldPassword, dto.NewPassword);
+                if (!changePasswordResult.Succeeded)
                 {
-                    string errors = string.Join("\n", result.Errors.Select(error => error.Description));
+                    string errors = string.Join("\n", changePasswordResult.Errors.Select(error => error.Description));
                     return new ErrorResult(errors);
                 }
-
-                await _signInManager.RefreshSignInAsync(user);
-
-                return new SuccessResult("User updated successfully");
             }
 
-            public async Task<Core.Utilities.Results.Abstract.IResult> ChangeUserActivationStatus(string email, bool activate)
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
             {
-                var user = await _userManager.FindByIdAsync(email);
-                if (user == null)
-                {
-                    return new ErrorResult("User not found!");
-                }
-
-                if (activate)
-                {
-                    user.IsActivate = true;
-                }
-                else
-                {
-                    user.IsActivate = false;
-                }
-
-                var result = await _userManager.UpdateAsync(user);
-
-                if (!result.Succeeded)
-                {
-                    string errors = string.Join("\n", result.Errors.Select(error => error.Description));
-                    return new ErrorResult(errors);
-                }
-
-                return new SuccessResult("User activation status changed successfully");
+                string errors = string.Join("\n", result.Errors.Select(error => error.Description));
+                return new ErrorResult(errors);
             }
 
-            public async Task<PagginatedResponse<AppUser>> GetAllUsers(int count, int page)
-            {
-                try
-                {
-                    IQueryable<AppUser> query = _userManager.Users;
+            await _signInManager.RefreshSignInAsync(user);
 
-                    if (count > 0 && page > 0)
+            return new SuccessResult("User updated successfully");
+        }
+
+        public async Task<Core.Utilities.Results.Abstract.IResult> ChangeUserActivationStatus(string email, bool activate)
+        {
+            var user = await _userManager.FindByIdAsync(email);
+            if (user == null)
+            {
+                return new ErrorResult("User not found!");
+            }
+
+            if (activate)
+            {
+                user.IsActivate = true;
+            }
+            else
+            {
+                user.IsActivate = false;
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                string errors = string.Join("\n", result.Errors.Select(error => error.Description));
+                return new ErrorResult(errors);
+            }
+
+            return new SuccessResult("User activation status changed successfully");
+        }
+
+        public async Task<PagginatedResponse<AppUser>> GetAllUsers(int count, int page)
+        {
+            try
+            {
+                IQueryable<AppUser> query = _userManager.Users;
+
+                if (count > 0 && page > 0)
+                {
+                    var ownerRoleId = (await _roleManager.FindByNameAsync("Owner")).Id;
+                    var employeeRoleId = (await _roleManager.FindByNameAsync("Employee")).Id;
+
+                    var usersInRoles = new List<AppUser>();
+
+                    foreach (var user in query)
                     {
-                        query = query.Where(user =>
-                            _userManager.IsInRoleAsync(user, "Owner").Result ||
-                            _userManager.IsInRoleAsync(user, "Employee").Result
-                        );
-                    }
+                        var isInRole = await _userManager.IsInRoleAsync(user, ownerRoleId) ||
+                                       await _userManager.IsInRoleAsync(user, employeeRoleId);
 
-                    int totalCount = await query.CountAsync();
-                    List<AppUser> users = await query.Skip((page - 1) * count).Take(count).ToListAsync();
-
-                    var response = new PagginatedResponse<AppUser>(
-                        datas: users,
-                        pageNumber: page,
-                        pageSize: count,
-                        totalCount: totalCount,
-                        otherdatas: null
-                    );
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    return new PagginatedResponse<AppUser>(
-                        datas: null,
-                        pageNumber: 0,
-                        pageSize: 0,
-                        totalCount: 0,
-                        otherdatas: null
-                    );
-                }
-            }
-
-            public async Task<PagginatedResponse<AppUser>> GetAllAdmin(int count, int page)
-            {
-                try
-                {
-                    IQueryable<AppUser> query = _userManager.Users;
-
-                    if (count > 0 && page > 0)
-                    {
-                        query = query.Where(user =>
-                            _userManager.IsInRoleAsync(user, "Admin").Result
-                        );
-                    }
-                    int totalCount = await query.CountAsync();
-                    List<AppUser> users = await query.Skip((page - 1) * count).Take(count).ToListAsync();
-
-                    var response = new PagginatedResponse<AppUser>(
-                        datas: users,
-                        pageNumber: page,
-                        pageSize: count,
-                        totalCount: totalCount,
-                        otherdatas: null
-                    );
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    return new PagginatedResponse<AppUser>(
-                        datas: null,
-                        pageNumber: 0,
-                        pageSize: 0,
-                        totalCount: 0,
-                        otherdatas: null
-                    );
-                }
-            }
-
-            public async Task<Core.Utilities.Results.Abstract.IResult> RegisterWithGoogle(string returnUrl = null)
-            {
-                try
-                {
-                    var authenticationProperties = _signInManager.ConfigureExternalAuthenticationProperties("Google", _helper.Action("GoogleCallback", "Account", new { returnUrl }));
-                    return new SuccessResult("Google authentication initiated successfully.");
-                }
-                catch (Exception ex)
-                {
-                    return new ErrorResult($"Error initiating Google authentication: {ex.Message}");
-                }
-            }
-
-
-            public async Task<Core.Utilities.Results.Abstract.IResult> GoogleCallback(string returnUrl = null)
-            {
-                try
-                {
-                    var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
-                    if (externalLoginInfo == null)
-                    {
-                        return new ErrorResult("External login information not found.");
-                    }
-
-                    var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
-                    var userName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Name);
-
-                    var existingUser = await _userManager.FindByEmailAsync(email);
-                    if (existingUser != null)
-                    {
-                        await _signInManager.SignInAsync(existingUser, isPersistent: false);
-                        if (!string.IsNullOrEmpty(returnUrl))
+                        if (isInRole)
                         {
-                            return new SuccessResult("User signed in successfully.");
+                            usersInRoles.Add(user);
                         }
-                        return new SuccessResult("User signed in successfully.");
                     }
 
-                    var userNameWithoutSpaces = userName.Replace(" ", string.Empty);
-                    var newUser = new AppUser
-                    {
-                        UserName = userNameWithoutSpaces.ToLower(),
-                        Email = email,
-                        EmailConfirmed = true
-                    };
+                    query = usersInRoles.AsQueryable();
 
-                    var result = await _userManager.CreateAsync(newUser);
-                    if (result.Succeeded)
-                    {
-                        await _userManager.AddToRoleAsync(newUser, UserRoles.Employee.ToString());
 
-                        await _signInManager.SignInAsync(newUser, isPersistent: false);
-
-                        if (!string.IsNullOrEmpty(returnUrl))
-                        {
-                            return new SuccessResult("New user registered and signed in successfully.");
-                        }
-
-                        return new SuccessResult("New user registered and signed in successfully.");
-                    }
-                    else
-                    {
-                        return new ErrorResult("Error registering new user.");
-                    }
                 }
-                catch (Exception ex)
-                {
-                    return new ErrorResult($"Error during Google callback: {ex.Message}");
-                }
+
+                int totalCount = await query.CountAsync();
+                List<AppUser> users = await query.Skip((page - 1) * count).Take(count).ToListAsync();
+
+                var response = new PagginatedResponse<AppUser>(
+                    datas: users,
+                    pageNumber: page,
+                    pageSize: count,
+                    totalCount: totalCount,
+                    otherdatas: null
+                );
+
+                return response;
             }
+            catch (Exception ex)
+            {
+                return new PagginatedResponse<AppUser>(
+                    datas: null,
+                    pageNumber: 0,
+                    pageSize: 0,
+                    totalCount: 0,
+                    otherdatas: null
+                );
+            }
+        }
 
+        public async Task<PagginatedResponse<AppUser>> GetAllAdmin(int count, int page)
+        {
+            try
+            {
+                IQueryable<AppUser> query = _userManager.Users;
+
+                if (count > 0 && page > 0)
+                {
+                    query = query.Where(user =>
+                        _userManager.IsInRoleAsync(user, "Admin").Result
+                    );
+                }
+                int totalCount = await query.CountAsync();
+                List<AppUser> users = await query.Skip((page - 1) * count).Take(count).ToListAsync();
+
+                var response = new PagginatedResponse<AppUser>(
+                    datas: users,
+                    pageNumber: page,
+                    pageSize: count,
+                    totalCount: totalCount,
+                    otherdatas: null
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new PagginatedResponse<AppUser>(
+                    datas: null,
+                    pageNumber: 0,
+                    pageSize: 0,
+                    totalCount: 0,
+                    otherdatas: null
+                );
+            }
+        }
+
+        public async Task<Core.Utilities.Results.Abstract.IResult> RegisterWithGoogle(string returnUrl = null)
+        {
+            try
+            {
+                var authenticationProperties = _signInManager.ConfigureExternalAuthenticationProperties("Google", _helper.Action("GoogleCallback", "Account", new { returnUrl }));
+                return new SuccessResult("Google authentication initiated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult($"Error initiating Google authentication: {ex.Message}");
+            }
         }
 
 
+        public async Task<Core.Utilities.Results.Abstract.IResult> GoogleCallback(string returnUrl = null)
+        {
+            try
+            {
+                var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
+                if (externalLoginInfo == null)
+                {
+                    return new ErrorResult("External login information not found.");
+                }
 
-    } 
+                var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
+                var userName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Name);
+
+                var existingUser = await _userManager.FindByEmailAsync(email);
+                if (existingUser != null)
+                {
+                    await _signInManager.SignInAsync(existingUser, isPersistent: false);
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return new SuccessResult("User signed in successfully.");
+                    }
+                    return new SuccessResult("User signed in successfully.");
+                }
+
+                var userNameWithoutSpaces = userName.Replace(" ", string.Empty);
+                var newUser = new AppUser
+                {
+                    UserName = userNameWithoutSpaces.ToLower(),
+                    Email = email,
+                    EmailConfirmed = true
+                };
+
+                var result = await _userManager.CreateAsync(newUser);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(newUser, UserRoles.Employee.ToString());
+
+                    await _signInManager.SignInAsync(newUser, isPersistent: false);
+
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return new SuccessResult("New user registered and signed in successfully.");
+                    }
+
+                    return new SuccessResult("New user registered and signed in successfully.");
+                }
+                else
+                {
+                    return new ErrorResult("Error registering new user.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult($"Error during Google callback: {ex.Message}");
+            }
+        }
+
+    }
+
+
+
+}
 

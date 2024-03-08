@@ -157,9 +157,8 @@ namespace HelloJob.Service.Services.Implementations
             }
             else
             {
-                query = _ResumeRepository.GetQuery(x => x.AppUserId == userId && !x.IsDeleted);
+                query = _ResumeRepository.GetQuery(x => x.AppUserId == userId && !x.IsDeleted && x.order != Order.Reject);
             }
-
             var totalCount = await query.CountAsync();
 
             var paginatedResumes = await query
@@ -169,6 +168,10 @@ namespace HelloJob.Service.Services.Implementations
                 .Include(x => x.Education)
                 .Include(x => x.Language)
                 .Include(x => x.Category)
+                .Include(x => x.WishListItems)
+                    .ThenInclude(y => y.Wishlist)
+                   .Include(x => x.WishListItems)
+                    .ThenInclude(y => y.Wishlist.AppUser)
                 .ToPagedListAsync(pageNumber, pageSize);
 
             var ResumeGetDtos = paginatedResumes.Datas.Select(x =>
@@ -217,6 +220,10 @@ namespace HelloJob.Service.Services.Implementations
                                         .Include(x => x.Education)
                                         .Include(x => x.Language)
                                         .Include(x => x.Category)
+                                        .Include(x => x.WishListItems)
+                                        .ThenInclude(y => y.Wishlist)
+                                       .Include(x => x.WishListItems)
+                                        .ThenInclude(y => y.Wishlist.AppUser)
                                         .FirstOrDefaultAsync();
             if (resume == null)
             {
@@ -338,7 +345,11 @@ namespace HelloJob.Service.Services.Implementations
                   .Include(x => x.City)
                   .Include(x => x.Education)
                   .Include(x => x.Language)
-                   .Include(x => x.Category);
+                   .Include(x => x.Category)
+                   .Include(x=>x.WishListItems)
+                    .ThenInclude(y=>y.Wishlist)
+                   .Include(x => x.WishListItems)
+                    .ThenInclude(y => y.Wishlist.AppUser);
         }
 
         private async Task<List<ResumeGetDto>> GetResumeGetDtoListAsync(IQueryable<Resume> query)
@@ -511,7 +522,6 @@ namespace HelloJob.Service.Services.Implementations
 
             return new SuccessResult("Order status updated successfully");
         }
-
         public async Task<IDataResult<List<ResumeGetDto>>> LoadMoreResumesAsync(int id ,int pageNumber, int pageSize, ResumeFilterDto dto)
         {
             var filteredResumesResult = await SortResumes(id,dto);

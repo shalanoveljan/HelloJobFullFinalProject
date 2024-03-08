@@ -38,8 +38,10 @@
                             Profilim
                         </a>
                     </li>
+                    @if (User.IsInRole("Employee"))
+                    {
                     <li>
-                        <a href="user/resume/create">
+                        <a asp-controller="resume" asp-action="create">
                             <span>
                                 <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
                                      alt="" />
@@ -47,6 +49,8 @@
                             Cv yerləşdir
                         </a>
                     </li>
+                        
+                    }
                     <li>
                         <a href="./myOrder.html">
                             <span>
@@ -75,7 +79,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./security.html">
+                        <a asp-action="Update" asp-controller="account">
                             <span>
                                 <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
                                      alt="" />
@@ -83,6 +87,9 @@
                             Təhlükəsizlik
                         </a>
                     </li>
+
+                    @if (User.IsInRole("Owner"))
+                    {
                     <li>
                         <a href="./CreateCompany.html">
                             <span>
@@ -110,40 +117,40 @@
                             Vakansiya Yerləşdir
                         </a>
                     </li>
+                    }
                 </ul>
-                <div class="backsite">
-                    <a href="./index.html"
-                       class="btn btn-site btn-transparent d-md-none">Sayta keçid et</a>
-                </div>
             </div>
             <div class="account_content">
                 <div class="account_head">
                     <div class="account_head_tools">
-                        <a href="./index.html"
+                        <a asp-controller="home" asp-action="index" asp-area=""
                            class="btn btn-site btn-transparent d-none d-md-block">Sayta keçid et</a>
                         <div class="account_head_user">
                             <a href="./account.html" class="profile__header__user__name">
                                 <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user.svg"
                                      alt="" />
-                                <span>Rashid Baghirov</span>
+                                <span>@User.Identity.Name</span>
                             </a>
-                            <ul class="account_head_user_drop">
+                            <ul class="account_head_user_drop"> 
                                 <li><a href="./mysticker.html">Mənim elanlarım</a></li>
                                 <li>
-                                    <a href="./security.html">Şəxsi məlumatlar</a>
+                                    <a href="user/security">Şəxsi məlumatlar</a>
                                 </li>
-                                <li><a href="/logout">Çıxış</a></li>
+                                <li><a asp-controller="account" asp-action="logout">Çıxış</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
                 @RenderBody()
-               
             </div>
         </div>
     </main>
     @RenderSection("Scripts", required: false)
     <script src="~/HelloJobPanel/assets/js/account.js"></script>
+    <script>
+        document.getElementById('homeLink').addEventListener('click', function () {
+            window.location.href = 'https://localhost:7066/home/index';
+        });
+    </script>
 </body>
 </html>
