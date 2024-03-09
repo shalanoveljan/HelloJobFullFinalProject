@@ -59,7 +59,7 @@ namespace HelloJob.App.Areas.Admin.Controllers
             }
 
             var res = await _accountService.GetAllAdmin(page,count);
-            return View(res.Datas);
+            return View(res);
         }
 
         [HttpGet]
@@ -72,7 +72,7 @@ namespace HelloJob.App.Areas.Admin.Controllers
             }
 
             var res = await _accountService.GetAllUsers(page, count);
-            return View(res.Datas);
+            return View(res);
         }
         [Authorize(Roles = "SuperAdmin,Admin")]
 
@@ -105,7 +105,7 @@ namespace HelloJob.App.Areas.Admin.Controllers
             var result = await _accountService.Login(dto,true);
             if (!result.Success)
             {
-                ViewData["Error"] = result.Message;
+                ModelState.AddModelError("", result.Message);
                 return View(dto);
             }
             return RedirectToAction("index", "dashboard");
@@ -223,7 +223,7 @@ namespace HelloJob.App.Areas.Admin.Controllers
             if (result.Success)
             {
                 TempData["update"] = "changed Activated status";
-                return NoContent();
+                return Redirect(Request.Headers["Referer"].ToString());
 
             }
             else

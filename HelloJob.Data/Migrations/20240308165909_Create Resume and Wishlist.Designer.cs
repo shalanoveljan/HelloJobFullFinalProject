@@ -4,6 +4,7 @@ using HelloJob.Data.DBContexts.SQLSERVER;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelloJob.Data.Migrations
 {
     [DbContext(typeof(HelloJobDbContext))]
-    partial class HelloJobDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240308165909_Create Resume and Wishlist")]
+    partial class CreateResumeandWishlist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

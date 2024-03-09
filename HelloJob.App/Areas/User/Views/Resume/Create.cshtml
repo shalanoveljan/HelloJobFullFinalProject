@@ -144,7 +144,7 @@
                                         <optgroup label="@category.Name">
                                             @foreach (var subCategory in ((IEnumerable<CategoryGetDto>)ViewBag.Categories.Datas).Where(c => c.ParentId == category.Id))
                                             {
-                                                <option>@subCategory.Name</option>
+                                                <option value="@subCategory.Id">@subCategory.Name</option>
                                             }
                                         </optgroup>
                                     }
@@ -222,7 +222,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="cv_inputs">
-                                <label for=""></label>
+                                <label for="">Marital Status</label>
                                 <select asp-for="Status" class="form-control cities">
                                     @foreach (var mode in Enum.GetValues(typeof(MaritalStatus)))
                                     {
@@ -274,8 +274,8 @@
                                     <label style="margin-bottom:20px" class="form-label-title">Skills</label>
                                     <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Skill" asp-for="SkillNames">
                                         <span asp-validation-for="SkillNames"></span>
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px"  type="button" class="add-btn1 btn-primary">+</button>
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn1 btn-primary">-</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;"  type="button" class="add-btn1 btn-primary">+</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
                                     </div>
                             </div>
                         </div>
@@ -288,12 +288,12 @@
                                         <span asp-validation-for="Univerties"></span>
                                         <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="Degree" asp-for="Degrees">
                                         <span asp-validation-for="Degrees"></span>
-                                         <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="Startdate" asp-for="EducationStartDates">
+                                         <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="Startdate" asp-for="EducationStartDates">
                                         <span asp-validation-for="EducationStartDates"></span>
-                                        <input style="margin-top:5px" class="form-control value" type="text" placeholder="Enddate" asp-for="EducationEndDates">
+                                        <input style="margin-top:5px" class="form-control value" type="date" placeholder="Enddate" asp-for="EducationEndDates">
                                         <span asp-validation-for="EducationEndDates"></span>
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn btn-primary">+</button>
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn btn-primary">-</button>
+                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn btn-primary">+</button>
+                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn btn-primary">-</button>
                                     </div>
                                 </div>
                             </div>
@@ -307,12 +307,12 @@
                                         <span asp-validation-for="Workplaces"></span>
                                         <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="positions" asp-for="Positions">
                                         <span asp-validation-for="Positions"></span>
-                                        <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="startdate" asp-for="ExperienceStartDates">
+                                        <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="startdate" asp-for="ExperienceStartDates">
                                         <span asp-validation-for="ExperienceStartDates"></span>
-                                        <input style="margin-top:5px" class="form-control value" type="text" placeholder="enddate" asp-for="ExperienceEndDates">
+                                        <input style="margin-top:5px" class="form-control value" type="date" placeholder="enddate" asp-for="ExperienceEndDates">
                                         <span asp-validation-for="ExperienceEndDates"></span>
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn2 btn-primary">+</button>
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn2 btn-primary">-</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px; margin-top:8px;" type="button" class="add-btn2 btn-primary">+</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn2 btn-primary">-</button>
                                    </div>
                             </div>
                         </div>

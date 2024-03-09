@@ -3,6 +3,7 @@ using HelloJob.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Security.Claims;
 
 namespace HelloJob.App.Areas.User.Controllers
 {
@@ -41,6 +42,8 @@ namespace HelloJob.App.Areas.User.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ResumePostDto dto)
         {
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            dto.AppUserId = userId;
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();

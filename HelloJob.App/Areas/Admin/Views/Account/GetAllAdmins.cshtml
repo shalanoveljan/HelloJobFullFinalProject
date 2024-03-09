@@ -29,9 +29,22 @@
                                                     <td>@role</td>
                                                 }
                                             <td>
-                                                <a onclick="return confirm('Are you sure?')" asp-action="remove" asp-route-id="@user.Id" class="badge badge-danger">Remove</a>
-                                                <a asp-controller="User" asp-action="update" asp-route-id="@user.Id" class="badge badge-warning">Update</a>
-                                                <a asp-action="block" asp-route-id="@user.Id" class="badge badge-primary">Block</a>
+                                                @if (user.IsActivate)
+                                                {
+                                                    <form method="post" asp-action="ChangeActivationStatus">
+                                                        <input type="hidden" name="email" value="@user.Email" />
+                                                        <input type="hidden" name="activate" value="false" />
+                                                        <button style="border:none" type="submit" class="badge badge-primary">Block</button>
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    <form method="post" asp-action="ChangeActivationStatus">
+                                                        <input type="hidden" name="email" value="@user.Email" />
+                                                        <input type="hidden" name="activate" value="true" />
+                                                        <button style="border:none" type="submit" class="badge badge-info">Activate</button>
+                                                    </form>
+                                                }
                                             </td>
                                         </tr>
                                     }

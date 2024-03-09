@@ -27,6 +27,7 @@ using System.Security.Claims;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using myResult = HelloJob.Core.Utilities.Results.Abstract.IResult;
 
 namespace HelloJob.Service.Services.Implementations
 {
@@ -103,7 +104,7 @@ namespace HelloJob.Service.Services.Implementations
             return await _userManager.IsInRoleAsync(user, roleName);
         }
 
-        public async Task<Core.Utilities.Results.Abstract.IResult> Login(LoginDto dto, bool isAdminPanelLogin)
+        public async Task<myResult> Login(LoginDto dto, bool isAdminPanelLogin)
         {
             try
             {
@@ -148,7 +149,7 @@ namespace HelloJob.Service.Services.Implementations
             }
         }
 
-        public async Task<Core.Utilities.Results.Abstract.IResult> VerifyEmail(string token, string email)
+        public async Task<myResult> VerifyEmail(string token, string email)
         {
             AppUser appUser = await _userManager.FindByEmailAsync(email);
             if (appUser == null) return new ErrorResult("User tapilmadi");
@@ -163,7 +164,7 @@ namespace HelloJob.Service.Services.Implementations
             return new SuccessResult("Email tesdiq olundu ve signin olundu");
         }
 
-        public async Task<Core.Utilities.Results.Abstract.IResult> LogOut()
+        public async Task<myResult> LogOut()
         {
             try
             {
@@ -177,7 +178,7 @@ namespace HelloJob.Service.Services.Implementations
             }
         }
 
-        public async Task<Core.Utilities.Results.Abstract.IResult> ForgetPassword(string email)
+        public async Task<myResult> ForgetPassword(string email)
         {
             if (email is null)
             {
@@ -211,6 +212,7 @@ namespace HelloJob.Service.Services.Implementations
             }
             return new SuccessResult();
         }
+
         public async Task<Core.Utilities.Results.Abstract.IDataResult<ResetPasswordDto>> ResetPasswordGet(string email, string token)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -227,7 +229,7 @@ namespace HelloJob.Service.Services.Implementations
             return new SuccessDataResult<ResetPasswordDto>(dto, "get resetPassword");
         }
 
-        public async Task<Core.Utilities.Results.Abstract.IResult> ResetPasswordPost(ResetPasswordDto dto)
+        public async Task<myResult> ResetPasswordPost(ResetPasswordDto dto)
         {
             var user = await _userManager.FindByEmailAsync(dto.Email);
             if (user == null)
@@ -245,7 +247,7 @@ namespace HelloJob.Service.Services.Implementations
             return new SuccessResult("Reset password success");
         }
 
-        public async Task<Core.Utilities.Results.Abstract.IResult> Update(UpdateDto dto)
+        public async Task<myResult> Update(UpdateDto dto)
         {
             var user = await _userManager.FindByNameAsync(_http.HttpContext.User.Identity.Name);
             if (user == null)
@@ -281,9 +283,9 @@ namespace HelloJob.Service.Services.Implementations
             return new SuccessResult("User updated successfully");
         }
 
-        public async Task<Core.Utilities.Results.Abstract.IResult> ChangeUserActivationStatus(string email, bool activate)
+        public async Task<myResult> ChangeUserActivationStatus(string email, bool activate)
         {
-            var user = await _userManager.FindByIdAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 return new ErrorResult("User not found!");
@@ -309,7 +311,7 @@ namespace HelloJob.Service.Services.Implementations
             return new SuccessResult("User activation status changed successfully");
         }
 
-        public async Task<PagginatedResponse<AppUser>> GetAllUsers(int count, int page)
+        public async Task<PagginatedResponse<AppUser>> GetAllUsers(int page,int count)
         {
             try
             {
@@ -317,20 +319,20 @@ namespace HelloJob.Service.Services.Implementations
 
                 if (count > 0 && page > 0)
                 {
-                    var ownerRoleId = (await _roleManager.FindByNameAsync("Owner")).Id;
-                    var employeeRoleId = (await _roleManager.FindByNameAsync("Employee")).Id;
-
                     var usersInRoles = new List<AppUser>();
 
                     foreach (var user in query)
                     {
-                        var isInRole = await _userManager.IsInRoleAsync(user, ownerRoleId) ||
-                                       await _userManager.IsInRoleAsync(user, employeeRoleId);
+                        var roles = await _userManager.GetRolesAsync(user);
 
-                        if (isInRole)
+                        foreach (var role in roles)
                         {
-                            usersInRoles.Add(user);
+                            if (role == "Employee" || role=="Owner")
+                            {
+                                usersInRoles.Add(user);
+                            }
                         }
+
                     }
 
                     query = usersInRoles.AsQueryable();
@@ -338,8 +340,9 @@ namespace HelloJob.Service.Services.Implementations
 
                 }
 
-                int totalCount = await query.CountAsync();
-                List<AppUser> users = await query.Skip((page - 1) * count).Take(count).ToListAsync();
+                int totalCount = query.Count();
+
+                List<AppUser> users =  query.Skip((page - 1) * count).Take(count).ToList();
 
                 var response = new PagginatedResponse<AppUser>(
                     datas: users,
@@ -363,7 +366,7 @@ namespace HelloJob.Service.Services.Implementations
             }
         }
 
-        public async Task<PagginatedResponse<AppUser>> GetAllAdmin(int count, int page)
+        public async Task<PagginatedResponse<AppUser>> GetAllAdmin(int page,int count)
         {
             try
             {
@@ -371,12 +374,28 @@ namespace HelloJob.Service.Services.Implementations
 
                 if (count > 0 && page > 0)
                 {
-                    query = query.Where(user =>
-                        _userManager.IsInRoleAsync(user, "Admin").Result
-                    );
+                    var usersInRoles = new List<AppUser>();
+
+                    foreach (var user in query)
+                    {
+                        var roles = await _userManager.GetRolesAsync(user);
+
+                        foreach (var role in roles)
+                        {
+                            if (role == "Admin")
+                            {
+                                usersInRoles.Add(user);
+                            }
+                        }
+
+                    }
+
+                    query = usersInRoles.AsQueryable();
+
+
                 }
-                int totalCount = await query.CountAsync();
-                List<AppUser> users = await query.Skip((page - 1) * count).Take(count).ToListAsync();
+                int totalCount =  query.Count();
+                List<AppUser> users =  query.Skip((page - 1) * count).Take(count).ToList();
 
                 var response = new PagginatedResponse<AppUser>(
                     datas: users,

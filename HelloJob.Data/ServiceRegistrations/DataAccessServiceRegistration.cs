@@ -38,6 +38,8 @@ namespace HelloJob.Data.ServiceRegistrations
             services.AddScoped<IExperienceDAL, ExperienceDAL>();
             services.AddScoped<IResumeDAL, ResumeDAL>();
             services.AddScoped<IExperienceDAL, ExperienceDAL>();
+            services.AddScoped<ILikeDAL, LikeDAL>();
+
 
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {

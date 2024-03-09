@@ -137,7 +137,7 @@
                         </a>
                     </div>
                     <div class="col-lg-9  header_btns">
-                        @if (User.Identity.IsAuthenticated &&(User.IsInRole("Employee") || User.IsInRole("Owner")))
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <div class="dropdown" id="dropdownContainer">
                                 <a asp-controller="profilim" asp-action="index" class="login-btn popup-btn btn btn-primary" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -156,7 +156,6 @@
                                     }
                                 </div>
                             </div>
-
 
                         }
                         else

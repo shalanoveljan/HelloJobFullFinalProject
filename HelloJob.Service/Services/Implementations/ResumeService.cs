@@ -104,7 +104,6 @@ namespace HelloJob.Service.Services.Implementations
                 return new ErrorResult("Image size is not valid");
 
             }
-
             if (dto.EducationStartDates.Count != dto.EducationEndDates.Count ||
        dto.ExperienceStartDates.Count != dto.ExperienceEndDates.Count)
             {
