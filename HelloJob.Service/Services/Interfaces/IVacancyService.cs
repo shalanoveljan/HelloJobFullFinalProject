@@ -17,6 +17,7 @@ namespace HelloJob.Service.Services.Interfaces
         public Task<IResult> RemoveAsync(int id);
         public Task<IResult> UpdateAsync(int id, VacancyPostDto dto);
         public Task<IDataResult<VacancyGetDto>> GetAsync(int id);
+        public Task<IDataResult<List<VacancyGetDto>>> GetAllForVacancyPageInWebSiteAsync();
         public Task IncreaseCount(int id);
         public Task<IResult> SetOrderStatus(int VacancyId, Order orderStatus);
     }

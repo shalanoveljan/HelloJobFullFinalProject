@@ -1,4 +1,5 @@
 ﻿using HelloJob.Entities.DTOS;
+using HelloJob.Entities.Models;
 using HelloJob.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,122 +9,114 @@ using System.Security.Claims;
 namespace HelloJob.App.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize(Roles = "Employee")]
-    public class ResumeController : Controller
+    [Authorize(Roles = "Owner")]
+    public class VacancyController : Controller
     {
-        readonly IResumeService _ResumeService;
+        readonly IVacancyService _VacancyService;
         readonly ICategoryService _categoryService;
-        readonly IEducationService _educationService;
-        readonly ILanguageService _languageService;
         readonly ICityService _cityService;
-        public ResumeController(IResumeService ResumeService, ICategoryService categoryService, IEducationService educationService, ILanguageService languageService, ICityService cityService)
+        readonly ICompanyService _companyService;
+        public VacancyController(IVacancyService VacancyService, ICategoryService categoryService, ICityService cityService, ICompanyService companyService)
         {
-            _ResumeService = ResumeService;
+            _VacancyService = VacancyService;
             _categoryService = categoryService;
-            _educationService = educationService;
-            _languageService = languageService;
             _cityService = cityService;
+            _companyService = companyService;
         }
 
         public async Task<IActionResult> Index(string userid,int page = 1,int pagesize=6)
         {
              userid = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var res = await _ResumeService.GetAllAsync(userid, false, page, pagesize);
+            var res = await _VacancyService.GetAllAsync(userid, false, page, pagesize);
             return View(res.Datas);
         }
 
-        [Authorize(Roles = "Employee")]
+        [Authorize(Roles = "Owner")]
 
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await _categoryService.GetAllAsync();
-            ViewBag.Educations = await _educationService.GetAllAsync();
-            ViewBag.Languages = await _languageService.GetAllAsync();
             ViewBag.Cities = await _cityService.GetAllAsync();
+            ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewBag.UserId = userId;
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employee")]
+        [Authorize(Roles = "Owner")]
 
 
-        public async Task<IActionResult> Create(ResumePostDto dto)
+        public async Task<IActionResult> Create(VacancyPostDto dto)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
-                ViewBag.Educations = await _educationService.GetAllAsync();
-                ViewBag.Languages = await _languageService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
+                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
                 return View();
             }
-            var response = await _ResumeService.CreateAsync(dto);
-
+            var response = await _VacancyService.CreateAsync(dto);
+            CompanyGetDto company =(await _companyService.GetAsync(dto.CompanyId)).Data;
 
             if (!response.Success)
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
-                ViewBag.Educations = await _educationService.GetAllAsync();
-                ViewBag.Languages = await _languageService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
+                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
                 ModelState.AddModelError("", response.Message);
                 return View();
             }
 
-            return RedirectToAction(nameof(Index), new { userid = dto.AppUserId });
+            return RedirectToAction(nameof(Index), new { userid = company.AppUser.Id });
         }
 
         public async Task<IActionResult> Update(int id)
         {
             ViewBag.Categories = await _categoryService.GetAllAsync();
-            ViewBag.Educations = await _educationService.GetAllAsync();
-            ViewBag.Languages = await _languageService.GetAllAsync();
             ViewBag.Cities = await _cityService.GetAllAsync();
+            ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
-            var res = await _ResumeService.GetAsync(id);
+            var res = await _VacancyService.GetAsync(id);
             return View(res.Data);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employee")]
+        [Authorize(Roles = "Owner")]
 
-        public async Task<IActionResult> Update(int id, ResumePostDto dto)
+        public async Task<IActionResult> Update(int id, VacancyPostDto dto)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
-                ViewBag.Educations = await _educationService.GetAllAsync();
-                ViewBag.Languages = await _languageService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
+                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
 
-                var res = await _ResumeService.GetAsync(id);
+                var res = await _VacancyService.GetAsync(id);
                 return View(res.Data);
             }
-            var response = await _ResumeService.UpdateAsync(id, dto);
+            var response = await _VacancyService.UpdateAsync(id, dto);
 
             if (!response.Success)
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
-                ViewBag.Educations = await _educationService.GetAllAsync();
-                ViewBag.Languages = await _languageService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
+                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
                 ModelState.AddModelError("", response.Message);
-                var res = await _ResumeService.GetAsync(id);
+                var res = await _VacancyService.GetAsync(id);
                 return View(res.Data);
             }
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize(Roles = "Employee")]
+        [Authorize(Roles = "Owner")]
         public async Task<IActionResult> Remove(int id)
         {
-            var res = await _ResumeService.RemoveAsync(id);
+            var res = await _VacancyService.RemoveAsync(id);
             if (!res.Success)
             {
                 ModelState.AddModelError("", res.Message);

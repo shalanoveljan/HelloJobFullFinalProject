@@ -161,6 +161,56 @@ namespace HelloJob.Service.Services.Implementations
             };
             return new SuccessDataResult<VacancyGetDto>(VacancyGetDto, "Get Vacancy");
         }
+        private IQueryable<Vacancy> GetBaseQuery()
+        {
+            return _VacancyRepository.GetQuery(x => !x.IsDeleted)/*&& x.order==Order.Accept*/
+                             .AsNoTrackingWithIdentityResolution()
+                                           .Include(x => x.Company)
+                                            .ThenInclude(x => x.AppUser)
+                                            .Include(x => x.City)
+                                             .Include(x => x.abouts)
+                                            .Include(x => x.Category)
+                                            .Include(x => x.WishListItems)
+                                                .ThenInclude(y => y.Wishlist)
+                                               .Include(x => x.WishListItems)
+                                                .ThenInclude(y => y.Wishlist.AppUser);
+        }
+
+        private async Task<List<VacancyGetDto>> GetCompanyGetDtoListAsync(IQueryable<Vacancy> query)
+        {
+            return await query.Select(Vacancy => new VacancyGetDto
+            {
+                Id = Vacancy.Id,
+                Position = Vacancy.Position,
+                Required_Experience = Vacancy.Required_Experience,
+                Mode = Vacancy.Mode,
+                Salary = Vacancy.Salary,
+                IsPremium = Vacancy.IsPremium,
+                CreatedAt = Vacancy.CreatedAt,
+                EndDate = Vacancy.EndDate,
+                order = Vacancy.order,
+                ViewCount = Vacancy.ViewCount,
+                abouts = Vacancy.abouts,
+                Company = new CompanyGetDto { Id = Vacancy.Company.Id, About = Vacancy.Company.About, Email = Vacancy.Company.Email, Image = Vacancy.Company.Image, Name = Vacancy.Company.Name, WebsiteUrlLink = Vacancy.Company.WebsiteUrlLink, order = Vacancy.Company.order, AppUser = Vacancy.Company.AppUser },
+                Category = new CategoryGetDto { Id = Vacancy.Category.Id, Name = Vacancy.Category.Name, Image = Vacancy.Category.Image, ParentId = Vacancy.Category.ParentId },
+                City = new CityGetDto { Id = Vacancy.City.Id, Name = Vacancy.City.Name, CreateAt = Vacancy.City.CreatedAt },
+
+            }).ToListAsync();
+        }
+        public async Task<IDataResult<List<VacancyGetDto>>> GetAllForVacancyPageInWebSiteAsync()
+        {
+            var query = GetBaseQuery();
+
+            var VacanciesGetDtos = await GetCompanyGetDtoListAsync(query);
+
+            if (VacanciesGetDtos == null)
+            {
+                return new ErrorDataResult<List<VacancyGetDto>>("Companys Not Found");
+            }
+
+            return new SuccessDataResult<List<VacancyGetDto>>(VacanciesGetDtos, "Get Companys for SITE PAGE");
+        }
+
 
         public async Task IncreaseCount(int id)
         {
