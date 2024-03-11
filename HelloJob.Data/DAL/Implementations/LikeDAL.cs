@@ -9,11 +9,21 @@ using System.Threading.Tasks;
 
 namespace HelloJob.Data.DAL.Implementations
 {
-    public class LikeDAL: EFRepositoryBase<Wishlist>, ILikeDAL
+    public class WishlistDAL: EFRepositoryBase<Wishlist>, IWishlistDAL
     {
-        public LikeDAL(HelloJobDbContext context) : base(context)
+        public WishlistDAL(HelloJobDbContext context) : base(context)
         {
 
         }
     }
+
+    public class WishlistItemDAL : EFRepositoryBase<WishlistItem>, IWishlistItemDAL
+    {
+        public WishlistItemDAL(HelloJobDbContext context) : base(context)
+        {
+
+        }
+    }
+
+
 }

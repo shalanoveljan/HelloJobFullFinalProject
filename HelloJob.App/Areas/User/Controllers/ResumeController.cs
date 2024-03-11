@@ -27,23 +27,30 @@ namespace HelloJob.App.Areas.User.Controllers
 
         public async Task<IActionResult> Index(string userid,int page = 1,int pagesize=6)
         {
-            return View(await _ResumeService.GetAllAsync(userid,false,page,pagesize));
+             userid = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var res = await _ResumeService.GetAllAsync(userid, false, page, pagesize);
+            return View(res.Datas);
         }
+
+        [Authorize(Roles = "Employee")]
 
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await _categoryService.GetAllAsync();
             ViewBag.Educations = await _educationService.GetAllAsync();
             ViewBag.Languages = await _languageService.GetAllAsync();
-            ViewBag.Cities = await _cityService.GetAllAsync();   
-                return View();
+            ViewBag.Cities = await _cityService.GetAllAsync();
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.UserId = userId;
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
+
+
         public async Task<IActionResult> Create(ResumePostDto dto)
         {
-            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            dto.AppUserId = userId;
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
@@ -67,12 +74,11 @@ namespace HelloJob.App.Areas.User.Controllers
                 return View();
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { userid = dto.AppUserId });
         }
 
         public async Task<IActionResult> Update(int id)
         {
-
             ViewBag.Categories = await _categoryService.GetAllAsync();
             ViewBag.Educations = await _educationService.GetAllAsync();
             ViewBag.Languages = await _languageService.GetAllAsync();
@@ -83,6 +89,8 @@ namespace HelloJob.App.Areas.User.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
+
         public async Task<IActionResult> Update(int id, ResumePostDto dto)
         {
             if (!ModelState.IsValid)
@@ -112,6 +120,7 @@ namespace HelloJob.App.Areas.User.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Remove(int id)
         {
             var res = await _ResumeService.RemoveAsync(id);

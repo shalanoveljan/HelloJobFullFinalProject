@@ -20,12 +20,13 @@ namespace HelloJob.Entities.DTOS
         public Gender Gender { get; set; }
         public JobMode Mode { get; set; }
         public MaritalStatus Status { get; set; }
+        public Order order { get; set; }
         public double Salary { get; set; }
         public bool IsDriverLicense { get; set; }
         public bool IsPremium { get; set; }
         public CategoryGetDto Category { get; set; }
         public EducationGetDto Education { get; set; }
-        public LanguageGetDto Language { get; set; }
+        public Language Language { get; set; }
         public CityGetDto City { get; set; }
         public int Experience { get; set; }
         public DateTime Birthday { get; set; }

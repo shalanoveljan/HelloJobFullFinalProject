@@ -35,11 +35,11 @@ namespace HelloJob.Data.ServiceRegistrations
             services.AddScoped<ILanguageDAL, LanguageDAL>();
             services.AddScoped<IEducationDAL, EducationDAL>();
             services.AddScoped<ICityDAL, CityDAL>();
-            services.AddScoped<IExperienceDAL, ExperienceDAL>();
             services.AddScoped<IResumeDAL, ResumeDAL>();
-            services.AddScoped<IExperienceDAL, ExperienceDAL>();
-            services.AddScoped<ILikeDAL, LikeDAL>();
-
+            services.AddScoped<IWishlistDAL, WishlistDAL>();
+            services.AddScoped<IWishlistItemDAL, WishlistItemDAL>();
+            services.AddScoped<ICompanyDAL, CompanyDAL>();
+            services.AddScoped<IVacancyDAL, VacancyDAL>();
 
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {

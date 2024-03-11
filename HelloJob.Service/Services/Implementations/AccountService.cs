@@ -124,8 +124,7 @@ namespace HelloJob.Service.Services.Implementations
                 if (!checkUser.IsActivate)
                     return new ErrorResult("Your account is blocked! Please contact the administrator.");
 
-                if ((isAdminPanelLogin && (await IsUserInRole(checkUser, "Owner") || await IsUserInRole(checkUser, "Employee"))) ||
-                    (!isAdminPanelLogin && (await IsUserInRole(checkUser, "SuperAdmin") || await IsUserInRole(checkUser, "Admin"))))
+                if ((isAdminPanelLogin &&  (await IsUserInRole(checkUser, "Owner") || await IsUserInRole(checkUser, "Employee"))))
                 {
                     return new ErrorResult(isAdminPanelLogin ? "You are not authorized to access the admin panel." : "You are not authorized to access the user panel. Please create a user for yourself.");
                 }

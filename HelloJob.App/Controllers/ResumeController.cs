@@ -1,7 +1,9 @@
 ﻿using HelloJob.Data.DBContexts.SQLSERVER;
 using HelloJob.Entities.DTOS;
 using HelloJob.Entities.Models;
+using HelloJob.Service.Services.Implementations;
 using HelloJob.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelloJob.App.Controllers
@@ -13,13 +15,15 @@ namespace HelloJob.App.Controllers
         readonly ICategoryService _categoryService;
         readonly IEducationService _educationService;
         readonly ILanguageService _languageService;
+        readonly ILikedService _likeService;
 
-        public ResumeController(IResumeService ResumeService, ICategoryService categoryService, IEducationService educationService, ILanguageService languageService)
+        public ResumeController(IResumeService ResumeService, ICategoryService categoryService, IEducationService educationService, ILanguageService languageService, ILikedService likeService)
         {
             _ResumeService = ResumeService;
             _categoryService = categoryService;
             _educationService = educationService;
             _languageService = languageService;
+            _likeService = likeService;
         }
 
 
@@ -43,6 +47,7 @@ namespace HelloJob.App.Controllers
         {
             ViewBag.Resumes = await _ResumeService.GetAllForResumePageInWebSiteAsync();
             var res = await _ResumeService.GetAsync(id);
+            await _ResumeService.IncreaseCount(id);
             return View(res.Data);
         }
 
@@ -63,6 +68,24 @@ namespace HelloJob.App.Controllers
         {
             var res = await _ResumeService.LoadMoreResumesAsync(id,pagenumber,pagesize,dto);
             return PartialView("_ResumePartial", res.Data);
+        }
+
+        public async Task<IActionResult> Wishlist()
+        {
+            
+                Wishlist wishlist = await _likeService.GetWishList();
+                if (wishlist is null)
+                {
+                    return Json("Wishlist is null");
+                }
+
+                return View(wishlist);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddWishlist(int itemid, string itemtype)
+        {
+            await _likeService.AddToWishlist(itemid,itemtype);
+            return Json(new { status = 200 });
         }
 
     }

@@ -26,7 +26,6 @@ namespace HelloJob.Service.Services.Implementations
     {
         readonly IWebHostEnvironment _env;
         readonly IResumeDAL _ResumeRepository;
-         readonly IMapper _mapper;
         readonly ICategoryDAL _categoryRepository;
         readonly IEducationDAL _educationRepository;
         readonly ILanguageDAL _languageRepository;
@@ -36,7 +35,6 @@ namespace HelloJob.Service.Services.Implementations
         {
             _env = env;
             _ResumeRepository = ResumeRepository;
-            _mapper = mapper;
             _categoryRepository = categoryRepository;
             _educationRepository = educationRepository;
             _languageRepository = languageRepository;
@@ -166,6 +164,9 @@ namespace HelloJob.Service.Services.Implementations
                 .Include(x => x.City)
                 .Include(x => x.Education)
                 .Include(x => x.Language)
+                .Include(x => x.experiences)
+                 .Include(x => x.Skills)
+                 .Include(x => x.educations)
                 .Include(x => x.Category)
                 .Include(x => x.WishListItems)
                     .ThenInclude(y => y.Wishlist)
@@ -187,17 +188,19 @@ namespace HelloJob.Service.Services.Implementations
                     Status = x.Status,
                     Salary = x.Salary,
                     IsDriverLicense = x.IsDriverLicense,
+                    Birthday=x.Birthday,
                     IsPremium = x.IsPremium,
                     Experience = x.Experience,
                     CreatedAt = x.CreatedAt,
                     EndDate = x.EndDate,
+                    order=x.order,
                     ViewCount = x.ViewCount,
                     educations = x.educations,
                     experiences = x.experiences,
                     Skills = x.Skills,
                     Category = new CategoryGetDto { Id = x.Category.Id, Name = x.Category.Name, Image = x.Category.Image, ParentId = x.Category.ParentId },
                     Education = new EducationGetDto { Id = x.Education.Id, Name = x.Education.Name, CreateAt = x.Education.CreatedAt },
-                    Language = new LanguageGetDto { Id = x.Language.Id, Name = x.Language.Name, CreateAt = x.Language.CreatedAt },
+                    Language = x.Language,
                     City = new CityGetDto { Id = x.City.Id, Name = x.City.Name, CreateAt = x.City.CreatedAt },
                     AppUser = x.AppUser,
                 }).ToList();
@@ -218,6 +221,9 @@ namespace HelloJob.Service.Services.Implementations
                                         .Include(x => x.City)
                                         .Include(x => x.Education)
                                         .Include(x => x.Language)
+                                        .Include(x => x.experiences)
+                                        .Include(x => x.Skills)
+                                        .Include(x => x.educations)
                                         .Include(x => x.Category)
                                         .Include(x => x.WishListItems)
                                         .ThenInclude(y => y.Wishlist)
@@ -236,15 +242,17 @@ namespace HelloJob.Service.Services.Implementations
                 Surname = resume.Surname,
                 Email = resume.Email,
                 PhoneNumber = resume.PhoneNumber,
+                Birthday=resume.Birthday,
                 Gender = resume.Gender,
                 Mode = resume.Mode,
                 Status = resume.Status,
                 Salary = resume.Salary,
+                order=resume.order,
                 IsDriverLicense = resume.IsDriverLicense,
                 IsPremium = resume.IsPremium,
                 Category = new CategoryGetDto { Id = resume.Category.Id, Name = resume.Category.Name, Image = resume.Category.Image, ParentId = resume.Category.ParentId },
                 Education = new EducationGetDto { Id = resume.Education.Id, Name = resume.Education.Name, CreateAt = resume.Education.CreatedAt },
-                Language = new LanguageGetDto { Id = resume.Language.Id, Name = resume.Language.Name, CreateAt = resume.Language.CreatedAt },
+                Language = resume.Language,
                 City = new CityGetDto { Id = resume.City.Id, Name = resume.City.Name, CreateAt = resume.City.CreatedAt },
                 Experience = resume.Experience,
                 CreatedAt = resume.CreatedAt,
@@ -338,12 +346,15 @@ namespace HelloJob.Service.Services.Implementations
 
         private IQueryable<Resume> GetBaseQuery()
         {
-            return _ResumeRepository.GetQuery(x => !x.IsDeleted)
+            return _ResumeRepository.GetQuery(x => !x.IsDeleted)/*&& x.order==Order.Accept*/
                 .AsNoTrackingWithIdentityResolution()
                   .Include(x => x.AppUser)
                   .Include(x => x.City)
                   .Include(x => x.Education)
                   .Include(x => x.Language)
+                  .Include(x => x.experiences)
+                  .Include(x => x.Skills)
+                   .Include(x => x.educations)
                    .Include(x => x.Category)
                    .Include(x=>x.WishListItems)
                     .ThenInclude(y=>y.Wishlist)
@@ -365,11 +376,13 @@ namespace HelloJob.Service.Services.Implementations
                 Mode = resume.Mode,
                 Status = resume.Status,
                 Salary = resume.Salary,
+                order=resume.order,
+                Birthday=resume.Birthday,
                 IsDriverLicense = resume.IsDriverLicense,
                 IsPremium = resume.IsPremium,
                 Category = new CategoryGetDto { Id = resume.Category.Id, Name = resume.Category.Name, Image = resume.Category.Image, ParentId = resume.Category.ParentId },
                 Education = new EducationGetDto { Id = resume.Education.Id, Name = resume.Education.Name, CreateAt = resume.Education.CreatedAt },
-                Language = new LanguageGetDto { Id = resume.Language.Id, Name = resume.Language.Name, CreateAt = resume.Language.CreatedAt },
+                Language = resume.Language,
                 City = new CityGetDto { Id = resume.City.Id, Name = resume.City.Name, CreateAt = resume.City.CreatedAt },
                 Experience = resume.Experience,
                 CreatedAt = resume.CreatedAt,
@@ -429,7 +442,7 @@ namespace HelloJob.Service.Services.Implementations
             // Filter by category IDs
             if (dto.CategoriesIds != null && dto.CategoriesIds.Count > 0)
             {
-                var activeCategories = _categoryRepository.GetQuery(x => !x.IsDeleted && x.ParentId == null).ToList();
+                var activeCategories = _categoryRepository.GetQuery(x => !x.IsDeleted).ToList();
                 var categories = activeCategories.Where(cat =>
                     dto.CategoriesIds.Any(categoryId => cat.Id == categoryId)
                 );

@@ -11,8 +11,10 @@
         </ul>
     </div>
     <div class="inner_tab">
-        <form enctype="multipart/form-data" method="post">
+        <form enctype="multipart/form-data" method="post" asp-controller="resume" asp-action="create">
             <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+            <input type="hidden" id="AppUserId" name="AppUserId" value="@ViewBag.UserId">
 
             <div class="row mb-5">
                 <div class="col-lg-2">
@@ -27,8 +29,6 @@
                                    id="fileInput"
                                    accept="image/*" />
                             <span class="text text-danger" asp-validation-for="ImageFile"></span>
-
-
                           
                         </div>
                         <label for="prof_img" class="upload_image">
@@ -453,4 +453,5 @@
             const removeBtn = document.querySelector('.remove-btn2');
             removeBtn.addEventListener('click', removeFormGroup);
         });</script>
+
 }

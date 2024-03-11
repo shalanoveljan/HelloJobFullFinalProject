@@ -108,15 +108,14 @@ namespace HelloJob.App.Areas.Admin.Controllers
                 ModelState.AddModelError("", result.Message);
                 return View(dto);
             }
-            return RedirectToAction("index", "dashboard");
+            return RedirectToAction("index", "dashboard",new {area = "Admin"});
         }
 
         public async Task<IActionResult> LogOut()
         {
             var result = await _accountService.LogOut();
-            return RedirectToAction("index", "dashboard");
+            return RedirectToAction("login", "account");
         }
-
         public async Task<IActionResult> ForgetPassword()
         {
             return View();

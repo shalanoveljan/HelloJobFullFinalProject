@@ -299,32 +299,6 @@ namespace HelloJob.Data.Migrations
                     b.ToTable("Educations");
                 });
 
-            modelBuilder.Entity("HelloJob.Entities.Models.Experience", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Experiences");
-                });
-
             modelBuilder.Entity("HelloJob.Entities.Models.Employee_Special_Education", b =>
                 {
                     b.Property<int>("Id")
@@ -470,9 +444,6 @@ namespace HelloJob.Data.Migrations
                     b.Property<int>("Experience")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ExperienceId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -531,8 +502,6 @@ namespace HelloJob.Data.Migrations
                     b.HasIndex("CityId");
 
                     b.HasIndex("EducationId");
-
-                    b.HasIndex("ExperienceId");
 
                     b.HasIndex("LanguageId");
 
@@ -934,10 +903,6 @@ namespace HelloJob.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HelloJob.Entities.Models.Experience", null)
-                        .WithMany("Resumes")
-                        .HasForeignKey("ExperienceId");
-
                     b.HasOne("HelloJob.Entities.Models.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
@@ -1091,11 +1056,6 @@ namespace HelloJob.Data.Migrations
                 });
 
             modelBuilder.Entity("HelloJob.Entities.Models.Education", b =>
-                {
-                    b.Navigation("Resumes");
-                });
-
-            modelBuilder.Entity("HelloJob.Entities.Models.Experience", b =>
                 {
                     b.Navigation("Resumes");
                 });

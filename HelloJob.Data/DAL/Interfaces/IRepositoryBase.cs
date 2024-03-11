@@ -14,5 +14,7 @@ namespace HelloJob.Data.DAL.Interfaces
         public Task<T> GetAsync(Expression<Func<T, bool>> expression, params string[] Includes);
         public IQueryable<T> GetQuery(Expression<Func<T, bool>> expression);
         public Task RemoveAsync(T entity);
+        public Task<int> SaveChangesAsync();
+
     }
 }

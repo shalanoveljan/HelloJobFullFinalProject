@@ -41,34 +41,47 @@ namespace HelloJob.App.Areas.Admin.Controllers
             var res = await _ResumeService.GetAsync(resumeId);
             return res.Data ;
         }
+        [HttpPost]
         public async Task<IActionResult> Accept(int resumeid)
         {
             var result = await ProcessOrderStatus(resumeid, "Muracietiniz qebul olundu");
-
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Redirect(Request.Headers["Referer"].ToString());
             }
             else
             {
-                return BadRequest(result.Message);
+                return View(nameof(Index));
             }
         }
-
+        [HttpPost]
         public async Task<IActionResult> Reject(int resumeid)
         {
             var result = await ProcessOrderStatus(resumeid, "Muracietiniz red edildi");
 
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Redirect(Request.Headers["Referer"].ToString());
             }
             else
             {
-                return BadRequest(result.Message);
+                return View(nameof(Index));
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> Pending(int resumeid)
+        {
+            var result = await ProcessOrderStatus(resumeid, "Muracietiniz gozlemededi");
 
+            if (result.Success)
+            {
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            else
+            {
+                return View(nameof(Index));
+            }
+        }
         private async Task<HelloJob.Core.Utilities.Results.Abstract.IResult> ProcessOrderStatus(int resumeid, string emailSubject)
         {
             var resume = await GetResumeById(resumeid);
@@ -79,26 +92,71 @@ namespace HelloJob.App.Areas.Admin.Controllers
             }
 
             var userEmail = resume.AppUser.Email;
-            var result = await _ResumeService.SetOrderStatus(resumeid, emailSubject == "Muracietiniz qebul olundu" ? Order.Accept : Order.Reject);
 
-            if (result.Success)
+            var orderStatus = GetOrderStatusFromEmailSubject(emailSubject);
+
+            if (orderStatus == Order.None)
             {
-                var notificationResult = await _emailHelper.SendNotificationEmailAsync(userEmail, emailSubject, emailSubject);
+                var result = await _ResumeService.SetOrderStatus(resumeid, orderStatus);
 
-                if (notificationResult.Success)
+                if (result.Success)
                 {
-                    return new SuccessResult(result.Message);
+                    var notificationResult = await _emailHelper.SendNotificationEmailAsync(userEmail, "Pending", "netice gozlenilir");
+
+                    if (notificationResult.Success)
+                    {
+                        return new SuccessResult("Pending bildirimi gönderildi");
+                    }
+                    else
+                    {
+                        return new ErrorResult("Pending bildirimi gönderilmedi");
+                    }
                 }
                 else
                 {
-                    return new ErrorResult("Melumatlandirici e-postası gönderilmedi");
+                    return new ErrorResult(result.Message);
                 }
             }
             else
             {
-                return new ErrorResult(result.Message);
+                var result = await _ResumeService.SetOrderStatus(resumeid, orderStatus);
+
+                if (result.Success)
+                {
+                    var notificationResult = await _emailHelper.SendNotificationEmailAsync(userEmail, emailSubject, emailSubject);
+
+                    if (notificationResult.Success)
+                    {
+                        return new SuccessResult(result.Message);
+                    }
+                    else
+                    {
+                        return new ErrorResult("Melumatlandirici e-postası gönderilmedi");
+                    }
+                }
+                else
+                {
+                    return new ErrorResult(result.Message);
+                }
             }
         }
+
+        private Order GetOrderStatusFromEmailSubject(string emailSubject)
+        {
+            if (emailSubject == "Muracietiniz qebul olundu")
+            {
+                return Order.Accept;
+            }
+            else if (emailSubject == "Muracietiniz red edildi")
+            {
+                return Order.Reject;
+            }
+            else
+            {
+                return Order.None;
+            }
+        }
+
 
     }
 }

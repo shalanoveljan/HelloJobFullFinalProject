@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HelloJob.Data.DAL.Interfaces
 {
-    public interface ILikeDAL:IRepositoryBase<Wishlist>
+    public interface IVacancyDAL: IRepositoryBase<Vacancy>
     {
 
     }

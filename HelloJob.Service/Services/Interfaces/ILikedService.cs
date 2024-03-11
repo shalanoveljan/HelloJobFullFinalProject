@@ -9,7 +9,8 @@ namespace HelloJob.Service.Services.Interfaces
 {
     public interface ILikedService
     {
-        Task<List<Wishlist>> GetWishLists(AppUser user);
+        Task<Wishlist> GetWishList();
+        Task AddToWishlist(int itemId, string itemtype);
         Task<WishlistItem> CreateWishlistItem(string itemType, int itemId);
         WishlistItem GetWishlistItem(List<WishlistItem> wishlistItems, string itemType, int itemId);
     }

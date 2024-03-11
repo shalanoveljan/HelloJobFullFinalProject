@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace HelloJob.Data.DAL.Interfaces
 {
-    public interface IExperienceDAL: IRepositoryBase<Experience>
+    public interface ICompanyDAL : IRepositoryBase<Company>
     {
+
     }
 }

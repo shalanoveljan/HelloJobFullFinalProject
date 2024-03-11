@@ -12,13 +12,14 @@
             <a href="/">İş elanları</a>
             </li>
             <li class="active">
-            <a href="./resume.html">CV-lər</a>
+                  <a asp-action="Index" asp-controller="resume">CV-lər</a>
             </li>
             <li >
-            <a href="./course.html">Kurslar</a>
+                  <a asp-action="index" asp-controller="course">Kurslar</a>
             </li>
             </ul>
             </div>
+             
         </div>
         </div> 
     </div>
@@ -134,7 +135,7 @@
                     <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/graduation.svg" alt="">
                     </div>
                     <div class="resume__item__text">
-                    <h4>@Model.Language.Name</h4>
+                    <h4>@Model.Education.Name</h4>
                     <p>Təhsil</p>
                     </div>
                     </div>
@@ -191,9 +192,9 @@
 
                             <div class="col-md-6">
                             <div class="resume__item resume__item--lang">
-                            <span>@Model.Language.ToString().Substring(0,2).ToUpper()</span>
+                            <span>@Model.Language.Name.ToString().Substring(0,2).ToUpper()</span>
                             <div class="resume__item__text">
-                            <h4>@Model.Language dili</h4>
+                            <h4>@Model.Language.Name dili</h4>
                             </div>
                             </div>
                             </div>
@@ -302,7 +303,7 @@
                                         }
                                         else
                                         {
-                                            <h4 class="hidd_num hidden_toggle-num">Nömrəni göstər</h4>
+                                            <h4 class="hidd_num hidden_toggle-num">Email göstər</h4>
                                         }
                     <h4 class="hidd_email hidden_toggle-email d-none"><a href="#"></a></h4>
                     <p>E-poçt ünvanı</p>
@@ -353,7 +354,7 @@
    <div class="container  cv_parts">
     <h3 class="resume__title">Oxşar cv-lər</h3>
     <div class="row">
-            @foreach (var item in ((IEnumerable<ResumeGetDto>)ViewBag.Resumes).Where(b => b.Category.Id == Model.Category.Id && b.Id != Model.Category.Id).Take(6))
+            @foreach (var item in ((List<ResumeGetDto>)ViewBag.Resumes.Data).Where(b => b.Category.Id == Model.Category.Id && b.Id != Model.Id).Take(6))
             {
                 <div class="col-md-6">
                     <div class="resume">
@@ -412,5 +413,40 @@
     <a asp-controller="resume" asp-action="index" class="view-all">Hamısını göstər</a>
 </main>
 @section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    var resumeId = "@Model.Id"; 
+
+    //var liked = localStorage.getItem("liked_" + resumeId);
+    //if (liked === "true") {
+    //    localStorage.setItem("liked_" + resumeId, "false");
+    //    document.getElementById("unlike").style.display = "none";
+    //    document.getElementById("like").style.display = "inline";
+    //} else {
+    //    localStorage.setItem("liked_" + resumeId, "true");
+    //    document.getElementById("unlike").style.display = "inline";
+    //    document.getElementById("like").style.display = "none";
+    //}
+
+    function addToFavorites(resumeId) {
+        fetch('/Like/AddToWishlist?itemId=' + resumeId + '&itemType=Resume', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    addToFavorites(resumeId);
+});
+
+    </script>
+
     <script src="~/assets/js/resume-detail.js"></script>
    }

@@ -1,3 +1,11 @@
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.csproj.AssemblyReference.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.AssemblyInfoInputs.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.AssemblyInfo.cs
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.csproj.CoreCompileInputs.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.RazorAssemblyInfo.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.RazorAssemblyInfo.cs
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\appsettings.json
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\HelloJob.App.staticwebassets.runtime.json
@@ -250,15 +258,7 @@ C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\HelloJob.Ser
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\HelloJob.Core.pdb
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\HelloJob.Data.pdb
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\HelloJob.Entities.pdb
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.csproj.AssemblyReference.cache
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.AssemblyInfoInputs.cache
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.AssemblyInfo.cs
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.csproj.CoreCompileInputs.cache
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.RazorAssemblyInfo.cache
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.RazorAssemblyInfo.cs
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\staticwebassets\msbuild.HelloJob.App.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\staticwebassets\msbuild.build.HelloJob.App.props
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.HelloJob.App.props
@@ -275,3 +275,5 @@ C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\refint\Hello
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.pdb
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\HelloJob.App.genruntimeconfig.cache
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\obj\Debug\net6.0\ref\HelloJob.App.dll
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\Microsoft.AspNetCore.Server.Kestrel.Https.dll
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.App\bin\Debug\net6.0\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll

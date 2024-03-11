@@ -28,8 +28,6 @@ namespace HelloJob.Service.Mappers
             CreateMap<Language, LanguageGetDto>().ReverseMap();
             CreateMap<Education, EducationGetDto>().ReverseMap();
             CreateMap<Education, EducationPostDto>().ReverseMap();
-            CreateMap<Experience, ExperienceGetDto>().ReverseMap();
-            CreateMap<Experience, ExperiencePostDto>().ReverseMap();
             CreateMap<City, CityGetDto>().ReverseMap();
             CreateMap<City, CityPostDto>().ReverseMap();
 

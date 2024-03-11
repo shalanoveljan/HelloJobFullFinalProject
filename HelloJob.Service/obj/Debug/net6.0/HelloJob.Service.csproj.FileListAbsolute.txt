@@ -1,3 +1,8 @@
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.csproj.AssemblyReference.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.AssemblyInfoInputs.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.AssemblyInfo.cs
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.csproj.CoreCompileInputs.cache
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\bin\Debug\net6.0\HelloJob.Service.deps.json
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\bin\Debug\net6.0\HelloJob.Service.dll
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\bin\Debug\net6.0\HelloJob.Service.pdb
@@ -7,11 +12,6 @@ C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\bin\Debug\net6.0\HelloJob
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\bin\Debug\net6.0\HelloJob.Data.pdb
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\bin\Debug\net6.0\HelloJob.Core.pdb
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\bin\Debug\net6.0\HelloJob.Entities.pdb
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.csproj.AssemblyReference.cache
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.AssemblyInfoInputs.cache
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.AssemblyInfo.cs
-C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.csproj.CoreCompileInputs.cache
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.csproj.CopyComplete
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\HelloJob.Service.dll
 C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Service\obj\Debug\net6.0\refint\HelloJob.Service.dll

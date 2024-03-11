@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HelloJob.Data.DAL.Implementations
 {
-    public class ExperienceDAL: EFRepositoryBase<Experience>, IExperienceDAL
+    public class VacancyDAL: EFRepositoryBase<Vacancy>, IVacancyDAL
     {
-        public ExperienceDAL(HelloJobDbContext context) : base(context)
+        public VacancyDAL(HelloJobDbContext context) : base(context)
         {
 
         }

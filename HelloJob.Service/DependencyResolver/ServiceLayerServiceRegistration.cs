@@ -28,7 +28,6 @@ namespace HelloJob.Service.DependencyResolver
             services.AddScoped<ITagService,TagService>();
             services.AddScoped<IEducationService,EducationService>();
             services.AddScoped<ILanguageService,LanguageService>();
-            services.AddScoped<IExperienceService,ExperienceService>();
             services.AddScoped<ICityService,CityService>();
             services.AddScoped<IAccountService,AccountService>();
             services.AddScoped<IResumeService,ResumeService>();

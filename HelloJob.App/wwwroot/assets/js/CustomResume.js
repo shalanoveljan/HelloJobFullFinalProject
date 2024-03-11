@@ -46,7 +46,6 @@ $(document).ready(function () {
         });
     });
 });
-
 function getFilterDto() {
     var categoriesIds = [];
     var languagesIds = [];
@@ -75,7 +74,6 @@ function getFilterDto() {
         status.push(parseInt($(this).val()));
     });
 
-
     var minExperience = parseInt($("#slider-1").val());
     var maxExperience = parseInt($("#slider-2").val());
 
@@ -87,7 +85,7 @@ function getFilterDto() {
         LanguagesIds: languagesIds,
         CategoriesIds: categoriesIds,
         IsDriverLicense: isDriverLicense,
-        Job_Mode: JobMode,
+        JobMode: JobMode, 
         MaritalStatus: status,
         Gender: gender,
         MinSalary: minSalary,

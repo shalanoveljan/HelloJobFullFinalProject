@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 
 @model List<ResumeGetDto>
 <main>
@@ -82,7 +82,7 @@
                         <ul class="resumes__filters__profession resumes__filters__checkbox">
                             @foreach (var item in ViewBag.Categories.Datas)
                             {
-                                @if (item.ParentId == null)
+                                @if (item.ParentId != null)
                                 {
                                     <li>
                                         <input type="checkbox" value="@item.Id" class="form-control d-none" id="category@(item.Id)"
@@ -125,13 +125,13 @@
                         <ul class="resumes__filters__profession resumes__filters__checkbox">
                             @foreach (var item in ViewBag.Educations.Datas)
                             {
-                                    <li>
-                                        <input type="checkbox" value="@item.Id" class="form-control d-none" id="education@(item.Id)"
+                                <li>
+                                    <input type="checkbox" value="@item.Id" class="form-control d-none" id="education@(item.Id)"
                                        name="EducationsIds">
-                                        <label for="education@(item.Id)">
-                                            @item.Name
-                                        </label>
-                                    </li>
+                                    <label for="education@(item.Id)">
+                                        @item.Name
+                                    </label>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -193,7 +193,7 @@
                     <div class="resumes__filters__item resumes__filters__item--profession">
                         <h3 class="resumes__title">Cinsiyyet</h3>
                         <ul class="resumes__filters__checkbox">
-                           @foreach (var gen in Enum.GetValues(typeof(Gender)))
+                            @foreach (var gen in Enum.GetValues(typeof(Gender)))
                             {
                                 if ((int)gen != 0)
                                 {
@@ -273,7 +273,6 @@
                 <div class="similar_resumes">
                     @await Html.PartialAsync("_ResumePartial",Model)
                 </div>
-                <ul class="pagination"><a onclick="LoadMore()" class="page-link-load" page="2" aria-label="Next">Daha çox göstər</a></ul>
             </div>
         </div>
     </div>

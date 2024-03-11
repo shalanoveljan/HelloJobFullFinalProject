@@ -140,7 +140,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <div class="dropdown" id="dropdownContainer">
-                                <a asp-controller="profilim" asp-action="index" class="login-btn popup-btn btn btn-primary" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a href="#" class="login-btn popup-btn btn btn-primary" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-arrow-right-to-bracket"></i>
                                     @User.Identity.Name
                                 </a>
@@ -170,7 +170,7 @@
                             @if (User.IsInRole("Employee"))
                             {
                                 <div class="elan_yerlesdir_button_hover">
-                                    <a asp-area="user" asp-controller="resume" asp-action="create" class="elan_yerlesdir btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <a asp-area="user" asp-controller="resume" asp-action="create" class="elan_yerlesdir btn btn-primary" >
                                         <i class="fa-solid fa-circle-plus"></i>
                                         CV yerləşdir
                                     </a>
@@ -179,7 +179,7 @@
                             else if (User.IsInRole("Owner"))
                             {
                                 <div class="elan_yerlesdir_button_hover">
-                                    <a asp-area="user" asp-controller="vacancy" asp-action="create" class="elan_yerlesdir btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <a asp-area="user" asp-controller="vacancy" asp-action="create" class="elan_yerlesdir btn btn-primary">
                                         <i class="fa-solid fa-circle-plus"></i>
                                         Elan yerləşdir
                                     </a>
@@ -197,7 +197,7 @@
                         }
 
 
-                        <a href="./wishlist.html" class="wishlist">
+                        <a asp-controller="resume" asp-action="wishlist" class="wishlist">
                             <span class="d-none">Wishlist</span>
                             <img class="heart-img" src="~/assets/icons/heart.svg" alt="">
                         </a>
