@@ -12,13 +12,12 @@ namespace HelloJob.Service.Services.Interfaces
 {
     public  interface IVacancyService
     {
-        public Task<PagginatedResponse<ResumeGetDto>> GetAllAsync(string userId, bool isAdmin, int pageNumber = 1, int pageSize = 6);
-        public Task<IResult> CreateAsync(ResumePostDto dto);
+        public Task<PagginatedResponse<VacancyGetDto>> GetAllAsync(string userId, bool isAdmin, int pageNumber = 1, int pageSize = 6);
+        public Task<IResult> CreateAsync(VacancyPostDto dto);
         public Task<IResult> RemoveAsync(int id);
-        public Task<IResult> UpdateAsync(int id, ResumePostDto dto);
-        public Task<IDataResult<ResumeGetDto>> GetAsync(int id);
+        public Task<IResult> UpdateAsync(int id, VacancyPostDto dto);
+        public Task<IDataResult<VacancyGetDto>> GetAsync(int id);
         public Task IncreaseCount(int id);
-        public Task<IDataResult<List<ResumeGetDto>>> GetAllForResumePageInWebSiteAsync();
-        public Task<IResult> SetOrderStatus(int resumeId, Order orderStatus);
+        public Task<IResult> SetOrderStatus(int VacancyId, Order orderStatus);
     }
 }

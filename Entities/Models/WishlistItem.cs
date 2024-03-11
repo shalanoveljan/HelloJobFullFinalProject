@@ -11,6 +11,8 @@ namespace HelloJob.Entities.Models
     {
         public int? ResumeId { get; set; }
         public Resume Resume { get; set; }
+        public int? VacancyId { get; set; }
+        public Vacancy Vacancy { get; set; }
         public int WishlistId { get; set; }
         public Wishlist Wishlist { get; set; }
         public bool IsLiked { get; set; }

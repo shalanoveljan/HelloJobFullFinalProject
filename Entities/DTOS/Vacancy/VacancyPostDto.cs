@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HelloJob.Entities.DTOS.Vacancy
+namespace HelloJob.Entities.DTOS
 {
     public record VacancyPostDto
     {

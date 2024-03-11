@@ -18,12 +18,21 @@ namespace HelloJob.Entities.Models
         public string Position { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
+        public Order order { get; set; }
         public int Required_Experience { get; set; }
         public int ViewCount { get; set; }
         public DateTime EndDate { get; set; }
         public JobMode Mode { get; set; }
         public bool IsPremium { get; set; }
         public List<About_Vacancy> abouts { get; set; }
+        public List<WishlistItem> WishListItems { get; set; }
+
+        public Vacancy()
+        {
+            abouts= new List<About_Vacancy>();
+            WishListItems= new List<WishlistItem>();
+        }
+
 
 
     }

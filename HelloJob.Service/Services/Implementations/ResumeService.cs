@@ -31,7 +31,7 @@ namespace HelloJob.Service.Services.Implementations
         readonly ILanguageDAL _languageRepository;
 
 
-        public ResumeService(IWebHostEnvironment env, IResumeDAL ResumeRepository, IMapper mapper, ICategoryDAL categoryRepository, IEducationDAL educationRepository, ILanguageDAL languageRepository)
+        public ResumeService(IWebHostEnvironment env, IResumeDAL ResumeRepository,  ICategoryDAL categoryRepository, IEducationDAL educationRepository, ILanguageDAL languageRepository)
         {
             _env = env;
             _ResumeRepository = ResumeRepository;
@@ -311,6 +311,9 @@ namespace HelloJob.Service.Services.Implementations
             resume.Experience = dto.Experience;
             resume.Birthday = dto.Birthday;
             resume.EndDate = dto.EndDate;
+            resume.educations.Clear();
+            resume.experiences.Clear();
+            resume.Skills.Clear();
 
             if (dto.ImageFile != null)
             {
