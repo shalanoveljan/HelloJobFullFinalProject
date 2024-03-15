@@ -12,13 +12,14 @@ function MyFunction() {
         url: `https://localhost:7066/Resume/SortResumes/${id}`,
         data: dto,
         success: function (data) {
+          
             similar_Resume.innerHTML = data;
         }
     });
 }
 
 
-function getCurrentOptionId() {
+function getCurrentOptionId() {                                                                                                  
     var selectElement = document.getElementById("sort");
     var selectedIndex = selectElement.selectedIndex;
     var selectedOption = selectElement.options[selectedIndex];
@@ -36,6 +37,7 @@ $(document).ready(function () {
                 dto: dto
             },
             success: function (data) {
+                console.log(data)
                 similar_Resume.innerHTML = data;
                 var ResumeCountValue = $("#ResumeCount").val();
                 $('#count_items_head').text(ResumeCountValue);

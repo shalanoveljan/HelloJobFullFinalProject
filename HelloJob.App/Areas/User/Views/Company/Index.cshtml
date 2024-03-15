@@ -1,17 +1,29 @@
-﻿<div class="create_cv">
+﻿
+@model List<CompanyGetDto>
+@inject IVacancyService vacancyService;
+
+@{
+    IList<VacancyGetDto> vacancies = (await vacancyService.GetAllAsync(ViewBag.UserId,false,1,6)).Datas;
+}
+
+
+<div class="create_cv">
     <div class="title">
         <h1>Şirkətlərim</h1>
         <ul class="profile__add-cv__parts">
             <li class="active">
-                <a href="#tab1" class="tab1 step_btn"> Şirkətlər(1)</a>
+                <a href="#tab1" class="tab1 step_btn"> Şirkətlər()</a>
             </li>
         </ul>
     </div>
     <div class="inner_tab">
         <div class="row mt-5">
+            @foreach (var item in Model)
+            {
+                
             <div class="company_card col-md-4 col-lg-3">
                 <div class="company_box">
-                    <a href="./companydetail.html" class="full">
+                    <a asp-area="" asp-controller="company" asp-action="detail" asp-route-id="@item.Id" class="full">
                         <div>
                             <div class="company_images" style="padding:0px !important; position:static !important;">
                                 <div class="image" style="
@@ -19,25 +31,25 @@
     display: flex;
     justify-content: center;
 ">
-                                    <img src="/assets/images/Company/3095uMIxAMv_400x400.jpg" alt="Kapital Bank" />
+                                    <img src="~/assets/images/Companies/@item.Image" alt="Kapital Bank" />
                                 </div>
                             </div>
-                            <p>Kapital Bank</p>
-                            <p>Vakansiya sayı <span>1</span> </p>
+                            <p>@item.Name</p>
+                                <p>Vakansiya sayı <span>@vacancies.Where(x=>x.Company.Id==item.Id).Count()</span> </p>
                         </div>
                     </a>
                     <div class="crudbtn mt-2">
-                        <a class="btn btn-success" style="text-decoration:none" href="/myaccount/editcompany?id=7">
+                        <a class="btn btn-success" style="text-decoration:none" asp-controller="Company" asp-action="Update" asp-route-id="@item.Id">
                             Edit
                         </a>
-                        <a class="btn btn-danger" style="text-decoration:none" href="/myaccount/deletecompany?id=7">
+                            <a class="btn btn-danger" style="text-decoration:none" asp-controller="Company" asp-action="Remove" asp-route-id="@item.Id">
                             Delete
                         </a>
 
                     </div>
                 </div>
             </div>
-
+            }
         </div>
     </div>
 </div>

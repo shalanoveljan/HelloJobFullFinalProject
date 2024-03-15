@@ -52,15 +52,6 @@
                         
                     }
                     <li>
-                        <a href="./myOrder.html">
-                            <span>
-                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
-                                     alt="" />
-                            </span>
-                            Gözləmədə olan elanlar
-                        </a>
-                    </li>
-                    <li>
                         <a asp-action="index" asp-controller="resume">
                             <span>
                                 <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
@@ -91,7 +82,7 @@
                     @if (User.IsInRole("Owner"))
                     {
                     <li>
-                        <a href="./CreateCompany.html">
+                        <a asp-controller="company" asp-action="create">
                             <span>
                                 <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
                                      alt="" />
@@ -100,7 +91,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./myCompany.html">
+                            <a asp-controller="company" asp-action="index">
                             <span>
                                 <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
                                      alt="" />
@@ -109,7 +100,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./PostVacans.html">
+                        <a asp-controller="vacancy" asp-action="create">
                             <span>
                                 <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
                                      alt="" />

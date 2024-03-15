@@ -27,13 +27,11 @@
                                    type="file"
                                    asp-for="ImageFile"
                                    id="fileInput"
-                                   accept="image/*" />
-                            <span class="text text-danger" asp-validation-for="ImageFile"></span>
-                          
+                                   accept="image/*"
+                                   onchange="showPreview(this)" />
                         </div>
                         <label for="prof_img" class="upload_image">
-                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg"
-                                 alt="" />
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg" alt="" />
                             <span>Şəkil əlavə et</span>
                             <p>SVG, PNG, JPG or GIF (max. 1000x1000px)</p>
                         </label>
@@ -44,7 +42,6 @@
                                 <label for="">Ad</label>
                                 <input type="text"
                                        asp-for="Name"
-                                       value="Elcan"
                                        class="form-control inputs"
                                        placeholder="Adınız" />
                                 <span class="text text-danger" asp-validation-for="Name"></span>
@@ -56,7 +53,6 @@
                                 <label for="">Soyad</label>
                                 <input type="text"
                                        asp-for="Surname"
-                                       value="Shalanov"
                                        class="form-control inputs"
                                        placeholder="Soyad" />
                                 <span class="text text-danger" asp-validation-for="Surname"></span>
@@ -68,7 +64,6 @@
                                 <label for="">Doğum Tarixi</label>
                                 <input type="date"
                                        asp-for="Birthday"
-                                       value="__/__/____"
                                        class="form-control inputs"
                                        placeholder="__/__/____" />
                             </div>
@@ -78,7 +73,6 @@
                                 <label for="">Son tarix </label>
                                 <input type="date"
                                        asp-for="EndDate"
-                                       value="__/__/____"
                                        class="form-control inputs"
                                        placeholder="__/__/____" />
                                 <span class="text text-danger" asp-validation-for="EndDate"></span>
@@ -90,7 +84,6 @@
                                 <label for="">E-Poçt</label>
                                 <input type="email"
                                        asp-for="Email"
-                                       value="rrrr@gmail.com"
                                        class="form-control inputs"
                                        placeholder="E-poçt ünvanınızı yazın" />
                                 <span class="text text-danger" asp-validation-for="Email"></span>
@@ -173,7 +166,6 @@
                                         }
                                     </select>
                                     <span class="text text-danger" asp-validation-for="EducationId"></span>
-                                </select>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -279,6 +271,7 @@
                                     </div>
                             </div>
                         </div>
+
                         <div class="col-lg-12">
                             <div class="cv_inputs">
                                 <div method="post" class="form-group-1" id="form-container2">
@@ -453,5 +446,27 @@
             const removeBtn = document.querySelector('.remove-btn2');
             removeBtn.addEventListener('click', removeFormGroup);
         });</script>
+
+    <script>
+        function showPreview(input) {
+            const file = input.files[0];
+            const profileImg = document.getElementById('profile_img');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    profileImg.src = e.target.result;
+                    profileImg.style.opacity = '1';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                profileImg.src = '';
+                profileImg.style.opacity = '0';
+            }
+
+        }
+    </script>
 
 }

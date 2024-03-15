@@ -80,16 +80,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2l0eVxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Company/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tcGFueVxDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Company/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tcGFueVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Company/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tcGFueVxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Course/Create.cshtml]
@@ -164,16 +156,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVGFnXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Vacancy/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVmFjYW5jeVxDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Vacancy/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVmFjYW5jeVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/Vacancy/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVmFjYW5jeVxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/Admin/Views/_ViewImports.cshtml]
@@ -290,6 +274,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Views/Course/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Views/Home/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Views/Home/Index.cshtml]

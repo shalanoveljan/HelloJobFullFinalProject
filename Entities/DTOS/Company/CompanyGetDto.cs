@@ -19,5 +19,6 @@ namespace HelloJob.Entities.DTOS
         public string WebsiteUrlLink { get; set; }
         public string Email { get; set; }
         public string About { get; set; }
+
     }
 }

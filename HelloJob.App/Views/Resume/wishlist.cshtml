@@ -1,6 +1,6 @@
 ﻿
 
-@model Wishlist
+@model WishlistGetDto
 <main>
     <div class="col-md-12 breadc new_breadcrumb">
         <div class="container two_side_breadc">
@@ -32,32 +32,32 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    @foreach (var item in Model.WishListItems)
+                    @foreach (var item in Model.wishlistItems)
                     {
                     <a href="" class="vacancies__item vacancies__item_new">
                         <div class="vacancies__item__left">
                             <div class="vacancies__icon">
-                                <img loading="lazy" src="~/assets/images/Resumes/@item.Resume.Image" alt="Xadime">
+                                <img loading="lazy" src="~/assets/images/Resumes/@item.Image" alt="Xadime">
                             </div>
                             <div class="vacancies__desc">
-                                <h3>@item.Resume.Name @item.Resume.Surname</h3>
-                                <p class="vacancy_item_company">@item.Resume.Category.Name</p>
+                                <h3>@item.Name @item.Surname</h3>
+                                <p class="vacancy_item_company">@item.Category.Name</p>
                                 <div class="vacancy_item_date_count">
                                     <span class="vacancy_item_time">
-                                        <i class="fa-regular fa-calendar"></i> @item.Resume.EndDate.ToString("dd MMM")
+                                        <i class="fa-regular fa-calendar"></i> @item.EndDate.ToString("dd MMM")
                                     </span>
-                                    <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i>@item.Resume.ViewCount</span>
+                                    <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i>@item.ViewCount</span>
                                 </div>
                             </div>
                         </div>
                         <div class="vacancies__item__right">
-                            <span class="vacancies__price">@item.Resume.Salary AZN</span>
+                            <span class="vacancies__price">@item.Salary AZN</span>
                             <span class="card_like " data-section="works" data-id="16519">
                                 <!-- <i id="unlike" class="fa-regular fa-heart"></i> -->
                                 <i id="likedIcon" class="fa-solid fa-heart"></i>
                             </span>
                         </div>
-                            @if (item.Resume.IsPremium)
+                            @if (item.IsPremium)
                             {
                             <span class="vacancies__premium">
                             <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">

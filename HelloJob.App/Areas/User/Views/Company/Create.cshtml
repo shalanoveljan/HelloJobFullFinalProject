@@ -1,4 +1,7 @@
-﻿<div class="create_cv">
+﻿
+@model CompanyPostDto
+
+<div class="create_cv">
     <div class="title">
         <h1>Şirkət yarat</h1>
         <ul class="profile__add-cv__parts">
@@ -8,7 +11,11 @@
         </ul>
     </div>
     <div class="inner_tab">
-        <form action="">
+        <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="create">
+            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+            <input type="hidden" id="AppUserId" name="AppUserId" value="@ViewBag.UserId">
+
             <div class="row mb-5">
                 <div class="col-lg-2">
                     <h2 class="section_title">Şirkət məlumatları</h2>
@@ -18,18 +25,14 @@
                         <div class="image_input">
                             <input class="choose"
                                    type="file"
+                                   asp-for="ImageFile"
                                    id="fileInput"
-                                   accept="image/*" />
-                            <span class="upload_file_img">
-                                <img id="preview"
-                                     src="https://cdn-icons-png.flaticon.com/512/2815/2815428.png"
-                                     class="m-0"
-                                     alt="" />
-                            </span>
+                                   accept="image/*"
+                                    />
                         </div>
+
                         <label for="prof_img" class="upload_image">
-                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg"
-                                 alt="" />
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg" alt="" />
                             <span>Şəkil əlavə et</span>
                             <p>SVG, PNG, JPG or GIF (max. 1000x1000px)</p>
                         </label>
@@ -39,22 +42,50 @@
                             <div class="cv_inputs">
                                 <label for="">Ad</label>
                                 <input type="text"
-                                       name="name"
-                                       value="Rashid"
+                                       asp-for="Name"
+                                       value="Elcan"
                                        class="form-control inputs"
                                        placeholder="Adınız" />
+                                <span class="text text-danger" asp-validation-for="Name"></span>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="cv_inputs">
-                                <label for="">E-Poçt</label>
-                                <input type="text"
-                                       name="name"
-                                       value="rrrr@gmail.com"
+                              <div class="cv_inputs">
+                                <label for="">Email</label>
+                                <input type="email"
+                                       asp-for="Email"
+                                       value=""
                                        class="form-control inputs"
-                                       placeholder="E-poçt ünvanınızı yazın" />
+                                       placeholder="Email" />
+                                <span class="text text-danger" asp-validation-for="Email"></span>
+
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                              <div class="cv_inputs">
+                                <label for="">Url link</label>
+                                <input type="text"
+                                       asp-for="WebsiteUrlLink"
+                                       value=""
+                                       class="form-control inputs"
+                                       placeholder="UrlLink" />
+                                <span class="text text-danger" asp-validation-for="WebsiteUrlLink"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                              <div class="cv_inputs">
+                                <label for="">About</label>
+                                <input type="text"
+                                       asp-for="About"
+                                       value=""
+                                       class="form-control inputs"
+                                       placeholder="About" />
+                                <span class="text text-danger" asp-validation-for="About"></span>
+
+                            </div>
+                        </div>
+                       
                     </div>
                 </div>
             </div>

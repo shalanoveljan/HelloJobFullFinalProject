@@ -109,7 +109,7 @@ namespace HelloJob.Service.Services.Implementations
 
         private IQueryable<Company> GetBaseQuery()
         {
-            return _CompanyRepository.GetQuery(x => !x.IsDeleted)/*&& x.order==Order.Accept*/
+            return _CompanyRepository.GetQuery(x => !x.IsDeleted && x.order == Order.Accept)/**/
                 .AsNoTrackingWithIdentityResolution()
                   .Include(x => x.AppUser);
         }

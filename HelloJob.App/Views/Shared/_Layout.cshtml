@@ -277,7 +277,7 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="/sirketler">Şirkətlər</a>
+                                    <a asp-controller="Company" asp-action="Index">Şirkətlər</a>
                                 </li>
                                 <li>
                                     <a asp-controller="blog" asp-action="Index">Bloq</a>
@@ -298,13 +298,13 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="/vakansiyalar">Bütün vakansiyalar</a>
+                                    <a asp-controller="Home" asp-action="Index">Bütün vakansiyalar</a>
                                 </li>
                                 <li>
-                                    <a href="/resumes/all">Bütün CV-lər</a>
+                                    <a asp-controller="Resume" asp-action="Index">Bütün CV-lər</a>
                                 </li>
                                 <li>
-                                    <a href="/item/add">Elan yerləşdir</a>
+                                    <a asp-controller="Vacancy" asp-action="Create" asp-area="User" >Elan yerləşdir</a>
                                 </li>
                             </ul>
                         </div>

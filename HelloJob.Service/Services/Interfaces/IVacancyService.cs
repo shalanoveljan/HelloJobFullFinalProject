@@ -18,6 +18,7 @@ namespace HelloJob.Service.Services.Interfaces
         public Task<IResult> UpdateAsync(int id, VacancyPostDto dto);
         public Task<IDataResult<VacancyGetDto>> GetAsync(int id);
         public Task<IDataResult<List<VacancyGetDto>>> GetAllForVacancyPageInWebSiteAsync();
+        public Task<PagginatedResponse<VacancyGetDto>> GetVacancysBySearchTextAsync(string searchText, int pageNumber = 1, int pageSize = 6);
         public Task IncreaseCount(int id);
         public Task<IResult> SetOrderStatus(int VacancyId, Order orderStatus);
     }

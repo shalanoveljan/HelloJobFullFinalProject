@@ -35,11 +35,11 @@ namespace HelloJob.App.Areas.User.Controllers
 
         public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = await _categoryService.GetAllAsync();
-            ViewBag.Cities = await _cityService.GetAllAsync();
-            ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewBag.UserId = userId;
+            ViewBag.Categories = await _categoryService.GetAllAsync();
+            ViewBag.Cities = await _cityService.GetAllAsync();
+            ViewBag.Companies = await _companyService.GetAllAsync(userId,false,1,6);
             return View();
         }
         [HttpPost]
@@ -53,7 +53,7 @@ namespace HelloJob.App.Areas.User.Controllers
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
-                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
+                ViewBag.Companies = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
                 return View();
             }
@@ -64,7 +64,7 @@ namespace HelloJob.App.Areas.User.Controllers
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
-                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
+                ViewBag.Companies = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
                 ModelState.AddModelError("", response.Message);
                 return View();
@@ -77,7 +77,10 @@ namespace HelloJob.App.Areas.User.Controllers
         {
             ViewBag.Categories = await _categoryService.GetAllAsync();
             ViewBag.Cities = await _cityService.GetAllAsync();
-            ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
+            ViewBag.Companies = await _companyService.GetAllForCompanyPageInWebSiteAsync();
+
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.UserId = userId;
 
             var res = await _VacancyService.GetAsync(id);
             return View(res.Data);
@@ -92,7 +95,7 @@ namespace HelloJob.App.Areas.User.Controllers
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
-                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
+                ViewBag.Companies = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
 
                 var res = await _VacancyService.GetAsync(id);
@@ -104,7 +107,6 @@ namespace HelloJob.App.Areas.User.Controllers
             {
                 ViewBag.Categories = await _categoryService.GetAllAsync();
                 ViewBag.Cities = await _cityService.GetAllAsync();
-                ViewBag.Company = await _companyService.GetAllForCompanyPageInWebSiteAsync();
 
                 ModelState.AddModelError("", response.Message);
                 var res = await _VacancyService.GetAsync(id);

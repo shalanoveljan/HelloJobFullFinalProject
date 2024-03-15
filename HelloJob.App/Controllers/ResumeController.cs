@@ -1,4 +1,6 @@
-﻿using HelloJob.Data.DBContexts.SQLSERVER;
+﻿using HelloJob.Core.Utilities.Results.Abstract;
+using HelloJob.Core.Utilities.Results.Concrete;
+using HelloJob.Data.DBContexts.SQLSERVER;
 using HelloJob.Entities.DTOS;
 using HelloJob.Entities.Models;
 using HelloJob.Service.Services.Implementations;
@@ -61,7 +63,8 @@ namespace HelloJob.App.Controllers
         public async Task<IActionResult> FilterResumes(ResumeFilterDto dto)
         {
             var res = await _ResumeService.FilterResumes(dto);
-            return PartialView("_ResumePartial", res.Data);
+           
+            return PartialView("_ResumePartial", res.Data );
         }
 
         public async Task<IActionResult> LoadMore(int id, ResumeFilterDto dto, int pagenumber=2, int pagesize=4)
@@ -73,12 +76,11 @@ namespace HelloJob.App.Controllers
         public async Task<IActionResult> Wishlist()
         {
             
-                Wishlist wishlist = await _likeService.GetWishList();
+                WishlistGetDto wishlist = await _likeService.GetWishList();
                 if (wishlist is null)
                 {
                     return Json("Wishlist is null");
                 }
-
                 return View(wishlist);
         }
         [HttpPost]

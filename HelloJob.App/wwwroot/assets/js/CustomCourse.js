@@ -17,7 +17,6 @@ function MyFunction() {
     });
 }
 
-
 function getCurrentOptionId() {
     var selectElement = document.getElementById("sort");
     var selectedIndex = selectElement.selectedIndex;

@@ -1,4 +1,5 @@
 ﻿using Entities.Common;
+using HelloJob.Entities.DTOS;
 using System;
 using System.Collections.Generic;
 using System.Linq;

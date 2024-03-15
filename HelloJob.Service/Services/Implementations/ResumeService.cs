@@ -283,7 +283,7 @@ namespace HelloJob.Service.Services.Implementations
         {
             Order orderStatus = Order.None;
 
-            Resume? resume = await _ResumeRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Education", "Language", "AppUser");
+            Resume? resume = await _ResumeRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Education", "Language", "AppUser", "Skills", "educations","experiences");
             if (resume == null)
             {
                 return new ErrorResult("The Resume not found");
@@ -349,7 +349,7 @@ namespace HelloJob.Service.Services.Implementations
 
         private IQueryable<Resume> GetBaseQuery()
         {
-            return _ResumeRepository.GetQuery(x => !x.IsDeleted)/*&& x.order==Order.Accept*/
+            return _ResumeRepository.GetQuery(x => !x.IsDeleted && x.order == Order.Accept)
                 .AsNoTrackingWithIdentityResolution()
                   .Include(x => x.AppUser)
                   .Include(x => x.City)

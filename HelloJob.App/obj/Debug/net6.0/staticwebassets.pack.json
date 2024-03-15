@@ -4597,12 +4597,20 @@
       "PackagePath": "staticwebassets\\assets\\images\\Resumes\\0820b721-cdd7-40ff-9d4d-b40aaf6b513dScreenshot (201).png"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\Resumes\\0d17ee51-2fe4-46b6-9a78-1495003aae5ablog-5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\Resumes\\0d17ee51-2fe4-46b6-9a78-1495003aae5ablog-5.jpg"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\Resumes\\126ac82b-20e8-43fb-8802-e7ab09d68c89Screenshot (246).png",
       "PackagePath": "staticwebassets\\assets\\images\\Resumes\\126ac82b-20e8-43fb-8802-e7ab09d68c89Screenshot (246).png"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\Resumes\\291395f4-1ff9-454c-8837-626842c3f49bScreenshot (196).png",
       "PackagePath": "staticwebassets\\assets\\images\\Resumes\\291395f4-1ff9-454c-8837-626842c3f49bScreenshot (196).png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\Resumes\\4b3e06e3-24c8-4409-9671-79bb2f59b0bbpicjumbo.com_hanv9909.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\Resumes\\4b3e06e3-24c8-4409-9671-79bb2f59b0bbpicjumbo.com_hanv9909.jpg"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\Resumes\\ab21f346-8423-45c0-ac17-45a41faa03edScreenshot (195).png",
@@ -4615,6 +4623,10 @@
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\Resumes\\d5074255-62c3-45b9-8352-1b543124c5f9Screenshot (197).png",
       "PackagePath": "staticwebassets\\assets\\images\\Resumes\\d5074255-62c3-45b9-8352-1b543124c5f9Screenshot (197).png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\Resumes\\ecee9db3-ed01-48af-ba98-de2fe64ce98cScreenshot (197).png",
+      "PackagePath": "staticwebassets\\assets\\images\\Resumes\\ecee9db3-ed01-48af-ba98-de2fe64ce98cScreenshot (197).png"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\banners\\CvElaveEtBanner.png",
@@ -4869,6 +4881,14 @@
       "PackagePath": "staticwebassets\\assets\\images\\close.svg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\50536c36-eb50-4017-a38b-c406f35f9c82JedAcademy.png",
+      "PackagePath": "staticwebassets\\assets\\images\\companies\\50536c36-eb50-4017-a38b-c406f35f9c82JedAcademy.png"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\9c113442-18da-46b8-a98b-01eb76ebfd95Xalqbank.png",
+      "PackagePath": "staticwebassets\\assets\\images\\companies\\9c113442-18da-46b8-a98b-01eb76ebfd95Xalqbank.png"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\Afea_Group.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\companies\\Afea_Group.jpg"
     },
@@ -4935,6 +4955,10 @@
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\defaultProfile.svg",
       "PackagePath": "staticwebassets\\assets\\images\\companies\\defaultProfile.svg"
+    },
+    {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\e876e498-e7f3-4cbc-8cee-fa1a9af750b7Kapitalbank.png",
+      "PackagePath": "staticwebassets\\assets\\images\\companies\\e876e498-e7f3-4cbc-8cee-fa1a9af750b7Kapitalbank.png"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\courses\\0045a946-d3fb-45f0-bbdd-7cf52d39f7feblog-9.jpg",

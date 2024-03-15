@@ -745,9 +745,9 @@ $blue:#2196F3;
   
 }
 .resume__header__img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 120px !important;
+    height: 120px !important;
+    object-fit: cover;
 }
 .similar-resume .resume__header .d-flex {
   flex: 1;

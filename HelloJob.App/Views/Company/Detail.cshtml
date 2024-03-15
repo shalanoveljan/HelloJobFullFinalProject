@@ -1,12 +1,22 @@
-﻿   <!-- Main start  -->
+﻿  
+ 
+@model CompanyGetDto
 
+@inject IVacancyService vacancyService;
+
+@{
+    List<VacancyGetDto> vacancies = (await vacancyService.GetAllForVacancyPageInWebSiteAsync()).Data;
+}
+
+
+<!-- Main start  -->
 <main class="main full" role="main">
     <div class="header-link">
         <div class="container">
             <ul>
-                <li><a href="/">İş elanları</a></li>
-                <li><a href="/resumes">CV - lər</a></li>
-                <li><a href="/kurslar">Kurslar</a></li>
+                <li><a asp-controller="Home" asp-action="index">İş elanları</a></li>
+                <li><a asp-controller="Resume" asp-action="index">CV - lər</a></li>
+                <li><a asp-controller="Course" asp-action="index">Kurslar</a></li>
             </ul>
         </div>
     </div>
@@ -16,7 +26,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item color"><a href="#">Esas sehife</a></li>
                     <li class="breadcrumb-item color"><a href="#">Sirketler</a></li>
-                    <li class="breadcrumb-item color" aria-current="page"><a href="#">Kapital bank</a></li>
+                    <li class="breadcrumb-item color" aria-current="page"><a href="#">@Model.Name</a></li>
                 </ol>
             </nav>
         </div>
@@ -28,11 +38,11 @@
                     <div class="company__head">
                         <div class="company__head__top" style="background-image: url(https://www.hellojob.az/uploads/company/full/2023/11/27/645221892a0bf-8-o5Yd8tXg084UM.jpeg)">
                             <div class="company__head__logo">
-                                <img loading="lazy" src="https://www.hellojob.az/uploads/company/full/2023/11/27/65646f90d881d-aOi4j4_o_ERDY3X.png" alt="">
+                                <img loading="lazy" src="~/assets/images/companies/@Model.Image" alt="">
                             </div>
                         </div>
                         <div class="company__head__bottom">
-                            <h2 class="company__head__name">Kapital Bank</h2>
+                            <h2 class="company__head__name">@Model.Name</h2>
                             <nav class="company__head__nav">
                                 <ul>
                                     <li><a href="#" class="tab__link active" data-tab="1">Vakansiyalar</a></li>
@@ -45,15 +55,17 @@
                         <h2 class="section-title">Kapital Bank iş elanları</h2>
                         <div class="resumes my-0">
                             <div class="vacancies">
-                                <a href="/vakansiya/telesatis-bolmesinde-kicik-mutexessis-4" class="vacancies__item company-vacancy-item">
+                                @foreach (var item in @vacancies.Where(x => x.Company.Id == Model.Id))
+                                {
+                                <a asp-controller="Home" asp-action="Detail" asp-route-id="@Model.Id" class="vacancies__item company-vacancy-item">
                                     <div class="vacancies__item__left">
                                         <div class="vacancies__icon">
-                                            <img loading="lazy" src="https://www.hellojob.az/uploads/_categories/2023/03/17/satis-cat-64143417860756414341786081-vC1K1njTVifH3Sh.svg" alt="Telesatış bölməsində kiçik mütəxəssis">
+                                            <img loading="lazy" src="@item.Category.Image" alt="Telesatış bölməsində kiçik mütəxəssis">
                                         </div>
                                         <div class="vacancies__desc">
-                                            <h3>Telesatış bölməsində kiçik mütəxəssis</h3>
-                                            <p> Kapital Bank</p>
-                                            <span class="com_card_date">29 Yan</span>
+                                            <h3>@item.Category.Name</h3>
+                                            <p>@item.Company.Name</p>
+                                            <span class="com_card_date">@item.EndDate.ToString("dd MM")</span>
                                         </div>
                                     </div>
                                     <div class="vacancies__item__right">
@@ -65,26 +77,7 @@
                                         </span>
                                     </div>
                                 </a>
-                                <a href="/vakansiya/biznes-tehlili-uzre-mutexessisi-analitik" class="vacancies__item company-vacancy-item">
-                                    <div class="vacancies__item__left">
-                                        <div class="vacancies__icon">
-                                            <img loading="lazy" src="https://www.hellojob.az/uploads/_categories/2023/03/17/maliyye-cat-6414340658330641434065833b-26NMIAq7bV3-yXq.svg" alt="Biznes Təhlili üzrə Mütəxəssisi (Analitik)">
-                                        </div>
-                                        <div class="vacancies__desc">
-                                            <h3>Biznes Təhlili üzrə Mütəxəssisi (Analitik)</h3>
-                                            <p> Kapital Bank</p>
-                                            <span class="com_card_date">16 Yan</span>
-                                        </div>
-                                    </div>
-                                    <div class="vacancies__item__right">
-                                        <span class="card_like " data-section="works" data-id="16271">
-                                            <i id="unliked_ico" class="fa-regular fa-heart"></i>
-                                            <i id="liked_ico" class="fa-solid fa-heart" style="
-        display: none;color: #2196F3;top: 18px;
-    "></i>
-                                        </span>
-                                    </div>
-                                </a>
+                                }
                             </div>
                         </div>
                         <h2 class="section-title pt-4">
@@ -92,15 +85,17 @@
                         </h2>
                         <div class="resumes my-0">
                             <div class="vacancies">
-                                <a href="/vakansiya/semkir-filiali-uzre-mikrokreditler-bolmesinin-kicik-mutexessisi" class="vacancies__item company-vacancy-item">
+                                @foreach (var item in vacancies.Where(x => x.EndDate <= DateTime.Now && x.Company.Id == Model.Id))
+                                {
+                                <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id" class="vacancies__item company-vacancy-item">
                                     <div class="vacancies__item__left">
                                         <div class="vacancies__icon">
-                                            <img loading="lazy" src="https://www.hellojob.az/uploads/_categories/2023/03/17/maliyye-cat-6414340658330641434065833b-26NMIAq7bV3-yXq.svg" alt="Şəmkir filialı üzrə Mikrokreditlər bölməsinin kiçik mütəxəssisi">
+                                            <img loading="lazy" src="~/assets/images/categories/@item.Category.Image" alt="Şəmkir filialı üzrə Mikrokreditlər bölməsinin kiçik mütəxəssisi">
                                         </div>
                                         <div class="vacancies__desc">
-                                            <h3>Şəmkir filialı üzrə Mikrokreditlər bölməsinin kiçik mütəxəssisi</h3>
-                                            <p> Kapital Bank</p>
-                                            <span class="com_card_date">28 Dek 2023</span>
+                                            <h3>@item.Category.Name</h3>
+                                                <p>@item.Company.Name</p>
+                                                <span class="com_card_date">@item.EndDate.ToString("dd MMM yyyy")</span>
                                         </div>
                                     </div>
                                     <div class="vacancies__item__right">
@@ -112,39 +107,16 @@
                                         </span>
                                     </div>
                                 </a>
-                                <a href="/vakansiya/cebrayil-rayon-filialinda-kicik-emeliyyatci-kassir" class="vacancies__item company-vacancy-item">
-                                    <div class="vacancies__item__left">
-                                        <div class="vacancies__icon">
-                                            <img loading="lazy" src="https://www.hellojob.az/uploads/_categories/2023/03/17/maliyye-cat-6414340658330641434065833b-26NMIAq7bV3-yXq.svg" alt="Cəbrayıl rayon filialında Kiçik əməliyyatçı-kassir">
-                                        </div>
-                                        <div class="vacancies__desc">
-                                            <h3>Cəbrayıl rayon filialında Kiçik əməliyyatçı-kassir</h3>
-                                            <p> Kapital Bank</p>
-                                            <span class="com_card_date">28 Dek 2023</span>
-                                        </div>
-                                    </div>
-                                    <div class="vacancies__item__right">
-                                        <span class="card_like " data-section="works" data-id="16105">
-                                            <i id="unliked_ico" class="fa-regular fa-heart"></i>
-                                            <i id="liked_ico" class="fa-solid fa-heart" style="
-        display: none;color: #2196F3;top: 18px;
-    "></i>
-                                        </span>
-                                    </div>
-                                </a>
+                                    
+                                }
                             </div>
                         </div>
-                        <ul class="custom-pagination mb-4"> <li><a class="active" href="/sirket/kapital-bank-8/?page=1">1</a></li> <li><a href="/sirket/kapital-bank-8/?page=2">2</a></li> <li><a href="/sirket/kapital-bank-8/?page=3">3</a></li><li class="w-100"><a>...</a></li><li><a class="rotate-pagination-item" aria-label="Next" href="/sirket/kapital-bank-8/?page=2"><img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow.svg" alt=""></a></li></ul>
-                    </div>
                     <div class="tab__item " data-tab="2">
                         <h2 class="section-title">şirkət haqqında</h2>
                         <div class="content">
                             <p>
-                            </p><p>Kapital Bank Azərbaycan Əmanət Bankının varisi kimi 140 ildən çox, uğurla fəaliyyət göstərir. Hazırda Kapital Bank Azərbaycanda ən böyük xidmət şəbəkəsinə malik maliyyə qurumudur. Universal bank olan Kapital Bank 3 milyondan çox fiziki və 22 mindən artıq hüquqi şəxslərə xidmət göstərir. Eyni zamanda, Kapital Bank dövlətin həyata keçirdiyi bir sıra sosial proqramlarda yaxından iştirak edir və real sektorun inkişafı üzrə bir sıra proqramları həyata keçirir.</p>
-                            <p>&nbsp;</p>
-                            <p>Kapital Bank 3 may 2018-ci il tarixində Azərbaycan Respublikasının qanunvericiliyinə uyğun olaraq Bank tərəfindən təsis edilmiş “BirKart bank olmayan kredit təşkilatı” Məhdud Məsuliyyətli Cəmiyyətin (“törəmə müəssisə”) 100%-lik sahibi olmuşdur. “BirKart BOKT” MMC yaradılmasının məqsədi əhalinin maliyyə resurslarına çıxış imkanlarının daha da yaxşılaşdırılması, xüsusilə nağdsız ödənişlərin stimullaşdırılması üçün kart məhsullarının onlar üçün əlçatan nöqtələrdə satılmasıdır.</p>
-                            <p>&nbsp;</p>
-                            <p></p>
+                                 @Model.About
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -166,7 +138,7 @@
                                         </div>
                                         <div class="resume__item__text">
                                             <h4 class="hidd_email">E-poçtu göstər</h4>
-                                            <h4 class="hidd_email d-none">hr@kapitalbank.az</h4>
+                                            <h4 class="hidd_email d-none">@Model.Email</h4>
                                             <p>E-poçt ünvanı</p>
                                         </div>
                                         <button class="resume__icon hidden_toggle hidden_toggle-email mr-0">
@@ -177,7 +149,7 @@
                                             <img loading="lazy" src="https://www.hellojob.az/content/assets/images/company/globe.svg" alt="">
                                         </div>
                                         <div class="resume__item__text">
-                                            <h4><a href="https://kapitalbank.az" target="_blank">https://kapitalbank.az</a></h4>
+                                            <h4><a href="@Model.WebsiteUrlLink" target="_blank">https://kapitalbank.az</a></h4>
                                             <p>Veb səhifəsi</p>
                                         </div>
                                     </div>

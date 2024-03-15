@@ -14,8 +14,8 @@
             @if (User.IsInRole("Owner"))
             {
                 <div class="col-lg-3 col-md-6">
-                    <a class="my-profile__item" href="./mysticker.html">
-                        <div class="my-profile__item__icon">
+                    <a class="my-profile__item" asp-controller="vacancy" asp-action="create">
+                        <div class="my-profile__item__icon"> 
                             <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/building.svg" alt="" />
                         </div>
                         <h2 class="my-profile__item__name">Vakansiya Yerləşdir</h2>

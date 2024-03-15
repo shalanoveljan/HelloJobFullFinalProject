@@ -21,6 +21,7 @@ namespace HelloJob.App.Areas.User.Controllers
         public async Task<IActionResult> Index(string userid,int page = 1,int pagesize=6)
         {
              userid = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.UserId = userid;
             var res = await _CompanyService.GetAllAsync(userid, false, page, pagesize);
             return View(res.Datas);
         }
@@ -58,6 +59,8 @@ namespace HelloJob.App.Areas.User.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.UserId = userId;
             var res = await _CompanyService.GetAsync(id);
             return View(res.Data);
         }

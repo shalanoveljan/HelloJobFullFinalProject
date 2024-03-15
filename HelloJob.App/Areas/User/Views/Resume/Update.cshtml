@@ -23,12 +23,13 @@
                                    type="file"
                                    name="ImageFile"
                                    id="fileInput"
-                                   accept="image/*" />
+                                   accept="image/*"
+                                   onchange="showPreview(this)" />
 
+                            <img loading="lazy" style="opacity: 1;" src="~/assets/images/Resumes/@Model.Image" id="profile_img">
                         </div>
                         <label for="prof_img" class="upload_image">
-                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg"
-                                 alt="" />
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg" alt="" />
                             <span>Şəkil əlavə et</span>
                             <p>SVG, PNG, JPG or GIF (max. 1000x1000px)</p>
                         </label>
@@ -63,7 +64,6 @@
                                 <label for="">Doğum Tarixi</label>
                                 <input type="date"
                                        asp-for="Birthday"
-                                       value="__/__/____"
                                        class="form-control inputs"
                                        placeholder="__/__/____" />
                             </div>
@@ -73,7 +73,6 @@
                                 <label for="">Son tarix </label>
                                 <input type="date"
                                        asp-for="EndDate"
-                                       value="__/__/____"
                                        class="form-control inputs"
                                        placeholder="__/__/____" />
                                 <span class="text text-danger" asp-validation-for="EndDate"></span>
@@ -138,7 +137,16 @@
                                         <optgroup label="@category.Name">
                                                 @foreach (var subCategory in ((IEnumerable<CategoryGetDto>)ViewBag.Categories.Datas).Where(c => c.ParentId == category.Id))
                                                 {
-                                                <option value="@subCategory.Id">@subCategory.Name</option>
+                                                    if (subCategory.Id == Model.Category.Id)
+                                                    {
+
+                                                    <option selected value="@subCategory.Id">@subCategory.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                    <option value="@subCategory.Id">@subCategory.Name</option>
+
+                                                    }
                                                 }
                                         </optgroup>
                                         }
@@ -155,8 +163,8 @@
                         <div class="col-lg-6">
                             <div class="cv_inputs">
                                 <label for="">Təhsil</label>
-                                <select name="EducationId" class="form-select cities">
-                                    <option value="" selected disabled>Təhsilinizi seçin</option>
+                                <select name="EducationId" class="form-control cities">
+                                    <option value="" disabled>Təhsilinizi seçin</option>
                                         @foreach (var item in ViewBag.Educations.Datas)
                                         {
                                         <option value="@item.Id">@item.Name</option>
@@ -168,7 +176,7 @@
                             <div class="cv_inputs">
                                 <label for="">Dil bilikleri</label>
                                 <select name="LanguageId" class="form-control cities">
-                                    <option value="" selected disabled>Bildiyiniz Dili seçin</option>
+                                    <option value="" disabled>Bildiyiniz Dili seçin</option>
                                         @foreach (var item in ViewBag.Languages.Datas)
                                         {
                                         <option value="@item.Id">@item.Name</option>
@@ -256,41 +264,52 @@
                         <div class="col-lg-12">
                             <div class="cv_inputs">
                                 <div method="post" class="form-group-2" id="form-container">
-                                    <div style="width:100%">
+                                            @foreach (var item in Model.Skills)
+                                            {
+                                         <div style="width:100%">
                                         <label style="margin-bottom:20px" class="form-label-title">Skills</label>
-                                        <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Skill" name="SkillNames">
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn1 btn-primary">+</button>
-                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
+                                            <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Skill" value="@item.Name" name="SkillNames">
+                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn1 btn-primary">+</button>
+                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
                                     </div>
+                                            }
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="cv_inputs">
                                     <div method="post" class="form-group-1" id="form-container2">
+                                                @foreach (var item in Model.educations)
+                                                {
                                         <div style="width:100%">
                                             <label style="margin-bottom:20px" class="form-label-title">Educations</label>
-                                            <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Universitet" name="Univerties">
-                                            <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="Degree" name="Degrees">
-                                            <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="Startdate" name="EducationStartDates">
-                                            <input style="margin-top:5px" class="form-control value" type="date" placeholder="Enddate" name="EducationEndDates">
-                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn btn-primary">+</button>
-                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn btn-primary">-</button>
+                                                <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Universitet" value="@item.University" name="Univerties">
+                                                <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="Degree" value="@item.Degree" name="Degrees">
+                                                <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="Startdate" value="@item.StartDate.ToString("yyyy-MM-dd")" name="EducationStartDates">
+                                                <input style="margin-top:5px" class="form-control value" type="date" placeholder="Enddate" value="@item.EndDate.ToString("yyyy-MM-dd")" name="EducationEndDates">
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn btn-primary">+</button>
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn btn-primary">-</button>
+
                                         </div>
+                                                }
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="cv_inputs">
                                     <div method="post" class="form-group-3" id="form-container3">
+                                                @foreach (var item in Model.experiences)
+                                                {
                                         <div style="width:100%">
                                             <label style="margin-bottom:20px" class="form-label-title">Experiences</label>
-                                            <input style="margin-top:5px;  width:100%;" class="form-control key" type="text" placeholder="workplace" name="Workplaces">
-                                            <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="positions" name="Positions">
-                                            <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="startdate" name="ExperienceStartDates">
-                                            <input style="margin-top:5px" class="form-control value" type="date" placeholder="enddate" name="ExperienceEndDates">
-                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px; margin-top:8px;" type="button" class="add-btn2 btn-primary">+</button>
-                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn2 btn-primary">-</button>
+                                                <input style="margin-top:5px;  width:100%;" class="form-control key" type="text" placeholder="workplace" value="@item.Workplace" name="Workplaces">
+                                                <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="positions" value="@item.Position" name="Positions">
+                                                <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="startdate" value="@item.StartDate.ToString("yyyy-MM-dd")" name="ExperienceStartDates">
+                                                <input style="margin-top:5px" class="form-control value" type="date" placeholder="enddate" value="@item.EndDate.ToString("yyyy-MM-dd")" name="ExperienceEndDates">
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px; margin-top:8px;" type="button" class="add-btn2 btn-primary">+</button>
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn2 btn-primary">-</button>
+
                                         </div>
+                                                }
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +323,6 @@
 </div>
 
 @section Scripts {
-    <script src="~/HelloJobPanel/assets/js/pageCv.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const formContainer = document.getElementById('form-container2');
@@ -314,19 +332,15 @@
                 const formGroup = document.createElement('div');
                 formGroup.classList.add('form-group-1');
                 formGroup.innerHTML = `
-                                                 <div style="width:100%">
-                                                <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Universitet" asp-for="Univerties">
-                                                <span asp-validation-for="Univerties"></span>
-                                                <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="Degree" asp-for="Degrees">
-                                                <span asp-validation-for="Degrees"></span>
-                                                 <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="StartDate" asp-for="EducationStartDates">
-                                                <span asp-validation-for="EducationStartDates"></span>
-                                                <input style="margin-top:5px" class="form-control value" type="text" placeholder="Enddate" asp-for="EducationEndDates">
-                                                <span asp-validation-for="EducationEndDates"></span>
-                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn btn-primary">+</button>
-                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn btn-primary">-</button>
-                                            </div>
-                                `;
+                                                         <div style="width:100%">
+                                                        <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Universitet" name="Univerties">
+                                                        <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="Degree" name="Degrees">
+                                                         <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="StartDate" name="EducationStartDates">
+                                                        <input style="margin-top:5px" class="form-control value" type="text" placeholder="Enddate" name="EducationEndDates">
+                                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn btn-primary">+</button>
+                                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn btn-primary">-</button>
+                                                    </div>
+                                        `;
                 formContainer.appendChild(formGroup);
 
                 // Attach event listeners to the buttons in the new form group
@@ -358,13 +372,12 @@
                 const formGroup1 = document.createElement('div');
                 formGroup1.classList.add('form-group-2');
                 formGroup1.innerHTML = `
-                                             <div style="width:100%">
-                                                    <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Skill" asp-for="SkillNames">
-                                                        <span asp-validation-for="SkillNames"></span>
-                                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px"  type="button" class="add-btn1 btn-primary">+</button>
-                                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn1 btn-primary">-</button>
-                                                    </div>
-                                                `;
+                                                     <div style="width:100%">
+                                                            <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Skill" name="SkillNames">
+                                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px"  type="button" class="add-btn1 btn-primary">+</button>
+                                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn1 btn-primary">-</button>
+                                                            </div>
+                                                        `;
                 formContainer.appendChild(formGroup1);
 
                 // Attach event listeners to the buttons in the new form group
@@ -396,19 +409,15 @@
                 const formGroup3 = document.createElement('div');
                 formGroup3.classList.add('form-group-3');
                 formGroup3.innerHTML = `
-                                                                <div style="width:100%">
-                                                        <input style="margin-top:5px;  width:100%;" class="form-control key" type="text" placeholder="workplace" asp-for="Workplaces">
-                                                        <span asp-validation-for="Workplaces"></span>
-                                                        <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="positions" asp-for="Positions">
-                                                        <span asp-validation-for="Positions"></span>
-                                                        <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="startdate" asp-for="ExperienceStartDates">
-                                                        <span asp-validation-for="ExperienceStartDates"></span>
-                                                        <input style="margin-top:5px" class="form-control value" type="text" placeholder="enddate" asp-for="ExperienceEndDates">
-                                                        <span asp-validation-for="ExperienceEndDates"></span>
-                                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn2 btn-primary">+</button>
-                                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn2 btn-primary">-</button>
-                                                   </div>
-                                        `;
+                                                                        <div style="width:100%">
+                                                                <input style="margin-top:5px;  width:100%;" class="form-control key" type="text" placeholder="workplace" name="Workplaces">
+                                                                <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="positions" name="Positions">
+                                                                <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="startdate" name="ExperienceStartDates">
+                                                                <input style="margin-top:5px" class="form-control value" type="text" placeholder="enddate" name="ExperienceEndDates">
+                                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn2 btn-primary">+</button>
+                                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn2 btn-primary">-</button>
+                                                           </div>
+                                                `;
                 formContainer.appendChild(formGroup3);
 
                 // Attach event listeners to the buttons in the new form group
@@ -430,5 +439,28 @@
             const removeBtn = document.querySelector('.remove-btn2');
             removeBtn.addEventListener('click', removeFormGroup);
         });</script>
+    <script>
+        function showPreview(input) {
+            const file = input.files[0];
+            const profileImg = document.getElementById('profile_img');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    profileImg.src = e.target.result;
+                    profileImg.style.opacity = '1';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                profileImg.src = '';
+                profileImg.style.opacity = '0';
+            }
+
+        }
+    </script>
+
+    <script src="~/HelloJobPanel/assets/js/pageCv.js"></script>
 
 }

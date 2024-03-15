@@ -354,7 +354,7 @@
    <div class="container  cv_parts">
     <h3 class="resume__title">Oxşar cv-lər</h3>
     <div class="row">
-            @foreach (var item in ((List<ResumeGetDto>)ViewBag.Resumes.Data).Where(b => b.Category.Id == Model.Category.Id && b.Id != Model.Id).Take(6))
+            @foreach (var item in ((List<ResumeGetDto>)ViewBag.Resumes.Data).Where(b => b.Category.Id == Model.Category.Id && b.Id != Model.Id).OrderByDescending(x => x.CreatedAt).Take(6))
             {
                 <div class="col-md-6">
                     <div class="resume">
@@ -364,7 +364,7 @@
                                     <div class="resume_header_img">
                                         <img loading="lazy" src="~/assets/images/resumes/@item.Image" alt="" class="">
                                     </div>
-                                    <div class="resume_header_desc">
+                                    <div class="resume_header_descima
                                         <h3>@item.Category.Name</h3>
                                         <p>@item.Name @item.Surname</p>
                                     </div>

@@ -49,19 +49,16 @@
                     line-height: 18px;
                     color: #A3A6AC;
                     padding-bottom: 8px;
-
                     width: 100%;
                     white-space: nowrap;
                     text-decoration: none;
                 }
-
             }
 
             .active {
                 color: #2196F3;
                 border-color: #2196F3;
                 text-decoration: none;
-
             }
         }
     }
@@ -341,7 +338,7 @@
                 }
             }
 
-        
+
 
             .checkbox {
                 input {
@@ -356,7 +353,6 @@
                     margin-left: 5px;
                 }
             }
-
         }
 
         .submit-button {
@@ -364,6 +360,7 @@
             margin-top: 24px;
             width: 100%;
             justify-content: end;
+
             .submit {
                 font-weight: 500;
                 font-size: 14px;
@@ -381,16 +378,13 @@
                 transition: 0.2s linear;
             }
         }
-
     }
-
-
-
 }
 
-.mobile_account{
+.mobile_account {
     .persons_menu {
-       display: none;
+        display: none;
+
         .account_head_user {
             ul {
                 position: absolute;
@@ -418,8 +412,8 @@
             }
         }
     }
-    .active{
+
+    .active {
         display: block;
     }
-
 }

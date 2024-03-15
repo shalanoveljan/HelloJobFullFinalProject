@@ -10,6 +10,10 @@ namespace HelloJob.App.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+            if (!User.IsInRole("SuperAdmin") && !User.IsInRole("Admin"))
+            {
+                return RedirectToAction("login", "account");
+            }
             return View();
         }
     }
