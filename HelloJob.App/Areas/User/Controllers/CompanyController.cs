@@ -27,7 +27,6 @@ namespace HelloJob.App.Areas.User.Controllers
         }
 
         [Authorize(Roles = "Owner")]
-
         public async Task<IActionResult> Create()
         {
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -37,8 +36,6 @@ namespace HelloJob.App.Areas.User.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Owner")]
-
-
         public async Task<IActionResult> Create(CompanyPostDto dto)
         {
             if (!ModelState.IsValid)

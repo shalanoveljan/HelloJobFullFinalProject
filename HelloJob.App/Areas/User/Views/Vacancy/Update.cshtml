@@ -9,7 +9,7 @@
         </ul>
     </div>
     <div class="inner_tab">
-        <form action="Create">
+        <form enctype="multipart/form-data" method="post" asp-controller="vacancy" asp-action="update">
             <div class="row mb-5">
                 <div class="col-lg-2">
                     <h2 class="section_title">İş barədə məlumatlar</h2>
@@ -33,9 +33,16 @@
                             <div class="vacans_inputs">
                                 <label for="">Şirkət adı</label>
                                 <select name="CompanyId" id="" class="form-control cities">
-                                    @foreach (var item in ViewBag.Companies.Data)
+                                    @foreach (var item in ViewBag.Companies.Datas)
                                     {
+                                        if (item.Id==Model.Company.Id)
+                                        {
+                                            <option selected value="@item.Id">@item.Name</option>
+                                        }
+                                        else
+                                        {
                                         <option value="@item.Id">@item.Name</option>
+                                        }
                                     }
                                 </select>
                             </div>
@@ -49,7 +56,16 @@
                                         <optgroup label="@category.Name">
                                             @foreach (var subCategory in ((IEnumerable<CategoryGetDto>)ViewBag.Categories.Datas).Where(c => c.ParentId == category.Id))
                                             {
-                                                <option value="@subCategory.Id">@subCategory.Name</option>
+                                                if (subCategory.Id == Model.Category.Id)
+                                                    {
+
+                                                    <option selected value="@subCategory.Id">@subCategory.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                    <option value="@subCategory.Id">@subCategory.Name</option>
+
+                                                    }
                                             }
                                         </optgroup>
                                     }
@@ -62,18 +78,16 @@
                                 <select name="CityId" id="" class="form-control cities">
                                     @foreach (var item in ViewBag.Cities.Datas)
                                     {
+                                        @if (item.Id == Model.City.Id)
+                                        {
+                                            <option selected value="@item.Id">@item.Name</option>
+                                        }
+                                        else
+                                        {
                                         <option value="@item.Id">@item.Name</option>
+                                        }
                                     }
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="vacans_inputs">
-                                <label for="">Vəzifə</label>
-                                <input type="text"
-                                       name=""
-                                       class="form-control inputs"
-                                       placeholder="Vəzifə" />
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -142,11 +156,15 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div method="post" class="form-group-2" id="form-container">
+                                    @foreach (var item in Model.abouts)
+                                    {
                                     <div style="width:100%">
-                                        <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Condition" name="Conditions">
+                                            <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" value="@item.Condition" placeholder="Condition" name="Conditions">
                                         <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn1 btn-primary">+</button>
                                         <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
                                     </div>
+                                        
+                                    }
                                 </div>
                             </div>
 
@@ -172,11 +190,11 @@
                     const formGroup1 = document.createElement('div');
                     formGroup1.classList.add('form-group-2');
                     formGroup1.innerHTML = `
-                                                                              <div style="width:100%">
-                                                                <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Conditions" name="Conditions">
-                                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn1 btn-primary">+</button>
-                                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
-                                                            </div>
+                                                                                <div style="width:100%">
+                                                        <input style="margin-top:5px;  width:100%;" class="form-control key " type="text"  placeholder="Condition" name="Conditions">
+                                                    <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn1 btn-primary">+</button>
+                                                    <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
+                                                </div>
                                                                         `;
                     formContainer.appendChild(formGroup1);
 

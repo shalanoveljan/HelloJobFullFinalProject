@@ -271,7 +271,7 @@ namespace HelloJob.Service.Services.Implementations
 
         public async Task<IResult> RemoveAsync(int id)
         {
-            Vacancy? Vacancy = await _VacancyRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Vacancy.AppUser", "abouts");
+            Vacancy? Vacancy = await _VacancyRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Company.AppUser", "abouts");
 
             if (Vacancy == null)
             {
@@ -300,7 +300,7 @@ namespace HelloJob.Service.Services.Implementations
         {
             Order orderStatus = Order.None;
 
-            Vacancy? Vacancy = await _VacancyRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Vacancy.AppUser", "abouts");
+            Vacancy? Vacancy = await _VacancyRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Company.AppUser", "abouts");
             if (Vacancy == null)
             {
                 return new ErrorResult("The Vacancy not found");

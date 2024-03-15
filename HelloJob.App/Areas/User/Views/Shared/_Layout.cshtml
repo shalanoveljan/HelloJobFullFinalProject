@@ -50,7 +50,6 @@
                         </a>
                     </li>
                         
-                    }
                     <li>
                         <a asp-action="index" asp-controller="resume">
                             <span>
@@ -60,6 +59,19 @@
                             Elanlarım
                         </a>
                     </li>
+                    }
+                    @if (User.IsInRole("Owner"))
+                    {
+                         <li>
+                        <a asp-action="index" asp-controller="vacancy">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                     alt="" />
+                            </span>
+                            Elanlarım
+                        </a>
+                    </li>
+                    }
                     <li>
                         <a href="./WishListpage.html">
                             <span>
