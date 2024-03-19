@@ -169,9 +169,9 @@ namespace HelloJob.Service.Services.Implementations
                  .Include(x => x.educations)
                 .Include(x => x.Category)
                 .Include(x => x.WishListItems)
-                    .ThenInclude(y => y.Wishlist)
-                   .Include(x => x.WishListItems)
-                    .ThenInclude(y => y.Wishlist.AppUser)
+                  .ThenInclude(y => y.Wishlist)
+                 .Include(x => x.WishListItems)
+                  .ThenInclude(y => y.Wishlist.AppUser)
                 .ToPagedListAsync(pageNumber, pageSize);
 
             var ResumeGetDtos = paginatedResumes.Datas.Select(x =>
@@ -347,7 +347,7 @@ namespace HelloJob.Service.Services.Implementations
                 await _ResumeRepository.UpdateAsync(Resume);
         }
 
-        private IQueryable<Resume> GetBaseQuery()
+        private IQueryable<Resume> GetBaseQuery(int pageNumber=1,int pageSize=2)
         {
             return _ResumeRepository.GetQuery(x => !x.IsDeleted && x.order == Order.Accept)
                 .AsNoTrackingWithIdentityResolution()
@@ -491,12 +491,12 @@ namespace HelloJob.Service.Services.Implementations
             // Filter by minimum experience
             if (dto.MinExperience > 0)
             {
-                ResumeGetDtos = ResumeGetDtos.Where(Resume => Resume.Salary >= dto.MinSalary).ToList();
+                ResumeGetDtos = ResumeGetDtos.Where(Resume => Resume.Experience >= dto.MinExperience).ToList();
             }
             // Filter by maximum experience
             if (dto.MaxExperience < 7)
             {
-                ResumeGetDtos = ResumeGetDtos.Where(Resume => Resume.Salary <= dto.MaxSalary).ToList();
+                ResumeGetDtos = ResumeGetDtos.Where(Resume => Resume.Experience <= dto.MaxExperience).ToList();
             }
            
             // Filter by certificate availability
@@ -524,6 +524,34 @@ namespace HelloJob.Service.Services.Implementations
             return new SuccessDataResult<List<ResumeGetDto>>(ResumeGetDtos, "Halaldi sene ");
 
         }
+        public async Task<IDataResult<List<ResumeGetDto>>> LoadMoreResumesAsync(int id, ResumeFilterDto dto,int pageNumber, int pageSize)
+        {
+            var sortedResumesResult = await SortResumes(id, dto);
+            if (!sortedResumesResult.Success)
+            {
+                return new ErrorDataResult<List<ResumeGetDto>>("Error occurred while sorting resumes");
+            }
+            var sortedResumes = sortedResumesResult.Data;
+
+            if (pageNumber == 1)
+            {
+                var firstPageResumes = sortedResumes.Take(2).ToList();
+                return new SuccessDataResult<List<ResumeGetDto>>(firstPageResumes, "Loaded initial resumes");
+            }
+
+            var resumesToReturn = sortedResumes
+                                    .Skip((pageNumber - 1) * pageSize) 
+                                    .Take(pageSize) 
+                                    .ToList();
+
+            if (!resumesToReturn.Any())
+            {
+                return new ErrorDataResult<List<ResumeGetDto>>("No more resumes available");
+            }
+
+            return new SuccessDataResult<List<ResumeGetDto>>(resumesToReturn, $"Loaded resumes for page {pageNumber}");
+        }
+
         public async Task<IResult> SetOrderStatus(int resumeId, Order orderStatus)
         {
             var resume = await _ResumeRepository.GetAsync(x => !x.IsDeleted && x.Id == resumeId, "Category", "City", "Education", "Language", "AppUser");
@@ -536,27 +564,6 @@ namespace HelloJob.Service.Services.Implementations
             await _ResumeRepository.UpdateAsync(resume);
 
             return new SuccessResult("Order status updated successfully");
-        }
-        public async Task<IDataResult<List<ResumeGetDto>>> LoadMoreResumesAsync(int id ,int pageNumber, int pageSize, ResumeFilterDto dto)
-        {
-            var filteredResumesResult = await SortResumes(id,dto);
-            if (!filteredResumesResult.Success)
-            {
-                return new ErrorDataResult<List<ResumeGetDto>>("Error occurred while filtering resumes");
-            }
-            var filteredResumes = filteredResumesResult.Data;
-
-            var resumesToReturn = filteredResumes
-                                    .Skip((pageNumber - 1) * pageSize)
-                                    .Take(pageSize)
-                                    .ToList();
-
-            if (!resumesToReturn.Any())
-            {
-                return new ErrorDataResult<List<ResumeGetDto>>("No more resumes available");
-            }
-
-            return new SuccessDataResult<List<ResumeGetDto>>(resumesToReturn, "Load more resumes");
         }
 
     }

@@ -123,12 +123,58 @@ namespace HelloJob.Service.Services.Implementations
 
             return pagginatedResponse;
         }
+        public async Task<PagginatedResponse<VacancyGetDto>> GetAllDefaultSearchAsync(int pageNumber = 1, int pageSize = 6)
+        {
+            IQueryable<Vacancy> query;
 
+                query = _VacancyRepository.GetQuery(x =>!x.IsDeleted && x.order == Order.Accept);
+          
+            var totalCount = await query.CountAsync();
+
+            var paginatedVacancys = await query
+                .AsNoTrackingWithIdentityResolution()
+                .Include(x => x.Company)
+                .ThenInclude(x => x.AppUser)
+                .Include(x => x.City)
+                 .Include(x => x.abouts)
+                .Include(x => x.Category)
+                .Include(x => x.WishListItems)
+                    .ThenInclude(y => y.Wishlist)
+                   .Include(x => x.WishListItems)
+                    .ThenInclude(y => y.Wishlist.AppUser)
+                .ToPagedListAsync(pageNumber, pageSize);
+
+            var VacancyGetDtos = paginatedVacancys.Datas.Select(x =>
+                new VacancyGetDto
+                {
+                    Id = x.Id,
+                    Mode = x.Mode,
+                    Salary = x.Salary,
+                    Position = x.Position,
+                    Required_Experience = x.Required_Experience,
+                    IsPremium = x.IsPremium,
+                    CreatedAt = x.CreatedAt,
+                    EndDate = x.EndDate,
+                    order = x.order,
+                    ViewCount = x.ViewCount,
+                    abouts = x.abouts,
+                    Company = new CompanyGetDto { Id = x.Company.Id, About = x.Company.About, Email = x.Company.Email, Image = x.Company.Image, Name = x.Company.Name, WebsiteUrlLink = x.Company.WebsiteUrlLink, order = x.Company.order, AppUser = x.Company.AppUser },
+                    Category = new CategoryGetDto { Id = x.Category.Id, Name = x.Category.Name, Image = x.Category.Image, ParentId = x.Category.ParentId },
+                    City = new CityGetDto { Id = x.City.Id, Name = x.City.Name, CreateAt = x.City.CreatedAt },
+                }).ToList();
+
+            var pagginatedResponse = new PagginatedResponse<VacancyGetDto>(
+                VacancyGetDtos, paginatedVacancys.PageNumber,
+                paginatedVacancys.PageSize,
+                totalCount);
+
+            return pagginatedResponse;
+        }
         public async Task<PagginatedResponse<VacancyGetDto>> GetVacancysBySearchTextAsync(string searchText, int pageNumber=1, int pageSize=6)
         {
             if (string.IsNullOrEmpty(searchText))
             {
-                return await GetAllAsync(null,false,pageNumber,pageSize);
+                return await GetAllDefaultSearchAsync(pageNumber,pageSize);
             }
             IQueryable<Vacancy> query;
 
@@ -266,7 +312,10 @@ namespace HelloJob.Service.Services.Implementations
 
         public async Task IncreaseCount(int id)
         {
+            Vacancy Vacancy = await _VacancyRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Category", "City", "Company.AppUser", "abouts");
 
+            Vacancy.ViewCount++;
+            await _VacancyRepository.UpdateAsync(Vacancy);
         }
 
         public async Task<IResult> RemoveAsync(int id)
@@ -284,7 +333,7 @@ namespace HelloJob.Service.Services.Implementations
 
         public async Task<IResult> SetOrderStatus(int VacancyId, Order orderStatus)
         {
-            var Vacancy = await _VacancyRepository.GetAsync(x => !x.IsDeleted && x.Id == VacancyId, "Category", "City", "Vacancy.AppUser");
+            var Vacancy = await _VacancyRepository.GetAsync(x => !x.IsDeleted && x.Id == VacancyId, "Category", "City", "Company.AppUser");
             if (Vacancy == null)
             {
                 return new ErrorResult("Vacancy not found");

@@ -1,5 +1,10 @@
 ﻿
 @model ResumeGetDto
+@inject ILikedService likedService;
+
+@{
+    WishlistGetDto wishlist = await likedService.GetWishList();
+}
 
 <main>
     <div class="nsp_course">
@@ -48,12 +53,16 @@
                              <p >@Model.Name @Model.Surname</p>
                          </div>
                     </div>
-                        
-                    <span class="resume__icon mr-0 course_like mt-2 " data-id="31">
-                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
-                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
-                      </span>
-                
+                        <span class="resume__icon mr-0 course_like" id="likes" data-id="@Model.Id">
+                            @if (wishlist.wishlistItems.Any(x => x.Id == Model.Id && x.IsLiked))
+                            {
+                                <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                            }
+                            else
+                            {
+                                <i id="like" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                            }
+                        </span>
                 </div>
                 <div class="resume__block">
                     <h3 class="resume__title">Şəxsİ məlumatlar</h3>
@@ -358,13 +367,13 @@
             {
                 <div class="col-md-6">
                     <div class="resume">
-                        <a href="./detail.html" target="_blank">
+                        <a asp-controller="resume" asp-action="detail" asp-route-id="@item.Id" target="_blank">
                             <div class="resume_header">
                                 <div class="info">
                                     <div class="resume_header_img">
                                         <img loading="lazy" src="~/assets/images/resumes/@item.Image" alt="" class="">
                                     </div>
-                                    <div class="resume_header_descima
+                                    <div class="resume_header_descima">
                                         <h3>@item.Category.Name</h3>
                                         <p>@item.Name @item.Surname</p>
                                     </div>

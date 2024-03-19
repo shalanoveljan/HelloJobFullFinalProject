@@ -67,9 +67,9 @@ namespace HelloJob.App.Controllers
             return PartialView("_ResumePartial", res.Data );
         }
 
-        public async Task<IActionResult> LoadMore(int id, ResumeFilterDto dto, int pagenumber=2, int pagesize=4)
+        public async Task<IActionResult> LoadMore(int id,ResumeFilterDto dto,int pagenumber= 3, int pagesize = 1)
         {
-            var res = await _ResumeService.LoadMoreResumesAsync(id,pagenumber,pagesize,dto);
+            var res = await _ResumeService.LoadMoreResumesAsync(id,dto,pagenumber,pagesize);
             return PartialView("_ResumePartial", res.Data);
         }
 

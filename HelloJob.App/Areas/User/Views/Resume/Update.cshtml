@@ -114,7 +114,14 @@
                                 <select name="CityId" id="" class="form-control cities">
                                         @foreach (var item in ViewBag.Cities.Datas)
                                         {
+                                         @if (item.Id == Model.City.Id)
+                                        {
+                                            <option selected value="@item.Id">@item.Name</option>
+                                        }
+                                        else
+                                        {
                                         <option value="@item.Id">@item.Name</option>
+                                        }
                                         }
                                 </select>
                             </div>

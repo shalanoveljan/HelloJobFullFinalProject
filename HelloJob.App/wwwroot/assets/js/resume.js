@@ -66,26 +66,52 @@
         console.log('salam');
       }
       
-        const likeIcons = document.querySelectorAll('#like');
-       const unlikeIcons = document.querySelectorAll('#unlike');
-       
-       likeIcons.forEach(likeIcon => {
-           likeIcon.addEventListener('click', function(e) {
-               e.preventDefault();
-               this.style.display = 'none';
-               unlikeIcons[Array.from(likeIcons).indexOf(this)].style.display = 'inline-block';
-           });
-       });
-       
-       unlikeIcons.forEach(unlikeIcon => {
-           unlikeIcon.addEventListener('click', function(e) {
-               e.preventDefault();
-               this.style.display = 'none';
-               likeIcons[Array.from(unlikeIcons).indexOf(this)].style.display = 'inline-block';
-           });
-       });
-  
-       
+       // const likeIcons = document.querySelectorAll('#like');
+       //const unlikeIcons = document.querySelectorAll('#unlike');
+
+       //likeIcons.forEach(likeIcon => {
+       //    likeIcon.addEventListener('click', function(e) {
+       //        e.preventDefault();
+       //        this.style.display = 'none';
+       //        unlikeIcons[Array.from(likeIcons).indexOf(this)].style.display = 'inline-block';
+       //    });
+       //});
+
+       //unlikeIcons.forEach(unlikeIcon => {
+       //    unlikeIcon.addEventListener('click', function(e) {
+       //        e.preventDefault();
+       //        this.style.display = 'none';
+       //        likeIcons[Array.from(unlikeIcons).indexOf(this)].style.display = 'inline-block';
+       //    });
+       //});
+
+$(document).ready(function () {
+    $('.course_like').on('click', '#like', function (e) {
+        e.preventDefault();
+
+        var itemId = $(this).closest('.course_like').data('id');
+        var itemType = "resume";
+
+        $.ajax({
+            url: '/Resume/AddWishlist',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                itemid: itemId,
+                itemtype: itemType
+            },
+            success: function (response) {
+                console.log("Wishlist'a elave olundu");
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error('There has been a problem with your AJAX request:', error);
+            }
+        });
+    });
+});
+
+
   const filterClearButton = document.getElementById('clear');
   const filterClearButton2 = document.getElementById('clear_filters');
   const range1 = document.getElementById('range1');

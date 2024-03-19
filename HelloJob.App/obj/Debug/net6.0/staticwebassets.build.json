@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IwarSatC5dvbmgSrCAJm2kN6F0q0IeD2loEZKpx+snc=",
+  "Hash": "c9guqYrK4btbKLNqKqVBTBPFuLlOK63PZN9R7kNG+8w=",
   "Source": "HelloJob.App",
   "BasePath": "_content/HelloJob.App",
   "Mode": "Default",
@@ -17714,6 +17714,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\close.svg"
     },
     {
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\2d1ac5b9-1d46-42ad-8450-48dbb0fcb25eabb.png",
+      "SourceId": "HelloJob.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
+      "BasePath": "_content/HelloJob.App",
+      "RelativePath": "assets/images/companies/2d1ac5b9-1d46-42ad-8450-48dbb0fcb25eabb.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\companies\\2d1ac5b9-1d46-42ad-8450-48dbb0fcb25eabb.png"
+    },
+    {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\50536c36-eb50-4017-a38b-c406f35f9c82JedAcademy.png",
       "SourceId": "HelloJob.App",
       "SourceType": "Discovered",
@@ -19907,12 +19924,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\styles\\pages\\_wishlist.scss"
     },
     {
-      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\vacancy-detail.scss",
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\vacancy-detail.css",
       "SourceId": "HelloJob.App",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
       "BasePath": "_content/HelloJob.App",
-      "RelativePath": "assets/styles/pages/vacancy-detail.scss",
+      "RelativePath": "assets/styles/pages/vacancy-detail.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -19921,7 +19938,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\styles\\pages\\vacancy-detail.scss"
+      "OriginalItemSpec": "wwwroot\\assets\\styles\\pages\\vacancy-detail.css"
     },
     {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\responsive.css",

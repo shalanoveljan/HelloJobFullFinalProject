@@ -1,16 +1,22 @@
 ﻿
 @model List<ResumeGetDto>
+@inject ILikedService likedService;
+
 @{
-    var premiumItems = Model.Where(item => item.IsPremium).ToList();
-    var nonPremiumItems = Model.Where(item => !item.IsPremium).ToList();
-    bool checkSort = false;
-    if (ViewBag.Dto != null)
-    {
-        checkSort = ViewBag.Dto.IsSort;
-    }
+    WishlistGetDto wishlist = await likedService.GetWishList();
+}
+@{
+
+    //var premiumItems = Model.Where(item => item.IsPremium).ToList();
+    //var nonPremiumItems = Model.Where(item => !item.IsPremium).ToList();checkSort ? Model : premiumItems.Concat(nonPremiumItems)
+    //bool checkSort = false;
+    //if (ViewBag.Dto != null)
+    //{
+    //    checkSort = ViewBag.Dto.IsSort;
+    //}
 }
 <input type="text" value="@Model.Count" id="ResumeCount" hidden/>
-@foreach (var item in checkSort ? Model : premiumItems.Concat(nonPremiumItems))
+@foreach (var item in Model.Take(2).ToList() )
 {
     <div class="resume">
         <a asp-action="Detail" asp-route-id="@item.Id" target="_blank">
@@ -24,11 +30,16 @@
                         <p>@item.Name  @item.Surname </p>
                     </div>
                 </div>
-                <span class="resume__icon mr-0 course_like" id="likes" data-id="@item.Id">
-                    <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
-                    <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
-                </span>
-
+                    <span class="resume__icon mr-0 course_like" id="likes" data-id="@item.Id">
+                        @if (wishlist.wishlistItems.Any(x => x.Id == item.Id && x.IsLiked))
+                        {
+                            <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                        }
+                        else
+                        {
+                            <i id="like"  style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                        }
+                    </span>
             </div>
             <div class="resume_footer">
                 <div class="resume_item">
@@ -62,59 +73,8 @@
         </a>
     </div>
 }
- <button type="submit" onclick="LoadMore()" class="page-link-load" page="2" >Daha çox göstər</button>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var likeButtons = document.querySelectorAll('.course_like');
-        likeButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var resumeId = this.getAttribute("data-id");
-                console.log(resumeId);
-                console.log("clicked card");
-                //var liked = localStorage.getItem("liked_" + resumeId);
 
-                //if (liked === null) {
-                //    liked = "false";
-                //}
-
-                //if (liked === "true") {
-                //    localStorage.setItem("liked_" + resumeId, "false");
-                //    this.querySelector("#unlike").style.display = "inline";
-                //    this.querySelector("#like").style.display = "none";
-                //} else {
-                //    localStorage.setItem("liked_" + resumeId, "true");
-                //    this.querySelector("#unlike").style.display = "none";
-                //    this.querySelector("#like").style.display = "inline";
-                //}
-
-                //console.log("Like clicked for resume with ID:", resumeId);
-
-                
-                fetch('/Resume/AddWishlist?itemId=' + resumeId + '&itemType=Resume', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                }).then(response => {
-                    return response.json();
-                }).then(data => {
-                    console.log(data);
-                }).catch(error => {
-                    console.error('Error:', error);
-                });
-                
-            });
-
-            //var resumeId = button.getAttribute("data-id");
-            //var liked = localStorage.getItem("liked_" + resumeId);
-            //if (liked === "true") {
-            //    button.querySelector("#unlike").style.display = "none";
-            //    button.querySelector("#like").style.display = "inline";
-            //}
-        });
-    });
-</script>
 
 
 

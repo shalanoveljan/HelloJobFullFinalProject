@@ -50,7 +50,7 @@
                 <div class="resume__block resume__header">
                     <div class="d-flex flex-grow-1">
                         <div class="resume__header__img">
-                            <img loading="lazy" src="~/assets/images/vacancies/@categories.FirstOrDefault(x=>x.Id==Model.Category.ParentId).Image alt="Çağrı mərkəzinin operatoru">
+                            <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==Model.Category.ParentId).Image" alt="Çağrı mərkəzinin operatoru">
                         </div>
                         <div class="resume__header__desc">
                             <h3 class="resume__header__name">@Model.Position is elani</h3>
@@ -249,16 +249,13 @@
                     <div class="contact mb-5">
                         <div class="contact__body">
                             <div class="contact__top">
-                                <h4>Elan № 16486</h4>
+                                <h4>Elan № @Model.Id</h4>
                                 <div class="resume__item mb-0">
                                     <div class="resume__icon">
                                         <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/mail.svg" alt="">
                                     </div>
                                     <div class="resume__item__text">
-                                        <h4 class="hidd_email email nshow_email" data-tooltip="E-poçt kopyalandı">E-poçtu göstər</h4>
-                                        <h4 class="hidd_email d-none">
-                                            <a data-tooltip="E-poçt kopyalandı" class="email" href="#">info@linguadilmerkezi.com</a>
-                                        </h4>
+                                        <h4 class="hidd_email email nshow_email" data-tooltip="E-poçt kopyalandı">@Model.Company.Email</h4>
                                         <p>E-poçt ünvanı</p>
                                     </div>
                                     <button class="resume__icon hidden_toggle nshow_email hidden_toggle-email mr-0">
@@ -273,7 +270,7 @@
                                                 <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/calendar.svg" alt="">
                                             </div>
                                             <div class="resume__item__text">
-                                                <h4>04 Fevral</h4>
+                                                <h4>@Model.CreatedAt.ToString("dd MMMM")</h4>
                                                 <p>Elan tarixi</p>
                                             </div>
                                         </div>
@@ -281,7 +278,7 @@
                                     <div class="col-md-6 col-6">
                                         <div class="resume__item align-items-center ">
                                             <div class="resume__item__text">
-                                                <h4>15 Mart</h4>
+                                                <h4>@Model.EndDate.ToString("dd MMMM")</h4>
                                                 <p>Bitmə tarixi</p>
                                             </div>
                                         </div>
@@ -292,7 +289,7 @@
                                                 <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/eye.svg" alt="">
                                             </div>
                                             <div class="resume__item__text">
-                                                <h4>8032</h4>
+                                                <h4>@Model.ViewCount</h4>
                                                 <p>Baxılıb</p>
                                             </div>
                                         </div>

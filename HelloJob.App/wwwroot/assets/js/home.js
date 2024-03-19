@@ -109,24 +109,50 @@ $('.new-categories-slider').slick({
     });
   
 
- const likeIcons = document.querySelectorAll('#like');
- const unlikeIcons = document.querySelectorAll('#unlike');
+ //const likeIcons = document.querySelectorAll('#like');
+ //const unlikeIcons = document.querySelectorAll('#unlike');
  
- likeIcons.forEach(likeIcon => {
-     likeIcon.addEventListener('click', function(e) {
-         e.preventDefault();
-         this.style.display = 'none';
-         unlikeIcons[Array.from(likeIcons).indexOf(this)].style.display = 'inline-block';
-     });
- });
+ //likeIcons.forEach(likeIcon => {
+ //    likeIcon.addEventListener('click', function(e) {
+ //        e.preventDefault();
+ //        this.style.display = 'none';
+ //        unlikeIcons[Array.from(likeIcons).indexOf(this)].style.display = 'inline-block';
+ //    });
+ //});
  
- unlikeIcons.forEach(unlikeIcon => {
-     unlikeIcon.addEventListener('click', function(e) {
-         e.preventDefault();
-         this.style.display = 'none';
-         likeIcons[Array.from(unlikeIcons).indexOf(this)].style.display = 'inline-block';
-     });
- });
+ //unlikeIcons.forEach(unlikeIcon => {
+ //    unlikeIcon.addEventListener('click', function(e) {
+ //        e.preventDefault();
+ //        this.style.display = 'none';
+ //        likeIcons[Array.from(unlikeIcons).indexOf(this)].style.display = 'inline-block';
+ //    });
+ //});
 
+
+$(document).ready(function () {
+    $('.course_like').on('click', '#like', function (e) {
+        e.preventDefault();
+
+        var itemId = $(this).closest('.course_like').data('id');
+        var itemType = "vacancy";
+
+        $.ajax({
+            url: '/Home/AddWishlist',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                itemid: itemId,
+                itemtype: itemType
+            },
+            success: function (response) {
+                console.log("Wishlist'a elave olundu");
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error('There has been a problem with your AJAX request:', error);
+            }
+        });
+    });
+});
  
 

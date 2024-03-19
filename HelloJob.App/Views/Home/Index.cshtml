@@ -1,5 +1,11 @@
 ﻿@model HomeVM
 
+@inject ILikedService likedService;
+
+@{
+    WishlistGetDto wishlist = await likedService.GetWishList();
+}
+
 
 @if (TempData["Verify"] != null)
 {
@@ -42,14 +48,14 @@
                 <div class="nsp_bottom col-md-12">
                     <div class="nsp_searchbar full">
                         <div class="nsb_searchbar_top">
-                            <form asp-action="Index" asp-controller="home" class="full">
+                            <form asp-controller="home" asp-action="index" class="full">
                                 <div class="nsp_search_input">
                                     <img src="~/assets/icons/search.svg" alt="">
-                                    <input type="text" name="searchText" class="searchinput" value="" placeholder="Məsələn, Dizayner">
+                                    <input type="text" name="searchText" id="searchinput" class="searchinput" value="" placeholder="Məsələn, Dizayner">
                                     <input type="hidden" name="search_type" value="keyword">
                                     <input type="hidden" name="searched" value="">
                                 </div>
-                                <button type="submit" class="nsp_search"><span>Axtar</span></button>
+                                <button type="submit" class="nsp_search" ><span>Axtar</span></button>
                             </form>
                             <div class="nsb_bar_buttons">
                                 <button id="multisearch" class="nsp_filter_open">
@@ -261,28 +267,36 @@
                         <div class="vacancies__item__right">
 
                             <span class="vacancies__price">@item.Salary AZN</span>
-                            <span class="card_like " data-section="works" data-id="16519">
+                           @* <span class="card_like " data-section="works" data-id="16519">
                                 <i id="unlike" class="fa-regular fa-heart"></i>
                                 <i id="like" class="fa-solid fa-heart"></i>
-                            </span>
+                            </span>*@
+                                <span class="card_like course_like" id="likes" data-id="@item.Id">
+                                    @if (wishlist.wishlistVacancies.Any(x => x.Id == item.Id && x.IsLiked))
+                                    {
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    }
+                                    else
+                                    {
+                                        <i id="like" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                    }
+                                </span>
                         </div>
-                        if(@item.IsPremium){
+                        @if(@item.IsPremium){
                         <span class="vacancies__premium">
                             <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
                             <span>Premium</span>
                         </span>
                         }
                     </a>
-                        
                     }
-
                     <ul class="custom-pagination">
                         <li class="page-item @(Model.vacancies.PageNumber==1 ? "disable"  : null )  ">
                             <a asp-action="Index" asp-route-page="@(Model.vacancies.PageNumber-1)" class="disabled">
                                 <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow.svg" alt="">
                             </a>
                         </li>
-                        @for (int i = 0; i < Model.vacancies.TotalPages; i++)
+                        @for (int i = 1; i <= Model.vacancies.TotalPages; i++)
                         {
                             <li  class="page-item @(Model.vacancies.PageNumber==i ? "disable"  : null )">
                                 <a asp-action="Index" asp-route-page="@i" class="active">@i</a>
@@ -307,7 +321,7 @@
                         <div class="sticky_element__companies comps">
                             @foreach (var item in Model.companies.Datas)
                             {
-                                <a asp-action="Detail" asp-controller="Home" asp-route-id="@item.Id" class="vacancies__company">
+                                <a asp-action="Detail" asp-controller="Company" asp-route-id="@item.Id" class="vacancies__company">
                                     <img loading="lazy" src="~/assets/images/companies/@item.Image" alt="@item.Name" width="30px" class="n_company_images">
                                     <p> @Model.vacancies.Datas.Where(x=>x.Company.Id==item.Id).Count() vakansiya</p>
                                 </a>
@@ -365,6 +379,31 @@
 <!-- Main Section End -->
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@*    <script>
+        $(document).ready(function () {
+            $(".nsp_search").click(function (event) {
+                event.preventDefault();
+
+                var searchInput = $("#searchinput").val().trim();
+
+                if (searchInput !== "") {
+                    $.ajax({
+                        url: "https://localhost:7066/home/index",
+                        method: "GET",
+                        data: { searchText: searchInput },
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                } else {
+                    alert("Yanlış giriş.");
+                }
+            });
+        });
+    </script>*@
     <script>
         const data1 = document.getElementById("resetpassword");
         if (data1 != undefined) {

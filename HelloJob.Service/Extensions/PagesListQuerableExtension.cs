@@ -17,7 +17,7 @@ namespace HelloJob.Service.Extensions
           int pageSize)
         {
             var count = await source.CountAsync();
-            if (count >= 0)
+             if (count >= 0)
             {
                 var items = await source
                     .Skip((pageNumber - 1) * pageSize)

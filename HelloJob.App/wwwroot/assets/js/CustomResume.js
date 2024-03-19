@@ -4,15 +4,12 @@ let similar_Resume = document.getElementById("similar-resume");
 function MyFunction() {
     const id = getCurrentOptionId();
     const dto = getFilterDto(); 
-
     console.log(dto)
-
     $.ajax({
         type: 'Post',
         url: `https://localhost:7066/Resume/SortResumes/${id}`,
         data: dto,
         success: function (data) {
-          
             similar_Resume.innerHTML = data;
         }
     });
@@ -87,8 +84,8 @@ function getFilterDto() {
         LanguagesIds: languagesIds,
         CategoriesIds: categoriesIds,
         IsDriverLicense: isDriverLicense,
-        JobMode: JobMode, 
-        MaritalStatus: status,
+        Mode: JobMode, 
+        Status: status,
         Gender: gender,
         MinSalary: minSalary,
         MaxSalary: maxSalary,
@@ -99,24 +96,31 @@ function getFilterDto() {
 
 function LoadMore() {
     const id = getCurrentOptionId();
-    var pageNumber = parseInt($(".page-link-load").attr("page")); 
-    var pageSize = 4; 
-    var resumeCount = parseInt($("#ResumeCount").val()); 
     var dto = getFilterDto(); 
+    var pageNumber = parseInt($(".page-link-load").attr("page")); 
+    var pageSize = 1; 
+    var resumeCount = parseInt($("#ResumeCount").val()); 
 
     $.ajax({
         url: `https://localhost:7066/Resume/LoadMore/${id}`,
         type: 'GET',
         data: {
             pagenumber: pageNumber,
-            pagesize: pageSize,
+            pageSize: pageSize,
             dto: dto
         },
         success: function (res) {
-            $('#resumeList').append(res); 
+            
+            console.log("success")
             pageNumber++; 
-            if (($("#resumeList .resume").length) >= resumeCount) {
-                $(".pagination").html('<span class="page-link-load" aria-label="Next">Daha resume yoxdur/span>');
+            similar_Resume.innerHTML += res;
+            var totalResumes = $(".resume").length;
+            console.log(totalResumes)
+            console.log(resumeCount)
+
+
+            if (totalResumes >= resumeCount) {
+               $(".page-link-load").hide();
             } else {
                 $(".page-link-load").attr("page", pageNumber);
             }
@@ -124,6 +128,8 @@ function LoadMore() {
         error: function (xhr, status, error) {
             console.error(error); 
         }
+        
     });
+
 }
 

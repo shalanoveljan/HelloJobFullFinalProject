@@ -7,7 +7,11 @@
 @{
     List<VacancyGetDto> vacancies = (await vacancyService.GetAllForVacancyPageInWebSiteAsync()).Data;
 }
+@inject ICategoryService categoryService;
 
+@{
+    List<CategoryGetDto> categories = (await categoryService.GetAllAsync()).Datas.ToList();
+}
 
 <!-- Main start  -->
 <main class="main full" role="main">
@@ -60,12 +64,12 @@
                                 <a asp-controller="Home" asp-action="Detail" asp-route-id="@Model.Id" class="vacancies__item company-vacancy-item">
                                     <div class="vacancies__item__left">
                                         <div class="vacancies__icon">
-                                            <img loading="lazy" src="@item.Category.Image" alt="Telesatış bölməsində kiçik mütəxəssis">
+                                                <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==@item.Category.ParentId).Image" alt="Telesatış bölməsində kiçik mütəxəssis">
                                         </div>
                                         <div class="vacancies__desc">
                                             <h3>@item.Category.Name</h3>
                                             <p>@item.Company.Name</p>
-                                            <span class="com_card_date">@item.EndDate.ToString("dd MM")</span>
+                                                <span class="com_card_date">@item.EndDate.ToString("dd MMM yyyy")</span>
                                         </div>
                                     </div>
                                     <div class="vacancies__item__right">
@@ -90,7 +94,7 @@
                                 <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id" class="vacancies__item company-vacancy-item">
                                     <div class="vacancies__item__left">
                                         <div class="vacancies__icon">
-                                            <img loading="lazy" src="~/assets/images/categories/@item.Category.Image" alt="Şəmkir filialı üzrə Mikrokreditlər bölməsinin kiçik mütəxəssisi">
+                                                <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==@item.Category.ParentId).Image" alt="Şəmkir filialı üzrə Mikrokreditlər bölməsinin kiçik mütəxəssisi">
                                         </div>
                                         <div class="vacancies__desc">
                                             <h3>@item.Category.Name</h3>
@@ -111,6 +115,7 @@
                                 }
                             </div>
                         </div>
+                </div>
                     <div class="tab__item " data-tab="2">
                         <h2 class="section-title">şirkət haqqında</h2>
                         <div class="content">
@@ -119,8 +124,8 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
+            </div>
+                <div class="col-lg-4">
                     <div class="resume__block--contact inner_fixed_bottom">
                         <div class="contact">
                             <div class="contact__head">
@@ -138,8 +143,8 @@
                                         </div>
                                         <div class="resume__item__text">
                                             <h4 class="hidd_email">E-poçtu göstər</h4>
-                                            <h4 class="hidd_email d-none">@Model.Email</h4>
-                                            <p>E-poçt ünvanı</p>
+                                            <h4 class="hidd_email d-none"></h4>
+                                            <p>@Model.Email</p>
                                         </div>
                                         <button class="resume__icon hidden_toggle hidden_toggle-email mr-0">
                                         </button>
@@ -158,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
         </div>
         <div class="blog_inner_tags"></div>
     </section>

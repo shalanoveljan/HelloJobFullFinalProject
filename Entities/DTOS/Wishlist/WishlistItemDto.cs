@@ -9,8 +9,8 @@ namespace HelloJob.Entities.DTOS
 {
     public record WishlistItemDto
     {
-        public int Id { get; set; }
         public string Image { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public JobMode Mode { get; set; }

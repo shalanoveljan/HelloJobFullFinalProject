@@ -22,6 +22,6 @@ namespace HelloJob.Service.Services.Interfaces
         public Task<IDataResult<List<ResumeGetDto>>> SortResumes(int id, ResumeFilterDto dto);
         public Task<IDataResult<List<ResumeGetDto>>> FilterResumes(ResumeFilterDto dto);
         public Task<IResult> SetOrderStatus(int resumeId, Order orderStatus);
-        public Task<IDataResult<List<ResumeGetDto>>> LoadMoreResumesAsync(int id, int pageNumber, int pageSize, ResumeFilterDto dto);
+        public Task<IDataResult<List<ResumeGetDto>>> LoadMoreResumesAsync(int id, ResumeFilterDto dto, int pageNumber, int pageSize);
     }
 }

@@ -20,10 +20,11 @@ namespace HelloJob.Service.Services.Implementations
         private readonly IWishlistItemDAL _wishlistItemRepository;
         private readonly IResumeDAL _resumeRepository;
         readonly IResumeService _resumeService;
+        readonly IVacancyService _VacancyService;
         readonly IHttpContextAccessor _http;
 
 
-        public LikedService(UserManager<AppUser> userManager, IResumeDAL resumeRepository, IHttpContextAccessor http, IWishlistDAL wishlistRepository, IWishlistItemDAL wishlistItemRepository, IResumeService resumeService)
+        public LikedService(UserManager<AppUser> userManager, IResumeDAL resumeRepository, IHttpContextAccessor http, IWishlistDAL wishlistRepository, IWishlistItemDAL wishlistItemRepository, IResumeService resumeService, IVacancyService vacancyService)
         {
             _userManager = userManager;
             _resumeRepository = resumeRepository;
@@ -31,73 +32,86 @@ namespace HelloJob.Service.Services.Implementations
             _wishlistRepository = wishlistRepository;
             _wishlistItemRepository = wishlistItemRepository;
             _resumeService = resumeService;
+            _VacancyService = vacancyService;
         }
-        //public async Task<WishlistItem> CreateWishlistItem(string itemType, int itemId)
-        //{
-        //    if (itemType == "Resume")
-        //    {
-        //        Resume? cv =await _resumeRepository.GetAsync(c => c.Id == itemId);
-        //        if (cv is null)
-        //        {
-        //            return null;
-        //        }
-        //        return new WishlistItem
-        //        {
-        //            Id = cv.Id,
-                    
-        //            IsLiked = true
-        //        };
-        //    }
-        //    return null;
-        //}
-
-        public async Task AddToWishlist(int itemId,string itemtype)
+        public async Task AddToWishlist(int itemId, string itemType)
         {
             if (_http.HttpContext.User.Identity.IsAuthenticated)
             {
                 AppUser appUser = await _userManager.FindByNameAsync(_http.HttpContext.User.Identity.Name);
-                var wishlist = await _wishlistRepository.GetAsync(x=>!x.IsDeleted&&x.AppUserId==appUser.Id, "WishListItems");
+                var wishlist = await _wishlistRepository.GetAsync(x => !x.IsDeleted && x.AppUserId == appUser.Id, "WishListItems");
 
-                if(wishlist != null)
+                if (wishlist != null)
                 {
-                    var wishlistItem = wishlist.WishListItems.Where(x => !x.IsDeleted).FirstOrDefault(x => x.ResumeId == itemId);
-                    if (wishlistItem != null)
+                    if (itemType == "resume")
                     {
-                        wishlistItem.IsLiked = false;
-                        wishlist.WishListItems.Remove(wishlistItem);
-                        await _wishlistRepository.UpdateAsync(wishlist);
+                        var wishlistItem = wishlist.WishListItems.FirstOrDefault(x => !x.IsDeleted && x.ResumeId == itemId);
+                        if (wishlistItem != null)
+                        {
+                            wishlistItem.IsLiked = true;
+                        }
+                        else
+                        {
+                            wishlistItem = new WishlistItem
+                            {
+                                ResumeId = itemId,
+                                Wishlist = wishlist,
+                                IsLiked = true
+                            };
+                            wishlist.WishListItems.Add(wishlistItem);
+                        }
                     }
-
-                    else
+                    else if (itemType == "vacancy")
                     {
-                         wishlistItem =new WishlistItem 
-                         {
-                           ResumeId=itemId,
-                           Wishlist=wishlist,
-                           IsLiked=true,
-                         } ;
-                        await _wishlistItemRepository.AddAsync(wishlistItem);
+                        var wishlistItem = wishlist.WishListItems.FirstOrDefault(x => !x.IsDeleted && x.VacancyId == itemId);
+                        if (wishlistItem != null)
+                        {
+                            wishlistItem.IsLiked = true;
+                        }
+                        else
+                        {
+                            wishlistItem = new WishlistItem
+                            {
+                                VacancyId = itemId,
+                                Wishlist = wishlist,
+                                IsLiked = true
+                            };
+                            wishlist.WishListItems.Add(wishlistItem);
+                        }
                     }
+                    await _wishlistRepository.UpdateAsync(wishlist);
                 }
-
                 else
                 {
-                    wishlist=new Wishlist { AppUserId= appUser.Id };
+                    wishlist = new Wishlist { AppUserId = appUser.Id };
                     await _wishlistRepository.AddAsync(wishlist);
-                    var item = new WishlistItem
+
+                    var item = new WishlistItem();
+                    if (itemType == "resume")
                     {
-                        Wishlist = wishlist,
-                        ResumeId = itemId,
-                        IsLiked = true,
-                    };
+                        item = new WishlistItem
+                        {
+                            ResumeId = itemId,
+                            Wishlist = wishlist,
+                            IsLiked = true
+                        };
+                    }
+                    else if (itemType == "vacancy")
+                    {
+                        item = new WishlistItem
+                        {
+                            VacancyId = itemId,
+                            Wishlist = wishlist,
+                            IsLiked = true
+                        };
+                    }
                     await _wishlistItemRepository.AddAsync(item);
+                    await _wishlistRepository.SaveChangesAsync();
                 }
-                await _wishlistRepository.SaveChangesAsync();
             }
             else
             {
-                List<WishlistPostDto>? WishlistDtos = new List<WishlistPostDto>();
-
+                List<WishlistPostDto> WishlistDtos = new List<WishlistPostDto>();
                 var wishlistJson = _http.HttpContext.Request.Cookies["wishlist"];
 
                 if (wishlistJson == null)
@@ -105,22 +119,21 @@ namespace HelloJob.Service.Services.Implementations
                     WishlistPostDto wishlistitem = new WishlistPostDto()
                     {
                         Id = itemId,
-                        IsLiked= true,
+                        IsLiked = true,
                     };
                     WishlistDtos.Add(wishlistitem);
                 }
                 else
                 {
                     WishlistDtos = JsonConvert.DeserializeObject<List<WishlistPostDto>>(wishlistJson);
-
-                    WishlistPostDto? wishlistdto = WishlistDtos.FirstOrDefault(x => x.Id == itemId);
+                    var wishlistdto = WishlistDtos.FirstOrDefault(x => x.Id == itemId);
 
                     if (wishlistdto == null)
                     {
                         wishlistdto = new WishlistPostDto()
                         {
                             Id = itemId,
-                            IsLiked= true,
+                            IsLiked = true,
                         };
                         WishlistDtos.Add(wishlistdto);
                     }
@@ -129,25 +142,24 @@ namespace HelloJob.Service.Services.Implementations
                         wishlistdto.IsLiked = false;
                         WishlistDtos.Remove(wishlistdto);
                     }
-
                 }
-
 
                 wishlistJson = JsonConvert.SerializeObject(WishlistDtos);
                 _http.HttpContext.Response.Cookies.Append("wishlist", wishlistJson);
             }
         }
+
         public async Task<WishlistGetDto> GetWishList()
         {
-            WishlistGetDto wishlistgetdto = new WishlistGetDto();
-           
+            WishlistGetDto wishlistGetDto = new WishlistGetDto();
 
             if (_http.HttpContext.User.Identity.IsAuthenticated)
             {
                 AppUser appUser = await _userManager.FindByNameAsync(_http.HttpContext.User.Identity.Name);
-
-                var wishlistquery = await _wishlistRepository.GetQuery(x => !x.IsDeleted && x.AppUserId == appUser.Id)
+                var wishlistQuery = await _wishlistRepository.GetQuery(x => !x.IsDeleted && x.AppUserId == appUser.Id)
                     .Include(x => x.WishListItems)
+                    .ThenInclude(c => c.Resume)
+                     .Include(x => x.WishListItems)
                     .ThenInclude(c => c.Resume)
                         .ThenInclude(v => v.Category)
                 .Include(x => x.WishListItems)
@@ -165,12 +177,26 @@ namespace HelloJob.Service.Services.Implementations
                 .Include(x => x.WishListItems)
                     .ThenInclude(c => c.Resume)
                         .ThenInclude(v => v.experiences)
+                       .Include(x => x.WishListItems)
+                                .ThenInclude(c => c.Vacancy)
+                                    .ThenInclude(v => v.Category)
+                            .Include(x => x.WishListItems)
+                                .ThenInclude(c => c.Vacancy)
+                                    .ThenInclude(v => v.Company)
+                            .Include(x => x.WishListItems)
+                                .ThenInclude(c => c.Vacancy)
+                                    .ThenInclude(v => v.Category)
+                            .Include(x => x.WishListItems)
+                                .ThenInclude(c => c.Vacancy)
+                                    .ThenInclude(v => v.City)
+
+
                     .FirstOrDefaultAsync();
 
-                if (wishlistquery != null)
+                if (wishlistQuery != null)
                 {
-                    wishlistgetdto.wishlistItems = wishlistquery.WishListItems.Where(X => !X.IsDeleted)
-                        .Select(cv=> new WishlistItemDto
+                    wishlistGetDto.wishlistItems = wishlistQuery.WishListItems.Where(x => !x.IsDeleted && x.ResumeId != null)
+                        .Select(cv => new WishlistItemDto
                         {
                             Id = cv.Resume.Id,
                             Image = cv.Resume.Image,
@@ -179,11 +205,29 @@ namespace HelloJob.Service.Services.Implementations
                             Experience = cv.Resume.Experience,
                             Mode = cv.Resume.Mode,
                             Surname = cv.Resume.Surname,
-                            ViewCount= cv.Resume.ViewCount,
-                             EndDate= cv.Resume.EndDate,
-                             Salary= (int)cv.Resume.Salary,
-                             IsPremium= cv.Resume.IsPremium,
+                            ViewCount = cv.Resume.ViewCount,
+                            EndDate = cv.Resume.EndDate,
+                            Salary = (int)cv.Resume.Salary,
+                            IsPremium = cv.Resume.IsPremium,
                             IsLiked = true
+
+                        }).ToList();
+
+                    wishlistGetDto.wishlistVacancies = wishlistQuery.WishListItems.Where(x => !x.IsDeleted && x.VacancyId != null)
+                        .Select(cv => new WishlistVacancyDto
+                        {
+                            Id = cv.Vacancy.Id,
+                            Position = cv.Vacancy.Position,
+                            Required_Experience = cv.Vacancy.Required_Experience,
+                            Category = new CategoryGetDto { Id = cv.Vacancy.Category.Id, Name = cv.Vacancy.Category.Name, Image = cv.Vacancy.Category.Image, ParentId = cv.Vacancy.Category.ParentId },
+                            Company = new CompanyGetDto { Id = cv.Vacancy.Company.Id, Name = cv.Vacancy.Company.Name },
+                            Mode = cv.Vacancy.Mode,
+                            ViewCount = cv.Vacancy.ViewCount,
+                            EndDate = cv.Vacancy.EndDate,
+                            Salary = (int)cv.Vacancy.Salary,
+                            IsPremium = cv.Vacancy.IsPremium,
+                            IsLiked = true
+
                         }).ToList();
                 }
             }
@@ -199,7 +243,8 @@ namespace HelloJob.Service.Services.Implementations
                     foreach (var item in wishlistItems)
                     {
                         var resume = await _resumeService.GetAsync(item.Id);
-                        if (resume != null)
+                        var Vacancy = await _VacancyService.GetAsync(item.Id);
+                        if (resume.Data != null)
                         {
                             var wishlistItem = new WishlistItemDto
                             {
@@ -212,26 +257,41 @@ namespace HelloJob.Service.Services.Implementations
                                 Surname = resume.Data.Surname,
                                 ViewCount = resume.Data.ViewCount,
                                 EndDate = resume.Data.EndDate,
-                                Salary=(int)resume.Data.Salary,
-                                IsPremium=resume.Data.IsPremium,
+                                Salary = (int)resume.Data.Salary,
+                                IsPremium = resume.Data.IsPremium,
                                 IsLiked = true
                             };
-                            wishlistgetdto.wishlistItems.Add(wishlistItem);
+                            wishlistGetDto.wishlistItems.Add(wishlistItem);
                         }
+
+                        if (Vacancy.Data != null)
+                        {
+                            var wishlistItem = new WishlistVacancyDto
+                            {
+                                Id = Vacancy.Data.Id,
+                                Position = Vacancy.Data.Position,
+                                Required_Experience = Vacancy.Data.Required_Experience,
+                                Category = new CategoryGetDto { Id = Vacancy.Data.Category.Id, Name = Vacancy.Data.Category.Name, Image = Vacancy.Data.Category.Image, ParentId = Vacancy.Data.Category.ParentId },
+                                Company = new CompanyGetDto { Id = Vacancy.Data.Company.Id, Name = Vacancy.Data.Company.Name },
+                                Mode = Vacancy.Data.Mode,
+                                ViewCount = Vacancy.Data.ViewCount,
+                                EndDate = Vacancy.Data.EndDate,
+                                Salary = (int)Vacancy.Data.Salary,
+                                IsPremium = Vacancy.Data.IsPremium,
+                                IsLiked = true
+                            };
+
+                            wishlistGetDto.wishlistVacancies.Add(wishlistItem);
+
+                        }
+
+
                     }
                 }
             }
-            return wishlistgetdto;
-        }
 
-        public WishlistItem GetWishlistItem(List<WishlistItem> wishlistItems, string itemType, int itemId)
-        {
-            if (itemType == "Resume")
-            {
-                return  wishlistItems.FirstOrDefault(item => item.ResumeId == itemId);
-            }
 
-            return null;
+            return wishlistGetDto;
         }
     }
 }

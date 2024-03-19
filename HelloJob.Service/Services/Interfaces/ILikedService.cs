@@ -12,6 +12,5 @@ namespace HelloJob.Service.Services.Interfaces
     {
       public Task<WishlistGetDto> GetWishList();
      public  Task AddToWishlist(int itemId, string itemtype);
-      public WishlistItem GetWishlistItem(List<WishlistItem> wishlistItems, string itemType, int itemId);
     }
 }

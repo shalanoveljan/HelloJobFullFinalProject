@@ -226,23 +226,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Experience" asp-action="Index">
-                            <i class="fa-brands fa-microblog"></i>
-                            <span class="menu-title">Experience</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" asp-controller="Resume" asp-action="Index">
                             <i class="fa-brands fa-microblog"></i>
                             <span class="menu-title">Requests of Resumes</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="account" asp-action="login">
+                     <li class="nav-item">
+                        <a class="nav-link" asp-controller="Vacancy" asp-action="Index">
                             <i class="fa-brands fa-microblog"></i>
-                            <span class="menu-title">login</span>
+                            <span class="menu-title">Requests of Vacancies</span>
                         </a>
-                    </li>   
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Company" asp-action="Index">
+                            <i class="fa-brands fa-microblog"></i>
+                            <span class="menu-title">Requests of Companies</span>
+                        </a>
+                    </li>
                     @if (User.IsInRole("SuperAdmin"))
                     {
                     <li class="nav-item">

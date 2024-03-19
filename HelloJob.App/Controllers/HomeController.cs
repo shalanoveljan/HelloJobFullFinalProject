@@ -3,7 +3,6 @@ using HelloJob.Entities.DTOS;
 using HelloJob.Entities.Models;
 using HelloJob.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace HelloJob.App.Controllers
 {
@@ -17,19 +16,19 @@ namespace HelloJob.App.Controllers
         readonly ICompanyService _companyService;
         readonly ILikedService _likeService;
 
-        public HomeController(IVacancyService VacancyService, ICategoryService categoryService, ILikedService likeService, ILogger<HomeController> logger, IBlogService blogService, ICompanyService companyService, ICityService cityService)
+        public HomeController(IVacancyService VacancyService, ICategoryService categoryService, ILogger<HomeController> logger, IBlogService blogService, ICompanyService companyService, ICityService cityService, ILikedService likeService)
         {
             _VacancyService = VacancyService;
             _categoryService = categoryService;
-            _likeService = likeService;
             _companyService = companyService;
             _cityService = cityService;
             _blogService = blogService;
             _logger = logger;
+            _likeService = likeService;
         }
 
 
-      
+
 
         public async Task<IActionResult> Index(string searchText,string userid = null, int page = 1, int pagesize = 6)
         {
@@ -39,7 +38,7 @@ namespace HelloJob.App.Controllers
                 categories = await _categoryService.GetAllAsync(),
                 blogs = await _blogService.GetAllAsync(page, pagesize),
                 vacancies= await _VacancyService.GetVacancysBySearchTextAsync(searchText, page, pagesize),
-                companies=await _companyService.GetAllAsync(userid, false , page, pagesize)
+                companies=await _companyService.GetAllCheckingOrderAsync(page, pagesize)
 
         };
             return View(homeVM);
@@ -50,17 +49,6 @@ namespace HelloJob.App.Controllers
             var res = await _VacancyService.GetAsync(id);
             await _VacancyService.IncreaseCount(id);
             return View(res.Data);
-        }
-        public async Task<IActionResult> Wishlist()
-        {
-
-            WishlistGetDto wishlist = await _likeService.GetWishList();
-            if (wishlist is null)
-            {
-                return Json("Wishlist is null");
-            }
-
-            return View(wishlist);
         }
         [HttpPost]
         public async Task<IActionResult> AddWishlist(int itemid, string itemtype)

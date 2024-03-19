@@ -107,6 +107,40 @@ namespace HelloJob.Service.Services.Implementations
 
     }
 
+        public async Task<PagginatedResponse<CompanyGetDto>> GetAllCheckingOrderAsync(int pageNumber = 1, int pageSize = 6)
+        {
+            IQueryable<Company> query;
+
+                query = _CompanyRepository.GetQuery(x => !x.IsDeleted && x.order == Order.Accept);
+            var totalCount = await query.CountAsync();
+
+            var paginatedCompanys = await query
+                .AsNoTrackingWithIdentityResolution()
+                .Include(x => x.AppUser)
+                .ToPagedListAsync(pageNumber, pageSize);
+
+            var CompanyGetDtos = paginatedCompanys.Datas.Select(x =>
+                new CompanyGetDto
+                {
+                    Id = x.Id,
+                    Image = x.Image,
+                    Name = x.Name,
+                    Email = x.Email,
+                    order = x.order,
+                    AppUser = x.AppUser,
+                    WebsiteUrlLink = x.WebsiteUrlLink,
+                    About = x.About,
+                }).ToList();
+
+            var pagginatedResponse = new PagginatedResponse<CompanyGetDto>(
+                CompanyGetDtos, paginatedCompanys.PageNumber,
+                paginatedCompanys.PageSize,
+                totalCount);
+
+            return pagginatedResponse;
+
+        }
+
         private IQueryable<Company> GetBaseQuery()
         {
             return _CompanyRepository.GetQuery(x => !x.IsDeleted && x.order == Order.Accept)/**/

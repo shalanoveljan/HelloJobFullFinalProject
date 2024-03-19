@@ -4881,6 +4881,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\close.svg"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\2d1ac5b9-1d46-42ad-8450-48dbb0fcb25eabb.png",
+      "PackagePath": "staticwebassets\\assets\\images\\companies\\2d1ac5b9-1d46-42ad-8450-48dbb0fcb25eabb.png"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\images\\companies\\50536c36-eb50-4017-a38b-c406f35f9c82JedAcademy.png",
       "PackagePath": "staticwebassets\\assets\\images\\companies\\50536c36-eb50-4017-a38b-c406f35f9c82JedAcademy.png"
     },
@@ -5361,8 +5365,8 @@
       "PackagePath": "staticwebassets\\assets\\styles\\pages\\_wishlist.scss"
     },
     {
-      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\vacancy-detail.scss",
-      "PackagePath": "staticwebassets\\assets\\styles\\pages\\vacancy-detail.scss"
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\vacancy-detail.css",
+      "PackagePath": "staticwebassets\\assets\\styles\\pages\\vacancy-detail.css"
     },
     {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\responsive.css",

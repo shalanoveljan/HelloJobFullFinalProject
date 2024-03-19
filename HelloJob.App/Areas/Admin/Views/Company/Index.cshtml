@@ -7,7 +7,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Resumes Table</h4>
+                        <h4 class="card-title">Companys Table</h4>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -37,28 +37,28 @@
                                             <td>
                                                 @if (item.order == Order.Accept)
                                                 {
-                                                    <form asp-controller="company" asp-action="Reject" asp-route-resumeid="@item.Id" method="post" onsubmit="return confirm('Are you sure?')">
+                                                    <form asp-controller="company" asp-action="Reject" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Are you sure?')">
                                                         <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-danger">Reject</button>
                                                     </form>
-                                                    <form asp-controller="company" asp-action="Pending" asp-route-resumeid="@item.Id" method="post">
+                                                    <form asp-controller="company" asp-action="Pending" asp-route-id="@item.Id" method="post">
                                                         <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-warning">Pending</button>
                                                     </form>
                                                 }
                                                 else if (item.order == Order.None)
                                                 {
-                                                    <form asp-controller="company" asp-action="Accept" asp-route-resumeid="@item.Id" method="post">
+                                                    <form asp-controller="company" asp-action="Accept" asp-route-id="@item.Id" method="post">
                                                         <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-primary">Accept</button>
                                                     </form>
-                                                    <form asp-controller="company" asp-action="Reject" asp-route-resumeid="@item.Id" method="post" onsubmit="return confirm('Are you sure?')">
+                                                    <form asp-controller="company" asp-action="Reject" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Are you sure?')">
                                                         <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-danger">Reject</button>
                                                     </form>
                                                 }
                                                 else if (item.order == Order.Reject)
                                                 {
-                                                    <form asp-controller="company" asp-action="Accept" asp-route-resumeid="@item.Id" method="post">
+                                                    <form asp-controller="company" asp-action="Accept" asp-route-id="@item.Id" method="post">
                                                         <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-primary">Accept</button>
                                                     </form>
-                                                    <form asp-controller="company" asp-action="Pending" asp-route-resumeid="@item.Id" method="post">
+                                                    <form asp-controller="company" asp-action="Pending" asp-route-id="@item.Id" method="post">
                                                         <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-warning">Pending</button>
                                                     </form>
                                                 }
