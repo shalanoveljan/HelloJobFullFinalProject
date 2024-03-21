@@ -87,7 +87,11 @@ namespace HelloJob.App.Controllers
         public async Task<IActionResult> AddWishlist(int itemid, string itemtype)
         {
             await _likeService.AddToWishlist(itemid,itemtype);
-            return Json(new { status = 200 });
+            return Json(new
+            {
+                success = true,
+            });
+
         }
 
     }

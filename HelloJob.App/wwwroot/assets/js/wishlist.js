@@ -36,9 +36,60 @@ $('.blog-items').slick({
       // settings: "unslick"
       // instead of a settings object
     ]
-  });
+});
 
-document.addEventListener('DOMContentLoaded', function() {
+
+$(document).ready(function () {
+$('.resume-like').on('click', '#like', function (e) {
+    console.log("clicked in wishlist")
+    e.preventDefault();
+
+    var itemId = $(this).closest('.resume-like').data('id');
+    var itemType = "resume";
+
+    $.ajax({
+        url: '/Resume/AddWishlist',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            itemid: itemId,
+            itemtype: itemType
+        },
+        success: function (response) {
+            console.log("Wishlist'a elave olundu");
+            location.reload();
+        },
+        error: function (xhr, status, error) {
+            console.error('There has been a problem with your AJAX request:', error);
+        }
+    });
+});
+
+    $('.vacancy-like').on('click', '#like', function (e) {
+        console.log("clicked in wishlist")
+        e.preventDefault();
+
+        var itemId = $(this).closest('.vacancy-like').data('id');
+        var itemType = "vacancy";
+
+        $.ajax({
+            url: '/Home/AddWishlist',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                itemid: itemId,
+                itemtype: itemType
+            },
+            success: function (response) {
+                console.log("Wishlist'a elave olundu");
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error('There has been a problem with your AJAX request:', error);
+            }
+        });
+    });
+   
   const likeIcons = document.querySelectorAll('.card_like');
 
   likeIcons.forEach(likeIcon => {
@@ -51,3 +102,5 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+
+

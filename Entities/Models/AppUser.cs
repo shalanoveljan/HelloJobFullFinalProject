@@ -1,4 +1,6 @@
-﻿namespace HelloJob.Entities.Models
+﻿using Org.BouncyCastle.Asn1.Ocsp;
+
+namespace HelloJob.Entities.Models
 {
     public class AppUser: Microsoft.AspNetCore.Identity.IdentityUser
     {
@@ -7,7 +9,7 @@
 
         public AppUser()
         {
-            Resumes=new List<Resume>();
+            Resumes =new List<Resume>();
         }
     }
 }

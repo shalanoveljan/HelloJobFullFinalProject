@@ -1,8 +1,10 @@
 ﻿
 @model VacancyGetDto
 @inject ICategoryService categoryService;
+@inject ILikedService likedService;
 
 @{
+    WishlistGetDto wishlist = await likedService.GetWishList();
     List<CategoryGetDto> categories = (await categoryService.GetAllAsync()).Datas.ToList();
 }
 <main>
@@ -67,9 +69,15 @@
                             @Model.Salary AZN
                         </span>
                     </div>
-                    <span class="resume__icon mr-0 course_like mt-2 " data-id="31">
-                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
-                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                    <span class="resume__icon mr-0 course_like" id="likes" data-id="@Model.Id">
+                        @if (wishlist.wishlistVacancies.Any(x => x.Id == Model.Id && x.IsLiked))
+                        {
+                            <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                        }
+                        else
+                        {
+                            <i id="like" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                        }
                     </span>
                 </div>
 
@@ -168,7 +176,19 @@
                 <section class="scrollsection">
                     <div class="scrollsectioncon">
                         <span class="part1">
-                            <button> E-mail poçt göstər</button>
+                            @if (User.IsInRole("Employee"))
+                            {
+                            <a asp-controller="Request" asp-action="create" asp-route-vacancyId="@Model.Id" class="btn btn-primary p-2">
+                                Muraciet et
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary p-2">
+                                    @Model.Company.Email
+                                </a>
+                            }
+
                             <span class=" mr-0 course-detail-like" data-id="31">
                                 <a href="tel:0554571717" class="btn btn-grey show_number">
                                     <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/phone.svg" alt="">
@@ -319,8 +339,3 @@
 
 
 </main>
-
-   @section Scripts{
-
-       <script src="~/assets/js/vacancy-detail.js"></script>
-    }

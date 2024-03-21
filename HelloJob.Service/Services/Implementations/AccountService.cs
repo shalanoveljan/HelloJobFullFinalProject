@@ -489,6 +489,11 @@ namespace HelloJob.Service.Services.Implementations
             }
         }
 
+        public async Task<AppUser> GetUser(string id)
+        {
+            return _signInManager.UserManager.Users.FirstOrDefault(u => u.Id == id);
+        }
+
     }
 
 

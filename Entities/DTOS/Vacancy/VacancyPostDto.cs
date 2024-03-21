@@ -13,6 +13,7 @@ namespace HelloJob.Entities.DTOS
     {
         public int CompanyId { get; set; }
         public int CategoryId { get; set; }
+        public int RequestId { get; set; }
         public int Salary { get; set; }
         public string Position { get; set; }
         public int CityId { get; set; }

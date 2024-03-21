@@ -188,12 +188,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xEYXNoYm9hcmRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/User/Views/Request/CVRequest.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xSZXF1ZXN0XENWUmVxdWVzdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/User/Views/Request/VacacyRequest.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xSZXF1ZXN0XFZhY2FjeVJlcXVlc3QuY3NodG1s
+[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/User/Views/Request/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xSZXF1ZXN0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Areas/User/Views/Resume/Create.cshtml]
@@ -286,6 +282,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Views/Like/wishlist.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlrZVx3aXNobGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Views/Request/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVxdWVzdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/OMEN/Desktop/HelloJobProject/HelloJob.App/Views/Resume/Detail.cshtml]

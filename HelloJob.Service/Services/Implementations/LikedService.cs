@@ -1,4 +1,5 @@
 ﻿using HelloJob.Core.Utilities.Results.Concrete;
+using HelloJob.Data.DAL.Implementations;
 using HelloJob.Data.DAL.Interfaces;
 using HelloJob.Data.DBContexts.SQLSERVER;
 using HelloJob.Entities.DTOS;
@@ -48,7 +49,8 @@ namespace HelloJob.Service.Services.Implementations
                         var wishlistItem = wishlist.WishListItems.FirstOrDefault(x => !x.IsDeleted && x.ResumeId == itemId);
                         if (wishlistItem != null)
                         {
-                            wishlistItem.IsLiked = true;
+                            wishlistItem.IsLiked = false;
+                            wishlist.WishListItems.Remove(wishlistItem);
                         }
                         else
                         {
@@ -66,7 +68,8 @@ namespace HelloJob.Service.Services.Implementations
                         var wishlistItem = wishlist.WishListItems.FirstOrDefault(x => !x.IsDeleted && x.VacancyId == itemId);
                         if (wishlistItem != null)
                         {
-                            wishlistItem.IsLiked = true;
+                            wishlistItem.IsLiked = false;
+                            wishlist.WishListItems.Remove(wishlistItem);
                         }
                         else
                         {

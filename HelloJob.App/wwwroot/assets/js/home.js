@@ -132,6 +132,7 @@ $('.new-categories-slider').slick({
 $(document).ready(function () {
     $('.course_like').on('click', '#like', function (e) {
         e.preventDefault();
+        var likeIcon = $(this);
 
         var itemId = $(this).closest('.course_like').data('id');
         var itemType = "vacancy";
@@ -146,7 +147,11 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log("Wishlist'a elave olundu");
-                location.reload();
+                if (likeIcon.hasClass('fa-regular')) {
+                    likeIcon.removeClass('fa-regular').addClass('fa-solid');
+                } else {
+                    likeIcon.removeClass('fa-solid').addClass('fa-regular');
+                }
             },
             error: function (xhr, status, error) {
                 console.error('There has been a problem with your AJAX request:', error);

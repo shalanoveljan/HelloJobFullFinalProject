@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "c9guqYrK4btbKLNqKqVBTBPFuLlOK63PZN9R7kNG+8w=",
+  "Hash": "e8bAoaK7huK4tGOQqNz1WPbOC0J1Wgc9J3Zl0nxmcg4=",
   "Source": "HelloJob.App",
   "BasePath": "_content/HelloJob.App",
   "Mode": "Default",
@@ -19922,6 +19922,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\styles\\pages\\_wishlist.scss"
+    },
+    {
+      "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\request.css",
+      "SourceId": "HelloJob.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\",
+      "BasePath": "_content/HelloJob.App",
+      "RelativePath": "assets/styles/pages/request.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\styles\\pages\\request.css"
     },
     {
       "Identity": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\vacancy-detail.css",

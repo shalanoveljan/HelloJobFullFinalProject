@@ -40,6 +40,7 @@ namespace HelloJob.Data.ServiceRegistrations
             services.AddScoped<IWishlistItemDAL, WishlistItemDAL>();
             services.AddScoped<ICompanyDAL, CompanyDAL>();
             services.AddScoped<IVacancyDAL, VacancyDAL>();
+            services.AddScoped<IRequestDAL, RequestDAL>();
 
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {

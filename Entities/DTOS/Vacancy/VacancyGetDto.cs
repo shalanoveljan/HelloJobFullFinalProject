@@ -11,8 +11,10 @@ namespace HelloJob.Entities.DTOS
     public record VacancyGetDto
     {
         public int Id { get; set; }
+
         public CompanyGetDto Company { get; set; }
         public CategoryGetDto Category { get; set; }
+        public RequestGetDto Request { get; set; }
         public int Salary { get; set; }
         public string Position { get; set; }
         public CityGetDto City { get; set; }
@@ -24,5 +26,6 @@ namespace HelloJob.Entities.DTOS
         public JobMode Mode { get; set; }
         public bool IsPremium { get; set; }
         public List<About_Vacancy> abouts { get; set; }
+
     }
 }

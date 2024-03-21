@@ -40,6 +40,12 @@ namespace HelloJob.Entities.Models
         public List<Employee_Special_Education> educations { get; set; }
         public List<Employee_Special_Experience> experiences { get; set; }
         public List<WishlistItem> WishListItems { get; set; }
+        public List<Request> Requests { get; set; }
+
+        public Resume()
+        {
+            Requests= new List<Request>();
+        }
 
 
 

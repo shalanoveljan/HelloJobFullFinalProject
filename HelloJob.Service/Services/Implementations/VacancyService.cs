@@ -59,6 +59,7 @@ namespace HelloJob.Service.Services.Implementations
                 Required_Experience= dto.Required_Experience,
                 Salary= dto.Salary,
                 CategoryId= dto.CategoryId,
+                //RequestId= dto.RequestId,
                 EndDate = dto.EndDate,
                 abouts = new List<About_Vacancy>()
             };
@@ -69,7 +70,6 @@ namespace HelloJob.Service.Services.Implementations
             await _VacancyRepository.AddAsync(Vacancy);
             return new SuccessResult("Create Vacancy successfully");
         }
-
         public async Task<PagginatedResponse<VacancyGetDto>> GetAllAsync(string userId, bool isAdmin, int pageNumber = 1, int pageSize = 6)
         { 
             IQueryable<Vacancy> query;
@@ -89,6 +89,7 @@ namespace HelloJob.Service.Services.Implementations
                 .Include(x => x.Company)
                 .ThenInclude(x => x.AppUser)
                 .Include(x => x.City)
+                //.Include(x => x.Request)
                  .Include(x => x.abouts)
                 .Include(x => x.Category)
                 .Include(x => x.WishListItems)
@@ -231,10 +232,10 @@ namespace HelloJob.Service.Services.Implementations
                                             .Include(x => x.City)
                                              .Include(x => x.abouts)
                                             .Include(x => x.Category)
-                                            .Include(x => x.WishListItems)
-                                                .ThenInclude(y => y.Wishlist)
-                                               .Include(x => x.WishListItems)
-                                                .ThenInclude(y => y.Wishlist.AppUser)
+                                         .Include(x => x.WishListItems)
+                                        .ThenInclude(y => y.Wishlist)
+                                       .Include(x => x.WishListItems)
+                                        .ThenInclude(y => y.Wishlist.AppUser)
                                           .FirstOrDefaultAsync();
             if (Vacancy == null)
             {
@@ -256,6 +257,7 @@ namespace HelloJob.Service.Services.Implementations
                 Company = new CompanyGetDto { Id = Vacancy.Company.Id, About = Vacancy.Company.About, Email = Vacancy.Company.Email, Image = Vacancy.Company.Image, Name = Vacancy.Company.Name, WebsiteUrlLink = Vacancy.Company.WebsiteUrlLink, order = Vacancy.Company.order, AppUser = Vacancy.Company.AppUser },
                 Category = new CategoryGetDto { Id = Vacancy.Category.Id, Name = Vacancy.Category.Name, Image = Vacancy.Category.Image, ParentId = Vacancy.Category.ParentId },
                 City = new CityGetDto { Id = Vacancy.City.Id, Name = Vacancy.City.Name, CreateAt = Vacancy.City.CreatedAt },
+                
             };
             return new SuccessDataResult<VacancyGetDto>(VacancyGetDto, "Get Vacancy");
         }

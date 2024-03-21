@@ -396,7 +396,7 @@ namespace HelloJob.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
@@ -433,7 +433,7 @@ namespace HelloJob.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
@@ -487,6 +487,39 @@ namespace HelloJob.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("HelloJob.Entities.Models.Request", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VacancyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResumeId");
+
+                    b.HasIndex("VacancyId")
+                        .IsUnique();
+
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("HelloJob.Entities.Models.Resume", b =>
@@ -1048,6 +1081,25 @@ namespace HelloJob.Data.Migrations
                     b.Navigation("Resume");
                 });
 
+            modelBuilder.Entity("HelloJob.Entities.Models.Request", b =>
+                {
+                    b.HasOne("HelloJob.Entities.Models.Resume", "Resume")
+                        .WithMany("Requests")
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HelloJob.Entities.Models.Vacancy", "Vacancy")
+                        .WithOne()
+                        .HasForeignKey("HelloJob.Entities.Models.Request", "VacancyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Resume");
+
+                    b.Navigation("Vacancy");
+                });
+
             modelBuilder.Entity("HelloJob.Entities.Models.Resume", b =>
                 {
                     b.HasOne("HelloJob.Entities.Models.AppUser", "AppUser")
@@ -1271,6 +1323,8 @@ namespace HelloJob.Data.Migrations
 
             modelBuilder.Entity("HelloJob.Entities.Models.Resume", b =>
                 {
+                    b.Navigation("Requests");
+
                     b.Navigation("Skills");
 
                     b.Navigation("WishListItems");

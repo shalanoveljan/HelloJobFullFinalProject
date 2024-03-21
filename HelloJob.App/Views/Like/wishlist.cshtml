@@ -61,9 +61,8 @@
                         </div>
                         <div class="vacancies__item__right">
                             <span class="vacancies__price">@item.Salary AZN</span>
-                            <span class="card_like " data-section="works" data-id="16519">
-                                <!-- <i id="unlike" class="fa-regular fa-heart"></i> -->
-                                <i id="likedIcon" class="fa-solid fa-heart"></i>
+                            <span class="card_like resume-like" data-section="works" data-id="@item.Id">
+                                <i id="like" class="fa-solid fa-heart"></i>
                             </span>
                         </div>
                             @if (item.IsPremium)
@@ -97,9 +96,8 @@
                             </div>
                             <div class="vacancies__item__right">
                                 <span class="vacancies__price">@item.Salary AZN</span>
-                                <span class="card_like " data-section="works" data-id="16519">
-                                    <!-- <i id="unlike" class="fa-regular fa-heart"></i> -->
-                                    <i id="likedIcon" class="fa-solid fa-heart"></i>
+                                <span class="card_like vacancy-like" data-section="works" data-id="@item.Id">
+                                    <i id="like" class="fa-solid fa-heart"></i>
                                 </span>
                             </div>
                             @if (item.IsPremium)
@@ -139,3 +137,8 @@
     </section>
     <!-- Vacancies end -->
 </main>
+
+
+@section Scripts{
+    <script src="~/assets/js/wishlist.js"></script>
+    }

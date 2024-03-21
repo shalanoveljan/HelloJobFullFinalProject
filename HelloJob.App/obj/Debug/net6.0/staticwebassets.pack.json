@@ -5365,6 +5365,10 @@
       "PackagePath": "staticwebassets\\assets\\styles\\pages\\_wishlist.scss"
     },
     {
+      "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\request.css",
+      "PackagePath": "staticwebassets\\assets\\styles\\pages\\request.css"
+    },
+    {
       "Id": "C:\\Users\\OMEN\\Desktop\\HelloJobProject\\HelloJob.App\\wwwroot\\assets\\styles\\pages\\vacancy-detail.css",
       "PackagePath": "staticwebassets\\assets\\styles\\pages\\vacancy-detail.css"
     },

@@ -38,6 +38,7 @@ namespace HelloJob.Data.DBContexts.SQLSERVER
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Vacancy> Vacancies { get; set; }
+        public DbSet<Request> Requests { get; set; }
         public DbSet<About_Vacancy> About_Vacancies { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
