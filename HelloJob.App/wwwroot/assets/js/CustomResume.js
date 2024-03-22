@@ -111,7 +111,7 @@ function LoadMore() {
         },
         success: function (res) {
             
-            console.log("success")
+            console.log(res)
             pageNumber++; 
             similar_Resume.innerHTML += res;
             var totalResumes = $(".resume").length;
