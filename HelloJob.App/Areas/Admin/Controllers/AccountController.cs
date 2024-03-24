@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 namespace HelloJob.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class AccountController : Controller
     {
         
@@ -230,5 +229,27 @@ namespace HelloJob.App.Areas.Admin.Controllers
                 return BadRequest(result.Message);
             }
         }
+
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
+
+        public async Task<IActionResult> ChangeUserRole(string userId, string newRoleId)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(newRoleId))
+            {
+                return BadRequest("userid or newRoleID is null");
+            }
+
+            var result = await _accountService.ChangeRole(userId, newRoleId);
+            if (result)
+            {
+                return RedirectToAction("Index","Dashboard");
+            }
+            else
+            {
+                return BadRequest("dont change role unfortunately");
+            }
+        }
+
     }
 }

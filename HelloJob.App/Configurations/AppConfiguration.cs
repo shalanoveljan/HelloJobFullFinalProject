@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
-using System.Web.Mvc;
 
 namespace HelloJob.App.Configurations
 {
@@ -38,51 +37,6 @@ namespace HelloJob.App.Configurations
                 DataSeeder.SeedUsers(userManager).Wait();
             }
 
-            //           applicationBuilder.UseEndpoints(endpoints =>
-            //           {
-
-
-            //               //endpoints.MapControllerRoute(
-            //               //    name: "areas",
-            //               //    pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}"
-            //               //);
-
-            //               //endpoints.MapControllerRoute(
-            //               //    name: "adminArea",
-            //               //    pattern: "admin/{controller=Account}/{action=Login}/{id?}",
-            //               //    defaults: new { area = "Admin" }
-            //               //);
-
-            //               //endpoints.MapControllerRoute(
-            //               //    name: "userArea",
-            //               //    pattern: "user/{controller=Dashboard}/{action=index}/{id?}",
-            //               //    defaults: new { area = "User" }
-            //               //);
-
-            //               //// Default yönlendirme
-            //               //endpoints.MapControllerRoute(
-            //               //    name: "default",
-            //               //    pattern: "{controller=Home}/{action=Index}/{id?}"
-            //               //);
-
-            //               //             endpoints.MapControllerRoute(
-            //               //       name: "areas",
-            //               //      pattern: "{area:exists}/{controller=dashboard}/{action=index}/{id?}"
-            //               //);
-            //               //             endpoints.MapControllerRoute(
-            //               //             name: "default",
-            //               //             pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            //               endpoints.MapRoute(
-            //    name: "Default",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-            //    namespaces: new[] { "YourNamespace.Controllers" }
-            //);
-            //           });
-
-
-            
                 applicationBuilder.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(

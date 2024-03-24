@@ -43,6 +43,13 @@ namespace HelloJob.Service.Services.Implementations
                 return new ErrorResult("Request is null");
             }
 
+            var existingRequest = await _RequestRepository.GetByVacancyIdAndRequestId(dto.VacancyId,Request.ResumeId);
+
+            if (existingRequest != null)
+            {                                                                                                                  
+                return new ErrorResult("A request for this vacancy by this resume already exists.");
+            }
+
             await _RequestRepository.AddAsync(Request);
 
             return new SuccessResult("Create Request successfully");
@@ -120,5 +127,17 @@ namespace HelloJob.Service.Services.Implementations
             return pagginatedResponse;
         }
 
+        public async Task<Core.Utilities.Results.Abstract.IResult> RemoveAsync(int id)
+        {
+            Request? Request = await _RequestRepository.GetAsync(x => !x.IsDeleted && x.Id == id, "Resume.AppUser", "Resume.City", "Resume.Category", "Vacancy.Company.AppUser", "Vacancy.City", "Vacancy.Category", "Vacancy.abouts", "Vacancy.WishListItems.Wishlist.AppUser");
+
+            if (Request == null)
+            {
+                return new ErrorResult("Request Not Found");
+            }
+            Request.IsDeleted = true;
+            await _RequestRepository.UpdateAsync(Request);
+            return new SuccessResult("Request removed");
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace HelloJob.Service.Services.Interfaces
         public Task<IResult> RegisterWithGoogle(string returnUrl = null);
         public Task<IResult> GoogleCallback(string returnUrl = null);
         public Task<AppUser> GetUser(string id);
+        public Task<bool> ChangeRole(string userId, string newRoleId);
 
 
     }

@@ -16,7 +16,7 @@
     //}
 }
 <input type="text" value="@Model.Count" id="ResumeCount" hidden/>
-@foreach (var item in Model.Take(2).ToList() )
+@foreach (var item in Model.Take(1).ToList() )
 {
     <div class="resume">
         <a asp-action="Detail" asp-route-id="@item.Id" target="_blank">
@@ -30,6 +30,7 @@
                         <p>@item.Name  @item.Surname </p>
                     </div>
                 </div>
+                  
                     <span class="resume__icon mr-0 course_like" id="likes" data-id="@item.Id">
                         @if (wishlist.wishlistItems.Any(x => x.Id == item.Id && x.IsLiked))
                         {

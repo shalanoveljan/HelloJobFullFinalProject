@@ -494,9 +494,31 @@ namespace HelloJob.Service.Services.Implementations
             return _signInManager.UserManager.Users.FirstOrDefault(u => u.Id == id);
         }
 
+        public async Task<bool> ChangeRole(string userId, string newRoleId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return false; 
+            }
+
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            if (currentRoles == null || currentRoles.Count == 0)
+            {
+                return false; 
+            }
+
+            var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+            if (!removeResult.Succeeded)
+            {
+                return false; 
+            }
+
+            
+            var addResult = await _userManager.AddToRoleAsync(user, newRoleId);
+            return addResult.Succeeded;
+        }
     }
-
-
 
 }
 

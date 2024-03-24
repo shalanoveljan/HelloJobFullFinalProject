@@ -1,7 +1,11 @@
 ﻿
 @model PagginatedResponse<AppUser>
 @inject UserManager<AppUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
 
+@{
+    var allRoles = RoleManager.Roles.Select(r => r.Name).ToList();
+}
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -15,6 +19,7 @@
                                     <tr>
                                         <th>Username</th>
                                         <th>Role</th>
+                                        <th>Change Role</th>
                                         <th>Operations</th>
                                     </tr>
                                 </thead>
@@ -28,6 +33,20 @@
                                             {
                                                 <td>@role</td>
                                             }
+
+                                            <td>
+                                                <form method="post" asp-action="ChangeUserRole" asp-controller="account">
+                                                    <input type="hidden" name="userId" value="@user.Id" />
+                                                    <select name="newRoleId" class="form-control">
+                                                        @foreach (var role in allRoles)
+                                                        {
+                                                            <option value="@role">@role</option>
+                                                        }
+                                                    </select>
+                                                    <button type="submit" class="btn btn-primary">Change Role</button>
+                                                </form>
+                                            </td>
+
                                                 <td>
                                                 @if (user.IsActivate)
                                                 {
@@ -46,6 +65,8 @@
                                                     </form>
                                                 }
                                                 </td>
+
+
                                             </tr>
                                     }
                                 </tbody>

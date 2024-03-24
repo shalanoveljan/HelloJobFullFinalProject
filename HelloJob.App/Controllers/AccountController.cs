@@ -2,6 +2,9 @@
 using HelloJob.Entities.DTOS;
 using HelloJob.Entities.Models;
 using HelloJob.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -75,6 +78,7 @@ namespace HelloJob.App.Controllers
             {
                 return View(dto);
             }
+
             var result = await _accountService.Login(dto,false);
             if (!result.Success)
             {
@@ -82,6 +86,27 @@ namespace HelloJob.App.Controllers
                 return View(dto);
             }
             return RedirectToAction("index", "home");
+        }
+        public IActionResult GoogleLogin()
+        {
+            var prop = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
+            return Challenge(prop, GoogleDefaults.AuthenticationScheme);
+        }
+
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var result= await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(claim => new
+            {
+                claim.Issuer,
+                claim.OriginalIssuer,
+                claim.Type,
+                claim.Value
+            });
+
+            return Json(claims);
+            //return RedirectToAction("Index", "Home");
         }
 
         [Authorize]

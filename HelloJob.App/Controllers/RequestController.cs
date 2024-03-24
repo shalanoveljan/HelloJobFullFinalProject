@@ -49,8 +49,13 @@ namespace HelloJob.App.Controllers
                 var userid = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 ViewBag.UserId = userid;
                 ViewBag.Resumes = await _resumeService.GetAllAsync(userid, false, 1, 6);
-
-                return View (dto);
+                RequestVM vm = new RequestVM
+                {
+                    Resumes = (await _resumeService.GetAllAsync(userid, false, 1, 6)).Datas.ToList(),
+                    Vacancy = (await _vacancyService.GetAsync(dto.VacancyId)).Data,
+                    Categories = (await categoryService.GetAllAsync()).Datas.ToList(),
+                };
+                return View(vm);
             }
             var res = await _requestService.CreateAsync(dto);
             if (!res.Success)
@@ -58,9 +63,14 @@ namespace HelloJob.App.Controllers
                 var userid = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 ViewBag.UserId = userid;
                 ViewBag.Resumes = await _resumeService.GetAllAsync(userid, false, 1, 6);
+                RequestVM vm = new RequestVM
+                {
+                    Resumes = (await _resumeService.GetAllAsync(userid, false, 1, 6)).Datas.ToList(),
+                    Categories = (await categoryService.GetAllAsync()).Datas.ToList(),
+                    Vacancy = (await _vacancyService.GetAsync(dto.VacancyId)).Data,
 
-            return View(dto);
-
+                };
+                return View(vm);
             }
             return RedirectToAction("index","home");
         }

@@ -9,5 +9,6 @@ namespace HelloJob.Data.DAL.Interfaces
 {
     public interface IRequestDAL: IRepositoryBase<Request>
     {
+        Task<Request> GetByVacancyIdAndRequestId(int vacancyId, int resumeId);
     }
 }

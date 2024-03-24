@@ -33,5 +33,15 @@ namespace HelloJob.App.Areas.User.Controllers
             return View(res.Datas);
         }
 
+        public async Task<IActionResult> Remove(int id)
+        {
+            var res = await _RequestService.RemoveAsync(id);
+            if (!res.Success)
+            {
+                ModelState.AddModelError("", res.Message);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

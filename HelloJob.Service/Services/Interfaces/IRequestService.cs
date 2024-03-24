@@ -15,5 +15,7 @@ namespace HelloJob.Service.Services.Interfaces
     {
         public Task<PagginatedResponse<RequestGetDto>> GetAllAsync(string userid,int pageNumber=1, int pageSize=6);
         public Task<IResult> CreateAsync(RequestPostDto dto);
+        public Task<IResult> RemoveAsync(int id);
+
     }
 }
