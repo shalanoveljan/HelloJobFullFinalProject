@@ -16,7 +16,7 @@
     //}
 }
 <input type="text" value="@Model.Count" id="ResumeCount" hidden/>
-@foreach (var item in Model.Take(1).ToList() )
+@foreach (var item in Model.Take(3).ToList() )
 {
     <div class="resume">
         <a asp-action="Detail" asp-route-id="@item.Id" target="_blank">
