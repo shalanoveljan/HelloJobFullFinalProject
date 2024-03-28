@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection.Emit;
 
 namespace HelloJob.Data.Configurations
 {
@@ -18,12 +19,17 @@ namespace HelloJob.Data.Configurations
                .HasForeignKey(r => r.ResumeId)
                .OnDelete(DeleteBehavior.Restrict);
 
-
             builder
          .HasOne(r => r.Vacancy)
          .WithMany()
          .HasForeignKey(r => r.VacancyId)
          .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+            .HasAlternateKey(r => new { r.VacancyId, r.AppUserId })
+            .HasName("UQ_VacancyId_AppUserId");
+
+
 
         }
 

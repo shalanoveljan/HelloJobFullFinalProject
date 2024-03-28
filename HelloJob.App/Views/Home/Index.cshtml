@@ -20,7 +20,10 @@
 {
     <div id="register" style="display:none">@TempData["Register"]</div>
 }
-
+@if (TempData["Request"] != null)
+{
+    <div id="request" style="display:none">@TempData["Request"]</div>
+}
 
 
 <!-- Main Section Start -->
@@ -411,7 +414,7 @@
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 6000,
+                timer: 4000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
@@ -430,7 +433,7 @@
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 6000,
+                timer: 4000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
@@ -448,7 +451,7 @@
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 6000,
+                timer: 4000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
@@ -458,6 +461,25 @@
             Toast.fire({
                 icon: "warning",
                 title: "please verify your email "
+            });
+        }
+
+        const data4 = document.getElementById("request");
+        if (data4 != undefined) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Send Request for this vacancy"
             });
         }
 </script>

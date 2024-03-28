@@ -72,6 +72,9 @@ namespace HelloJob.App.Controllers
                 };
                 return View(vm);
             }
+
+            TempData["Request"] = "Send Request for this vacancy";
+
             return RedirectToAction("index","home");
         }
     }

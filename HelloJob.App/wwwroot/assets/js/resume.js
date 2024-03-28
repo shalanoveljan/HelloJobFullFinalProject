@@ -67,10 +67,10 @@
       }
       
   
-
 $(document).ready(function () {
-    $('.course_like').on('click', '#like', function (e) {
+    $('body').on('click', '.course_like #like', function (e) {
         e.preventDefault();
+        console.log("new version")
         var likeIcon = $(this);
         var itemId = $(this).closest('.course_like').data('id');
         var itemType = "resume";
@@ -92,14 +92,12 @@ $(document).ready(function () {
                     console.log("dolu ureke deyisdi")
                     likeIcon.removeClass('fa-solid').addClass('fa-regular');
                 }
-                //location.reload();
             },
             error: function (xhr, status, error) {
                 console.error('There has been a problem with your AJAX request:', error);
             }
         });
     });
-
 });
 
 
