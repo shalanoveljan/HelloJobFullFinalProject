@@ -27,9 +27,12 @@ namespace HelloJob.Entities.Models
         public bool IsPremium { get; set; }
         public List<About_Vacancy> abouts { get; set; }
         public List<WishlistItem> WishListItems { get; set; }
+        public List<Request> Requests { get; set; }
+
 
         public Vacancy()
         {
+            Requests = new List<Request>();
             abouts= new List<About_Vacancy>();
             WishListItems= new List<WishlistItem>();
         }

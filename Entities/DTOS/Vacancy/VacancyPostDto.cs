@@ -22,5 +22,6 @@ namespace HelloJob.Entities.DTOS
         public JobMode Mode { get; set; }
         public bool IsPremium { get; set; }
         public List<string> Conditions { get; set; }
+
     }
 }

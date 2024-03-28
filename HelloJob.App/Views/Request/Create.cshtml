@@ -10,6 +10,8 @@
 
                     <form enctype="multipart/form-data" style="width:100%" asp-controller="request" asp-action="create" method="post">
                         <input type="text" value="@ViewBag.vacancyId" asp-for="@Model.dto.VacancyId" id="vacancy_id" hidden />
+                        <input type="hidden" id="AppUserId" asp-for="@Model.dto.AppUserId" value="@ViewBag.UserId">
+
                     <div class="col-md-8">
                         <div>
                             <div class="nz p-4">  

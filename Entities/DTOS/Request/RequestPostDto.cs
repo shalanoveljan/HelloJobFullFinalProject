@@ -11,5 +11,6 @@ namespace HelloJob.Entities.DTOS
     {
         public int SelectedResumeId { get; set; }
         public int VacancyId { get; set; }
+        public string AppUserId { get; set; }
     }
 }

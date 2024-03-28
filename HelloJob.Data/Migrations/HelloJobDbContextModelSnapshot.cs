@@ -497,6 +497,10 @@ namespace HelloJob.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -514,10 +518,12 @@ namespace HelloJob.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ResumeId");
+                    b.HasIndex("AppUserId");
 
-                    b.HasIndex("VacancyId")
+                    b.HasIndex("ResumeId")
                         .IsUnique();
+
+                    b.HasIndex("VacancyId");
 
                     b.ToTable("Requests");
                 });
@@ -1083,17 +1089,25 @@ namespace HelloJob.Data.Migrations
 
             modelBuilder.Entity("HelloJob.Entities.Models.Request", b =>
                 {
-                    b.HasOne("HelloJob.Entities.Models.Resume", "Resume")
+                    b.HasOne("HelloJob.Entities.Models.AppUser", "AppUser")
                         .WithMany("Requests")
-                        .HasForeignKey("ResumeId")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HelloJob.Entities.Models.Vacancy", "Vacancy")
+                    b.HasOne("HelloJob.Entities.Models.Resume", "Resume")
                         .WithOne()
-                        .HasForeignKey("HelloJob.Entities.Models.Request", "VacancyId")
+                        .HasForeignKey("HelloJob.Entities.Models.Request", "ResumeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("HelloJob.Entities.Models.Vacancy", "Vacancy")
+                        .WithMany("Requests")
+                        .HasForeignKey("VacancyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Resume");
 
@@ -1287,6 +1301,8 @@ namespace HelloJob.Data.Migrations
 
             modelBuilder.Entity("HelloJob.Entities.Models.AppUser", b =>
                 {
+                    b.Navigation("Requests");
+
                     b.Navigation("Resumes");
                 });
 
@@ -1323,8 +1339,6 @@ namespace HelloJob.Data.Migrations
 
             modelBuilder.Entity("HelloJob.Entities.Models.Resume", b =>
                 {
-                    b.Navigation("Requests");
-
                     b.Navigation("Skills");
 
                     b.Navigation("WishListItems");
@@ -1341,6 +1355,8 @@ namespace HelloJob.Data.Migrations
 
             modelBuilder.Entity("HelloJob.Entities.Models.Vacancy", b =>
                 {
+                    b.Navigation("Requests");
+
                     b.Navigation("WishListItems");
 
                     b.Navigation("abouts");

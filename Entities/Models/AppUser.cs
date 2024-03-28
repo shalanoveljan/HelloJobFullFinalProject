@@ -6,10 +6,13 @@ namespace HelloJob.Entities.Models
     {
         public bool IsActivate { get; set; } = true;
         public List<Resume> Resumes { get; set; }
+        public List<Request> Requests { get; set; }
+
 
         public AppUser()
         {
             Resumes =new List<Resume>();
+            Requests =new List<Request>();
         }
     }
 }

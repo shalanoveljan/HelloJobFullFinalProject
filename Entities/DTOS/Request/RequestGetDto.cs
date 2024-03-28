@@ -14,6 +14,7 @@ namespace HelloJob.Entities.DTOS
         public VacancyGetDto Vacancy { get; set; }
         public DateTime CreatedAt { get; set; }
         public ResumeGetDto Resume { get; set; }
+        public List<VacancyGetDto> Vacancys { get; set; } = null!;
 
     }
 }
