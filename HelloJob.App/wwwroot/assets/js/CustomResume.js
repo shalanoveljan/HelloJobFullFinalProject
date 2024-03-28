@@ -98,7 +98,7 @@ function LoadMore() {
     const id = getCurrentOptionId();
     var dto = getFilterDto(); 
     var pageNumber = parseInt($(".page-link-load").attr("page")); 
-    var pageSize = 3; 
+    var pageSize = 1; 
     var resumeCount = parseInt($("#ResumeCount").val()); 
 
     $.ajax({
