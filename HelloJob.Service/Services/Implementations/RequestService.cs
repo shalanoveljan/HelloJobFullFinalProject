@@ -29,12 +29,7 @@ namespace HelloJob.Service.Services.Implementations
         {
             _RequestRepository = RequestRepository;
         }
-        //{
-        //var existingRequest = await _RequestRepository.GetByVacancyIdAndRequestId(dto.VacancyId, Request.ResumeId);
-
-        //if (existingRequest != null)
-        //    return new ErrorResult("A request for this vacancy by this resume already exists.");
-        //}
+   
 
 
         public async Task<HelloJob.Core.Utilities.Results.Abstract.IResult> CreateAsync(RequestPostDto dto)
@@ -50,7 +45,13 @@ namespace HelloJob.Service.Services.Implementations
             {
                 return new ErrorResult("Request is null");
             }
-         
+
+            {
+                var existingRequest = await _RequestRepository.GetByVacancyIdAndRequestId(dto.VacancyId, dto.AppUserId);
+
+                if (existingRequest != null)   return new ErrorResult("A request for this vacancy by this resume already exists.");
+            }
+
             await _RequestRepository.AddAsync(Request);
 
             return new SuccessResult("Create Request successfully");

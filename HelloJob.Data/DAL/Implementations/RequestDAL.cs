@@ -17,9 +17,9 @@ namespace HelloJob.Data.DAL.Implementations
         {
             _dbContext= context;
         }
-        public async Task<Request> GetByVacancyIdAndRequestId(int vacancyId, int resumeId)
+        public async Task<Request> GetByVacancyIdAndRequestId(int vacancyId, string userid)
         {
-            return await _dbContext.Requests.FirstOrDefaultAsync(r => r.VacancyId == vacancyId && r.Resume.Id == resumeId);
+            return await _dbContext.Requests.FirstOrDefaultAsync(r => r.VacancyId == vacancyId && r.Resume.AppUserId==userid);
         }
     }
 }

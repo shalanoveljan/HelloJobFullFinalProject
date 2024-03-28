@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelloJob.Data.Migrations
 {
     [DbContext(typeof(HelloJobDbContext))]
-    [Migration("20240327115004_added Request")]
+    [Migration("20240328064630_added Request")]
     partial class addedRequest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -522,8 +522,7 @@ namespace HelloJob.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ResumeId")
-                        .IsUnique();
+                    b.HasIndex("ResumeId");
 
                     b.HasIndex("VacancyId");
 
@@ -1098,8 +1097,8 @@ namespace HelloJob.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("HelloJob.Entities.Models.Resume", "Resume")
-                        .WithOne()
-                        .HasForeignKey("HelloJob.Entities.Models.Request", "ResumeId")
+                        .WithMany("Requests")
+                        .HasForeignKey("ResumeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1341,6 +1340,8 @@ namespace HelloJob.Data.Migrations
 
             modelBuilder.Entity("HelloJob.Entities.Models.Resume", b =>
                 {
+                    b.Navigation("Requests");
+
                     b.Navigation("Skills");
 
                     b.Navigation("WishListItems");

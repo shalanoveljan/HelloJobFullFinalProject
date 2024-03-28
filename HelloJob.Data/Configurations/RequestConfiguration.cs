@@ -13,11 +13,11 @@ namespace HelloJob.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Request> builder)
         {
-            builder
-                .HasOne(r => r.Resume)
-                .WithOne()
-                .HasForeignKey<Request>(r => r.ResumeId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(r => r.Resume)
+               .WithMany(r => r.Requests)
+               .HasForeignKey(r => r.ResumeId)
+               .OnDelete(DeleteBehavior.Restrict);
+
 
             builder
          .HasOne(r => r.Vacancy)

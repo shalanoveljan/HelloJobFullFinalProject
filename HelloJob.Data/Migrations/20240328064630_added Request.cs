@@ -73,8 +73,7 @@ namespace HelloJob.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_ResumeId",
                 table: "Requests",
-                column: "ResumeId",
-                unique: true);
+                column: "ResumeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_VacancyId",
